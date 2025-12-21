@@ -1,6 +1,6 @@
 -- Use "color", not "colour" etc
 -- Mod's name "Drag Queen Balatro Mod" not final
--- Search for "placeholder" (any capitalization) for placeholder text
+-- Search for "placeholder" or "tempname" (any capitalization) for placeholder text
 -- Also search "dragqueen" if we need to change for some reason
 -- Avoid end-punctuation
 -- Strings in double-quotes, not single quotes
@@ -58,7 +58,7 @@ return {
         Blind = {
             -- Boss blinds
             bl_dragqueen_tempnamekissblind = {
-                name = "The tempname Kiss",
+                name = "The placeholder Kiss",
                 text = {
                     "Cards with Kisses",
                     "are debuffed"
@@ -78,7 +78,7 @@ return {
                     "are debuffed"
                 }
             },
-            -- 
+            -- #1# refers to "most played hand"
             b_dragqueen_lipsync = {
                 name = "The Lipsync",
                 text = {
@@ -200,7 +200,7 @@ return {
             },
             -- Ink and Color
             inkandcolor_dark_suits_stained = {
-                name = "Stained sark suits",
+                name = "Stained dark suits",
                 text = {
                     "{C:inkandcolor_ink}Ink{}"
                 }
