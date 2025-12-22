@@ -5,3 +5,13 @@ DRAGQUEENMOD.config = DRAGQUEENMOD.current_mod.config
 DRAGQUEENMOD.dark_suits = {"Spades", "Clubs", "Purses"}
 DRAGQUEENMOD.light_suits = {"Hearts", "Diamonds", "Pumps"}
 
+-- Define modifiers
+DRAGQUEENMOD.modifiers = {}
+
+
+
+
+-- Disable specific items by commenting them out
+DRAGQUEENMOD.ENABLED_JOKERS = {
+    -- "",
+}
