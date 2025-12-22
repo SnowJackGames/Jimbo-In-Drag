@@ -14,7 +14,7 @@
         -- Planets
         -- Tarot
         -- Spectrals
-        -- Tarot
+        -- Tags
         -- 45 Degree Tarot
         -- Vouchers
         -- Packs

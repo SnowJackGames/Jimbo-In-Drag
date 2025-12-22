@@ -8,93 +8,117 @@ to_number = to_number or function(n)
 end
 
 
--- Searching for other mods for cross-mod content
--- Ones with different suits adding to their relevant suit definitions
+-- Fetches the current used prefix for a loaded mod if that prefix has recently changed
+---@param name string
+---@param guessedprefix string
+local function getprefix(name, guessedprefix)
+  local foundprefix = SMODS.find_mod(name)[1].prefix or guessedprefix
+  return foundprefix
+end 
 
+
+-- Searching for other mods for cross-mod content and integration
+function DRAGQUEENMOD.cross_mod_content_register()
 -- Bunco
-if next(SMODS.find_mod("Bunco")) then
-  local prefix = SMODS.find_mod("Bunco")[1].prefix or "bunc"
+  if next(SMODS.find_mod("Bunco")) then
+    local prefix = getprefix("Bunco", "bunc")
+    table.insert(DRAGQUEENMOD.dark_suits, prefix .. "_Halberds")
+    table.insert(DRAGQUEENMOD.light_suits, prefix .. "_Fleurons")
+    DRAGQUEENMOD.exotic_suits = {prefix .. "_Halberds", prefix .. "_Fleurons"}
 
-  table.insert(DRAGQUEENMOD.dark_suits, prefix .. "_Halberds")
-  table.insert(DRAGQUEENMOD.light_suits, prefix .. "_Fleurons")
-  DRAGQUEENMOD.exotic_suits = {prefix .. "_Halberds", prefix .. "_Fleurons"}
-  -- Probably need to add Drag Queen suits to Bunco's definitions of light and dark 
-  -- And potentially override their tooltip implementation
-  -- Don't duplicate Glitter tag, edition
-  -- Add consumer edition tags
-  -- Add Mothers
-  -- Add Stylophone audio
-end
+    -- The only time Bunco calls for dark or light suits is with their joker "cassette"
+    -- Which checks directly for Spades, Clubs, and Halberds
+    -- Technically, could capture BUNCOMOD.bunc_define_joker to capture their Cassette implementation
+    -- But that sounds like a lot of work
 
--- Paperback
-if next(SMODS.find_mod("Paperback")) then
-  local prefix = SMODS.find_mod("Paperback")[1].prefix or "paperback"
-
-  table.insert(DRAGQUEENMOD.dark_suits, prefix .. "_Crowns")
-  table.insert(DRAGQUEENMOD.light_suits, prefix .. "_Stars")
-  DRAGQUEENMOD.proud_suits = {prefix .. "_Crowns", prefix .. "_Stars"}
-  -- probably need to add Drag Queen suits to Paperback's definitions of light and dark suits
-  -- And potentially override their tooltip implementation
-  -- Add paperclips to modifiers
-  -- Add their ranks
-  -- Add Mothers, which also count as Apostles
+    -- Don't duplicate Glitter tag, edition
+    -- Add consumer edition tags
+    -- Add Mothers
+    -- Add Stylophone audio
   end
 
--- Six Suits
-if next(SMODS.find_mod("SixSuits")) then
-  local prefix = SMODS.find_mod("SixSuits")[1].prefix or "six"
+  -- Paperback
+  if next(SMODS.find_mod("Paperback")) then
+    local prefix = getprefix("Paperback", "paperback")
 
-  table.insert(DRAGQUEENMOD.dark_suits, prefix .. "_Moons")
-  table.insert(DRAGQUEENMOD.light_suits, prefix .. "_Stars")
-  DRAGQUEENMOD.night_suits = {prefix .. "_Moons",prefix .. "_Stars"}
-  -- Add Mothers
+    -- Adds their suits to our definitions of light and dark and proud
+    table.insert(DRAGQUEENMOD.dark_suits, prefix .. "_Crowns")
+    table.insert(DRAGQUEENMOD.light_suits, prefix .. "_Stars")
+    DRAGQUEENMOD.proud_suits = {prefix .. "_Crowns", prefix .. "_Stars"}
+
+    -- If their definition of light and dark don't already reference our suits, they now do
+    if next(PB_UTIL.dark_suits("dragqueen_Purses")) == false then
+      table.insert(PB_UTIL.dark_suits, "dragqueen_Purses")
+    end
+    if next(PB_UTIL.dark_suits("dragqueen_Pumps")) == false then
+      table.insert(PB_UTIL.light_suits, "dragqueen_Pumps")
+    end
+
+
+    -- Look into their utilities/ui.lua/PB_UTIL.suit_tooltip(type)
+    -- Might just override their tooltip with our own if it is easier
+    -- Add paperclips to modifiers
+    -- Add their ranks
+    -- Add Mothers, which also count as Apostles
+  end
+
+  -- Six Suits
+  if next(SMODS.find_mod("SixSuits")) then
+    local prefix = SMODS.find_mod("SixSuits")[1].prefix or "six"
+
+    table.insert(DRAGQUEENMOD.dark_suits, prefix .. "_Moons")
+    table.insert(DRAGQUEENMOD.light_suits, prefix .. "_Stars")
+    DRAGQUEENMOD.night_suits = {prefix .. "_Moons",prefix .. "_Stars"}
+    -- Add Mothers
+  end
+
+  -- Minty's Silly Little Mod
+  if next(SMODS.find_mod("MintysSillyMod")) then
+    local prefix = SMODS.find_mod("MintysSillyMod")[1].prefix or "minty"
+
+    table.insert(DRAGQUEENMOD.light_suits, prefix .. "_3s")
+    DRAGQUEENMOD.treat_suits = {prefix .. "_3s"}
+    -- Add Mother
+  end
+
+  -- Magic: The Jokering
+  if next(SMODS.find_mod("magic_the_jokering")) then
+    local prefix = SMODS.find_mod("magic_the_jokeringMintysSillyMod")[1].prefix or "mtg"
+
+    DRAGQUEENMOD.magic_suits = {prefix .. "_Clovers", prefix .. "_Suitless"}
+    -- Add Mothers
+  end
+
+  -- Ink And Color
+  if next(SMODS.find_mod("InkAndColor")) then
+    local prefix = SMODS.find_mod("InkAndColor")[1].prefix or "ink"
+
+    table.insert(DRAGQUEENMOD.dark_suits, prefix .. "_Inks")
+    table.insert(DRAGQUEENMOD.light_suits, prefix .. "_Colors")
+    DRAGQUEENMOD.stained_suits = {prefix .. "_Inks", prefix .. "_Colors"}
+    -- Add Mother
+  end
+
+  -- Pokermon
+  -- Foresight compatibility
+
+  -- UnStable
+  -- Add Ranks
+
+  -- Cryptid
+  -- Add to their modifier deck
+
+  -- Cardsleeves
+
+  -- Partners
+
+  -- More Fluff
+  -- Add to 45-degree tarot cards
+
+  -- Gemstones
+  -- Add Gemstones to modifiers
 end
 
--- Minty's Silly Little Mod
-if next(SMODS.find_mod("MintysSillyMod")) then
-  local prefix = SMODS.find_mod("MintysSillyMod")[1].prefix or "minty"
-
-  table.insert(DRAGQUEENMOD.light_suits, prefix .. "_3s")
-  DRAGQUEENMOD.treat_suits = {prefix .. "_3s"}
-  -- Add Mother
-end
-
--- Magic: The Jokering
-if next(SMODS.find_mod("magic_the_jokering")) then
-  local prefix = SMODS.find_mod("magic_the_jokeringMintysSillyMod")[1].prefix or "mtg"
-
-  DRAGQUEENMOD.magic_suits = {prefix .. "_Clovers", prefix .. "_Suitless"}
-  -- Add Mothers
-end
-
--- Ink And Color
-if next(SMODS.find_mod("InkAndColor")) then
-  local prefix = SMODS.find_mod("InkAndColor")[1].prefix or "ink"
-
-  table.insert(DRAGQUEENMOD.dark_suits, prefix .. "_Inks")
-  table.insert(DRAGQUEENMOD.light_suits, prefix .. "_Colors")
-  DRAGQUEENMOD.stained_suits = {prefix .. "_Inks", prefix .. "_Colors"}
-  -- Add Mother
-end
-
--- Pokermon
--- Foresight compatibility
-
--- UnStable
--- Add Ranks
-
--- Cryptid
--- Add to their modifier deck
-
--- Cardsleeves
-
--- Partners
-
--- More Fluff
--- Add to 45-degree tarot cards
-
--- Gemstones
--- Add Gemstones to modifiers
 
 
 
@@ -105,6 +129,7 @@ function DRAGQUEENMOD.should_load_spectrum_items()
   return not (
     next(SMODS.find_mod('Bunco'))
     or next(SMODS.find_mod("SixSuits"))
+    or next(SMODS.find_mod("Paperback"))
     or next(SMODS.find_mod("SpectrumFramework"))
   )
 end
