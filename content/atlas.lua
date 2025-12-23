@@ -14,11 +14,11 @@
         -- Planets
         -- Tarot
         -- Spectrals
+        -- Vouchers
+		-- Packs
         -- Tags
         -- 45 Degree Tarot
-        -- Vouchers
-        -- Packs
-        -- Colors
+        -- Colours
     -- Skins
     -- Sleeves
     -- Partners

@@ -1,3 +1,9 @@
+-- Use "color", not "colour" etc
+-- Exception is when referencing specific variables in Balatro's source code,
+-- Which is coded in canadian
+-- Mod's name "Drag Queen Balatro Mod" not final
+-- Search for "placeholder" or "tempname" (any capitalization) for placeholder text
+
 DRAGQUEENMOD = {}
 
 -- Load utility functions into DRAGQUEENMOD

@@ -96,7 +96,7 @@ function DRAGQUEENMOD.cross_mod_content_register()
     table.insert(DRAGQUEENMOD.dark_suits, prefix .. "_Inks")
     table.insert(DRAGQUEENMOD.light_suits, prefix .. "_Colors")
     DRAGQUEENMOD.stained_suits = {prefix .. "_Inks", prefix .. "_Colors"}
-    -- Add Mother
+    -- Add Mothers
   end
 
   -- Pokermon

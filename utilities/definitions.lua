@@ -11,16 +11,55 @@ DRAGQUEENMOD.modifiers = {}
 
 
 
--- The user can disable specific items by commenting them out if they hate it
+-- The user can disable specific Drag Queen Mod items by commenting them out if they hate it
 -- But watch out!
+
+DRAGQUEENMOD.BASE_POKER_HANDS = {
+
+}
 
 DRAGQUEENMOD.SUITS = {
     "Purses",
     "Pumps"
 }
 
+DRAGQUEENMOD.SUITS_CATEGORIES = {
+    "Plain",
+    "Accessory",
+    "Light",
+    "Dark"
+}
+
+DDRAGQUEENMOD.BASE_RANKS = {
+  "Ace",
+  "King",
+  "Queen",
+  "Jack",
+  "10",
+  "9",
+  "8",
+  "7",
+  "6",
+  "5",
+  "4",
+  "3",
+  "2"
+}
+
 DRAGQUEENMOD.RANKS = {
     "Mother",
+}
+
+DRAGQUEENMOD.BASE_POKER_HANDS = {
+  "Straight Flush",
+  "Four of a Kind",
+  "Full House",
+  "Flush",
+  "Straight",
+  "Three of a Kind",
+  "Two Pair",
+  "Pair",
+  "High Card"
 }
 
 DRAGQUEENMOD.POKER_HANDS = {
