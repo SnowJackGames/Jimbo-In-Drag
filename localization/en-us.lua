@@ -321,9 +321,11 @@ return {
     Voucher = {
       v_dragqueen_serve = {
         name = "Serve",
-        text = "{C:dark_edition}Sparkle{}, {C:dark_edition}Gloss{}, and",
-        "{C:dark_edition}Glitter{} cards",
-        "appear {C:attention}#1#X{} more often"
+        text = {
+          "{C:dark_edition}Sparkle{}, {C:dark_edition}Gloss{}, and",
+          "{C:dark_edition}Glitter{} cards",
+          "appear {C:attention}#1#X{} more often"
+        }
       }
     },
     Pack = {

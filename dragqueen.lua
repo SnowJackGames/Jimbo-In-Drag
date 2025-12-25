@@ -15,19 +15,22 @@ SMODS.load_file("utilities/ui.lua")()
 
 
 -- Load the atlases
-SMODS.load_file("content/atlas.lua")()
+--SMODS.load_file("content/atlas.lua")()
 
 
 -- Check for Cross-Mod Content
-DRAGQUEENMOD.cross_mod_content_register()
-
+-- Cross-Mod Content
+if SMODS.config.cross_mod_enabled then
+    DRAGQUEENMOD.cross_mod_content_register()
+end
 
 -- Load Contents of Drag Queen Mod
 -- Core Content
 DRAGQUEENMOD.register_items(DRAGQUEENMOD.SUITS, "content/Suits")
 DRAGQUEENMOD.register_items(DRAGQUEENMOD.RANKS, "content/Ranks")
-DRAGQUEENMOD.register_items(DRAGQUEENMOD.POKER_HANDS, "content/Poker_Hands")
-
+if DRAGQUEENMOD.should_load_spectrum_items() then
+    DRAGQUEENMOD.register_items(DRAGQUEENMOD.POKER_HANDS, "content/Poker_Hands")
+end
 
 -- Modifiers
 DRAGQUEENMOD.register_items(DRAGQUEENMOD.ENHANCEMENTS, "content/Modifiers/Enhancements")
@@ -66,11 +69,18 @@ if DRAGQUEENMOD.config.skins_enabled then
 end
 
 -- Vanilla Reworks
-if DRAGQUEENMOD.config.vanilla_reworks_enabled then
-    DRAGQUEENMOD.register_items(DRAGQUEENMOD.VANILLA_REWORKS,"content/Skins")
-end
+--if DRAGQUEENMOD.config.vanilla_reworks_enabled then
+    -- DRAGQUEENMOD.register_items(DRAGQUEENMOD.VANILLA_REWORKS,"")
+--end
 
--- Cross-Mod Content
-if DRAGQUEENMOD.confi.cross_mod_enabled then
-    DRAGQUEENMOD.cross_mod_content_register()
-end
+-- I don't understand this part but apply our config to particular findable objects?
+-- local objects = {}
+
+
+-- for _, v in pairs(SMODS.Centers) do
+--     objects[#objects+1] = {obj = v, center = true}
+-- end
+
+-- for _, v in pairs(SMODS.Tags) do
+--     objects[#objects+1] = {obj = v, center = true}
+-- end

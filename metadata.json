@@ -1,17 +1,11 @@
 {
-	"id": "dragqueen",
-	"name": "Drag Queen Balatro Mod",
-	"display_name": "Drag Queen Balatro Mod",
-	"author": ["Snow Jack Games","KassLavender"],
-	"description": "A drag queen-themed mod with high amounts of cross-mod compatibility. Balanced for Vanilla!",
-	"prefix": "dqbm",
-	"main_file": "drag.lua",
-	"priority": 0,
-	"badge_colour": "",
-	"badge_text_colour": "",
-	"version": "Dev",
-	"dependencies": [
-        "Steammodded (>=1.0.0-beta-1221a)",
-        "Lovely (>=0.8.0)"
-    ]
+  "id": "dragqueen",
+  "name": "Drag Queen Balatro Mod",
+  "prefix": "dragqueen",
+  "author": ["Snow Jack Games","KassLavender"],
+  "description": "A drag queen-themed mod with high amounts of cross-mod compatibility. Balanced for Vanilla!",
+  "main_file": "dragqueen.lua",
+  "badge_colour": "FF00FF",
+  "version": "0.0.1",
+  "dependencies": []
 }
