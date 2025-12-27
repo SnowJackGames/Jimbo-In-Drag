@@ -1,9 +1,9 @@
 -- Talisman compatibility
-to_big = to_big or function(n)
+DRAGQUEENMOD.to_big = to_big or function(n)
   return n
 end
 
-to_number = to_number or function(n)
+DRAGQUEENMOD.to_number = to_number or function(n)
   return n
 end
 

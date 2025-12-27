@@ -3,7 +3,7 @@
 ---@param path string
 function DRAGQUEENMOD.register_items(items, path)
   for i = 1, #items do
-    if love.filesystem.getInfo(path .. "/" .. items[i] .. ".lua") then 
+    if path and love.filesystem.getInfo(path .. "/" .. items[i] .. ".lua") then 
       SMODS.load_file(path .. "/" .. items[i] .. ".lua")()
     end
   end
@@ -19,7 +19,6 @@ function DRAGQUEENMOD.is_suit(card, type)
   end
   return false
 end
-
 
 -- Determines if current deck is playing with anything other than "plain suits" (spades, hearts, clubs, diamonds)
 -- If so then we want to communicate this to things communicating what light and dark suits are there available
@@ -89,4 +88,13 @@ function DRAGQUEENMOD.indexof(array, value)
         end
     end
     return nil
+end
+
+---@param context table
+---@return true | nil
+-- Determines if score flames were activated
+function  DRAGQUEENMOD.final_scoring_step_slay(context)
+  if context.final_scoring_step and (hand_chips * mult > G.GAME.blind.chips) then
+    return true
+  end
 end

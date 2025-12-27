@@ -1,10 +1,85 @@
 -- Create config UI
-
+-- In create_toggle could make active_colour something cute
+---@diagnostic disable-next-line: duplicate-set-field
+SMODS.current_mod.config_tab = function ()
+  return {
+    n = G.UIT.ROOT,
+    config = {align = "cm", padding = 0.05, emboss = 0.05, r = 0.1, colour = G.C.BLACK},
+    nodes = {
+      {
+        n = G.UIT.R,
+        config = { align = "cm", minh = 1 },
+        nodes = {
+          {
+            n = G.UIT.T,
+            config = {
+              text = localize('dragqueen_ui_requires_restart'),
+              colour = G.C.RED,
+              scale = 0.5,
+              shadow = true
+            }
+          }
+        }
+      },
+      {
+        n = G.UIT.R,
+        config = { align = "cm"},
+        nodes = {
+          {
+            n = G.UIT.C,
+            config = {align = "cl"},
+            nodes = {
+              create_toggle {
+                label = localize("dragqueen_ui_jokers_enabled"),
+                ref_table = DRAGQUEENMOD.config,
+                ref_value = "jokers_enabled"
+              },
+              create_toggle {
+                label = localize("dragqueen_ui_decks_enabled"),
+                ref_table = DRAGQUEENMOD.config,
+                ref_value = "decks_enabled"
+              },
+              create_toggle {
+                label = localize("dragqueen_ui_blinds_enabled"),
+                ref_table = DRAGQUEENMOD.config,
+                ref_value = "blinds_enabled"
+              }
+            }
+          },
+          {
+            n = G.UIT.C,
+            config = {align = "cr"},
+            nodes = {
+              create_toggle {
+                label = localize("dragqueen_UI_skins_enabled"),
+                ref_table = DRAGQUEENMOD.config,
+                ref_value = "skins_enabled",
+                w = 4.5
+              },
+              create_toggle {
+                label = localize("dragqueen_UI_vanilla_reworks_enabled"),
+                ref_table = DRAGQUEENMOD.config,
+                ref_value = "vanilla_reworks_enabled",
+                w = 4.5
+              },
+              create_toggle {
+                label = localize("dragqueen_UI_cross_mod_enabled"),
+                ref_table = DRAGQUEENMOD.config,
+                ref_value = "cross_mod_enabled",
+                w = 4.5
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+end
 
 
 -- Create Credits tab in our mod UI
 
--- Create collection entries for Kisses
+-- Create collection entries for Kisses if we have multiple types, or just stick them in stickers
 
 
 

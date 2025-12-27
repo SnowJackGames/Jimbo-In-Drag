@@ -398,8 +398,15 @@ return {
       k_dragqueen_joker = "Drag Queen",
       -- When a card says something like "Expired!"
       dragqueen_yas = "Yas!",
-      dragqueen_slay = "Slay!"
-      -- UI specific stuff like "Enable Cross-Mod Integration"
+      dragqueen_slay = "Slay!",
+      -- Config menu stuff
+      dragqueen_ui_jokers_enabled = "Enable Jokers",
+      dragqueen_ui_decks_enabled = "Enable Decks",
+      dragqueen_ui_blinds_enabled = "Enable blinds",
+      dragqueen_UI_skins_enabled = "Enable Skins",
+      dragqueen_UI_vanilla_reworks_enabled = "Enable Vanilla Reworks",
+      dragqueen_UI_cross_mod_enabled = "Enable Cross-Mod Content",
+      dragqueen_ui_requires_restart = "Requires Restart"
     },
     v_dictionary = {
       -- Variable information; like challenges_completed = "Completed#1#/#2# Challenges"

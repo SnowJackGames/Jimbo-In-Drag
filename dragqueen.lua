@@ -1,6 +1,6 @@
 -- Use "color", not "colour" etc
 -- Exception is when referencing specific variables in Balatro's source code,
--- Which is coded in canadian
+-- Which is coded in Canadian
 -- Mod's name "Drag Queen Balatro Mod" not final
 -- Search for "placeholder" or "tempname" (any capitalization) for placeholder text
 
@@ -15,7 +15,7 @@ SMODS.load_file("utilities/ui.lua")()
 
 
 -- Load the atlases
---SMODS.load_file("content/atlas.lua")()
+SMODS.load_file("content/atlas.lua")()
 
 
 -- Check for Cross-Mod Content
@@ -69,9 +69,9 @@ if DRAGQUEENMOD.config.skins_enabled then
 end
 
 -- Vanilla Reworks
---if DRAGQUEENMOD.config.vanilla_reworks_enabled then
-    -- DRAGQUEENMOD.register_items(DRAGQUEENMOD.VANILLA_REWORKS,"")
---end
+if DRAGQUEENMOD.config.vanilla_reworks_enabled then
+    DRAGQUEENMOD.register_items(DRAGQUEENMOD.VANILLA_REWORKS,"")
+end
 
 -- I don't understand this part but apply our config to particular findable objects?
 -- local objects = {}
