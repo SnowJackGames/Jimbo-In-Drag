@@ -33,6 +33,20 @@ function DRAGQUEENMOD.disable_non_plains()
   end
 end
 
+---Checks if the provided suit is currently in the deck
+---@param suit string
+---@param ignore_wild? boolean
+---@return boolean
+function DRAGQUEENMOD.has_suit_in_deck(suit, ignore_wild)
+  for _, v in ipairs(G.playing_cards or {}) do
+    if not SMODS.has_no_suit(v) and (v.base.suit == suit or (not ignore_wild and v:is_suit(suit))) then
+      return true
+    end
+  end
+  return false
+end
+
+-- Checks if non-plain cards are allowed to spawn
 function DRAGQUEENMOD.non_plain_in_pool()
   if G.GAME and G.GAME.NonPlain then return true
   end
@@ -49,6 +63,23 @@ function DRAGQUEENMOD.non_plain_in_pool()
         end
     end
     return spectrum_played
+end
+
+--- @return boolean
+function DRAGQUEENMOD.has_modded_suit_in_deck()
+  for k, v in ipairs(G.playing_cards or {}) do
+    local is_modded = true
+    for _, suit in ipairs(DRAGQUEENMOD.base_suits) do
+      if v.base.suit == suit then
+        is_modded = false
+      end
+    end
+
+    if not SMODS.has_no_suit(v) and is_modded then
+      return true
+    end
+  end
+  return false
 end
 
 ---@param set string
@@ -98,3 +129,4 @@ function  DRAGQUEENMOD.final_scoring_step_slay(context)
     return true
   end
 end
+

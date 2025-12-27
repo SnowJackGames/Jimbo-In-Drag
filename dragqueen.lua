@@ -73,14 +73,58 @@ if DRAGQUEENMOD.config.vanilla_reworks_enabled then
     DRAGQUEENMOD.register_items(DRAGQUEENMOD.VANILLA_REWORKS,"")
 end
 
--- I don't understand this part but apply our config to particular findable objects?
--- local objects = {}
+-- Apply our config to particular findable objects
+local objects = {}
 
+for _, v in pairs(SMODS.Centers) do
+    objects[#objects+1] = {obj = v, center = true}
+end
 
--- for _, v in pairs(SMODS.Centers) do
---     objects[#objects+1] = {obj = v, center = true}
--- end
+for _, v in pairs(SMODS.Tags) do
+    objects[#objects+1] = {obj = v, center = true}
+end
 
--- for _, v in pairs(SMODS.Tags) do
---     objects[#objects+1] = {obj = v, center = true}
--- end
+-- Apply said config to each valid object
+for _, v in ipairs(objects) do
+  local obj = v.obj
+  if obj and type(obj) == "table" and obj.dragqueen then
+    local func_ref = obj.in_pool or function() return true end
+    local config = obj.dragqueen
+
+    if config.requires_pumps or config.requires_purses then
+      config.requires_custom_suits = true
+    end
+
+    config.requirements = {}
+    for k, _ in pairs(config) do
+      local data = DRAGQUEENMOD.requirement_map[k]
+      if data then
+        table.insert(config.requirements, data)
+      end
+    end
+
+    -- Hook the in_pool function, adding extra logic depending on the
+    -- config provided by this center
+    obj.in_pool = function(self, args)
+      local ret, dupes = func_ref(self, args)
+
+      for _, req in ipairs(config.requirements) do
+        ret = ret and DRAGQUEENMOD.config[req.setting]
+      end
+
+      if config.requires_pumps then
+        ret = ret and DRAGQUEENMOD.has_suit_in_deck("dragqueen_Pumps", true)
+      end
+
+      if config.requires_purses then
+        ret = ret and DRAGQUEENMOD.has_suit_in_deck("dragqueen_Purses", true)
+      end
+
+      if config.requires_spectrum_or_suit then
+        ret = ret and (DRAGQUEENMOD.spectrum_played() or DRAGQUEENMOD.has_modded_suit_in_deck())
+      end
+
+      return ret, dupes
+    end
+  end
+end

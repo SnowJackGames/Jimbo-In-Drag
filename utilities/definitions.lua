@@ -42,8 +42,11 @@ DRAGQUEENMOD.modifiers = {}
 -- The user can disable specific Drag Queen Mod items by commenting them out if they hate it
 -- But watch out!
 
-DRAGQUEENMOD.BASE_POKER_HANDS = {
-
+DRAGQUEENMOD.BASE_SUITS = {
+    "Spades",
+    "Hearts",
+    "Clubs",
+    "Diamonds"
 }
 
 DRAGQUEENMOD.SUITS = {
@@ -152,6 +155,8 @@ DRAGQUEENMOD.CONSUMABLES = {
 
 -- Other Core Content
 DRAGQUEENMOD.JOKERS = {
+    --"broke_joker",
+    --"vain_joker"
 }
 
 DRAGQUEENMOD.DECKS = {
@@ -178,6 +183,29 @@ DRAGQUEENMOD.PARTNERS = {
 }
 
 DRAGQUEENMOD.CHARMS = {
+}
+
+DRAGQUEENMOD.requirement_map = {
+    requires_jokers = {
+        setting = "jokers_enabled",
+        tooltip = "dragqueen_requires_jokers"
+    },
+    requires_decks = {
+        setting = "decks_enabled",
+        tooltip = "dragqueen_requires_decks"
+    },
+    requires_blinds = {
+        setting = "blinds_enabled",
+        tooltip = "dragqueen_requires_blinds"
+    },
+    requires_skins = {
+        setting = "skins_enabled",
+        tooltip = "dragqueen_requires_skins"
+    },
+    requires_cross_mods = {
+        setting = "cross_mod_enabled",
+        tooltip = "dragqueen_requires_cross_mods"
+    }
 }
 
 -- Define kiss objects

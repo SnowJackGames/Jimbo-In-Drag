@@ -34,6 +34,22 @@ return {
   descriptions = {
     Joker = {
       -- Modded jokers
+      j_dragqueen_broke_joker = {
+        name = "Broke Joker",
+        text = {
+          "Played cards with",
+          "{C:dragqueen_purses}Purse{} suit give",
+          "{C:mult}+#1#{} Mult when scored"
+        }
+      },
+      j_dragqueen_vain_joker = {
+        name = "Vain Joker",
+        text = {
+          "Played cards with",
+          "{C:dragqueen_pumps}Pump{} suit give",
+          "{C:mult}+#1#{} Mult when scored"
+        }
+      },
       -- Patching vanilla jokers
       -- Patching other mods' jokers
     },
@@ -391,6 +407,48 @@ return {
         }
       }
     },
+    Other = {
+      dragqueen_requires_jokers = {
+        name = "Requires Jokers",
+        text = {
+          "Removed from pool due",
+          "to {C:attention}Jokers{} being",
+          "disabled in {C:legendary}Drag Queen Mod{}"
+        }
+      },
+      dragqueen_requires_decks = {
+        name = "Requires Decks",
+        text = {
+          "Removed from pool due",
+          "to {C:attention}Decks{} being",
+          "disabled in {C:legendary}Drag Queen Mod{}"
+        }
+      },
+      dragqueen_requires_blinds = {
+        name = "Requires Blinds",
+        text = {
+          "Removed from pool due",
+          "to {C:attention}Blinds{} being",
+          "disabled in {C:legendary}Drag Queen Mod{}"
+        }
+      },
+      dragqueen_requires_skins = {
+        name = "Requires Skins",
+        text = {
+          "Removed from pool due",
+          "to {C:attention}Skins{} being",
+          "disabled in {C:legendary}Drag Queen Mod{}"
+        }
+      },
+      dragqueen_requires_cross_mods = {
+        name = "Requires Cross-Mod Content",
+        text = {
+          "Removed from pool due",
+          "to {C:attention}Cross-Mod Content{} being",
+          "disabled in {C:legendary}Drag Queen Mod{}"
+        }
+      }
+    }
   },
   misc = {
     dictionary = {

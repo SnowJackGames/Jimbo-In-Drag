@@ -32,8 +32,7 @@ SMODS.suit{
           or (sleeve_config and sleeve_config.create_pumps)
     else
       -- If not creating a deck
-      -- Currently not implemented
-      return DRAGQUEENMOD.has_suit_in_deck('dragqueen_Pumps', true) or DRAGQUEENMOD.spectrum_played()
+      return DRAGQUEENMOD.has_suit_in_deck('dragqueen_Pumps', true) or DRAGQUEENMOD.non_plain_in_pool()
     end
   end
 }
