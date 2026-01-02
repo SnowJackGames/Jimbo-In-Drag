@@ -9,10 +9,8 @@ end
 
 -- Searching for other mods for cross-mod content and integration
 function DRAGQUEENMOD.cross_mod_content_register()
-  sendInfoMessage("Running cross mod content register", "Drag Queen Mod Info Logger")
 -- Bunco
   if next(SMODS.find_mod("Bunco")) then
-    sendInfoMessage("found Bunco", "Drag Queen Mod Info Logger")
     local prefix = DRAGQUEENMOD.getprefix("Bunco", "bunc")
     table.insert(DRAGQUEENMOD.dark_suits, prefix .. "_Halberds")
     table.insert(DRAGQUEENMOD.light_suits, prefix .. "_Fleurons")
@@ -31,7 +29,6 @@ function DRAGQUEENMOD.cross_mod_content_register()
 
   -- Paperback
   if next(SMODS.find_mod("paperback")) then
-    sendInfoMessage("Paperback found", "Drag Queen Mod Info Logger")
     local prefix = DRAGQUEENMOD.getprefix("paperback", "paperback")
 
     -- Adds their suits to our definitions of light and dark and proud

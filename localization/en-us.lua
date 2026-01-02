@@ -468,11 +468,25 @@ return {
     },
     suits_singular = {
       dragqueen_Pumps = "Pump",
-      dragqueen_Purses = "Purse"
+      dragqueen_Purses = "Purse",
+      bunc_Fleurons = "Fleuron",
+      bunc_Halberds = "Halberd",
+      paperback_Crowns = "Crown",
+      paperback_Stars = "Star",
+      minty_3s = "3",
+      six_Moons = "Moon",
+      six_Stars = "Star"
     },
     suits_plural = {
       dragqueen_Pumps = "Pumps",
-      dragqueen_Purses = "Purses"
+      dragqueen_Purses = "Purses",
+      bunc_Fleurons = "Fleurons",
+      bunc_Halberds = "Halberds",
+      paperback_Crowns = "Crowns",
+      paperback_Stars = "Stars",
+      minty_3s = "3s",
+      six_Moons = "Moons",
+      six_Stars = "Stars"
     },
     poker_hands = {
       ["dragqueen_Spectrum"] = "Spectrum",

@@ -180,9 +180,19 @@ end
 ---@param context table
 ---@return true | nil
 -- Determines if score flames were activated
-function  DRAGQUEENMOD.final_scoring_step_slay(context)
+function DRAGQUEENMOD.final_scoring_step_slay(context)
   if context.final_scoring_step and (hand_chips * mult > G.GAME.blind.chips) then
     return true
   end
 end
 
+-- Lets Balatro load unusual Unicode characters for fun tooltip stuff
+function DRAGQUEENMOD.font_symbols()
+  -- "newfont.ttf" is a copy of the balatro m6x11plus.ttf font, with added characters from Bunco,
+  -- and added characters created from SVG icons from BigBlueTermPlusNerdFont-Regular (see BigBlueTermPlusNerdFont-RegularSVG-assets-license.txt in /assets/fonts)
+  local symbol_font_location = "Mods/DragQueenBalatroMod/assets/fonts/newfont.ttf"
+  local symbol_font = love.graphics.newFont(symbol_font_location, G.TILESIZE * 10)
+  for i, v in ipairs(G.FONTS) do
+    G.FONTS[i].FONT:setFallbacks(symbol_font)
+  end
+end

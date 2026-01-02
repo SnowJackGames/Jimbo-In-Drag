@@ -1,6 +1,9 @@
 -- Load mod config
 DRAGQUEENMOD.config = SMODS.current_mod.config
 
+-- Get this mod's path
+DRAGQUEENMOD.dragqueen_path = tostring(SMODS.Mods["dragqueen"].path)
+
 -- Enable optional features
 SMODS.current_mod.optional_features = {
   retrigger_joker = true,

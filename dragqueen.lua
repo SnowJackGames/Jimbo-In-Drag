@@ -12,7 +12,8 @@ SMODS.load_file("utilities/misc_functions.lua")()
 SMODS.load_file("utilities/cross-mod.lua")()
 SMODS.load_file("utilities/ui.lua")()
 
-
+-- Do a bit of font magic so that Balatro can support unusual Unicode characters
+DRAGQUEENMOD.font_symbols()
 
 -- Load the atlases
 SMODS.load_file("content/atlas.lua")()
@@ -48,6 +49,8 @@ DRAGQUEENMOD.register_items(DRAGQUEENMOD.CONSUMABLES.VOUCHERS, "content/Consumab
 DRAGQUEENMOD.register_items(DRAGQUEENMOD.CONSUMABLES.PACKS, "content/Consumables/Packs")
 DRAGQUEENMOD.register_items(DRAGQUEENMOD.CONSUMABLES.TAGS, "content/Consumables/Tags")
 
+
+print(love.filesystem.getSaveDirectory())
 
 -- Jokers
 if DRAGQUEENMOD.config.jokers_enabled then
