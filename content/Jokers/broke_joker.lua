@@ -8,13 +8,14 @@ SMODS.Joker {
         }
     },
     rarity = 1,
-    pos = {},
-    atlas = "jokers_atlas",
+    pos = {x = 0, y = 0},
+    atlas = "placeholder",
     cost = 5,
     unlocked = true,
-    discovered = false,
+    discovered = true,
     blueprint_compat = true,
     eternal_compat = true,
+    perishable_compat = false,
     dragqueen = {
         requires_purses = true
     },

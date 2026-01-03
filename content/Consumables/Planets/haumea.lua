@@ -1,4 +1,4 @@
-PB_UTIL.Planet {
+DRAGQUEENMOD.Planet {
   key = 'haumea',
   atlas = 'planets_atlas',
   pos = { x = 1, y = 0 },

@@ -1,4 +1,4 @@
-PB_UTIL.Planet {
+DRAGQUEENMOD.Planet {
   key = 'sedna',
   atlas = 'planets_atlas',
   pos = { x = 2, y = 0 },

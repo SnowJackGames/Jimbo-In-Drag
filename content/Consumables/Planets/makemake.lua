@@ -1,4 +1,4 @@
-PB_UTIL.Planet {
+DRAGQUEENMOD.Planet {
   key = 'makemake',
   atlas = 'planets_atlas',
   pos = { x = 3, y = 0 },

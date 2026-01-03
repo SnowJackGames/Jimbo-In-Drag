@@ -2,14 +2,15 @@
 DRAGQUEENMOD.config = SMODS.current_mod.config
 
 -- Get this mod's path
-DRAGQUEENMOD.dragqueen_path = tostring(SMODS.Mods["dragqueen"].path)
+DRAGQUEENMOD.dragqueen_path = string.gsub(tostring(SMODS.Mods["dragqueen"].path), "\\", "/")
+DRAGQUEENMOD.dragqueen_path_from_save_folder = string.gsub(DRAGQUEENMOD.dragqueen_path, love.filesystem.getSaveDirectory(), "")
 
 -- Enable optional features
 SMODS.current_mod.optional_features = {
-  retrigger_joker = true,
-  post_trigger = true,
-  quantum_enhancements = true,
-  cardareas = {deck = true}
+  retrigger_joker = false,
+  post_trigger = false,
+  quantum_enhancements = false,
+  cardareas = {deck = false, discard = false}
 }
 
 -- Update values that get reset at the start of each round
@@ -127,7 +128,7 @@ DRAGQUEENMOD.MODIFIERS = {
 -- Consumables
 DRAGQUEENMOD.CONSUMABLES = {
     PLANETS = {
-        "Quaor",
+        "Quaoar",
         "Haumea",
         "Sedna",
         "Makemake"
@@ -159,8 +160,8 @@ DRAGQUEENMOD.CONSUMABLES = {
 
 -- Other Core Content
 DRAGQUEENMOD.JOKERS = {
-    --"broke_joker",
-    --"vain_joker"
+    "broke_joker",
+    "vain_joker"
 }
 
 DRAGQUEENMOD.DECKS = {

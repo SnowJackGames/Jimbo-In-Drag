@@ -42,7 +42,6 @@ DRAGQUEENMOD.register_items(DRAGQUEENMOD.MODIFIERS.KISSES, "content/Modifiers/Ki
 
 
 -- Consumables
-DRAGQUEENMOD.register_items(DRAGQUEENMOD.CONSUMABLES.PLANETS, "content/Consumables/Planets")
 DRAGQUEENMOD.register_items(DRAGQUEENMOD.CONSUMABLES.TAROT, "content/Consumables/Tarot")
 DRAGQUEENMOD.register_items(DRAGQUEENMOD.CONSUMABLES.SPECTRALS, "content/Consumables/Spectrals")
 DRAGQUEENMOD.register_items(DRAGQUEENMOD.CONSUMABLES.VOUCHERS, "content/Consumables/Vouchers")
@@ -50,7 +49,6 @@ DRAGQUEENMOD.register_items(DRAGQUEENMOD.CONSUMABLES.PACKS, "content/Consumables
 DRAGQUEENMOD.register_items(DRAGQUEENMOD.CONSUMABLES.TAGS, "content/Consumables/Tags")
 
 
-print(love.filesystem.getSaveDirectory())
 
 -- Jokers
 if DRAGQUEENMOD.config.jokers_enabled then

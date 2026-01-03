@@ -3,7 +3,8 @@
 ---@param path string
 function DRAGQUEENMOD.register_items(items, path)
   for i = 1, #items do
-    if path and love.filesystem.getInfo(path .. "/" .. items[i] .. ".lua") then 
+    if path and love.filesystem.getInfo(DRAGQUEENMOD.dragqueen_path_from_save_folder .. path .. "/" .. items[i] .. ".lua") then 
+      print("loading: " .. path .. "/" .. items[i] .. ".lua")
       SMODS.load_file(path .. "/" .. items[i] .. ".lua")()
     end
   end
@@ -190,6 +191,7 @@ end
 function DRAGQUEENMOD.font_symbols()
   -- "newfont.ttf" is a copy of the balatro m6x11plus.ttf font, with added characters from Bunco,
   -- and added characters created from SVG icons from BigBlueTermPlusNerdFont-Regular (see BigBlueTermPlusNerdFont-RegularSVG-assets-license.txt in /assets/fonts)
+  -- DRAGQUEENMOD.dragqueen_path_from_save_folder looks like "/Mods/DragQueenBalatroMod/"
   local symbol_font_location = "Mods/DragQueenBalatroMod/assets/fonts/newfont.ttf"
   local symbol_font = love.graphics.newFont(symbol_font_location, G.TILESIZE * 10)
   for i, v in ipairs(G.FONTS) do

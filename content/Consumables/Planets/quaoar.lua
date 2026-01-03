@@ -1,4 +1,4 @@
-PB_UTIL.Planet {
+DRAGQUEENMOD.Planet {
   key = 'quaoar',
   atlas = 'planets_atlas',
   pos = { x = 0, y = 0 },
