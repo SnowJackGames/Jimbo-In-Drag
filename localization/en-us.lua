@@ -380,7 +380,7 @@ return {
       dragqueen_ink_dark_suits = {
         name = "Stained Dark Suits",
         text = {
-          "{C:black,E:1,S:1.1}Ink{}"
+          "{C:black,E:1,S:1.1}Inks{}"
         }
       },
       -- When deck only has plain suits
@@ -442,7 +442,7 @@ return {
       dragqueen_ink_light_suits = {
         name = "Stained Light Suits",
         text = {
-          "{C:purple,E:1,S:1.1}Color{}"
+          "{C:purple,E:1,S:1.1}Colors{}"
         }
       },
       -- Dynamically generated through UI.lua:DRAGQUEENMOD.suit_tooltip()
@@ -491,7 +491,9 @@ return {
       paperback_Stars = "Star",
       minty_3s = "3",
       six_Moons = "Moon",
-      six_Stars = "Star"
+      six_Stars = "Star",
+      ink_Inks = "Ink",
+      ink_Colors = "Color"
     },
     suits_plural = {
       dragqueen_Pumps = "Pumps",
@@ -502,7 +504,9 @@ return {
       paperback_Stars = "Stars",
       minty_3s = "3s",
       six_Moons = "Moons",
-      six_Stars = "Stars"
+      six_Stars = "Stars",
+      ink_Inks = "Inks",
+      ink_Colors = "Colors"
     },
     poker_hands = {
       ["dragqueen_Spectrum"] = "Spectrum",

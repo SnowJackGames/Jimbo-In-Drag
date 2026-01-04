@@ -143,15 +143,14 @@ function DRAGQUEENMOD.suit_tooltip(type)
         "paperback",
         "MintysSillyMod",
         "SixSuits",
-        "magic_the_jokering",
         "InkAndColor"
       }
-      local mods_in_play = {}
+      local mods_in_play = false
 
-      -- Let's first figure out what mods are even installed
+      -- Let's first figure out if other modded suits are relevant
       for _, modname in ipairs(mod_names) do
         if next(SMODS.find_mod(modname)) then
-          table.insert(mods_in_play, modname)
+          mods_in_play = true
         end
       end
 
@@ -161,7 +160,7 @@ function DRAGQUEENMOD.suit_tooltip(type)
       local messageparts = {}
       table.insert(messageparts, DRAGQUEENMOD.easydescriptionlocalize("Grammar", "dragqueen_suit_conjunction1").text)
       table.insert(messageparts, DRAGQUEENMOD.easydescriptionlocalize("Other","dragqueen_vanilla_plus_" .. type .. "_suits").text)
-      if next(mods_in_play) == nil then
+      if not mods_in_play then
         table.insert(messageparts, DRAGQUEENMOD.easydescriptionlocalize("Grammar", "dragqueen_suit_conjunction4").text)
         table.insert(messageparts, DRAGQUEENMOD.easydescriptionlocalize("Other", "dragqueen_accessory_" .. type .. "_suits").text)
       else
@@ -169,45 +168,27 @@ function DRAGQUEENMOD.suit_tooltip(type)
         table.insert(messageparts, DRAGQUEENMOD.easydescriptionlocalize("Other", "dragqueen_accessory_" .. type .. "_suits").text)
 
         -- Now, if there's any modded suits we add those to messageparts
-        for _, modname in ipairs(mods_in_play) do
+        for _, modname in ipairs(mod_names) do
           -- First we check to make sure that mod does have the category of light and dark suits (ex. MintysSillyMod only has a light suit)
-          if pcall(DRAGQUEENMOD.easydescriptionlocalize, "Other", "dragqueen_" .. DRAGQUEENMOD.getprefix(modname) .. "_" .. type .. "_suits") then
-            -- i.e. if this is the last modded suit to be added
-            if DRAGQUEENMOD.indexof(mods_in_play, modname) == #mods_in_play then
-              table.insert(messageparts, DRAGQUEENMOD.easydescriptionlocalize("Grammar", "dragqueen_suit_conjunction4").text)
-              table.insert(messageparts, DRAGQUEENMOD.easydescriptionlocalize("Other", "dragqueen_" .. DRAGQUEENMOD.getprefix(modname) .. "_" .. type .. "_suits").text)
-            -- i.e. there's more modded suits after this one
-            else
-              table.insert(messageparts, DRAGQUEENMOD.easydescriptionlocalize("Grammar", "dragqueen_suit_conjunction3").text)
-              table.insert(messageparts, DRAGQUEENMOD.easydescriptionlocalize("Other", "dragqueen_" .. DRAGQUEENMOD.getprefix(modname) .. "_" .. type .. "_suits").text)
+          if next(SMODS.find_mod(modname)) then
+            if pcall(DRAGQUEENMOD.easydescriptionlocalize, "Other", "dragqueen_" .. DRAGQUEENMOD.getprefix(modname) .. "_" .. type .. "_suits") then
+                table.insert(messageparts, DRAGQUEENMOD.easydescriptionlocalize("Grammar", "dragqueen_suit_conjunction3").text)
+                table.insert(messageparts, DRAGQUEENMOD.easydescriptionlocalize("Other", "dragqueen_" .. DRAGQUEENMOD.getprefix(modname) .. "_" .. type .. "_suits").text)
             end
           end
         end
         table.insert(messageparts, DRAGQUEENMOD.easydescriptionlocalize("Grammar", "dragqueen_suit_conjunction5").text)
       end
 
-      -- This is complicated, but if for some reason conjunction 4 is in messageparts,
-      -- (Ex. A case where a mod has a light suit but not a dark suit, so it skips over adding conj4 for their nonexistant dark suit)
-      -- Then we have to insert conj4 at the correct position; third to last.
-      local conj4exists = false
-      local messagepartslength = 0
-      for _, texttable in ipairs(messageparts) do
-        messagepartslength = messagepartslength + 1
-        if texttable == DRAGQUEENMOD.easydescriptionlocalize("Grammar", "dragqueen_suit_conjunction4").text then
-          conj4exists = true
-        end
-      end
-
-      if conj4exists == false then
-        messageparts[messagepartslength - 2] = DRAGQUEENMOD.easydescriptionlocalize("Grammar", "dragqueen_suit_conjunction4").text
-      end
-
+      -- Then we have to insert conj4 at the correct position; third to last. In en-us, this is ", and "
+      messageparts[(#messageparts) - 2] = DRAGQUEENMOD.easydescriptionlocalize("Grammar", "dragqueen_suit_conjunction4").text
 
       -- Now we have all the messageparts text tables, let's extract the strings into a simpler table of strings
       local messagestrings = {}
       for _, texttable in ipairs(messageparts) do
         for _, textstring in ipairs(texttable) do
           table.insert(messagestrings, textstring)
+          print(textstring)
         end
       end
       
