@@ -51,6 +51,14 @@ return {
           "{C:mult}+#1#{} Mult when scored"
         }
       },
+      j_dragqueen_tights = {
+        name = "Tights",
+        text = {
+          "{C:green}#1# in #2#{} chance for played",
+          "cards with {C:dragqueen_pumps}Pump{} suit to give",
+          "{C:chips}X#3#{} Chips when scored"
+        }
+      },
       -- Patching vanilla jokers
       -- Patching other mods' jokers
     },

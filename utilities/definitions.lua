@@ -161,7 +161,8 @@ DRAGQUEENMOD.CONSUMABLES = {
 -- Other Core Content
 DRAGQUEENMOD.JOKERS = {
     "broke_joker",
-    "vain_joker"
+    "vain_joker",
+    "tights"
 }
 
 DRAGQUEENMOD.DECKS = {
