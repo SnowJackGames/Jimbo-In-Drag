@@ -188,7 +188,6 @@ function DRAGQUEENMOD.suit_tooltip(type)
       for _, texttable in ipairs(messageparts) do
         for _, textstring in ipairs(texttable) do
           table.insert(messagestrings, textstring)
-          print(textstring)
         end
       end
       
