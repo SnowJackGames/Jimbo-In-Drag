@@ -56,7 +56,7 @@ return {
         text = {
           "{C:green}#1# in #2#{} chance for played",
           "cards with {C:dragqueen_purses}Purse{} suit to give",
-          "{C:money}X#3#{} Money when scored"
+          "{X:money,C:white}X#3#{} Money when scored"
         }
       },
       j_dragqueen_tights = {
@@ -64,7 +64,7 @@ return {
         text = {
           "{C:green}#1# in #2#{} chance for played",
           "cards with {C:dragqueen_pumps}Pump{} suit to give",
-          "{C:chips}X#3#{} Chips when scored"
+          "{X:chips,C:white}X#3#{} Chips when scored"
         }
       },
       -- Patching vanilla jokers
