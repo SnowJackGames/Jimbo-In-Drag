@@ -8,5 +8,5 @@
   "main_file": "dragqueen.lua",
   "badge_colour": "FF00FF",
   "version": "0.0.1",
-  "dependencies": []
+  "dependencies": ["Steamodded (>=1.0.0~BETA-1016c)", "Lovely (>=0.8)", "SpectrumFramework (>=0.8.1)"]
 }
