@@ -26,13 +26,6 @@
     -- Mod icon
 
 
--- Registers the atlas for Planets
-SMODS.Atlas {
-  key = "planets_atlas",
-  px = 71,
-  py = 95,
-  path = "Consumables/Planets.png"
-}
 
 -- Placeholder
 SMODS.Atlas {

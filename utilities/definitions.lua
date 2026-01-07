@@ -127,12 +127,6 @@ DRAGQUEENMOD.MODIFIERS = {
 
 -- Consumables
 DRAGQUEENMOD.CONSUMABLES = {
-    PLANETS = {
-        "Quaoar",
-        "Haumea",
-        "Sedna",
-        "Makemake"
-    },
 
     TAROT = {
     },
@@ -226,25 +220,3 @@ DRAGQUEENMOD.kiss = SMODS.Sticker:extend{
     }
 
 }
-
----@type SMODS.Consumable
-DRAGQUEENMOD.Planet = SMODS.Consumable:extend{
-    set = "Planet",
-    is_dwarf = false,
-
-    -- Descriptions of planets are all the same, so can just nab c_mercury
-    process_loc_text = function(self)
-      G.localization.descriptions[self.set][self.key] = {
-        text = G.localization.descriptions[self.set].c_mercury.text
-      }
-    end,
-
-    set_card_type_badge = function(self, card, badges)
-      badges[#badges + 1] = create_badge(
-        not self.is_dwarf and localize('k_planet_q') or localize('k_dwarf_planet'),
-        get_type_colour(self, card),
-        nil,
-        1.2
-      )
-    end
-    }

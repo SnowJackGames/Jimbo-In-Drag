@@ -26,7 +26,7 @@ SMODS.suit{
       local back_config = back and back.effect.center.dragqueen
 
       local sleeve = G.GAME.selected_sleeve
-      local sleeve_config = (G.DQ_CENTERS[sleeve] or {}).dragqueen
+      local sleeve_config = (G.P_CENTERS[sleeve] or {}).dragqueen
 
       return (back_config and back_config.create_purses)
           or (sleeve_config and sleeve_config.create_pumps)

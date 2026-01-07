@@ -1,5 +1,0 @@
-.LUA files
-ex. Talisman compatibility
-searching for diferent other mods to register content
-whether or not to load stuff like Spectrum hands, planets, and jokers
-config UI

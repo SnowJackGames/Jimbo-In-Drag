@@ -138,15 +138,3 @@ function DRAGQUEENMOD.paperback_joker_patch()
     true
   )
   end
-
---- Whether to load stuff such as hands, planets and jokers related to Spectrums
---- This mod defers to everyone else
---- @return boolean
-function DRAGQUEENMOD.should_load_spectrum_items()
-  return not (
-    next(SMODS.find_mod('Bunco'))
-    or next(SMODS.find_mod("SixSuits"))
-    or next(SMODS.find_mod("Paperback"))
-    or next(SMODS.find_mod("SpectrumFramework"))
-  )
-end

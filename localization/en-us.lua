@@ -141,20 +141,6 @@ return {
     },
     Gemstone = {
     },
-    Planet = {
-      c_dragqueen_quaoar = {
-        name = "Quaoar",
-      },
-      c_dragqueen_haumea = {
-        name = "Haumea",
-      },
-      c_dragqueen_sedna = {
-        name = "Sedna",
-      },
-      c_dragqueen_makemake = {
-        name = "Makemake",
-      },
-    },
     Tarot = {
     },
     Spectral = {
@@ -507,30 +493,6 @@ return {
       six_Stars = "Stars",
       ink_Inks = "Inks",
       ink_Colors = "Colors"
-    },
-    poker_hands = {
-      ["dragqueen_Spectrum"] = "Spectrum",
-      ["dragqueen_Straight Spectrum"] = "Straight Spectrum",
-      ["dragqueen_Straight Spectrum (Royal)"] = "Royal Spectrum",
-      ["dragqueen_Spectrum House"] = "Spectrum House",
-      ["dragqueen_Spectrum Five"] = "Spectrum Five",
-    },
-    poker_hand_descriptions = {
-      ["dragqueen_Spectrum"] = {
-        "5 cards with different suits"
-      },
-      ["dragqueen_Straight Spectrum"] = {
-        "5 cards in a row (consecutive ranks),",
-        "each with a different suit"
-      },
-      ["dragqueen_Spectrum House"] = {
-        "A Three of a Kind and a Pair with",
-        "each card having a different suit"
-      },
-      ["dragqueen_Spectrum Five"] = {
-        "5 cards with the same rank,",
-        "each with a different suit"
-      }
     },
     labels = {
       -- Like how seals and editions have badges at the bottom
