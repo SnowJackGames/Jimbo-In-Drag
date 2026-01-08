@@ -100,9 +100,9 @@ DRAGQUEENMOD.BASE_POKER_HANDS = {
 
 DRAGQUEENMOD.SPECTRUM_POKER_HANDS = {
   "Spectrum",
-  "Straight_Spectrum",
-  "Spectrum_House",
-  "Spectrum_Five",
+  "Straight Spectrum",
+  "Spectrum House",
+  "Spectrum Five",
 }
 
 

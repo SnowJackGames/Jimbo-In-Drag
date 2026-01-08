@@ -2,7 +2,7 @@
   "id": "dragqueen",
   "name": "Drag Queen Balatro Mod",
   "prefix": "dragqueen",
-  "priority": 1,
+  "priority": 37,
   "author": ["Snow Jack Games","KassLavender"],
   "description": "A drag queen-themed mod with high amounts of cross-mod compatibility. Balanced for Vanilla!",
   "main_file": "dragqueen.lua",

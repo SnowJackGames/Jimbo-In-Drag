@@ -1,3 +1,15 @@
+---@diagnostic disable: undefined-field
+function DRAGQUEENMOD.SpectrumFramework_spectrum_played_hook()
+  local spectrum_played = SPECF.spectrum_played
+  function SPECF.spectrum_played()
+    if DRAGQUEENMOD.non_plain_in_pool() then
+      return true
+    end
+  end
+  spectrum_played()
+end
+
+
 function DRAGQUEENMOD.Bunco_joker_patch()
   local cassette = {
     custom_vars = function(self, info_queue, card)
