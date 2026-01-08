@@ -20,6 +20,8 @@ payload = '''
 dragqueen_Pumps = '',
 dragqueen_Purses = '',
 six_Moons = '',
+ink_Inks = '',
+ink_Colors = '⊙',
 '''
 
 # Fixes a line of Bunco's code searching assembled strings in various languages if it's there
@@ -75,6 +77,8 @@ local suit_symbols = {
     dragqueen_Pumps = '',
     dragqueen_Purses = '',
     six_Moons = '',
+    ink_Inks = '',
+    ink_Colors = '⊙',
 }
 if pcall(next, found_strings) == false then
     local found_strings = {}

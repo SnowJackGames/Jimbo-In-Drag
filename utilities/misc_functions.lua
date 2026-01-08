@@ -189,12 +189,13 @@ end
 
 -- Lets Balatro load unusual Unicode characters for fun tooltip stuff
 function DRAGQUEENMOD.font_symbols()
-  -- "newfont.ttf" is a copy of the balatro m6x11plus.ttf font, with added characters from Bunco,
+  -- "symbol-font.ttf" is a copy of the balatro m6x11plus.ttf font, with added characters from Bunco,
   -- and added characters created from SVG icons from BigBlueTermPlusNerdFont-Regular (see BigBlueTermPlusNerdFont-RegularSVG-assets-license.txt in /assets/fonts)
-  -- DRAGQUEENMOD.dragqueen_path_from_save_folder looks like "/Mods/DragQueenBalatroMod/"
-  local symbol_font_location = "Mods/DragQueenBalatroMod/assets/fonts/newfont.ttf"
-  local symbol_font = love.graphics.newFont(symbol_font_location, G.TILESIZE * 10)
+  -- used for suit symbols (see: /lovely/suitsymbols.toml)
+  local font_location = DRAGQUEENMOD.dragqueen_path_from_save_folder .. "assets/fonts/"
+  local symbol_font = love.graphics.newFont(font_location .. "symbol-font.ttf", G.TILESIZE * 10)
+  local nerd_font = love.graphics.newFont(font_location .. "BigBlueTermPlusNerdFontPropo-Regular.ttf", G.TILESIZE * 8)
   for i, v in ipairs(G.FONTS) do
-    G.FONTS[i].FONT:setFallbacks(symbol_font)
+    G.FONTS[i].FONT:setFallbacks(symbol_font, nerd_font)
   end
 end

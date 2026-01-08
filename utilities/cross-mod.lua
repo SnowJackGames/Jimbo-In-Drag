@@ -133,7 +133,6 @@ function DRAGQUEENMOD.cross_mod_ours_to_theirs()
   if next(SMODS.find_mod("rgmadcap")) then
     -- We add all of our dark and light suits we know of to their definition
     if dark_suits then
-      print("rgmadcap dark suits found")
       local suitfound = false
       for _, v in ipairs(DRAGQUEENMOD.dark_suits) do
         for _, w in ipairs(dark_suits) do
@@ -148,7 +147,6 @@ function DRAGQUEENMOD.cross_mod_ours_to_theirs()
     end
 
     if light_suits then
-      print("rgmadcap light suits found")
       local suitfound = false
       for _, v in ipairs(DRAGQUEENMOD.light_suits) do
         for _, w in ipairs(light_suits) do

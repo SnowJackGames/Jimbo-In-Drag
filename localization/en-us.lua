@@ -366,7 +366,7 @@ return {
       dragqueen_ink_dark_suits = {
         name = "Stained Dark Suits",
         text = {
-          "{C:black,E:1,S:1.1}Inks{}"
+          "{C:black}Inks{}"
         }
       },
       -- When deck only has plain suits
@@ -428,7 +428,7 @@ return {
       dragqueen_ink_light_suits = {
         name = "Stained Light Suits",
         text = {
-          "{C:purple,E:1,S:1.1}Colors{}"
+          "{C:purple}Colors{}"
         }
       },
       -- Dynamically generated through UI.lua:DRAGQUEENMOD.suit_tooltip()
