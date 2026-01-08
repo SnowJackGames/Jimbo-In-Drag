@@ -21,7 +21,7 @@ dragqueen_Pumps = '',
 dragqueen_Purses = '',
 six_Moons = '',
 ink_Inks = '',
-ink_Colors = '⊙',
+ink_Colors = '',
 '''
 
 # Fixes a line of Bunco's code searching assembled strings in various languages if it's there
