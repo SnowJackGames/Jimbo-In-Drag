@@ -20,9 +20,9 @@ payload = '''
 dragqueen_Pumps = '',
 dragqueen_Purses = '',
 six_Moons = '',
-ink_Inks = '',
-ink_Colors = '',
 '''
+# ink_Inks = '',
+# ink_Colors = '',
 
 # Fixes a line of Bunco's code searching assembled strings in various languages if it's there
 [[patches]]
@@ -77,8 +77,6 @@ local suit_symbols = {
     dragqueen_Pumps = '',
     dragqueen_Purses = '',
     six_Moons = '',
-    ink_Inks = '',
-    ink_Colors = '⊙',
 }
 if pcall(next, found_strings) == false then
     local found_strings = {}
@@ -99,3 +97,5 @@ if pcall(next, found_strings) == false then
     end
 end
 '''
+# ink_Inks = '',
+# ink_Colors = '',
