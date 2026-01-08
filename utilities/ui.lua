@@ -95,6 +95,8 @@ end
 --- | "treat"
 --- | "magic"
 --- | "stained"
+--- | "parallel"
+--- | "chaotic"
 --- @return table
 function DRAGQUEENMOD.suit_tooltip(type)
   local key = "dragqueen_"
@@ -110,7 +112,9 @@ function DRAGQUEENMOD.suit_tooltip(type)
     ["night"] = "six_",
     ["treat"] = "minty_",
     ["magic"] = "mtg_",
-    ["stained"] = "ink_"
+    ["stained"] = "ink_",
+    ["parallel"] = "rgmc_",
+    ["chaotic"] = "rgmc_"
   }
 
   -- convention in our localization file for referencing other mods
@@ -143,7 +147,8 @@ function DRAGQUEENMOD.suit_tooltip(type)
         "paperback",
         "MintysSillyMod",
         "SixSuits",
-        "InkAndColor"
+        "InkAndColor",
+        "rgmadcap"
       }
       local mods_in_play = false
 
@@ -171,9 +176,12 @@ function DRAGQUEENMOD.suit_tooltip(type)
         for _, modname in ipairs(mod_names) do
           -- First we check to make sure that mod does have the category of light and dark suits (ex. MintysSillyMod only has a light suit)
           if next(SMODS.find_mod(modname)) then
-            if pcall(DRAGQUEENMOD.easydescriptionlocalize, "Other", "dragqueen_" .. DRAGQUEENMOD.getprefix(modname) .. "_" .. type .. "_suits") then
+            local modsuits = "dragqueen_" .. DRAGQUEENMOD.getprefix(modname) .. "_" .. type .. "_suits"
+            if pcall(DRAGQUEENMOD.easydescriptionlocalize, "Other", modsuits) then
+              for _, v in ipairs(DRAGQUEENMOD.easydescriptionlocalize("Other", modsuits).text) do
                 table.insert(messageparts, DRAGQUEENMOD.easydescriptionlocalize("Grammar", "dragqueen_suit_conjunction3").text)
-                table.insert(messageparts, DRAGQUEENMOD.easydescriptionlocalize("Other", "dragqueen_" .. DRAGQUEENMOD.getprefix(modname) .. "_" .. type .. "_suits").text)
+                table.insert(messageparts, {v})
+              end
             end
           end
         end

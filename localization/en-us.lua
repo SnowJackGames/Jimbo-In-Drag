@@ -27,8 +27,15 @@
 -- {C:minty_3s}
 -- {C:clover}
 -- {C:FFFFFF} for Suitless
--- {C:black,E:1,S:1.1} for Ink
--- {C:C:purple,E:1,S:1.1} for Color
+-- {C:black} for Ink
+-- {C:C:purple} for Color
+-- {C:rgmc_goblets}
+-- {C:rgmc_towers}
+-- {C:rgmc_blooms}
+-- {C:rgmc_daggers}
+-- {C:rgmc_lanterns}
+-- {C:rgmc_voids}
+
 
 
 return {
@@ -318,7 +325,20 @@ return {
       dragqueen_ink_stained_suits = {
         name = "Stained Suits",
         text = {
-          "{C:black,E:1,S:1.1}Ink{} and {C:purple,E:1,S:1.1}Color{}"
+          "{C:black,E:1,S:1.1}Inks{} and {C:purple,E:1,S:1.1}Colors{}"
+        }
+      },
+      -- Implemented by Madcap
+      dragqueen_rgmc_parallel_suits = {
+        name = "Parallel Suits",
+        text = {
+          "{C:rgmc_towers}Towers{}, {C:rgmc_goblets}Goblets{}, {C:rgmc_daggers}Daggers{}, and {C:rgmc_blooms}Blooms{}"
+        }
+      },
+      dragqueen_rgmc_chaotic_suits = {
+        name = "Chaotic Suits",
+        text = {
+          "{C:rgmc_lanterns}lanterns{} and {C:rgmc_voids}Voids{}"
         }
       },
       -- When deck only has plain suits
@@ -367,6 +387,15 @@ return {
         name = "Stained Dark Suits",
         text = {
           "{C:black}Inks{}"
+        }
+      },
+      --Madcap
+      dragqueen_rgmc_dark_suits = {
+        name = "Madcap Dark Suits",
+        text = {
+          "{C:rgmc_towers}Towers{}",
+          "{C:rgmc_daggers}Daggers{}",
+          "{C:rgmc_voids}Voids{}"
         }
       },
       -- When deck only has plain suits
@@ -429,6 +458,15 @@ return {
         name = "Stained Light Suits",
         text = {
           "{C:purple}Colors{}"
+        }
+      },
+      --Madcap
+      dragqueen_rgmc_light_suits = {
+        name = "Madcap Dark Suits",
+        text = {
+          "{C:rgmc_goblets}Goblets{}",
+          "{C:rgmc_blooms}Blooms{}",
+          "{C:rgmc_lanterns}Lanterns{}"
         }
       },
       -- Dynamically generated through UI.lua:DRAGQUEENMOD.suit_tooltip()
