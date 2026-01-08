@@ -1,10 +1,10 @@
 {
   "id": "dragqueen",
-  "name": "Drag Queen Balatro Mod",
+  "name": "Jimbo In Drag",
   "prefix": "dragqueen",
   "priority": 37,
   "author": ["Snow Jack Games","KassLavender"],
-  "description": "A drag queen-themed mod with high amounts of cross-mod compatibility. Balanced for Vanilla!",
+  "description": "A girlypop and drag queen-themed mod for Balatro, centered around two new suits: Purses and Pumps. Vanilla-balanced, with cross-mod integration!",
   "main_file": "dragqueen.lua",
   "badge_colour": "FF00FF",
   "version": "0.0.1",
