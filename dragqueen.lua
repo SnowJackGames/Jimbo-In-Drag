@@ -9,6 +9,7 @@ DRAGQUEENMOD = {}
 -- Load utility functions into DRAGQUEENMOD
 SMODS.load_file("utilities/definitions.lua")()
 SMODS.load_file("utilities/misc_functions.lua")()
+SMODS.load_file("utilities/content_patches.lua")()
 SMODS.load_file("utilities/cross-mod.lua")()
 SMODS.load_file("utilities/ui.lua")()
 

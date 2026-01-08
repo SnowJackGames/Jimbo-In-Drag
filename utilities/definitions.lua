@@ -98,7 +98,7 @@ DRAGQUEENMOD.BASE_POKER_HANDS = {
   "High Card"
 }
 
-DRAGQUEENMOD.POKER_HANDS = {
+DRAGQUEENMOD.SPECTRUM_POKER_HANDS = {
   "Spectrum",
   "Straight_Spectrum",
   "Spectrum_House",

@@ -15,11 +15,8 @@ function DRAGQUEENMOD.cross_mod_content_register()
     table.insert(DRAGQUEENMOD.dark_suits, prefix .. "_Halberds")
     table.insert(DRAGQUEENMOD.light_suits, prefix .. "_Fleurons")
     DRAGQUEENMOD.exotic_suits = {prefix .. "_Halberds", prefix .. "_Fleurons"}
-
-    -- The only time Bunco calls for dark or light suits is with their joker "cassette"
-    -- Which checks directly for Spades, Clubs, and Halberds
-    -- Technically, could capture BUNCOMOD.bunc_define_joker to capture their Cassette implementation
-    -- But that sounds like a lot of work
+    
+    DRAGQUEENMOD.Bunco_joker_patch()
 
     -- Don't duplicate Glitter tag, edition
     -- Add consumer edition tags
@@ -41,21 +38,19 @@ function DRAGQUEENMOD.cross_mod_content_register()
     local paperback_path = tostring(SMODS.Mods["paperback"].path)
     local paperback_cross_mod_path = string.gsub(paperback_path, ".paperback.lua", "") .. "utilities/cross-mod.lua"
     local paperback_cross_mod_file = assert(io.open(paperback_cross_mod_path,"r"), "Couldn't understand Paperback path")
-    -- If there's no mention of the Drag Queen mod, then they're probably not implementing us
+    -- If there's no mention of the our mod, then they're probably not implementing us
     -- A silly fix but I think grounded in logic
     if paperback_cross_mod_file then
       local paperback_cross_mod_content = paperback_cross_mod_file:read("*a")
       if not string.find(paperback_cross_mod_content, "dragqueen") then
-        paperback_cross_mod_content = nil
-        DRAGQUEENMOD.paperback_joker_patch()
+        if PB_UTIL then
+          PB_UTIL.is_suit = DRAGQUEENMOD.is_suit
+          PB_UTIL.suit_tooltip = DRAGQUEENMOD.suit_tooltip
+        end
       end
     end
 
 
-    -- Look into their utilities/ui.lua/PB_UTIL.suit_tooltip(type)
-    -- Might just override their tooltip with our own if it is easier?
-    -- SMODS.Mods["paperback"].PB_UTIL.suit_tooltip = DRAGQUEENMOD.suit_tooltip
-    -- Might need to change priority
     -- Add paperclips to modifiers
     -- Add their ranks
     -- Add Mothers, which also count as Apostles
@@ -117,24 +112,3 @@ function DRAGQUEENMOD.cross_mod_content_register()
   -- Gemstones
   -- Add Gemstones to modifiers
 end
-
--- If paperback doesn't already have cross-mod integration with us, then we can modify some of their dark and light suit specific stuff to do so
-function DRAGQUEENMOD.paperback_joker_patch()
-  SMODS.Joker:take_ownership("paperback_solemn_lament",
-    {
-      loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue + 1] = DRAGQUEENMOD.suit_tooltip("dark")
-        info_queue[#info_queue + 1] = DRAGQUEENMOD.suit_tooltip("light")
-
-        return {
-          vars = {
-            card.ability.extra.x_mult_mod,
-            card.ability.extra.x_mult
-
-          }
-        }
-      end,
-    },
-    true
-  )
-  end
