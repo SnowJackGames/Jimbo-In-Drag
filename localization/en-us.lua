@@ -27,8 +27,8 @@
 -- {C:minty_3s}
 -- {C:clover}
 -- {C:FFFFFF} for Suitless
--- {C:black} for Ink
--- {C:C:purple} for Color
+-- {C:ink_inks}
+-- {C:ink_colors}
 -- {C:rgmc_goblets}
 -- {C:rgmc_towers}
 -- {C:rgmc_blooms}
@@ -325,7 +325,7 @@ return {
       dragqueen_ink_stained_suits = {
         name = "Stained Suits",
         text = {
-          "{C:black,E:1,S:1.1}Inks{} and {C:purple,E:1,S:1.1}Colors{}"
+          "{C:ink_inks}Inks{} and {C:ink_colors}Colors{}"
         }
       },
       -- Implemented by Madcap
@@ -386,7 +386,7 @@ return {
       dragqueen_ink_dark_suits = {
         name = "Stained Dark Suits",
         text = {
-          "{C:black}Inks{}"
+          "{C:ink_inks}Inks{}"
         }
       },
       --Madcap
@@ -457,7 +457,7 @@ return {
       dragqueen_ink_light_suits = {
         name = "Stained Light Suits",
         text = {
-          "{C:purple}Colors{}"
+          "{C:ink_colors}Colors{}"
         }
       },
       --Madcap

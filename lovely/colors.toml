@@ -32,4 +32,6 @@ payload = '''
   rgmc_daggers = G.C.SUITS.rgmc_daggers or G.C.RGMC_DAGGERS or HEX('591235'),
   rgmc_lanterns = G.C.SUITS.rgmc_lanterns or G.C.RGMC_LANTERNS or HEX('F09B4A'),
   rgmc_voids = G.C.SUITS.rgmc_voids or G.C.RGMC_VOIDS or HEX('564C53'),
+  ink_inks = G.C.SUITS.ink_Inks or G.C.INK_INKS or HEX('374649'),
+  ink_colors = G.C.SUITS.ink_Colors or G.C.INK_COLORS or HEX('eb8920'),
 '''
