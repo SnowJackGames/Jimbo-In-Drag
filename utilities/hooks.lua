@@ -16,7 +16,7 @@ DRAGQUEENMOD.dragqueen_hook_evaluate_play = G.FUNCS.evaluate_play
 G.FUNCS.evaluate_play = function(e)
   local text,disp_text,poker_hands,scoring_hand,non_loc_disp_text = G.FUNCS.get_poker_hand_info(G.play.cards)
 
-  if G.GAME.NonPlain == false then
+  if G.GAME.NonPlain == false or nil then
     if string.find(text, "Spectrum") or string.find(text, "Specflush") then
       DRAGQUEENMOD.enable_non_plains()
     end
