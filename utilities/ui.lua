@@ -135,7 +135,7 @@ function DRAGQUEENMOD.suit_tooltip(type)
   if type == "dark" or "light" then
     local suits = type == "light" and DRAGQUEENMOD.light_suits or DRAGQUEENMOD.dark_suits
     -- if in game and playing with only plain suits, only display the vanilla suits; ex. dragqueen_vanilla_dark_suits
-    if G.Game and not G.GAME.NonPlain then
+    if G.GAME.NonPlain == false then
       key = key .. "vanilla_" .. type .. "_suits"
       
     -- Since any modded suits are in play, we consider all of them in play

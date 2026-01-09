@@ -49,7 +49,9 @@ end
 
 -- Checks if non-plain cards are allowed to spawn
 function DRAGQUEENMOD.non_plain_in_pool()
-  if G.GAME and G.GAME.NonPlain then return true
+  -- Returns true if in a run and NonPlain has been activated
+  if G.GAME and G.GAME.NonPlain then
+    return true
   end
   -- In case a spectrum somehow gets played without enabling non_plains, check directly:
   local spectrum_played = false
