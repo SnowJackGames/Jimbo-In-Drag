@@ -12,6 +12,7 @@ SMODS.load_file("utilities/misc_functions.lua")()
 SMODS.load_file("utilities/content_patches.lua")()
 SMODS.load_file("utilities/cross-mod.lua")()
 SMODS.load_file("utilities/ui.lua")()
+SMODS.load_file("utilities/hooks.lua")()
 
 -- Do a bit of font magic so that Balatro can support unusual Unicode characters
 DRAGQUEENMOD.font_symbols()
