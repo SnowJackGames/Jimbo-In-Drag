@@ -24,16 +24,6 @@ six_Moons = '',
 # ink_Inks = '',
 # ink_Colors = '',
 
-# Fixes a line of Bunco's code searching assembled strings in various languages if it's there
-[[patches]]
-[patches.pattern]
-target = 'functions/misc_functions.lua'
-pattern = "local result = string.find(assembled_string, localize(key, 'suits_singular')) or string.find(assembled_string, localize(key, 'suits_plural'))"
-position = 'at'
-match_indent = true
-payload = '''
-local result = string.find(assembled_string, localize(key, 'suits_singular')) or string.find(assembled_string, localize(key, 'suits_plural')) or string.find(assembled_string, key)
-'''
 
 # Text icons
 # Otherwise if Bunco doesn't happen to be installed, then we can run pretty much
