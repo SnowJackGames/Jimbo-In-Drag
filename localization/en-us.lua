@@ -450,13 +450,25 @@ return {
         }
       },
       -- Dynamically generated through UI.lua:DRAGQUEENMOD.suit_tooltip()
-      dragqueen_dark_suits_in_play = {
+      dragqueen_dark_suits_in_play_plain = {
         name = "Dark Suits",
         text = {
         }
       },
       -- Dynamically generated through UI.lua:DRAGQUEENMOD.suit_tooltip()
-      dragqueen_light_suits_in_play = {
+      dragqueen_light_suits_in_play_plain = {
+        name = "Light Suits",
+        text = {
+        }
+      },
+      -- Dynamically generated through UI.lua:DRAGQUEENMOD.suit_tooltip()
+      dragqueen_dark_suits_in_play_nonplain = {
+        name = "Dark Suits",
+        text = {
+        }
+      },
+      -- Dynamically generated through UI.lua:DRAGQUEENMOD.suit_tooltip()
+      dragqueen_light_suits_in_play_nonplain = {
         name = "Light Suits",
         text = {
         }
