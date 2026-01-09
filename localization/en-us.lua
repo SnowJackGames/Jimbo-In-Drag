@@ -191,6 +191,8 @@ return {
       -- English for example, uses no coordinator at position [1], uses a comma and a space for position types [2] and [3]
       -- Position [4] being ", and ", no coordinator for position [5]
       -- Russia does not use an oxford comma, so position [4] would be just " and "
+      -- Additionally, position [4] can depend on the number of items in a list, so for languages like english that vary usage
+      -- of a comma in a list of 2 there's conjunction4short
       -- This superfluous implementation *theoretically* makes translating this mod to say Classical Tibetan, Martuthunira, etc
       dragqueen_suit_conjunction1 = {
         name = "Conjunction1",
@@ -198,7 +200,6 @@ return {
           ""
         }
       },
-      -- Not actually needed as this can be set directly in descriptions.Suit.dragqueen_dark_vanilla_plus_suits etc
       dragqueen_suit_conjunction2 = {
         name = "Conjunction2",
         text = {
@@ -211,11 +212,18 @@ return {
           ", "
         }
       },
-      -- Between two final items in list, en-us using oxford comma
+      -- Between two final items in list with 3 or more, en-us using oxford comma
       dragqueen_suit_conjunction4 = {
         name = "Conjunction4",
         text = {
           ", and "
+        }
+      },
+      -- Between two items in list of 2, for en-us doesn't use oxford comma
+      dragqueen_suit_conjunction4short = {
+        name = "Conjunction4short",
+        text = {
+          " and "
         }
       },
       dragqueen_suit_conjunction5 = {
@@ -341,20 +349,6 @@ return {
           "{C:rgmc_lanterns}lanterns{} and {C:rgmc_voids}Voids{}"
         }
       },
-      -- When deck only has plain suits
-      dragqueen_vanilla_dark_suits = {
-        name = "Dark Suits",
-        text = {
-          "{C:spades}Spades{} and {C:clubs}Clubs{}"
-        }
-      },
-      -- When deck has any non-plain suit
-      dragqueen_vanilla_plus_dark_suits = {
-        name = "Dark Suits",
-        text = {
-          "{C:spades}Spades{}, {C:clubs}Clubs{}"
-        }
-      },
       dragqueen_accessory_dark_suits = {
         name = "Accessory Dark Suits",
         text = {
@@ -396,20 +390,6 @@ return {
           "{C:rgmc_towers}Towers{}",
           "{C:rgmc_daggers}Daggers{}",
           "{C:rgmc_voids}Voids{}"
-        }
-      },
-      -- When deck only has plain suits
-      dragqueen_vanilla_light_suits = {
-        name = "Light Suits",
-        text = {
-          "{C:hearts}Hearts{} and {C:diamonds}Diamonds{}"
-        }
-      },
-      -- When deck has any non-plain suit
-      dragqueen_vanilla_plus_light_suits = {
-        name = "Light Suits",
-        text = {
-          "{C:hearts}Hearts{}, {C:diamonds}Diamonds{}"
         }
       },
       dragqueen_accessory_light_suits = {
