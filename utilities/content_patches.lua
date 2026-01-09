@@ -1,12 +1,12 @@
 ---@diagnostic disable: undefined-field
 function DRAGQUEENMOD.SpectrumFramework_spectrum_played_hook()
-  local spectrum_played = SPECF.spectrum_played
+  local drag_queen_hook_spectrum_played = SPECF.spectrum_played
   function SPECF.spectrum_played()
     if DRAGQUEENMOD.non_plain_in_pool() then
       return true
     end
   end
-  spectrum_played()
+  drag_queen_hook_spectrum_played()
 end
 
 
