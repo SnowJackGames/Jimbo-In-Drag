@@ -35,6 +35,8 @@
 -- {C:rgmc_daggers}
 -- {C:rgmc_lanterns}
 -- {C:rgmc_voids}
+-- {C:unik_noughts}
+-- {C:unik_crosses}
 
 
 
@@ -349,6 +351,12 @@ return {
           "{C:rgmc_lanterns}lanterns{} and {C:rgmc_voids}Voids{}"
         }
       },
+      dragqueen_unik_tictactoe_suits = {
+        name = "Tic Tac Toe Suits",
+        text = {
+          "{C:unik_noughts}Noughts{} and {C:unik_noughts}Crosses{}"
+        }
+      },
       dragqueen_accessory_dark_suits = {
         name = "Accessory Dark Suits",
         text = {
@@ -390,6 +398,12 @@ return {
           "{C:rgmc_towers}Towers{}",
           "{C:rgmc_daggers}Daggers{}",
           "{C:rgmc_voids}Voids{}"
+        }
+      },
+      dragqueen_unik_dark_suits = {
+        name = "Unik Dark Suits",
+        text = {
+          "{C:unik_crosses}Crosses{}"
         }
       },
       dragqueen_accessory_light_suits = {
@@ -442,11 +456,17 @@ return {
       },
       --Madcap
       dragqueen_rgmc_light_suits = {
-        name = "Madcap Dark Suits",
+        name = "Madcap Light Suits",
         text = {
           "{C:rgmc_goblets}Goblets{}",
           "{C:rgmc_blooms}Blooms{}",
           "{C:rgmc_lanterns}Lanterns{}"
+        }
+      },
+      dragqueen_unik_light_suits = {
+        name = "Unik Light Suits",
+        text = {
+          "{C:unik_noughts}Noughts{}"
         }
       },
       -- Dynamically generated through UI.lua:DRAGQUEENMOD.suit_tooltip()

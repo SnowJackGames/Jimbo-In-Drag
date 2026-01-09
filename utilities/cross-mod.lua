@@ -100,6 +100,16 @@ function DRAGQUEENMOD.cross_mod_theirs_to_ours()
     DRAGQUEENMOD.parallel_suits = {prefix .. "_goblets", prefix .. "_towers", prefix .. "_blooms", prefix .. "_daggers"}
     DRAGQUEENMOD.chaotic_suits = {prefix .. "_voids", prefix .. "_lanterns"}
   end
+
+  -- UNIKs
+  if next(SMODS.find_mod("unik")) then
+    local prefix = SMODS.find_mod("unik")[1].prefix or "unik"
+
+    -- Adds their suits to our definitions of light and dark and parallel and tic-tac-toes
+    table.insert(DRAGQUEENMOD.dark_suits, prefix .. "_Crosses")
+    table.insert(DRAGQUEENMOD.light_suits, prefix .. "_Noughts")
+    DRAGQUEENMOD.tictactoe_suits = {prefix .. "_Crosses", prefix .. "_Noughts"}
+  end
 end
 
 -- We add our mod's definitions to others and patch others' content
@@ -114,7 +124,7 @@ function DRAGQUEENMOD.cross_mod_ours_to_theirs()
     -- If their definition of light and dark don't already reference our suits, they now do
     -- We have to find their definition relative to the player's mod install
     local paperback_path = tostring(SMODS.Mods["paperback"].path)
-    local paperback_cross_mod_path = string.gsub(paperback_path, ".paperback.lua", "") .. "utilities/cross-mod.lua"
+    local paperback_cross_mod_path = paperback_path .. "utilities/cross-mod.lua"
     local paperback_cross_mod_file = assert(io.open(paperback_cross_mod_path,"r"), "Couldn't understand Paperback path")
     -- If there's no mention of the our mod, then they're probably not implementing us
     -- A silly fix but I think grounded in logic
@@ -156,6 +166,25 @@ function DRAGQUEENMOD.cross_mod_ours_to_theirs()
         end
         if suitfound == false then
           table.insert(light_suits, v)
+        end
+      end
+    end
+  end
+
+  -- UNIKs
+  if next(SMODS.find_mod("unik")) then
+    -- If their definition of light and dark don't already reference our suits, they now do
+    -- We have to find their definition relative to the player's mod install
+    local unik_path = tostring(SMODS.Mods["unik"].path)
+    local unik_main_path = unik_path .. "unik.lua"
+    local unik_main_file = assert(io.open(unik_main_path,"r"), "Couldn't understand Unik path")
+    -- If there's no mention of the our mod, then they're probably not implementing us
+    if unik_main_file then
+      local unik_main = unik_main_file:read("*a")
+      if not string.find(unik_main, "dragqueen") then
+        if UNIK then
+          UNIK.is_suit_type = DRAGQUEENMOD.is_suit
+          UNIK.suit_tooltip = DRAGQUEENMOD.suit_tooltip
         end
       end
     end

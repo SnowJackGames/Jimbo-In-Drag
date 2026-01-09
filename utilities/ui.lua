@@ -97,6 +97,7 @@ end
 --- | "stained"
 --- | "parallel"
 --- | "chaotic"
+--- | "tictactoe"
 --- @return table
 function DRAGQUEENMOD.suit_tooltip(tooltiptype)
   local key = "dragqueen_"
@@ -114,7 +115,8 @@ function DRAGQUEENMOD.suit_tooltip(tooltiptype)
     ["magic"] = "mtg_",
     ["stained"] = "ink_",
     ["parallel"] = "rgmc_",
-    ["chaotic"] = "rgmc_"
+    ["chaotic"] = "rgmc_",
+    ["tictactoe"] = "unik_",
   }
 
   -- convention in our localization file for referencing other mods
@@ -286,7 +288,8 @@ function DRAGQUEENMOD.suit_tooltip_build_for_light_or_dark_for_nonplain(tooltipt
     "MintysSillyMod",
     "SixSuits",
     "InkAndColor",
-    "rgmadcap"
+    "rgmadcap",
+    "unik"
   }
   local mods_in_play = false
   
