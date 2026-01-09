@@ -10,7 +10,6 @@ end
 -- Searching for other mods for cross-mod content and integration
 function DRAGQUEENMOD.cross_mod_content_register()
   DRAGQUEENMOD.cross_mod_theirs_to_ours()
-  DRAGQUEENMOD.cross_mod_ours_to_theirs()
   DRAGQUEENMOD.cross_mod_dependent_and_duplicate_content()
 end
 
@@ -112,7 +111,8 @@ function DRAGQUEENMOD.cross_mod_theirs_to_ours()
   end
 end
 
--- We add our mod's definitions to others and patch others' content
+-- We add our mod's definitions to others and patch others' content; 
+-- Run at the last possible second in our hooks.lua: dragqueen_hook_splash_screen
 function DRAGQUEENMOD.cross_mod_ours_to_theirs()
   -- Bunco
   if next(SMODS.find_mod("Bunco")) then

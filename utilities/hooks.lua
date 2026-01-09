@@ -9,6 +9,7 @@ function Game:start_run(...)
   G.GAME.NonPlain = false
 end
 
+
 -- Hooking Balatro's G.FUNCS.evaluate_play()
 DRAGQUEENMOD.dragqueen_hook_evaluate_play = G.FUNCS.evaluate_play
 
@@ -23,4 +24,13 @@ G.FUNCS.evaluate_play = function(e)
   end
 
   DRAGQUEENMOD.dragqueen_hook_evaluate_play(e)
+end
+
+-- Hooking Balatro's Game:splash_screen()
+-- runs after all mods are initialized
+local dragqueen_hook_splash_screen = Game.splash_screen
+
+function Game:splash_screen(...)
+  dragqueen_hook_splash_screen(self, ...)
+  DRAGQUEENMOD.cross_mod_ours_to_theirs()
 end
