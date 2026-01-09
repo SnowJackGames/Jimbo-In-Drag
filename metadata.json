@@ -2,11 +2,18 @@
   "id": "dragqueen",
   "name": "Jimbo In Drag",
   "prefix": "dragqueen",
-  "priority": 37,
-  "author": ["Snow Jack Games","KassLavender"],
+  "priority": 7777771,
+  "author": [
+    "Snow Jack Games",
+    "KassLavender"
+  ],
   "description": "A girlypop and drag queen-themed mod for Balatro, centered around two new suits: Purses and Pumps. Vanilla-balanced, with cross-mod integration!",
   "main_file": "dragqueen.lua",
   "badge_colour": "FF00FF",
   "version": "0.0.1",
-  "dependencies": ["Steamodded (>=1.0.0~BETA-1016c)", "Lovely (>=0.8)", "SpectrumFramework (>=0.8.1)"]
+  "dependencies": [
+    "Steamodded (>=1.0.0~BETA-1016c)",
+    "Lovely (>=0.8)",
+    "SpectrumFramework (>=0.8.1)"
+  ]
 }
