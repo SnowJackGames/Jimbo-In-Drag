@@ -124,6 +124,22 @@ DRAGQUEENMOD.MODIFIERS = {
     }
 }
 
+-- every type but light and dark has a clear-cut answer
+-- "plain" and "accessory" don't have a mod prefix bc they're only referenced in our mod
+DRAGQUEENMOD.suit_types_to_mod_prefixes = {
+  ["plain"] = "",
+  ["accessory"] = "",
+  ["exotic"] = "bunc_",
+  ["proud"] = "paperback_",
+  ["night"] = "six_",
+  ["treat"] = "minty_",
+  ["magic"] = "mtg_",
+  ["stained"] = "ink_",
+  ["parallel"] = "rgmc_",
+  ["chaotic"] = "rgmc_",
+  ["tictactoe"] = "unik_",
+}
+
 
 -- Consumables
 DRAGQUEENMOD.CONSUMABLES = {

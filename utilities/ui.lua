@@ -103,25 +103,10 @@ function DRAGQUEENMOD.suit_tooltip(tooltiptype)
   local key = "dragqueen_"
   local colours = {}
 
-  -- every type but light and dark has a clear-cut answer
-  -- "plain" and "accessory" don't have a mod prefix bc they're only referenced in our mod
-  local suit_types_to_mod_prefixes = {
-    ["plain"] = "",
-    ["accessory"] = "",
-    ["exotic"] = "bunc_",
-    ["proud"] = "paperback_",
-    ["night"] = "six_",
-    ["treat"] = "minty_",
-    ["magic"] = "mtg_",
-    ["stained"] = "ink_",
-    ["parallel"] = "rgmc_",
-    ["chaotic"] = "rgmc_",
-    ["tictactoe"] = "unik_",
-  }
 
   -- convention in our localization file for referencing other mods
   -- ex. dragqueen_bunco_exotic_suits
-  for modtype, modprefix in pairs(suit_types_to_mod_prefixes) do
+  for modtype, modprefix in pairs(DRAGQUEENMOD.suit_types_to_mod_prefixes) do
     if modtype == tooltiptype then
       key = key .. modprefix .. tooltiptype .. "_suits"
     end
