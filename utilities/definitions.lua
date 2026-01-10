@@ -34,9 +34,28 @@ DRAGQUEENMOD.credits = {
 }
 
 
--- Define light and dark suits
+-- Define some suit categories
 DRAGQUEENMOD.dark_suits = {"Spades", "Clubs", "Purses"}
 DRAGQUEENMOD.light_suits = {"Hearts", "Diamonds", "Pumps"}
+DRAGQUEENMOD.base_suits = {"Spades", "Hearts", "Clubs", "Diamonds"}
+DRAGQUEENMOD.modded_suits = {"dragqueen_Purses", "dragqueen_Pumps"}
+
+-- every type but light and dark has a clear-cut answer
+-- "plain" and "accessory" don't have a mod prefix bc they're only referenced in our mod
+DRAGQUEENMOD.suit_types_to_mod_prefixes = {
+  ["plain"] = "",
+  ["accessory"] = "",
+  ["exotic"] = "bunc_",
+  ["proud"] = "paperback_",
+  ["night"] = "six_",
+  ["treat"] = "minty_",
+  ["magic"] = "mtg_",
+  ["stained"] = "ink_",
+  ["parallel"] = "rgmc_",
+  ["chaotic"] = "rgmc_",
+  ["tictactoe"] = "unik_",
+}
+
 
 -- Define modifiers
 DRAGQUEENMOD.modifiers = {}
@@ -47,24 +66,13 @@ DRAGQUEENMOD.modifiers = {}
 -- The user can disable specific Drag Queen Mod items by commenting them out if they hate it
 -- But watch out!
 
-DRAGQUEENMOD.BASE_SUITS = {
-    "Spades",
-    "Hearts",
-    "Clubs",
-    "Diamonds"
-}
 
 DRAGQUEENMOD.SUITS = {
     "Purses",
     "Pumps"
 }
 
-DRAGQUEENMOD.SUITS_CATEGORIES = {
-    "Plain",
-    "Accessory",
-    "Light",
-    "Dark"
-}
+
 
 DRAGQUEENMOD.BASE_RANKS = {
   "Ace",
@@ -124,21 +132,6 @@ DRAGQUEENMOD.MODIFIERS = {
     }
 }
 
--- every type but light and dark has a clear-cut answer
--- "plain" and "accessory" don't have a mod prefix bc they're only referenced in our mod
-DRAGQUEENMOD.suit_types_to_mod_prefixes = {
-  ["plain"] = "",
-  ["accessory"] = "",
-  ["exotic"] = "bunc_",
-  ["proud"] = "paperback_",
-  ["night"] = "six_",
-  ["treat"] = "minty_",
-  ["magic"] = "mtg_",
-  ["stained"] = "ink_",
-  ["parallel"] = "rgmc_",
-  ["chaotic"] = "rgmc_",
-  ["tictactoe"] = "unik_",
-}
 
 
 -- Consumables

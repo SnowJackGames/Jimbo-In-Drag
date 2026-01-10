@@ -31,9 +31,11 @@ function DRAGQUEENMOD.cross_mod_theirs_to_ours()
   if next(SMODS.find_mod("Bunco")) then
     local prefix = DRAGQUEENMOD.getprefix("Bunco", "bunc")
 
-    -- Adds their suits to our definitions of light and dark and exotic
+    -- Adds their suits to our definitions of light and dark and exotic and modded
     table.insert(DRAGQUEENMOD.dark_suits, prefix .. "_Halberds")
     table.insert(DRAGQUEENMOD.light_suits, prefix .. "_Fleurons")
+    table.insert(DRAGQUEENMOD.modded_suits, prefix .. "_Halberds")
+    table.insert(DRAGQUEENMOD.modded_suits, prefix .. "_Fleurons")
     DRAGQUEENMOD.exotic_suits = {prefix .. "_Halberds", prefix .. "_Fleurons"}
   end
 
@@ -41,9 +43,11 @@ function DRAGQUEENMOD.cross_mod_theirs_to_ours()
   if next(SMODS.find_mod("paperback")) then
     local prefix = DRAGQUEENMOD.getprefix("paperback", "paperback")
 
-    -- Adds their suits to our definitions of light and dark and proud
+    -- Adds their suits to our definitions of light and dark and proud and modded
     table.insert(DRAGQUEENMOD.dark_suits, prefix .. "_Crowns")
     table.insert(DRAGQUEENMOD.light_suits, prefix .. "_Stars")
+    table.insert(DRAGQUEENMOD.modded_suits, prefix .. "_Crowns")
+    table.insert(DRAGQUEENMOD.modded_suits, prefix .. "_Stars")
     DRAGQUEENMOD.proud_suits = {prefix .. "_Crowns", prefix .. "_Stars"}
   end
 
@@ -54,6 +58,8 @@ function DRAGQUEENMOD.cross_mod_theirs_to_ours()
     -- Adds their suits to our definitions of light and dark and night
     table.insert(DRAGQUEENMOD.dark_suits, prefix .. "_Moons")
     table.insert(DRAGQUEENMOD.light_suits, prefix .. "_Stars")
+    table.insert(DRAGQUEENMOD.modded_suits, prefix .. "_Moons")
+    table.insert(DRAGQUEENMOD.modded_suits, prefix .. "_Stars")
     DRAGQUEENMOD.night_suits = {prefix .. "_Moons",prefix .. "_Stars"}
 
   end
@@ -62,8 +68,9 @@ function DRAGQUEENMOD.cross_mod_theirs_to_ours()
   if next(SMODS.find_mod("MintysSillyMod")) then
     local prefix = SMODS.find_mod("MintysSillyMod")[1].prefix or "minty"
 
-    -- Adds their suits to our definitions of light and dark and treat
+    -- Adds their suits to our definitions of light and treat and modded
     table.insert(DRAGQUEENMOD.light_suits, prefix .. "_3s")
+    table.insert(DRAGQUEENMOD.modded_suits, prefix .. "_3s")
     DRAGQUEENMOD.treat_suits = {prefix .. "_3s"}
   end
 
@@ -71,17 +78,21 @@ function DRAGQUEENMOD.cross_mod_theirs_to_ours()
   if next(SMODS.find_mod("magic_the_jokering")) then
     local prefix = SMODS.find_mod("magic_the_jokering")[1].prefix or "mtg"
 
-    -- Adds their suits to our defintion of magic
+    -- Adds their suits to our definition of magic and modded
     DRAGQUEENMOD.magic_suits = {prefix .. "_Clovers", prefix .. "_Suitless"}
+    table.insert(DRAGQUEENMOD.modded_suits, prefix .. "_Clovers")
+    table.insert(DRAGQUEENMOD.modded_suits, prefix .. "_Suitless")
   end
 
   -- Ink And Color
   if next(SMODS.find_mod("InkAndColor")) then
     local prefix = SMODS.find_mod("InkAndColor")[1].prefix or "ink"
 
-    -- Adds their suits to our definitions of light and dark and stained
+    -- Adds their suits to our definitions of light and dark and stained and modded
     table.insert(DRAGQUEENMOD.dark_suits, prefix .. "_Inks")
     table.insert(DRAGQUEENMOD.light_suits, prefix .. "_Colors")
+    table.insert(DRAGQUEENMOD.modded_suits, prefix .. "_Inks")
+    table.insert(DRAGQUEENMOD.modded_suits, prefix .. "_Colors")
     DRAGQUEENMOD.stained_suits = {prefix .. "_Inks", prefix .. "_Colors"}
     -- Add Mothers
   end
@@ -90,13 +101,19 @@ function DRAGQUEENMOD.cross_mod_theirs_to_ours()
   if next(SMODS.find_mod("rgmadcap")) then
     local prefix = SMODS.find_mod("rgmadcap")[1].prefix or "rgmc"
 
-    -- Adds their suits to our definitions of light and dark and parallel and chaotic
+    -- Adds their suits to our definitions of light and dark and parallel and chaotic and modded
     table.insert(DRAGQUEENMOD.dark_suits, prefix .. "_towers")
     table.insert(DRAGQUEENMOD.dark_suits, prefix .. "_daggers")
     table.insert(DRAGQUEENMOD.dark_suits, prefix .. "_voids")
     table.insert(DRAGQUEENMOD.light_suits, prefix .. "_goblets")
     table.insert(DRAGQUEENMOD.light_suits, prefix .. "_blooms")
     table.insert(DRAGQUEENMOD.light_suits, prefix .. "_lanterns")
+    table.insert(DRAGQUEENMOD.modded_suits, prefix .. "_towers")
+    table.insert(DRAGQUEENMOD.modded_suits, prefix .. "_daggers")
+    table.insert(DRAGQUEENMOD.modded_suits, prefix .. "_voids")
+    table.insert(DRAGQUEENMOD.modded_suits, prefix .. "_goblets")
+    table.insert(DRAGQUEENMOD.modded_suits, prefix .. "_blooms")
+    table.insert(DRAGQUEENMOD.modded_suits, prefix .. "_lanterns")
     DRAGQUEENMOD.parallel_suits = {prefix .. "_goblets", prefix .. "_towers", prefix .. "_blooms", prefix .. "_daggers"}
     DRAGQUEENMOD.chaotic_suits = {prefix .. "_voids", prefix .. "_lanterns"}
   end
@@ -108,6 +125,8 @@ function DRAGQUEENMOD.cross_mod_theirs_to_ours()
     -- Adds their suits to our definitions of light and dark and parallel and tic-tac-toes
     table.insert(DRAGQUEENMOD.dark_suits, prefix .. "_Crosses")
     table.insert(DRAGQUEENMOD.light_suits, prefix .. "_Noughts")
+    table.insert(DRAGQUEENMOD.modded_suits, prefix .. "_Crosses")
+    table.insert(DRAGQUEENMOD.modded_suits, prefix .. "_Noughts")
     DRAGQUEENMOD.tictactoe_suits = {prefix .. "_Crosses", prefix .. "_Noughts"}
   end
 end
@@ -167,6 +186,20 @@ function DRAGQUEENMOD.cross_mod_ours_to_theirs()
         end
         if suitfound == false then
           table.insert(light_suits, v)
+        end
+      end
+    end
+
+    if modded_suits then
+      local suitfound = false
+      for _, v in ipairs(DRAGQUEENMOD.modded_suits) do
+        for _, w in ipairs(modded_suits) do
+          if w == v then
+            suitfound = true
+          end
+        end
+        if suitfound == false then
+          table.insert(modded_suits, v)
         end
       end
     end
