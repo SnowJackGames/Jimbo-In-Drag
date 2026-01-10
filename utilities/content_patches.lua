@@ -12,6 +12,7 @@ end
 
 function DRAGQUEENMOD.Bunco_joker_patch()
   local cassette = {
+    discovered = true,
     custom_vars = function(self, info_queue, card)
         local vars = {card.ability.extra.chips, card.ability.extra.mult}
 
@@ -54,7 +55,7 @@ function DRAGQUEENMOD.Bunco_joker_patch()
             main_end = main_end,
             vars = vars}
         else
-            info_queue[#info_queue + 1] = PB_UTIL.suit_tooltip('dark')
+            info_queue[#info_queue + 1] = DRAGQUEENMOD.suit_tooltip('dark')
 
             return {key = self.key..'_b',
             main_end = main_end,
