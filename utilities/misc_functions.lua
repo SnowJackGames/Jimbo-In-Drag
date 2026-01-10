@@ -201,3 +201,13 @@ function DRAGQUEENMOD.font_symbols()
     G.FONTS[i].FONT:setFallbacks(symbol_font, nerd_font)
   end
 end
+
+-- Removes style modifier codes from a string;
+-- i.e. "{C:clubs}Clubs{}" returns "Clubs"
+---@param styledstring string
+---@return string
+function DRAGQUEENMOD.remove_style_modifier_codes(styledstring)
+  local destyled = ""
+  destyled = string.gsub(styledstring, "{.-}", "")
+  return destyled
+end
