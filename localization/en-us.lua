@@ -37,6 +37,7 @@
 -- {C:rgmc_voids}
 -- {C:unik_noughts}
 -- {C:unik_crosses}
+-- {C:dragqueen_keyword}
 
 
 
@@ -49,7 +50,8 @@ return {
         text = {
           "Played cards with",
           "{C:dragqueen_purses}Purse{} suit give",
-          "{C:mult}+#1#{} Mult when scored"
+          "{C:mult}+#1#{} Mult when scored",
+          "{C:white,X:dragqueen_keyword}Accessorize{} {C:dragqueen_purses}Purses{} {C:attention}2{}"
         }
       },
       j_dragqueen_vain_joker = {
@@ -57,7 +59,8 @@ return {
         text = {
           "Played cards with",
           "{C:dragqueen_pumps}Pump{} suit give",
-          "{C:mult}+#1#{} Mult when scored"
+          "{C:mult}+#1#{} Mult when scored",
+          "{C:white,X:dragqueen_keyword}Accessorize{} {C:dragqueen_pumps}Pumps{} {C:attention}2{}"
         }
       },
       j_dragqueen_lipstick = {
@@ -65,7 +68,8 @@ return {
         text = {
           "{C:green}#1# in #2#{} chance for played",
           "cards with {C:dragqueen_purses}Purse{} suit to give",
-          "{X:money,C:white}X#3#{} Money when scored"
+          "{X:money,C:white}X#3#{} Money when scored",
+          "{C:white,X:dragqueen_keyword}Accessorize{} {C:dragqueen_purses}Purses{} {C:attention}1{}"
         }
       },
       j_dragqueen_tights = {
@@ -73,7 +77,8 @@ return {
         text = {
           "{C:green}#1# in #2#{} chance for played",
           "cards with {C:dragqueen_pumps}Pump{} suit to give",
-          "{X:chips,C:white}X#3#{} Chips when scored"
+          "{X:chips,C:white}X#3#{} Chips when scored",
+          "{C:white,X:dragqueen_keyword}Accessorize{} {C:dragqueen_pumps}Pumps{} {C:attention}1{}"
         }
       },
       -- Patching vanilla jokers
@@ -491,6 +496,17 @@ return {
       dragqueen_light_suits_in_play_nonplain = {
         name = "Light Suits",
         text = {
+        }
+      },
+      dragqueen_accessorize_tooltip = {
+        name = "Accessorize",
+        text = {
+          "{s:0.8}When this item is obtained, create{}",
+          "{s:0.8}up to {}{C:attention,s:0.8}X{}{s:0.8} number of {}{s:0.8,C:tarot}Tarot{}{s:0.8} cards{}",
+          "{s:0.8}that convert cards to the named suit{}",
+          "{s:0.8}if you have room; i.e.{}",
+          "{s:0.8}\"{}{C:white,X:dragqueen_keyword,s:0.8}Accessorize{}{s:0.8} {}{C:hearts,s:0.8}Hearts{}{s:0.8} {}{C:attention,s:0.8}1{}{s:0.8}\" creates{}",
+          "{s:0.8}up to {}{C:attention,s:0.8}1{}{s:0.8} {}{C:tarot,s:0.8}The Sun{}"
         }
       }
     }
