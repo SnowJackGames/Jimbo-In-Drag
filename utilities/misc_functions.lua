@@ -3,8 +3,7 @@
 ---@param path string
 function DRAGQUEENMOD.register_items(items, path)
   for i = 1, #items do
-    if path and love.filesystem.getInfo(DRAGQUEENMOD.dragqueen_path_from_save_folder .. path .. "/" .. items[i] .. ".lua") then 
-      -- print("loading: " .. path .. "/" .. items[i] .. ".lua")
+    if path and love.filesystem.getInfo(DRAGQUEENMOD.dragqueen_path_from_save_folder .. path .. "/" .. items[i] .. ".lua") then
       SMODS.load_file(path .. "/" .. items[i] .. ".lua")()
     end
   end
