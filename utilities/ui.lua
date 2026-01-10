@@ -191,9 +191,9 @@ function DRAGQUEENMOD.suit_tooltip_build_for_light_or_dark(tooltiptype, key, usi
   local conj3 = DRAGQUEENMOD.easydescriptionlocalize("Grammar", "dragqueen_suit_conjunction3").text[1]
   local conj4 = DRAGQUEENMOD.easydescriptionlocalize("Grammar", "dragqueen_suit_conjunction4").text[1]
   for _, textstring in ipairs(messagestrings) do
-    -- Line has room, we can keep typing
-
-    if (string.len(line) < 35) or (textstring == conj3) or (textstring == conj4) then
+    -- If line has room, we can keep typing
+    -- we determine the length without the style codes (like {C:Clubs}) because those are invisible
+    if (string.len(DRAGQUEENMOD.remove_style_modifier_codes(line)) < 15) or (textstring == conj3) or (textstring == conj4) then
       line = line .. textstring
     -- Typewriter goes "ding!", next line
     else
