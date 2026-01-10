@@ -163,8 +163,8 @@ function DRAGQUEENMOD.cross_mod_ours_to_theirs()
   if next(SMODS.find_mod("rgmadcap")) then
     -- We add all of our dark and light suits we know of to their definition
     if dark_suits then
-      local suitfound = false
       for _, v in ipairs(DRAGQUEENMOD.dark_suits) do
+        local suitfound = false
         for _, w in ipairs(dark_suits) do
           if w == v then
             suitfound = true
@@ -177,8 +177,8 @@ function DRAGQUEENMOD.cross_mod_ours_to_theirs()
     end
 
     if light_suits then
-      local suitfound = false
       for _, v in ipairs(DRAGQUEENMOD.light_suits) do
+        local suitfound = false
         for _, w in ipairs(light_suits) do
           if w == v then
             suitfound = true
@@ -191,8 +191,8 @@ function DRAGQUEENMOD.cross_mod_ours_to_theirs()
     end
 
     if modded_suits then
-      local suitfound = false
       for _, v in ipairs(DRAGQUEENMOD.modded_suits) do
+        local suitfound = false
         for _, w in ipairs(modded_suits) do
           if w == v then
             suitfound = true
@@ -200,6 +200,41 @@ function DRAGQUEENMOD.cross_mod_ours_to_theirs()
         end
         if suitfound == false then
           table.insert(modded_suits, v)
+        end
+      end
+    end
+
+    -- Alternative implementation with their library depending on their version
+    if next(SMODS.find_mod("MadLib")) then
+      if MadLib then
+        if MadLib.SuitTypes then
+          if MadLib.SuitTypes.Light then
+            for _, v in ipairs(DRAGQUEENMOD.light_suits) do
+              local suitfound = false
+              for _, w in ipairs(MadLib.SuitTypes.Light) do
+                if w == v then
+                  suitfound = true
+                end
+              end
+              if suitfound == false then
+                table.insert(MadLib.SuitTypes.Light, v)
+              end
+            end
+          end
+
+          if MadLib.SuitTypes.Dark then
+            for _, v in ipairs(DRAGQUEENMOD.dark_suits) do
+              local suitfound = false
+              for _, w in ipairs(MadLib.SuitTypes.Dark) do
+                if w == v then
+                  suitfound = true
+                end
+              end
+              if suitfound == false then
+                table.insert(MadLib.SuitTypes.Dark, v)
+              end
+            end
+          end
         end
       end
     end
