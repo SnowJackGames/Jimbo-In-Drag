@@ -210,3 +210,13 @@ function DRAGQUEENMOD.remove_style_modifier_codes(styledstring)
   destyled = string.gsub(styledstring, "{.-}", "")
   return destyled
 end
+
+-- Updates the current value of a "wavy color" (color that shifts between two colors)
+-- sinusoidally to Balatro's "clock"
+function DRAGQUEENMOD.wavy_color_updater(time)
+  local wavy_colors = {}
+  for color, v in pairs(DRAGQUEENMOD.sine_colors) do
+    wavy_colors[color] = mix_colours(v[1], v[2], (0.5 * (1 + math.sin(time * 1.5))))
+  end
+  return wavy_colors
+end
