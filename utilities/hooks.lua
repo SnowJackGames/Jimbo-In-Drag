@@ -26,11 +26,20 @@ G.FUNCS.evaluate_play = function(e)
   DRAGQUEENMOD.dragqueen_hook_evaluate_play(e)
 end
 
+
+-- Code to be hooked into the end of Game:splash_screen
+function DRAGQUEENMOD.last_second_code()
+  if DRAGQUEENMOD.load_cross_mod_ours_to_theirs then
+    DRAGQUEENMOD.cross_mod_ours_to_theirs()
+  end
+end
+
+
 -- Hooking Balatro's Game:splash_screen()
 -- runs after all mods are initialized
 local dragqueen_hook_splash_screen = Game.splash_screen
 
 function Game:splash_screen(...)
   dragqueen_hook_splash_screen(self, ...)
-  DRAGQUEENMOD.cross_mod_ours_to_theirs()
+  DRAGQUEENMOD.last_second_code()
 end

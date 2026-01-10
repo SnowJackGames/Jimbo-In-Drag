@@ -10,6 +10,7 @@ end
 -- Searching for other mods for cross-mod content and integration
 function DRAGQUEENMOD.cross_mod_content_register()
   DRAGQUEENMOD.cross_mod_theirs_to_ours()
+  DRAGQUEENMOD.load_cross_mod_ours_to_theirs = true
   DRAGQUEENMOD.cross_mod_dependent_and_duplicate_content()
 end
 
