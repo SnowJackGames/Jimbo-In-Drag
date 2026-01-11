@@ -2,17 +2,17 @@ SMODS.suit{
     key = "Pumps",
     card_key = "PUMPS",
 
-    lc_atlas = "pumpslc",
-    hc_atlas = "pumpshc",
+    lc_atlas = "lc_cards",
+    hc_atlas = "hc_cards",
 
-    lc_ui_atlas = "pumpsuiticonlc",
-    hc_ui_atlas = "pumpsuiticonhc",
+    lc_ui_atlas = "lc_ui",
+    hc_ui_atlas = "hc_ui",
 
     lc_color = G.C.DRAGQUEEN_PUMPS_LC,
     hc_colour = G.C.DRAGQUEEN_PUMPS_HC,
 
-    pos = {y = 1},
-    ui_pos = {x = 1, y = 0},
+    pos = {y = 0},
+    ui_pos = {x = 0, y = 0},
 
     in_pool = function(self, args)
         -- Allows forcing this suit to be included
