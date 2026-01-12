@@ -320,7 +320,7 @@ end
 ---@param count integer
 function DRAGQUEENMOD.accessorize(suit, count, saveroom)
   local tarot = assert(DRAGQUEENMOD.suits_to_tarot[suit], tostring(suit) .. " not found in DRAGQUEENMOD.suits_to_tarot")
-  for i = 1, 5, 1 do
+  for i = 1, count, 1 do
     DRAGQUEENMOD.try_spawn_card({ key = tarot})
   end
 end
