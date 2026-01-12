@@ -36,6 +36,8 @@ function DRAGQUEENMOD.cross_mod_theirs_to_ours()
     table.insert(DRAGQUEENMOD.light_suits, prefix .. "_Fleurons")
     table.insert(DRAGQUEENMOD.modded_suits, prefix .. "_Halberds")
     table.insert(DRAGQUEENMOD.modded_suits, prefix .. "_Fleurons")
+    DRAGQUEENMOD.suits_to_tarot[prefix .. "_Halberds"] = "c_" .. prefix .. "abyss"
+    DRAGQUEENMOD.suits_to_tarot[prefix .. "_Fleurons"] = "c_" .. prefix .. "sky"
     DRAGQUEENMOD.exotic_suits = {prefix .. "_Halberds", prefix .. "_Fleurons"}
   end
 
@@ -48,6 +50,8 @@ function DRAGQUEENMOD.cross_mod_theirs_to_ours()
     table.insert(DRAGQUEENMOD.light_suits, prefix .. "_Stars")
     table.insert(DRAGQUEENMOD.modded_suits, prefix .. "_Crowns")
     table.insert(DRAGQUEENMOD.modded_suits, prefix .. "_Stars")
+    DRAGQUEENMOD.suits_to_tarot[prefix .. "_Crowns"] = "c_" .. prefix .. "ace_of_swords"
+    DRAGQUEENMOD.suits_to_tarot[prefix .. "_Stars"] = "c_" .. prefix .. "ace_of_pentacles"
     DRAGQUEENMOD.proud_suits = {prefix .. "_Crowns", prefix .. "_Stars"}
   end
 
@@ -60,6 +64,8 @@ function DRAGQUEENMOD.cross_mod_theirs_to_ours()
     table.insert(DRAGQUEENMOD.light_suits, prefix .. "_Stars")
     table.insert(DRAGQUEENMOD.modded_suits, prefix .. "_Moons")
     table.insert(DRAGQUEENMOD.modded_suits, prefix .. "_Stars")
+    DRAGQUEENMOD.suits_to_tarot[prefix .. "_Crowns"] = "c_" .. prefix .. "moon_q"
+    DRAGQUEENMOD.suits_to_tarot[prefix .. "_Stars"] = "c_" .. prefix .. "star_q"
     DRAGQUEENMOD.night_suits = {prefix .. "_Moons",prefix .. "_Stars"}
 
   end
@@ -71,6 +77,7 @@ function DRAGQUEENMOD.cross_mod_theirs_to_ours()
     -- Adds their suits to our definitions of light and treat and modded
     table.insert(DRAGQUEENMOD.light_suits, prefix .. "_3s")
     table.insert(DRAGQUEENMOD.modded_suits, prefix .. "_3s")
+    DRAGQUEENMOD.suits_to_tarot[prefix .. "_3s"] = "c_" .. prefix .. "cat"
     DRAGQUEENMOD.treat_suits = {prefix .. "_3s"}
   end
 
@@ -82,6 +89,8 @@ function DRAGQUEENMOD.cross_mod_theirs_to_ours()
     DRAGQUEENMOD.magic_suits = {prefix .. "_Clovers", prefix .. "_Suitless"}
     table.insert(DRAGQUEENMOD.modded_suits, prefix .. "_Clovers")
     table.insert(DRAGQUEENMOD.modded_suits, prefix .. "_Suitless")
+    DRAGQUEENMOD.suits_to_tarot[prefix .. "_Clovers"] = "c_" .. prefix .. "forest"
+    DRAGQUEENMOD.suits_to_tarot[prefix .. "_Suitless"] = "c_" .. prefix .. "Wastes"
   end
 
   -- Ink And Color
@@ -93,6 +102,8 @@ function DRAGQUEENMOD.cross_mod_theirs_to_ours()
     table.insert(DRAGQUEENMOD.light_suits, prefix .. "_Colors")
     table.insert(DRAGQUEENMOD.modded_suits, prefix .. "_Inks")
     table.insert(DRAGQUEENMOD.modded_suits, prefix .. "_Colors")
+    DRAGQUEENMOD.suits_to_tarot[prefix .. "_Inks"] = "c_" .. prefix .. "the_blob"
+    DRAGQUEENMOD.suits_to_tarot[prefix .. "_Colors"] = "c_" .. prefix .. "the_paint"
     DRAGQUEENMOD.stained_suits = {prefix .. "_Inks", prefix .. "_Colors"}
     -- Add Mothers
   end
