@@ -3,7 +3,7 @@ SMODS.Joker {
   effect = "Suit Mult",
   config = {
     extra = {
-      s_mult = 7,
+      s_mult = 5,
       suit = "dragqueen_pumps",
       accessorize_count = 2
     }
@@ -31,6 +31,6 @@ SMODS.Joker {
     }
   end,
   add_to_deck = function(self, card, from_debuff)
-    --DRAGQUEENMOD.accessorize("dragqueen_pumps", card.ability.extra.accessorize_count)
+    DRAGQUEENMOD.accessorize("dragqueen_pumps", card.ability.extra.accessorize_count)
   end
 }

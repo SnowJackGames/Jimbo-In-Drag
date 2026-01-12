@@ -1,7 +1,7 @@
 SMODS.Joker {
   key = "tights",
   config = {
-    extra = { odds = 3, xchips = 1.5 }
+    extra = { odds = 3, xchips = 1.5 , accessorize_count = 1}
   },
   rarity = 1,
   pos = { x = 0, y = 0 },
@@ -33,5 +33,8 @@ SMODS.Joker {
         }
       end
     end
+  end,
+  add_to_deck = function(self, card, from_debuff)
+    DRAGQUEENMOD.accessorize("dragqueen_pumps", card.ability.extra.accessorize_count)
   end
 }

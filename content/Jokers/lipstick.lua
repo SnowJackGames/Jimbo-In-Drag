@@ -1,7 +1,7 @@
 SMODS.Joker {
   key = "lipstick",
   config = {
-    extra = { odds = 4, xdollars = 1.2 }
+    extra = { odds = 4, xdollars = 1.2, accessorize_count = 1 }
   },
   rarity = 1,
   pos = { x = 0, y = 0 },
@@ -34,5 +34,8 @@ SMODS.Joker {
         }
       end
     end
+  end,
+  add_to_deck = function(self, card, from_debuff)
+    DRAGQUEENMOD.accessorize("dragqueen_purses", card.ability.extra.accessorize_count)
   end
 }
