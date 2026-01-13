@@ -41,11 +41,11 @@ DRAGQUEENMOD.light_suits = { "Hearts", "Diamonds", "Pumps" }
 DRAGQUEENMOD.base_suits = { "Spades", "Hearts", "Clubs", "Diamonds" }
 DRAGQUEENMOD.modded_suits = { "dragqueen_Purses", "dragqueen_Pumps" }
 
--- Red, Green, Blue, Alpha; called by DRAGQUEENMOD.wavy_color_updater()
+-- Called by DRAGQUEENMOD.wavy_color_updater()
 DRAGQUEENMOD.sine_colors = {
   DRAGQUEEN_KEYWORD = {
-    { 0.9254901960784314, 0.7137254901960784, 0.8588235294117647, 1 },
-    { 0.9333333333333333, 0.7647058823529411, 0.6039215686274509, 1 }
+    HEX("eec39a"),
+    HEX("ecb6db")
   }
 }
 
