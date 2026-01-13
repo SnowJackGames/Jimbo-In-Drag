@@ -80,20 +80,26 @@ DRAGQUEENMOD.valid_playing_card_set_categories = {"Playing Card", "Base", "Enhan
 DRAGQUEENMOD.modifiers = {}
 
 
-
-
--- The user can disable specific Drag Queen Mod items by commenting them out if they hate it
--- But watch out!
-
-
-DRAGQUEENMOD.SUITS = {
-  "Purses",
-  "Pumps"
+DRAGQUEENMOD.base_poker_hands = {
+  "Straight Flush",
+  "Four of a Kind",
+  "Full House",
+  "Flush",
+  "Straight",
+  "Three of a Kind",
+  "Two Pair",
+  "Pair",
+  "High Card"
 }
 
+DRAGQUEENMOD.spectrum_poker_hands = {
+  "Spectrum",
+  "Straight Spectrum",
+  "Spectrum House",
+  "Spectrum Five",
+}
 
-
-DRAGQUEENMOD.BASE_RANKS = {
+DRAGQUEENMOD.base_ranks = {
   "Ace",
   "King",
   "Queen",
@@ -109,109 +115,97 @@ DRAGQUEENMOD.BASE_RANKS = {
   "2"
 }
 
-DRAGQUEENMOD.RANKS = {
+-- The user can disable specific Drag Queen Mod items in the "enabled" tables
+-- by commenting them out if they hate it
+-- But watch out!
+
+
+DRAGQUEENMOD.ENABLEDSUITS = {
+  "Purses",
+  "Pumps"
+}
+
+DRAGQUEENMOD.ENABLEDRANKS = {
   "Mother",
 }
 
-DRAGQUEENMOD.BASE_POKER_HANDS = {
-  "Straight Flush",
-  "Four of a Kind",
-  "Full House",
-  "Flush",
-  "Straight",
-  "Three of a Kind",
-  "Two Pair",
-  "Pair",
-  "High Card"
-}
-
-DRAGQUEENMOD.SPECTRUM_POKER_HANDS = {
-  "Spectrum",
-  "Straight Spectrum",
-  "Spectrum House",
-  "Spectrum Five",
-}
-
-
 -- Modifiers
 DRAGQUEENMOD.MODIFIERS = {
-  ENHANCEMENTS = {
+  ENABLEDENHANCEMENTS = {
   },
 
-  EDITIONS = {
+  ENABLEDEDITIONS = {
   },
 
-  STICKERS = {
+  ENABLEDSTICKERS = {
   },
 
-  KISSES = {
+  ENABLEDKISSES = {
   },
 
-  GEMSTONES = {
+  ENABLEDGEMSTONES = {
   }
 }
-
-
 
 -- Consumables
 DRAGQUEENMOD.CONSUMABLES = {
 
-  TAROT = {
+  ENABLEDTAROT = {
   },
 
-  SPECTRALS = {
+  ENABLEDSPECTRALS = {
     "Celebrity"
   },
 
-  VOUCHERS = {
+  ENABLEDVOUCHERS = {
     "Serve"
   },
 
-  PACKS = {
+  ENABLEDPACKS = {
   },
 
-  TAGS = {
+  ENABLEDTAGS = {
   },
 
-  FOURTYFIVEDEGREETAROT = {
+  ENABLEDFOURTYFIVEDEGREETAROT = {
   },
 
-  COLORS = {
+  ENABLEDCOLORS = {
   }
 }
 
 -- Other Core Content
-DRAGQUEENMOD.JOKERS = {
+DRAGQUEENMOD.ENABLEDJOKERS = {
   "broke_joker",
   "vain_joker",
   "lipstick",
   "tights"
 }
 
-DRAGQUEENMOD.DECKS = {
+DRAGQUEENMOD.ENABLEDDECKS = {
+  "accessory"
 }
 
-DRAGQUEENMOD.BLINDS = {
+DRAGQUEENMOD.ENABLEDBLINDS = {
   "Rent",
   "Gig"
 }
 
-DRAGQUEENMOD.SKINS = {
+DRAGQUEENMOD.ENABLEDSKINS = {
 }
 
-DRAGQUEENMOD.VANILLA_REWORKS = {
+DRAGQUEENMOD.ENABLEDVANILLA_REWORKS = {
 
 }
-
 
 -- Cross-Mod Specific
-DRAGQUEENMOD.SLEEVES = {
+DRAGQUEENMOD.ENABLEDSLEEVES = {
 }
 
-DRAGQUEENMOD.PARTNERS = {
+DRAGQUEENMOD.ENABLEDPARTNERS = {
 }
 
-DRAGQUEENMOD.CHARMS = {
+DRAGQUEENMOD.ENABLEDCHARMS = {
 }
 
 DRAGQUEENMOD.requirement_map = {

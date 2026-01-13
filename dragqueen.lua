@@ -29,48 +29,48 @@ end
 
 -- Load Contents of Drag Queen Mod
 -- Core Content
-DRAGQUEENMOD.register_items(DRAGQUEENMOD.SUITS, "content/Suits")
-DRAGQUEENMOD.register_items(DRAGQUEENMOD.RANKS, "content/Ranks")
+DRAGQUEENMOD.register_items(DRAGQUEENMOD.ENABLEDSUITS, "content/Suits")
+DRAGQUEENMOD.register_items(DRAGQUEENMOD.ENABLEDRANKS, "content/Ranks")
 
 -- Modifiers
-DRAGQUEENMOD.register_items(DRAGQUEENMOD.MODIFIERS.ENHANCEMENTS, "content/Modifiers/Enhancements")
-DRAGQUEENMOD.register_items(DRAGQUEENMOD.MODIFIERS.EDITIONS, "content/Modifiers/Editions")
-DRAGQUEENMOD.register_items(DRAGQUEENMOD.MODIFIERS.STICKERS, "content/Modifiers/Stickers")
-DRAGQUEENMOD.register_items(DRAGQUEENMOD.MODIFIERS.KISSES, "content/Modifiers/Kisses")
+DRAGQUEENMOD.register_items(DRAGQUEENMOD.MODIFIERS.ENABLEDENHANCEMENTS, "content/Modifiers/Enhancements")
+DRAGQUEENMOD.register_items(DRAGQUEENMOD.MODIFIERS.ENABLEDEDITIONS, "content/Modifiers/Editions")
+DRAGQUEENMOD.register_items(DRAGQUEENMOD.MODIFIERS.ENABLEDSTICKERS, "content/Modifiers/Stickers")
+DRAGQUEENMOD.register_items(DRAGQUEENMOD.MODIFIERS.ENABLEDKISSES, "content/Modifiers/Kisses")
 
 
 -- Consumables
-DRAGQUEENMOD.register_items(DRAGQUEENMOD.CONSUMABLES.TAROT, "content/Consumables/Tarot")
-DRAGQUEENMOD.register_items(DRAGQUEENMOD.CONSUMABLES.SPECTRALS, "content/Consumables/Spectrals")
-DRAGQUEENMOD.register_items(DRAGQUEENMOD.CONSUMABLES.VOUCHERS, "content/Consumables/Vouchers")
-DRAGQUEENMOD.register_items(DRAGQUEENMOD.CONSUMABLES.PACKS, "content/Consumables/Packs")
-DRAGQUEENMOD.register_items(DRAGQUEENMOD.CONSUMABLES.TAGS, "content/Consumables/Tags")
+DRAGQUEENMOD.register_items(DRAGQUEENMOD.CONSUMABLES.ENABLEDTAROT, "content/Consumables/Tarot")
+DRAGQUEENMOD.register_items(DRAGQUEENMOD.CONSUMABLES.ENABLEDSPECTRALS, "content/Consumables/Spectrals")
+DRAGQUEENMOD.register_items(DRAGQUEENMOD.CONSUMABLES.ENABLEDVOUCHERS, "content/Consumables/Vouchers")
+DRAGQUEENMOD.register_items(DRAGQUEENMOD.CONSUMABLES.ENABLEDPACKS, "content/Consumables/Packs")
+DRAGQUEENMOD.register_items(DRAGQUEENMOD.CONSUMABLES.ENABLEDTAGS, "content/Consumables/Tags")
 
 
 
 -- Jokers
 if DRAGQUEENMOD.config.jokers_enabled then
-  DRAGQUEENMOD.register_items(DRAGQUEENMOD.JOKERS,"content/Jokers")
+  DRAGQUEENMOD.register_items(DRAGQUEENMOD.ENABLEDJOKERS,"content/Jokers")
 end
 
 -- Decks
 if DRAGQUEENMOD.config.decks_enabled then
-  DRAGQUEENMOD.register_items(DRAGQUEENMOD.DECKS,"content/Decks")
+  DRAGQUEENMOD.register_items(DRAGQUEENMOD.ENABLEDDECKS,"content/Decks")
 end
 
 -- Blinds
 if DRAGQUEENMOD.config.blinds_enabled then
-  DRAGQUEENMOD.register_items(DRAGQUEENMOD.BLINDS,"content/Blinds")
+  DRAGQUEENMOD.register_items(DRAGQUEENMOD.ENABLEDBLINDS,"content/Blinds")
 end
 
 -- Skins
 if DRAGQUEENMOD.config.skins_enabled then
-  DRAGQUEENMOD.register_items(DRAGQUEENMOD.SKINS,"content/Skins")
+  DRAGQUEENMOD.register_items(DRAGQUEENMOD.ENABLEDSKINS,"content/Skins")
 end
 
 -- Vanilla Reworks
 if DRAGQUEENMOD.config.vanilla_reworks_enabled then
-  DRAGQUEENMOD.register_items(DRAGQUEENMOD.VANILLA_REWORKS,"")
+  DRAGQUEENMOD.register_items(DRAGQUEENMOD.ENABLEDVANILLA_REWORKS,"")
 end
 
 -- Apply our config to particular findable objects
