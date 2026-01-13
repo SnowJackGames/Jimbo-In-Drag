@@ -121,8 +121,8 @@ DRAGQUEENMOD.base_ranks = {
 
 
 DRAGQUEENMOD.ENABLEDSUITS = {
-  "Purses",
-  "Pumps"
+  "purses",
+  "pumps"
 }
 
 DRAGQUEENMOD.ENABLEDRANKS = {
