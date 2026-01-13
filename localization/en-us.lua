@@ -87,10 +87,14 @@ return {
     Rank = {
     },
     Back = {
-      b_dragqueen_suitplaceholder = {
-        name = "Purses and Pumps Deck placeholder",
+      b_dragqueen_accessory = {
+        name = "Accessory Deck",
         text = {
-          "Start with a full set of Purses and Pumps, but no face cards"
+          "Start run with an",
+          "additional full set of",
+          "{C:dragqueen_purses}Purses{} and {C:dragqueen_pumps}Pumps{},",
+          "but no {C:attention}face cards{}",
+          "of any set"
         }
       },
       b_dragqueen_kissed = {
