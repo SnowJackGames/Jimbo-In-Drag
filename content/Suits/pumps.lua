@@ -1,4 +1,4 @@
-SMODS.suit{
+SMODS.Suit{
     key = "Pumps",
     card_key = "PUMPS",
 
@@ -16,7 +16,7 @@ SMODS.suit{
 
     in_pool = function(self, args)
         -- Allows forcing this suit to be included
-        if args and args.dragqueen then
+        if args and args.dragqueen and args.dragqueen.include_pumps then
             return true
         end
 
