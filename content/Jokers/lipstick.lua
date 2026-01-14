@@ -30,8 +30,8 @@ SMODS.Joker {
       if context.other_card:is_suit("dragqueen_Purses") then
         if SMODS.pseudorandom_probability(card, 'example_seed', 1, card.ability.extra.odds) then
           return {
-            message = "X" .. card.ability.extra.xdollars,
-            colour = G.C.MONEY,
+            -- message = "X" .. card.ability.extra.xdollars,
+            -- colour = G.C.MONEY,
             dollars = G.GAME.dollars * card.ability.extra.xdollars
           }
         end
