@@ -326,7 +326,7 @@ function DRAGQUEENMOD.accessorize(suit, count, saveroom)
   local tarot = ""
   local reservespace = saveroom or 0
   
-  if suit == ("dragqueen_pumps" or "dragqueen_purses") then
+  if suit == ("dragqueen_pumps") or suit == ("dragqueen_purses") then
     print("Placeholder, Jimbo In Drag suits not existant yet")
     suit = "random"
   end
