@@ -30,12 +30,12 @@ SMODS.Joker {
   end,
 
   calculate = function(self, card, context)
-    -- 1 in 4 chance for played cards with Purse suit to earn X0.2 money when scored
+    -- 1 in 4 chance for played cards with Purse suit to earn X0.1 money when scored
     if context.individual and context.cardarea == G.play then
       if context.other_card:is_suit("dragqueen_Purses") then
         if SMODS.pseudorandom_probability(card, "example_seed", 1, card.ability.extra.odds) then
-          local multiplicand = DRAGQUEENMOD.to_big(card.ability.extra.xdollars)
-          local cap = DRAGQUEENMOD.to_big(card.ability.extra.money_cap)
+          local multiplicand = card.ability.extra.xdollars
+          local cap = card.ability.extra.money_cap
           local existing_money = DRAGQUEENMOD.to_big(G.GAME.dollars) + (DRAGQUEENMOD.to_big(G.GAME.dollar_buffer or 0))
           local to_earn = (existing_money * multiplicand)
           -- Minimum between (money in pool X xdollars) and the cap, default 20 dollars
