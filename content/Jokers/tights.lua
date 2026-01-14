@@ -27,10 +27,12 @@ SMODS.Joker {
   calculate = function(self, card, context)
     -- 1 in 3 chance for played cards with Pump suit to give X1.5 Chips when scored
     if context.individual and context.cardarea == G.play then
-      if context.other_card:is_suit("Pumps") and SMODS.pseudorandom_probability(card, 'example_seed', 1, card.ability.extra.odds) then
-        return {
-          xchips = card.ability.extra.xchips
-        }
+      if context.other_card:is_suit("dragqueen_Pumps") then
+        if SMODS.pseudorandom_probability(card, 'example_seed', 1, card.ability.extra.odds) then
+          return {
+            xchips = card.ability.extra.xchips
+          }
+        end
       end
     end
   end,

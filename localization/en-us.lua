@@ -67,8 +67,8 @@ return {
         name = "Lipstick",
         text = {
           "{C:green}#1# in #2#{} chance for played",
-          "cards with {C:dragqueen_purses}Purse{} suit to give",
-          "{X:money,C:white}X#3#{} Money when scored",
+          "cards with {C:dragqueen_purses}Purse{} suit to earn",
+          "{X:money,C:white}X#3#{} {C:money}money{} when scored",
           "{C:white,X:dragqueen_keyword}Accessorize{} {C:dragqueen_purses}Purses{} {C:attention}1{}"
         }
       },
