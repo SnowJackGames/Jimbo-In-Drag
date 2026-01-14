@@ -69,6 +69,7 @@ return {
           "{C:green}#1# in #2#{} chance for played",
           "cards with {C:dragqueen_purses}Purse{} suit to earn",
           "{X:money,C:white}X#3#{} {C:money}money{} when scored",
+          "{s:0.8,C:inactive}(Max of {}{s:0.8,C:money}$#4#{}{s:0.8,C:inactive}){}",
           "{C:white,X:dragqueen_keyword}Accessorize{} {C:dragqueen_purses}Purses{} {C:attention}1{}"
         }
       },
