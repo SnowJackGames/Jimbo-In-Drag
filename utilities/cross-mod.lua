@@ -265,6 +265,8 @@ function DRAGQUEENMOD.cross_mod_ours_to_theirs()
         if UNIK then
           UNIK.is_suit_type = DRAGQUEENMOD.is_suit
           UNIK.suit_tooltip = DRAGQUEENMOD.suit_tooltip
+          UNIK.dark_suits = DRAGQUEENMOD.dark_suits
+          UNIK.light_suits = DRAGQUEENMOD.light_suits
         end
       end
     end
