@@ -36,8 +36,8 @@ DRAGQUEENMOD.credits = {
 
 
 -- Define some suit categories
-DRAGQUEENMOD.dark_suits = { "Spades", "Clubs", "Purses" }
-DRAGQUEENMOD.light_suits = { "Hearts", "Diamonds", "Pumps" }
+DRAGQUEENMOD.dark_suits = { "Spades", "Clubs", "dragqueen_Purses" }
+DRAGQUEENMOD.light_suits = { "Hearts", "Diamonds", "dragqueen_Pumps" }
 DRAGQUEENMOD.base_suits = { "Spades", "Hearts", "Clubs", "Diamonds" }
 DRAGQUEENMOD.modded_suits = { "dragqueen_Purses", "dragqueen_Pumps" }
 
