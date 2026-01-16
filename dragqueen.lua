@@ -121,7 +121,7 @@ for _, v in ipairs(objects) do
       end
 
       if config.requires_spectrum_or_suit then
-        ret = ret and (DRAGQUEENMOD.spectrum_played() or DRAGQUEENMOD.has_modded_suit_in_deck())
+        ret = ret and (DRAGQUEENMOD.non_plain_in_pool() or DRAGQUEENMOD.has_modded_suit_in_deck())
       end
 
       return ret, dupes
