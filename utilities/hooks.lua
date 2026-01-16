@@ -6,7 +6,7 @@ local dragqueen_hook_start_run = Game.start_run
 -- Hook that sets NonPlain to false at the start of a run
 function Game:start_run(...)
   dragqueen_hook_start_run(self, ...)
-  G.GAME.NonPlain = false
+  G.GAME.NonPlain = DRAGQUEENMOD.non_plain_in_pool()
 end
 
 
