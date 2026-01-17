@@ -10,8 +10,8 @@ pattern = "RENTAL = HEX('b18f43'),"
 position = "after"
 match_indent = true
 payload = '''
-DRAGQUEEN_LIGHT_SUIT = HEX('F06841'),
-DRAGQUEEN_DARK_SUIT = HEX('3C4A4E'),
+DRAGQUEEN_LIGHT_SUIT = HEX('D4D4D4'),
+DRAGQUEEN_DARK_SUIT = HEX('323232'),
 DRAGQUEEN_PUMPS_LC = HEX('ecb6db'),
 DRAGQUEEN_PUMPS_HC = HEX('ecb6db'),
 DRAGQUEEN_PURSES_LC = HEX('eec39a'),
@@ -51,5 +51,6 @@ for color, value in pairs(wavy_colors) do
   self.C[color][1] = value[1]
   self.C[color][2] = value[2]
   self.C[color][3] = value[3]
+  self.C[color][4] = value[4]
 end
 '''
