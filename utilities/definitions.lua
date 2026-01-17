@@ -47,10 +47,13 @@ DRAGQUEENMOD.sine_colors = {
     G.ARGS.LOC_COLOURS["dragqueen_pumps"],
     G.ARGS.LOC_COLOURS["dragqueen_purses"]
   },
-  DRAGQUEEN_RGB = {     -- Example three-color wavy_color
+  DRAGQUEEN_RAINBOW = {
     HEX("FF0000"),  -- Red
+    HEX("FFFF00"),  -- Yellow
+    HEX("00FF00"),  -- Green
+    HEX("00FFFF"),  -- Cyan
     HEX("0000FF"),  -- Blue
-    HEX("00FF00")   -- Green
+    HEX("FF00FF"),  -- Magenta
   }
 }
 
