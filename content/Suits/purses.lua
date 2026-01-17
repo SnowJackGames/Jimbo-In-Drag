@@ -8,7 +8,7 @@ SMODS.Suit{
     lc_ui_atlas = "lc_ui",
     hc_ui_atlas = "hc_ui",
 
-    lc_color = G.C.DRAGQUEEN_PURSES_LC,
+    lc_colour = G.C.DRAGQUEEN_PURSES_LC,
     hc_colour = G.C.DRAGQUEEN_PURSES_HC,
 
     pos = {y = 1},
