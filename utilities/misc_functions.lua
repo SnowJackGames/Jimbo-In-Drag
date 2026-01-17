@@ -218,6 +218,7 @@ end
 -- Make sure code is efficient because it is called every tick;
 -- i.e. reduce calls to global
 function DRAGQUEENMOD.wavy_color_updater(time)
+  -- Please note how beautiful and smart I, Kassandra, am for figuring this all out
   local wavy_colors = {}
   local sosopaac = {}
   local sosopaac_index = 0
@@ -263,6 +264,8 @@ function DRAGQUEENMOD.wavy_color_updater(time)
 
     local unit_circle_position = 0
     local fmod = math.fmod
+    local gammaToLinear = love.math.gammaToLinear
+    local linearToGamma = love.math.linearToGamma
 
     for colorsetname, set_of_individual_colors in pairs(sine_colors) do
       if colorsetname ~= nil then
@@ -319,9 +322,29 @@ function DRAGQUEENMOD.wavy_color_updater(time)
           else
             color_proportion = (unit_circle_position - point_before_radians) / (point_after_radians - point_before_radians)
           end
-          
+
+          -- "Degamma" (convert to linear sRGB) the colors before being mixed
+          local degammaed_color_before = {0,0,1,1}
+          local degammaed_color_after = {1,0,0,1}
+          degammaed_color_before[1], degammaed_color_before[2], degammaed_color_before[3] = gammaToLinear(color_before[1], color_before[2], color_before[3])
+          degammaed_color_after[1], degammaed_color_after[2], degammaed_color_after[3] = gammaToLinear(color_after[1], color_after[2], color_after[3])
+
+          -- Alpha channel doesn't change when degammaed
+          degammaed_color_before[4] = color_before[4]
+          degammaed_color_after[4] = color_after[4]
+
           -- Note the order here when sent to mix_colours()
-          wavy_colors[colorsetname] = mix_colours(color_after, color_before, color_proportion)
+          local mixed_color = mix_colours(degammaed_color_after, degammaed_color_before, color_proportion)
+
+          -- "Regamma" (convert to non-linear sRGB) the color after being mixed
+          mixed_color[1], mixed_color[2], mixed_color[3] = linearToGamma(mixed_color[1], mixed_color[2], mixed_color[3])
+
+          -- The degamma to regamma technique comes from https://archive.is/WfGUU
+          -- If the two colors are red (FF0000) and green (00FF00), without converting from gamma to linear and back
+          -- the midpoint is a murky brown
+          -- With gamma awareness the midpoint is instead a yellowish color that preserves brightness
+
+          wavy_colors[colorsetname] = mixed_color
         end
       end
     end
@@ -371,19 +394,6 @@ function DRAGQUEENMOD.try_spawn_card(args, saveroom)
     else
       if is_joker and ((#area.cards + G.GAME["joker_buffer"] + setsaveroom) < area.config.card_limit) then should_spawn = true end
       if is_consumable and ((#area.cards + G.GAME["consumeable_buffer"] + setsaveroom) < (area.config.card_limit)) then should_spawn = true end
-      -- TODO: for spawning consumables can't seem to get "consumeable_buffer" to work properly,
-      -- if try_spawn_card is called to make multiple consumables in a row
-      -- joker_buffer seems to work okay so... i dunno
-      -- need to figure out how it actually works
-      
-      -- if is_joker then print("joker") end
-      -- if is_consumable then print("consumeable") end
-      -- print(#area.cards)
-      -- if is_joker then print(G.GAME["joker_buffer"]) end
-      -- if is_consumable then print(G.GAME["consumeable_buffer"]) end
-      -- print(area.config.card_count)
-      -- print(area.config.card_limit)
-      -- print()
     end
   end
 
