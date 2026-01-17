@@ -27,6 +27,18 @@ G.FUNCS.evaluate_play = function(e)
 end
 
 
+
+-- Hooking SMODS's .create_mod_badges()
+local dragqueen_hook_suit_badge = SMODS.create_mod_badges
+
+-- Puts a badge under a suited card indicating if it is a Light Suit, a Dark Suit, or both
+function SMODS.create_mod_badges(obj, badges, ...)
+  dragqueen_hook_suit_badge(obj, badges, ...)
+  DRAGQUEENMOD.card_suit_badge(obj, badges)
+end
+
+
+
 -- Code to be hooked into the end of Game:splash_screen
 function DRAGQUEENMOD.last_second_code()
   if DRAGQUEENMOD.load_cross_mod_ours_to_theirs then

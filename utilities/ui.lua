@@ -226,7 +226,6 @@ function DRAGQUEENMOD.suit_tooltip_build_for_light_or_dark(tooltiptype, key, usi
 end
 
 
-
 -- Build the light and dark suits for NonPlain == false 
 --- @param tooltiptype "dark" | "light"
 --- @param messageparts table
@@ -252,7 +251,6 @@ function DRAGQUEENMOD.suit_tooltip_build_for_light_or_dark_for_plain(tooltiptype
 
   return(messageparts)
 end
-
 
 
 -- Build the light and dark suits for NonPlain == false 
@@ -330,6 +328,77 @@ function DRAGQUEENMOD.suit_tooltip_build_for_light_or_dark_for_nonplain(tooltipt
 
   return(messageparts)
 end
+
+-- Puts a badge under a suited card indicating if it is a Light Suit, a Dark Suit, or both
+function DRAGQUEENMOD.card_suit_badge(obj, badges)
+  if obj then
+    if obj.is_suit ~= nil and obj.key ~= nil then
+      local suitkey = nil
+      local color = G.C.GREEN
+      for _, v in pairs(DRAGQUEENMOD.dark_suits) do
+        if obj.key == v then
+          suitkey = "dragqueen_dark_suits_in_play_plain"
+          color = G.C.DRAGQUEEN_DARK_SUIT
+        end
+      end
+      for _, v in pairs(DRAGQUEENMOD.light_suits) do
+        if obj.key == v then
+          suitkey = "dragqueen_light_suits_in_play_plain"
+          color = G.C.DRAGQUEEN_LIGHT_SUIT
+        end
+      end
+
+      if suitkey ~= nil then
+        local suittext = DRAGQUEENMOD.easydescriptionlocalize("Other", suitkey).name
+        assert(type(suittext) == "string", "issue pulling " .. suitkey .. ".name string in 'Jimbo in Drag' mod")
+        local size = 0.9
+        local scale_fac = 1
+        local max_text_width = 2 - 2*0.05 - 4*0.03*size - 2*0.03
+        local calced_text_width = 0
+
+        badges[#badges + 1] = {
+          n = G.UIT.R, config = {align = "cm"},
+          nodes = {
+            {
+              n = G.UIT.R,
+              config = {
+                align = "cm", r = 0.1, minw = 2, minh = 0.36, emboss = 0.05, padding = 0.03*size,
+                -- Overall badge color
+                colour = color or G.C.GREEN,
+              },
+              nodes = {
+                -- Spacer
+                {n = G.UIT.B, config = {h = 0.1, w = 0.03}},
+                {
+                  n = G.UIT.O,
+                  config = {
+                    -- The actual text
+                    object = DynaText(
+                      {
+                        string = suittext, colours = {G.C.WHITE},
+                        float = true,
+                        shadow = true,
+                        offset_y = -0.05,
+                        silent = true,
+                        spacing = 1*scale_fac,
+                        scale = 0.33*size*scale_fac,
+                        marquee = calced_text_width > max_text_width,
+                        maxw = max_text_width
+                      }
+                    )
+                  }
+                },
+                -- Spacer
+                {n = G.UIT.B, config = {h = 0.1, w = 0.03}},
+              }
+            }
+          }
+        }
+      end
+    end
+  end 
+end
+
 
 -- Kiss tooltip, if we only have one then add to stickers
 -- But if there's different types then can add to its own 
