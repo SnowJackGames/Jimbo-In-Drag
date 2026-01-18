@@ -240,8 +240,16 @@ function DRAGQUEENMOD.wavy_color_updater(time)
 
           -- More typechecking and also determining the number of colors in the set
           for _, individual_color in ipairs(set_of_individual_colors) do
-            assert(type(individual_color) == "table", "DRAGQUEENMOD.wavy_color_updater was sent a color of improper format in " .. colorsetname)
-            for _, value in pairs(individual_color) do
+            local passed_individual_color = individual_color
+
+            -- Could be a string to be passed to loc_colour, or a color table
+            if type(passed_individual_color) == "string" then
+              passed_individual_color = loc_colour(individual_color)
+            end
+
+            -- Make sure calculating 
+            assert(type(passed_individual_color) == "table", "DRAGQUEENMOD.wavy_color_updater was sent a color of improper format in " .. colorsetname)
+            for _, value in pairs(passed_individual_color) do
               assert(type(tonumber(value)) == "number", "DRAGQUEENMOD.wavy_color_updater was sent a color of improper format in " .. colorsetname)
             end
             points = points + 1
@@ -276,6 +284,8 @@ function DRAGQUEENMOD.wavy_color_updater(time)
     local fmod = math.fmod
     local gammaToLinear = love.math.gammaToLinear
     local linearToGamma = love.math.linearToGamma
+    local type = type
+    local loc_colour = loc_colour
 
     for colorsetname, set_of_individual_colors in pairs(sine_colors) do
       if colorsetname ~= nil then
@@ -326,6 +336,10 @@ function DRAGQUEENMOD.wavy_color_updater(time)
           local color_before = set_of_individual_colors[point_before]
           local color_after = set_of_individual_colors[point_after]
           local color_proportion = 0
+
+          -- If colors are strings, then pull from loc_colour
+          if type(color_before) == "string" then color_before = loc_colour(color_before) end
+          if type(color_after) == "string" then color_after = loc_colour(color_after) end
 
           -- Don't divide by zero
           if (point_after_radians - point_before_radians) == 0 then

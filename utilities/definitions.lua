@@ -41,11 +41,26 @@ DRAGQUEENMOD.light_suits = { "Hearts", "Diamonds", "dragqueen_Pumps" }
 DRAGQUEENMOD.base_suits = { "Spades", "Hearts", "Clubs", "Diamonds" }
 DRAGQUEENMOD.modded_suits = { "dragqueen_Purses", "dragqueen_Pumps" }
 
+
+DRAGQUEENMOD.inject_into_loc_colours = {
+  dragqueen_pumps = G.C.SUITS.dragqueen_Pumps or G.C.DRAGQUEEN_PUMPS_LC,
+  dragqueen_purses = G.C.SUITS.dragqueen_Purses or G.C.DRAGQUEEN_PURSES_LC,
+  dragqueen_keyword = G.C.DRAGQUEEN_KEYWORD,
+  dragqueen_rainbow = G.C.DRAGQUEEN_RAINBOW,
+  rgmc_blooms = G.C.SUITS.rgmc_blooms or G.C.RGMC_BLOOMS or HEX('A7EE5F'),
+  rgmc_daggers = G.C.SUITS.rgmc_daggers or G.C.RGMC_DAGGERS or HEX('591235'),
+  rgmc_lanterns = G.C.SUITS.rgmc_lanterns or G.C.RGMC_LANTERNS or HEX('F09B4A'),
+  rgmc_voids = G.C.SUITS.rgmc_voids or G.C.RGMC_VOIDS or HEX('564C53'),
+  ink_inks = G.C.SUITS.ink_Inks or G.C.INK_INKS or HEX('374649'),
+  ink_colors = G.C.SUITS.ink_Colors or G.C.INK_COLORS or HEX('eb8920'),
+}
+
+
 -- Called by DRAGQUEENMOD.wavy_color_updater()
 DRAGQUEENMOD.sine_colors = {
   DRAGQUEEN_KEYWORD = {
-    loc_colour("dragqueen_pumps"),
-    loc_colour("dragqueen_purses")
+    "dragqueen_pumps",
+    "dragqueen_purses"
   },
   DRAGQUEEN_RAINBOW = {
     HEX("FF0000"),  -- Red
