@@ -13,8 +13,24 @@ end
 
 
 -- Updates the current value of a "wavy color" (a color that shifts between two or more colors)
--- Make sure code is efficient because it is called every tick;
+-- <br> Make sure code is efficient because it is called every tick;
 -- i.e. reduce calls to global
+-- <br> Colors are defined in DRAGQUEENMOD.sine_colors of the format
+-- ```
+-- DRAGQUEENMOD.sine_colors = {
+--  first_wavy_color = {color1, color2, ...}
+-- }
+-- ```
+-- where color1 etc maybe of the following formats:
+-- ```
+-- - HEX("FF00FF")                      -- Hex code
+-- - G.C.RED                          -- color in G.C
+-- - G.ARGS.LOC_COLOURS.dark_edition  -- color in G.ARGS.LOC_COLOURS
+-- - {0, 0.5, 1, 1}                   -- table of r, g, b, a channels
+-- ```
+-- The format `loc_colour("mycolor")` is not recommended
+-- as the function `loc_colour` may be updated by hooks at later points of runtime after
+-- DRAGQUEENMOD.sine_colors is defined.
 function DRAGQUEENMOD.wavy_color_updater(time)
   -- Please note how beautiful and smart I, Kassandra, am for figuring this all out
   local wavy_colors = {}

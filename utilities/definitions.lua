@@ -56,7 +56,8 @@ DRAGQUEENMOD.inject_into_loc_colours = {
 }
 
 
--- Called by DRAGQUEENMOD.wavy_color_updater()
+-- Called by `DRAGQUEENMOD.wavy_color_updater()`
+---@see DRAGQUEENMOD.wavy_color_updater
 DRAGQUEENMOD.sine_colors = {
   DRAGQUEEN_KEYWORD = {
     "dragqueen_pumps",
