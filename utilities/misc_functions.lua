@@ -232,14 +232,24 @@ function DRAGQUEENMOD.wavy_color_updater(time)
     if sine_colors ~= nil then
       for colorsetname, set_of_individual_colors in pairs(sine_colors) do
         if colorsetname ~= nil then
-          local set_of_points_along_a_circle = {}
+          -- Typechecking
+          assert(type(colorsetname) == "string", "DRAGQUEENMOD.wavy_color_updater was sent colorsetname that is not a string")
+          assert(type(set_of_individual_colors) == "table", "DRAGQUEENMOD.wavy_color_updater was sent a color " .. colorsetname.. " with 'set_of_individual_colors' that is not a table")
+
           local points = 0
-          local pointdistance = 2 * pi
-          local currentdistance = 0
-          
-          for _, _ in ipairs(set_of_individual_colors) do
+
+          -- More typechecking and also determining the number of colors in the set
+          for _, individual_color in ipairs(set_of_individual_colors) do
+            assert(type(individual_color) == "table", "DRAGQUEENMOD.wavy_color_updater was sent a color of improper format in " .. colorsetname)
+            for _, value in pairs(individual_color) do
+              assert(type(tonumber(value)) == "number", "DRAGQUEENMOD.wavy_color_updater was sent a color of improper format in " .. colorsetname)
+            end
             points = points + 1
           end
+
+          local set_of_points_along_a_circle = {}
+          local pointdistance = 2 * pi
+          local currentdistance = 0
 
           -- Divide the circle into the number of colors there are
           pointdistance = pointdistance / points
@@ -274,7 +284,8 @@ function DRAGQUEENMOD.wavy_color_updater(time)
         
         -- If there's only one color there's no reason to mix it
         -- This is not intended usage of wavy_color_updater function however
-        if sosopaac_index_size == 1 then
+        if sosopaac_index_size == 0 then    -- Skip
+        elseif sosopaac_index_size == 1 then
           wavy_colors[colorsetname] = set_of_individual_colors[1]
         else
           -- Given unit_circle_position, find the two individual_colors that are closest
