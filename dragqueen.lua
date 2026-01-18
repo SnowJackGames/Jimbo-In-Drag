@@ -11,6 +11,7 @@ SMODS.load_file("utilities/definitions.lua")()
 SMODS.load_file("utilities/misc_functions.lua")()
 SMODS.load_file("utilities/content_patches.lua")()
 SMODS.load_file("utilities/cross-mod.lua")()
+SMODS.load_file("utilities/colors_and_fonts.lua")()
 SMODS.load_file("utilities/ui.lua")()
 SMODS.load_file("utilities/hooks.lua")()
 

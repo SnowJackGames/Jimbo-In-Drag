@@ -1,4 +1,4 @@
----@diagnostic disable: duplicate-set-field
+---@diagnostic disable: duplicate-set-field, lowercase-global
 
 -- Hooking Balatro's Game:start_run()
 local dragqueen_hook_start_run = Game.start_run
@@ -35,6 +35,18 @@ local dragqueen_hook_suit_badge = SMODS.create_mod_badges
 function SMODS.create_mod_badges(obj, badges, ...)
   dragqueen_hook_suit_badge(obj, badges, ...)
   DRAGQUEENMOD.card_suit_badge(obj, badges)
+end
+
+-- Hooking Balatro's loc_colour()
+local dragqueen_hook_loc_colour = loc_colour
+
+-- Adds our colors from global scope into G.ARGS.LOC_COLOURS
+function loc_colour(_c, _default, ...)
+  if not G.ARGS.LOC_COLOURS then
+	  dragqueen_hook_loc_colour()
+	end
+  DRAGQUEENMOD.color_register_into_LOC_COLOURS()
+  return dragqueen_hook_loc_colour(_c, _default, ...)
 end
 
 
