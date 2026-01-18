@@ -44,8 +44,8 @@ DRAGQUEENMOD.modded_suits = { "dragqueen_Purses", "dragqueen_Pumps" }
 -- Called by DRAGQUEENMOD.wavy_color_updater()
 DRAGQUEENMOD.sine_colors = {
   DRAGQUEEN_KEYWORD = {
-    G.ARGS.LOC_COLOURS["dragqueen_pumps"],
-    G.ARGS.LOC_COLOURS["dragqueen_purses"]
+    loc_colour("dragqueen_pumps"),
+    loc_colour("dragqueen_purses")
   },
   DRAGQUEEN_RAINBOW = {
     HEX("FF0000"),  -- Red
