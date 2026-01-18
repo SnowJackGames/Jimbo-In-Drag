@@ -43,6 +43,9 @@ DRAGQUEENMOD.modded_suits = { "dragqueen_Purses", "dragqueen_Pumps" }
 
 
 DRAGQUEENMOD.inject_into_loc_colours = {
+  dragqueen_light_suit = G.C.DRAGQUEEN_LIGHT_SUIT,
+  dragqueen_dark_suit = G.C.DRAGQUEEN_DARK_SUIT,
+  dragqueen_dark_and_light_suit = G.C.DRAGQUEEN_DARK_AND_LIGHT_SUIT,
   dragqueen_pumps = G.C.SUITS.dragqueen_Pumps or G.C.DRAGQUEEN_PUMPS_LC,
   dragqueen_purses = G.C.SUITS.dragqueen_Purses or G.C.DRAGQUEEN_PURSES_LC,
   dragqueen_keyword = G.C.DRAGQUEEN_KEYWORD,
@@ -70,6 +73,12 @@ DRAGQUEENMOD.sine_colors = {
     HEX("00FFFF"),  -- Cyan
     HEX("0000FF"),  -- Blue
     HEX("FF00FF"),  -- Magenta
+  },
+  DRAGQUEEN_DARK_AND_LIGHT_SUIT = {
+    "dragqueen_light_suit",
+    "dragqueen_light_suit",
+    "dragqueen_dark_suit",
+    "dragqueen_dark_suit",
   }
 }
 

@@ -530,7 +530,21 @@ return {
       dragqueen_UI_skins_enabled = "Enable Skins",
       dragqueen_UI_vanilla_reworks_enabled = "Enable Vanilla Reworks",
       dragqueen_UI_cross_mod_enabled = "Enable Cross-Mod Content",
-      dragqueen_ui_requires_restart = "Requires Restart"
+      dragqueen_ui_requires_restart = "Requires Restart",
+      dragqueen_card_badge_dark_suit = "Dark Suit",
+      dragqueen_card_badge_light_suit = "Light Suit",
+      dragqueen_card_badge_dark_and_light_suit = "Dark and Light Suit",
+      dragqueen_card_badge_plain_suit = "Plain Suit",
+      dragqueen_card_badge_accessory_suit = "Accessory Suit",
+      dragqueen_card_badge_bunc_exotic_suit = "Exotic Suit",
+      dragqueen_card_badge_paperback_proud_suit = "Pride Suit",
+      dragqueen_card_badge_six_night_suit = "Night Suit",
+      dragqueen_card_badge_minty_treat_suit = "Treat Suit",
+      dragqueen_card_badge_mtg_magic_suit = "Magic Suit",
+      dragqueen_card_badge_ink_stained_suit = "Stained Suit",
+      dragqueen_card_badge_rgmc_parallel_suit = "Parallel Suit",
+      dragqueen_card_badge_chaotic_parallel_suit = "Parallel Suit",
+      dragqueen_card_badge_unik_tictactoe_suit = "Tic Tac Toe Suit",
       
     },
     v_dictionary = {

@@ -332,71 +332,118 @@ end
 -- Puts a badge under a suited card indicating if it is a Light Suit, a Dark Suit, or both
 function DRAGQUEENMOD.card_suit_badge(obj, badges)
   if obj then
-    if obj.is_suit ~= nil and obj.key ~= nil then
-      local suitkey = nil
-      local color = G.C.GREEN
-      for _, v in pairs(DRAGQUEENMOD.dark_suits) do
-        if obj.key == v then
-          suitkey = "dragqueen_dark_suits_in_play_plain"
-          color = G.C.DRAGQUEEN_DARK_SUIT
-        end
-      end
-      for _, v in pairs(DRAGQUEENMOD.light_suits) do
-        if obj.key == v then
-          suitkey = "dragqueen_light_suits_in_play_plain"
-          color = G.C.DRAGQUEEN_LIGHT_SUIT
-        end
-      end
+    if obj.is_suit ~= nil and obj.key ~= nil and obj.base_card.config ~= nil then
 
-      if suitkey ~= nil then
-        local suittext = DRAGQUEENMOD.easydescriptionlocalize("Other", suitkey).name
-        assert(type(suittext) == "string", "issue pulling " .. suitkey .. ".name string in 'Jimbo in Drag' mod")
-        local size = 0.9
-        local scale_fac = 1
-        local max_text_width = 2 - 2*0.05 - 4*0.03*size - 2*0.03
-        local calced_text_width = 0
+      local suittext, badgecolor, textcolor = DRAGQUEENMOD.get_dark_or_light_suit_badge(obj)
+      badges[#badges + 1] = DRAGQUEENMOD.get_badge_template(suittext, badgecolor, textcolor)
 
-        badges[#badges + 1] = {
-          n = G.UIT.R, config = {align = "cm"},
-          nodes = {
-            {
-              n = G.UIT.R,
-              config = {
-                align = "cm", r = 0.1, minw = 2, minh = 0.36, emboss = 0.05, padding = 0.03*size,
-                -- Overall badge color
-                colour = color or G.C.GREEN,
-              },
-              nodes = {
-                -- Spacer
-                {n = G.UIT.B, config = {h = 0.1, w = 0.03}},
-                {
-                  n = G.UIT.O,
-                  config = {
-                    -- The actual text
-                    object = DynaText(
-                      {
-                        string = suittext, colours = {G.C.WHITE},
-                        float = true,
-                        shadow = true,
-                        offset_y = -0.05,
-                        silent = true,
-                        spacing = 1*scale_fac,
-                        scale = 0.33*size*scale_fac,
-                        marquee = calced_text_width > max_text_width,
-                        maxw = max_text_width
-                      }
-                    )
-                  }
-                },
-                -- Spacer
-                {n = G.UIT.B, config = {h = 0.1, w = 0.03}},
-              }
-            }
-          }
-        }
-      end
     end
-  end 
+  end
+end
+
+function DRAGQUEENMOD.get_dark_or_light_suit_badge(obj, givenbadgecolor, giventextcolor)
+  local suitkey = nil
+  local suittext = nil
+  local badgecolor = givenbadgecolor or G.C.GREEN
+  local textcolor = giventextcolor or G.C.WHITE
+  local isdark = false
+  local islight = false
+  local isbothdarkandlight = false
+
+
+  for _, v in pairs(DRAGQUEENMOD.dark_suits) do
+    if obj.key == v then
+      isdark = true
+    end
+  end
+  for _, v in pairs(DRAGQUEENMOD.light_suits) do
+    if obj.key == v then
+      islight = true
+    end
+  end
+
+  local islucky = false
+  if obj.base_card.config.center.key == "m_wild" then islucky = true end
+  if islucky == true then isbothdarkandlight = true end
+
+  -- Patch target for DRAGQUEENMOD.get_dark_or_light_suit_badge if you want more conditions to be considered both dark and light
+
+  if (isdark == true and islight == true) or isbothdarkandlight == true then
+    suitkey = "dragqueen_card_badge_dark_and_light_suit"
+    badgecolor = G.C.DRAGQUEEN_DARK_AND_LIGHT_SUIT
+  elseif isdark == true then
+    suitkey = "dragqueen_card_badge_dark_suit"
+    badgecolor = G.C.DRAGQUEEN_DARK_SUIT
+  elseif islight == true then
+    suitkey = "dragqueen_card_badge_light_suit"
+    badgecolor = G.C.DRAGQUEEN_LIGHT_SUIT
+  end
+
+  -- suitkey value check
+  if suitkey ~= nil then
+    suittext = DRAGQUEENMOD.easymisclocalize("dictionary", suitkey)
+    assert(type(suittext) == "string", "issue pulling " .. suitkey .. " string in 'Jimbo in Drag' mod")
+  else
+    error("suitkey value in DRAGQUEENMOD.get_dark_or_light_suit_badge is nonsensical")
+  end
+
+  return suittext, badgecolor, textcolor
+end
+
+function DRAGQUEENMOD.get_badge_template(badgetext, badgecolor, textcolor)
+  local size = 0.9
+  local font = G.LANG.font
+  local scale_fac = 1
+  local max_text_width = 2 - 2*0.05 - 4*0.03*size - 2*0.03
+  local calced_text_width = 0
+  for _, c in utf8.chars(badgetext) do
+    -- pulled directly from SMODS code
+    ---@diagnostic disable-next-line: undefined-field
+    local tx = font.FONT:getWidth(c)*(0.33*size)*G.TILESCALE*font.FONTSCALE + 2.7*1*G.TILESCALE*font.FONTSCALE
+    calced_text_width = calced_text_width + tx/(G.TILESIZE*G.TILESCALE)
+  end
+
+  local badgetobuild = {
+    n = G.UIT.R, config = {align = "cm"},
+    nodes = {
+      {
+        n = G.UIT.R,
+        config = {
+          align = "cm", r = 0.1, minw = 2, minh = 0.36, emboss = 0.05, padding = 0.03*size,
+          -- Overall badge color
+          colour = badgecolor or G.C.GREEN,
+        },
+        nodes = {
+          -- Spacer
+          { n = G.UIT.B, config = { h = 0.1, w = 0.03 } },
+          {
+            n = G.UIT.O,
+            config = {
+              -- The actual text
+              object = DynaText(
+                {
+                  string = badgetext,
+                  colours = { textcolor },
+                  silent = true,
+                  float = true,
+                  shadow = true,
+                  offset_y = -0.05,
+                  spacing = 1 * scale_fac,
+                  scale = 0.33 * size * scale_fac,
+                  marquee = calced_text_width > max_text_width,
+                  maxw = max_text_width
+                }
+              )
+            }
+          },
+          -- Spacer
+          { n = G.UIT.B, config = { h = 0.1, w = 0.03 } },
+        }
+      }
+    }
+  }
+
+  return badgetobuild
 end
 
 
