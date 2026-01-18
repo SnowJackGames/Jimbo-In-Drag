@@ -329,6 +329,7 @@ function DRAGQUEENMOD.suit_tooltip_build_for_light_or_dark_for_nonplain(tooltipt
   return(messageparts)
 end
 
+
 -- Puts a badge under a suited card indicating if it is a Light Suit, a Dark Suit, or both
 function DRAGQUEENMOD.card_suit_badge(obj, badges)
   if obj then
@@ -340,6 +341,7 @@ function DRAGQUEENMOD.card_suit_badge(obj, badges)
     end
   end
 end
+
 
 function DRAGQUEENMOD.get_dark_or_light_suit_badge(obj, givenbadgecolor, giventextcolor)
   local suitkey = nil
@@ -389,6 +391,7 @@ function DRAGQUEENMOD.get_dark_or_light_suit_badge(obj, givenbadgecolor, givente
 
   return suittext, badgecolor, textcolor
 end
+
 
 function DRAGQUEENMOD.get_badge_template(badgetext, badgecolor, textcolor)
   local size = 0.9
