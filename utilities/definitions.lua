@@ -40,6 +40,10 @@ DRAGQUEENMOD.dark_suits = { "Spades", "Clubs", "dragqueen_Purses" }
 DRAGQUEENMOD.light_suits = { "Hearts", "Diamonds", "dragqueen_Pumps" }
 DRAGQUEENMOD.base_suits = { "Spades", "Hearts", "Clubs", "Diamonds" }
 DRAGQUEENMOD.modded_suits = { "dragqueen_Purses", "dragqueen_Pumps" }
+DRAGQUEENMOD.suit_groups = {
+  ["plain"] = { "Spades", "Hearts", "Clubs", "Diamonds"},
+  ["accessory"] = { "dragqueen_Purses", "dragqueen_Pumps" }
+}
 
 
 DRAGQUEENMOD.inject_into_loc_colours = {
@@ -79,6 +83,16 @@ DRAGQUEENMOD.sine_colors = {
     "dragqueen_light_suit",
     "dragqueen_dark_suit",
     "dragqueen_dark_suit",
+  },
+  DRAGQUEEN_PLAIN_SUIT = {
+    "spades", "spades",
+    "hearts", "hearts",
+    "clubs", "clubs",
+    "diamonds", "diamonds",
+  },
+  DRAGQUEEN_ACCESSORY_SUIT = {
+    "dragqueen_pumps", "dragqueen_pumps",
+    "dragqueen_purses", "dragqueen_purses",
   }
 }
 

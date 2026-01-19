@@ -38,7 +38,8 @@ function DRAGQUEENMOD.cross_mod_theirs_to_ours()
     table.insert(DRAGQUEENMOD.modded_suits, prefix .. "_Fleurons")
     DRAGQUEENMOD.suits_to_tarot[prefix .. "_Halberds"] = "c_" .. prefix .. "_abyss"
     DRAGQUEENMOD.suits_to_tarot[prefix .. "_Fleurons"] = "c_" .. prefix .. "_sky"
-    DRAGQUEENMOD.exotic_suits = {prefix .. "_Halberds", prefix .. "_Fleurons"}
+    DRAGQUEENMOD.suit_groups["exotic"] = { prefix .. "_Halberds", prefix .. "_Fleurons" }
+    DRAGQUEENMOD.sine_colors.DRAGQUEEN_BUNC_EXOTIC_SUIT = { "bunc_halberds", "bunc_halberds", "bunc_fleurons", "bunc_fleurons" }
   end
 
   -- Paperback
@@ -52,7 +53,8 @@ function DRAGQUEENMOD.cross_mod_theirs_to_ours()
     table.insert(DRAGQUEENMOD.modded_suits, prefix .. "_Stars")
     DRAGQUEENMOD.suits_to_tarot[prefix .. "_Crowns"] = "c_" .. prefix .. "_ace_of_swords"
     DRAGQUEENMOD.suits_to_tarot[prefix .. "_Stars"] = "c_" .. prefix .. "_ace_of_pentacles"
-    DRAGQUEENMOD.proud_suits = {prefix .. "_Crowns", prefix .. "_Stars"}
+    DRAGQUEENMOD.suit_groups["proud"] = { prefix .. "_Crowns", prefix .. "_Stars" }
+    DRAGQUEENMOD.sine_colors.DRAGQUEEN_PAPERBACK_PROUD_SUIT = { "paperback_crowns", "paperback_crowns", "paperback_stars", "paperback_stars" }
   end
 
   -- Six Suits
@@ -66,7 +68,8 @@ function DRAGQUEENMOD.cross_mod_theirs_to_ours()
     table.insert(DRAGQUEENMOD.modded_suits, prefix .. "_Stars")
     DRAGQUEENMOD.suits_to_tarot[prefix .. "_Crowns"] = "c_" .. prefix .. "_moon_q"
     DRAGQUEENMOD.suits_to_tarot[prefix .. "_Stars"] = "c_" .. prefix .. "_star_q"
-    DRAGQUEENMOD.night_suits = {prefix .. "_Moons",prefix .. "_Stars"}
+    DRAGQUEENMOD.suit_groups["night"] = { prefix .. "_Moons",prefix .. "_Stars" }
+    DRAGQUEENMOD.sine_colors.DRAGQUEEN_SIX_NIGHT_SUIT = { "six_moons", "six_moons", "six_stars", "six_stars" }
 
   end
 
@@ -78,7 +81,8 @@ function DRAGQUEENMOD.cross_mod_theirs_to_ours()
     table.insert(DRAGQUEENMOD.light_suits, prefix .. "_3s")
     table.insert(DRAGQUEENMOD.modded_suits, prefix .. "_3s")
     DRAGQUEENMOD.suits_to_tarot[prefix .. "_3s"] = "c_" .. prefix .. "_cat"
-    DRAGQUEENMOD.treat_suits = {prefix .. "_3s"}
+    DRAGQUEENMOD.suit_groups["treat"] = { prefix .. "_3s" }
+    DRAGQUEENMOD.sine_colors.DRAGQUEEN_MINTY_TREAT_SUIT = { "minty_3s" }
   end
 
   -- Magic: The Jokering
@@ -86,11 +90,12 @@ function DRAGQUEENMOD.cross_mod_theirs_to_ours()
     local prefix = SMODS.find_mod("magic_the_jokering")[1].prefix or "mtg"
 
     -- Adds their suits to our definition of magic and modded
-    DRAGQUEENMOD.magic_suits = {prefix .. "_Clovers", prefix .. "_Suitless"}
     table.insert(DRAGQUEENMOD.modded_suits, prefix .. "_Clovers")
     table.insert(DRAGQUEENMOD.modded_suits, prefix .. "_Suitless")
     DRAGQUEENMOD.suits_to_tarot[prefix .. "_Clovers"] = "c_" .. prefix .. "_forest"
     DRAGQUEENMOD.suits_to_tarot[prefix .. "_Suitless"] = "c_" .. prefix .. "_Wastes"
+    DRAGQUEENMOD.suit_groups["magic"] = { prefix .. "_Clovers", prefix .. "_Suitless" }
+    DRAGQUEENMOD.sine_colors.DRAGQUEEN_MTG_MAGIC_SUIT = { "clover", "white" }
   end
 
   -- Ink And Color
@@ -104,8 +109,8 @@ function DRAGQUEENMOD.cross_mod_theirs_to_ours()
     table.insert(DRAGQUEENMOD.modded_suits, prefix .. "_Colors")
     DRAGQUEENMOD.suits_to_tarot[prefix .. "_Inks"] = "c_" .. prefix .. "_the_blob"
     DRAGQUEENMOD.suits_to_tarot[prefix .. "_Colors"] = "c_" .. prefix .. "_the_paint"
-    DRAGQUEENMOD.stained_suits = {prefix .. "_Inks", prefix .. "_Colors"}
-    -- Add Mothers
+    DRAGQUEENMOD.suit_groups["stained"] = { prefix .. "_Inks", prefix .. "_Colors" }
+    DRAGQUEENMOD.sine_colors.DRAGQUEEN_INK_STAINED_SUIT = { "ink_inks", "ink_colors" }
   end
 
   -- Madcap
@@ -125,8 +130,10 @@ function DRAGQUEENMOD.cross_mod_theirs_to_ours()
     table.insert(DRAGQUEENMOD.modded_suits, prefix .. "_goblets")
     table.insert(DRAGQUEENMOD.modded_suits, prefix .. "_blooms")
     table.insert(DRAGQUEENMOD.modded_suits, prefix .. "_lanterns")
-    DRAGQUEENMOD.parallel_suits = {prefix .. "_goblets", prefix .. "_towers", prefix .. "_blooms", prefix .. "_daggers"}
-    DRAGQUEENMOD.chaotic_suits = {prefix .. "_voids", prefix .. "_lanterns"}
+    DRAGQUEENMOD.suit_groups["parallel"] = { prefix .. "_goblets", prefix .. "_towers", prefix .. "_blooms", prefix .. "_daggers" }
+    DRAGQUEENMOD.suit_groups["chaotic"] = { prefix .. "_voids", prefix .. "_lanterns" }
+    DRAGQUEENMOD.sine_colors.DRAGQUEEN_RGMC_PARALLEL_SUIT = { "rgmc_goblets", "rgmc_goblets", "rgmc_towers", "rgmc_towers", "rgmc_blooms", "rgmc_blooms", "rgmc_daggers", "rgmc_daggers" }
+    DRAGQUEENMOD.sine_colors.DRAGQUEEN_RGMC_CHAOTIC_SUIT = { "rgmc_voids", "rgmc_voids", "rgmc_lanterns", "rgmc_lanterns" }
   end
 
   -- UNIKs
@@ -138,7 +145,8 @@ function DRAGQUEENMOD.cross_mod_theirs_to_ours()
     table.insert(DRAGQUEENMOD.light_suits, prefix .. "_Noughts")
     table.insert(DRAGQUEENMOD.modded_suits, prefix .. "_Crosses")
     table.insert(DRAGQUEENMOD.modded_suits, prefix .. "_Noughts")
-    DRAGQUEENMOD.tictactoe_suits = {prefix .. "_Crosses", prefix .. "_Noughts"}
+    DRAGQUEENMOD.suit_groups["tictactoe"] = { prefix .. "_Crosses", prefix .. "_Noughts" }
+    DRAGQUEENMOD.sine_colors.DRAGQUEEN_UNIK_TICTACTOE_SUIT = { "unik_crosses", "unik_crosses", "unik_noughts", "unik_noughts" }
   end
 end
 
@@ -295,6 +303,9 @@ function DRAGQUEENMOD.cross_mod_dependent_and_duplicate_content()
     -- Add Mother
 
   -- Magic: The Jokering
+    -- Add Mothers
+
+  -- Ink And Color
     -- Add Mothers
 
   -- Pokermon
