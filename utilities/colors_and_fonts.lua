@@ -109,8 +109,12 @@ function DRAGQUEENMOD.wavy_color_updater(time)
         -- If there's only one color there's no reason to mix it
         -- This is not intended usage of wavy_color_updater function however
         if sosopaac_index_size == 0 then    -- Skip
-        elseif sosopaac_index_size == 1 then
-          wavy_colors[colorsetname] = set_of_individual_colors[1]
+        elseif sosopaac_index_size == 1 then  -- Don't have to math on one color
+          local passedcolor = set_of_individual_colors[1]
+          if type(passedcolor) == "string" then
+            passedcolor = loc_colour(set_of_individual_colors[1])
+          end
+          wavy_colors[colorsetname] = passedcolor
         else
           -- Given unit_circle_position, find the two individual_colors that are closest
           -- Setting "before" to be the last color initially
