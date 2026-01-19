@@ -335,9 +335,15 @@ function DRAGQUEENMOD.card_suit_badge(obj, badges)
   if obj then
     if obj.is_suit ~= nil and obj.key ~= nil and obj.base_card.config ~= nil then
 
-      local suittext, badgecolor, textcolor = DRAGQUEENMOD.get_dark_or_light_suit_badge(obj)
-      badges[#badges + 1] = DRAGQUEENMOD.get_badge_template(suittext, badgecolor, textcolor)
+      local dark_or_light_suittext, dark_or_light_badgecolor, dark_or_light_textcolor = DRAGQUEENMOD.get_dark_or_light_suit_badge(obj)
+      if dark_or_light_suittext and dark_or_light_badgecolor and dark_or_light_textcolor then
+        badges[#badges + 1] = DRAGQUEENMOD.get_badge_template(dark_or_light_suittext, dark_or_light_badgecolor, dark_or_light_textcolor)
+      end
 
+      local suit_type_suittext, suit_type_badgecolor, suit_type_textcolor = DRAGQUEENMOD.get_suit_type_badge(obj)
+      if suit_type_suittext and suit_type_badgecolor and suit_type_textcolor then
+        badges[#badges + 1] = DRAGQUEENMOD.get_badge_template(suit_type_suittext, suit_type_badgecolor, suit_type_textcolor)
+      end
     end
   end
 end
@@ -390,6 +396,38 @@ function DRAGQUEENMOD.get_dark_or_light_suit_badge(obj, givenbadgecolor, givente
   end
 
   return suittext, badgecolor, textcolor
+end
+
+
+function DRAGQUEENMOD.get_suit_type_badge(obj, giventextcolor)
+  local obj_suit_to_eval = obj.base_card.config.card.suit
+  local obj_suit_category = nil
+
+  -- obj.base_card.config.card.suit
+  for suitcategory, suitsets in pairs(DRAGQUEENMOD.suit_groups) do
+    for _, individual_suit in ipairs(suitsets) do
+      if obj_suit_to_eval == individual_suit then
+        obj_suit_category = suitcategory
+      end
+    end
+  end
+
+  if obj_suit_category ~= nil then
+    local prefix = DRAGQUEENMOD.suit_types_to_mod_prefixes[obj_suit_category]
+    local suitkey = "dragqueen_card_badge_" .. prefix .. obj_suit_category .. "_suit"
+    local badgecolor = G.C["DRAGQUEEN_" .. string.upper(prefix) .. string.upper(obj_suit_category) .. "_SUIT"]
+    local textcolor = giventextcolor or G.C.WHITE
+
+    -- suitkey value check
+    if suitkey ~= nil then
+      local suittext = DRAGQUEENMOD.easymisclocalize("dictionary", suitkey)
+      assert(type(suittext) == "string", "issue pulling " .. suitkey .. " string in 'Jimbo in Drag' mod")
+
+      return suittext, badgecolor, textcolor
+    else
+      error("suitkey value in DRAGQUEENMOD.get_suit_type_badge is nonsensical")
+    end
+  end
 end
 
 
