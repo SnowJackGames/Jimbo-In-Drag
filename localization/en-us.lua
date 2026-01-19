@@ -543,7 +543,7 @@ return {
       dragqueen_card_badge_mtg_magic_suit = "Magic Suit",
       dragqueen_card_badge_ink_stained_suit = "Stained Suit",
       dragqueen_card_badge_rgmc_parallel_suit = "Parallel Suit",
-      dragqueen_card_badge_chaotic_parallel_suit = "Parallel Suit",
+      dragqueen_card_badge_rgmc_chaotic_suit = "Chaotic Suit",
       dragqueen_card_badge_unik_tictactoe_suit = "Tic Tac Toe Suit",
       
     },
