@@ -95,7 +95,7 @@ function DRAGQUEENMOD.cross_mod_theirs_to_ours()
     DRAGQUEENMOD.suits_to_tarot[prefix .. "_Clovers"] = "c_" .. prefix .. "_forest"
     DRAGQUEENMOD.suits_to_tarot[prefix .. "_Suitless"] = "c_" .. prefix .. "_Wastes"
     DRAGQUEENMOD.suit_groups["magic"] = { prefix .. "_Clovers", prefix .. "_Suitless" }
-    DRAGQUEENMOD.sine_colors.DRAGQUEEN_MTG_MAGIC_SUIT = { "clover", "white" }
+    DRAGQUEENMOD.sine_colors.DRAGQUEEN_MTG_MAGIC_SUIT = { "clover", "clover", "white", "white" }
   end
 
   -- Ink And Color
@@ -110,7 +110,7 @@ function DRAGQUEENMOD.cross_mod_theirs_to_ours()
     DRAGQUEENMOD.suits_to_tarot[prefix .. "_Inks"] = "c_" .. prefix .. "_the_blob"
     DRAGQUEENMOD.suits_to_tarot[prefix .. "_Colors"] = "c_" .. prefix .. "_the_paint"
     DRAGQUEENMOD.suit_groups["stained"] = { prefix .. "_Inks", prefix .. "_Colors" }
-    DRAGQUEENMOD.sine_colors.DRAGQUEEN_INK_STAINED_SUIT = { "ink_inks", "ink_colors" }
+    DRAGQUEENMOD.sine_colors.DRAGQUEEN_INK_STAINED_SUIT = { "ink_inks", "ink_inks", "ink_colors", "ink_colors" }
   end
 
   -- Madcap
