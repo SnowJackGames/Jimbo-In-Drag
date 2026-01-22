@@ -26,7 +26,15 @@ SMODS.Joker {
     info_queue[#info_queue + 1] = G.P_CENTERS.c_sun
     local num, denom = SMODS.get_probability_vars(
       card, 1, card.ability.extra.odds)
-    return { vars = { num, denom, card.ability.extra.xdollars, card.ability.extra.money_cap} }
+    return {
+      vars = {
+        num,
+        denom,
+        card.ability.extra.xdollars,
+        card.ability.extra.money_cap,
+        card.ability.extra.accessorize_count
+      }
+    }
   end,
 
   calculate = function(self, card, context)

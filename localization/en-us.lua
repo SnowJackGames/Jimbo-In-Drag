@@ -51,7 +51,7 @@ return {
           "Played cards with",
           "{C:dragqueen_purses}Purse{} suit give",
           "{C:mult}+#1#{} Mult when scored",
-          "{C:white,X:dragqueen_keyword}Accessorize{} {C:dragqueen_purses}Purses{} {C:attention}2{}"
+          "{C:white,X:dragqueen_keyword}Accessorize{} {C:dragqueen_purses}Purses{} {C:attention}#2#{}"
         }
       },
       j_dragqueen_vain_joker = {
@@ -60,7 +60,7 @@ return {
           "Played cards with",
           "{C:dragqueen_pumps}Pump{} suit give",
           "{C:mult}+#1#{} Mult when scored",
-          "{C:white,X:dragqueen_keyword}Accessorize{} {C:dragqueen_pumps}Pumps{} {C:attention}2{}"
+          "{C:white,X:dragqueen_keyword}Accessorize{} {C:dragqueen_pumps}Pumps{} {C:attention}#2#{}"
         }
       },
       j_dragqueen_lipstick = {
@@ -70,7 +70,7 @@ return {
           "cards with {C:dragqueen_purses}Purse{} suit to earn",
           "{X:money,C:white}X#3#{} {C:money}money{} when scored",
           "{s:0.8,C:inactive}(Max of {}{s:0.8,C:money}$#4#{}{s:0.8,C:inactive}){}",
-          "{C:white,X:dragqueen_keyword}Accessorize{} {C:dragqueen_purses}Purses{} {C:attention}1{}"
+          "{C:white,X:dragqueen_keyword}Accessorize{} {C:dragqueen_purses}Purses{} {C:attention}#5#{}"
         }
       },
       j_dragqueen_tights = {
@@ -82,6 +82,40 @@ return {
           "{C:white,X:dragqueen_keyword}Accessorize{} {C:dragqueen_pumps}Pumps{} {C:attention}1{}"
         }
       },
+      j_dragqueen_shoes = {
+        name = "Shoes",
+        text = {
+          "Costs all your money {s:0.8,C:inactive}(up to {}{s:0.8,C:money}$300{}{s:0.8,C:inactive}){}",
+          "If played hand is a pair of {C:dragqueen_pumps}Pumps{},",
+          "{C:green}#1# in #2#{} chance for cards in hand",
+          "to gain a random edition and you earn $15",
+          "{s:0.8,C:inactive,E:1}\"#3#\"{}"
+        },
+        quote = {
+          "I'm going to get what I want.",
+          "Shoes.",
+          "Shoes...",
+          "Oh my god...",
+          "Let's get some shoes.",
+          "Oh my god, shoes.",
+          "These shoes rule.",
+          "These shoes suck.",
+          "These shoes suck!",
+          "Oh my godd, shoes.",
+          "Shut up!",
+          "Stupid boy.",
+          "Let's party.",
+          "These shoes are three hundred dollars.",
+          "These shoes are three hundred fucking dollars.",
+          "Let's get 'em!",
+          "Oh.",
+          "Oh, by the way bitch, fuck you!",
+          "Fuck you!",
+          "Those shoes are mine, betch",
+          "Gimme those fucking shoes, betch.",
+          "Betch."
+        }
+      }
       -- Patching vanilla jokers
       -- Patching other mods' jokers
     },

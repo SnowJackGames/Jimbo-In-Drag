@@ -26,7 +26,8 @@ SMODS.Joker {
     info_queue[#info_queue + 1] = G.P_CENTERS.c_sun
     return {
       vars = {
-        card.ability.extra.s_mult
+        card.ability.extra.s_mult,
+        card.ability.extra.accessorize_count
       }
     }
   end,
