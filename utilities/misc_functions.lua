@@ -179,6 +179,28 @@ function DRAGQUEENMOD.easymisclocalize(set, key)
 end
 
 
+-- When given a quote table of strings,
+-- Pulls a random quote and returns it
+---@param quotes table
+---@return string | nil
+function DRAGQUEENMOD.get_quote(quotes)
+  local returnquote = nil
+  local current_position = 1
+  local randomed_position = math.random(#quotes)
+  for _, quote in ipairs(quotes) do
+    if current_position == randomed_position then
+      if type(quote) == "string" then
+        returnquote = quote
+      end
+    end
+
+    current_position = current_position + 1
+  end
+  
+  return returnquote
+end
+
+
 ---@param array table
 ---@param value any
 ---@return number | nil
