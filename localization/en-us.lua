@@ -161,6 +161,20 @@ return {
     Gemstone = {
     },
     Tarot = {
+      c_dragqueen_pumps_tarot = {
+        name = "The Pumps Placeholder",
+        text = "",
+        textplural = {
+          "Converts up to",
+          "{C:attention}#1#{} selected cards",
+          "to {C:dragqueen_pumps}Pumps{}"
+        },
+        textsingular = {
+          "Converts up to",
+          "{C:attention}#1#{} selected card",
+          "to a {C:dragqueen_pumps}Pump{}"
+        }
+      },
     },
     Spectral = {
     },
