@@ -37,6 +37,6 @@ SMODS.Joker {
     end
   end,
   add_to_deck = function(self, card, from_debuff)
-    DRAGQUEENMOD.accessorize("dragqueen_pumps", card.ability.extra.accessorize_count)
+    DRAGQUEENMOD.accessorize("dragqueen_Pumps", card.ability.extra.accessorize_count)
   end
 }
