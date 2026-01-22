@@ -1,9 +1,9 @@
 SMODS.Consumable{
   set = "Tarot",
-  key = "pumps_placeholder",
-  name = "The Pumps Placeholder",
+  key = "purses_placeholder",
+  name = "The Purses Placeholder",
   atlas = "Tarot",
-  pos = { x = 1, y = 0 },
+  pos = { x = 0, y = 0 },
   discovered = true,
 
   config = { max_highlighted = 3, suit_conv = "dragqueen_Pumps" },

@@ -54,9 +54,7 @@ end
 
 
 -- Checks if non-plain cards are allowed to spawn
----@param fallback? boolean May force true, default false
-function DRAGQUEENMOD.non_plain_in_pool(fallback)
-  if fallback then return true end
+function DRAGQUEENMOD.non_plain_in_pool()
   -- Returns true if in a run and NonPlain has been activated
   if G.GAME and G.GAME.NonPlain then
     return true

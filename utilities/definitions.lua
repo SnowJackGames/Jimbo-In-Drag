@@ -198,6 +198,8 @@ DRAGQUEENMOD.MODIFIERS = {
 DRAGQUEENMOD.CONSUMABLES = {
 
   ENABLEDTAROT = {
+    "PursesTarot",
+    "PumpsTarot"
   },
 
   ENABLEDSPECTRALS = {

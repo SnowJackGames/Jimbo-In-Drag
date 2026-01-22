@@ -161,15 +161,33 @@ return {
     Gemstone = {
     },
     Tarot = {
-      c_dragqueen_pumps_tarot = {
+      c_dragqueen_purses_placeholder_plural = {
+        name = "The Purses Placeholder",
+        text = {
+          "Converts up to",
+          "{C:attention}#1#{} selected cards",
+          "to {C:dragqueen_purses}Purses{}"
+        }
+      },
+      c_dragqueen_purses_placeholder_singular = {
+        name = "The Purses Placeholder",
+        text = {
+          "Converts up to",
+          "{C:attention}#1#{} selected card",
+          "to a {C:dragqueen_purses}Purse{}"
+        }
+      },
+      c_dragqueen_pumps_placeholder_plural = {
         name = "The Pumps Placeholder",
-        text = "",
-        textplural = {
+        text = {
           "Converts up to",
           "{C:attention}#1#{} selected cards",
           "to {C:dragqueen_pumps}Pumps{}"
-        },
-        textsingular = {
+        }
+      },
+      c_dragqueen_pumps_placeholder_singular = {
+        name = "The Pumps Placeholder",
+        text = {
           "Converts up to",
           "{C:attention}#1#{} selected card",
           "to a {C:dragqueen_pumps}Pump{}"
