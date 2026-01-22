@@ -184,19 +184,30 @@ end
 ---@param quotes table
 ---@return string | nil
 function DRAGQUEENMOD.get_quote(quotes)
+  local quotes_to_fetch = nil
   local returnquote = nil
-  local current_position = 1
-  local randomed_position = math.random(#quotes)
-  for _, quote in ipairs(quotes) do
-    if current_position == randomed_position then
-      if type(quote) == "string" then
-        returnquote = quote
-      end
-    end
 
-    current_position = current_position + 1
+  -- Get from the swear or no_swear table
+  if DRAGQUEENMOD.config.swears_enabled == true then
+    quotes_to_fetch = quotes.swear
+  else
+    quotes_to_fetch = quotes.no_swear
   end
-  
+
+  if quotes_to_fetch then
+    local current_position = 1
+    local randomed_position = math.random(#quotes_to_fetch)
+    for _, quote in ipairs(quotes_to_fetch) do
+      if current_position == randomed_position then
+        if type(quote) == "string" then
+          returnquote = quote
+        end
+      end
+
+      current_position = current_position + 1
+    end
+  end
+
   return returnquote
 end
 

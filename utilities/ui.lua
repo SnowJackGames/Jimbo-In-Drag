@@ -13,7 +13,7 @@ SMODS.current_mod.config_tab = function ()
           {
             n = G.UIT.T,
             config = {
-              text = localize('dragqueen_ui_requires_restart'),
+              text = localize("dragqueen_ui_requires_restart"),
               colour = G.C.RED,
               scale = 0.5,
               shadow = true
@@ -32,17 +32,20 @@ SMODS.current_mod.config_tab = function ()
               create_toggle {
                 label = localize("dragqueen_ui_jokers_enabled"),
                 ref_table = DRAGQUEENMOD.config,
-                ref_value = "jokers_enabled"
+                ref_value = "jokers_enabled",
+                w = 4.5
               },
               create_toggle {
                 label = localize("dragqueen_ui_decks_enabled"),
                 ref_table = DRAGQUEENMOD.config,
-                ref_value = "decks_enabled"
+                ref_value = "decks_enabled",
+                w = 4.5
               },
               create_toggle {
                 label = localize("dragqueen_ui_blinds_enabled"),
                 ref_table = DRAGQUEENMOD.config,
-                ref_value = "blinds_enabled"
+                ref_value = "blinds_enabled",
+                w = 4.5
               }
             }
           },
@@ -71,7 +74,47 @@ SMODS.current_mod.config_tab = function ()
             }
           }
         }
-      }
+      },
+      {
+        n = G.UIT.R,
+        config = { align = "cm", minh = 1 },
+        nodes = {
+          {
+            n = G.UIT.T,
+            config = {
+              text = localize("dragqueen_ui_does_not_require_restart"),
+              colour = G.C.GREY,
+              scale = 0.5,
+              shadow = true
+            }
+          }
+        }
+      },
+      {
+        n = G.UIT.R,
+        config = { align = "cm"},
+        nodes = {
+          create_toggle {
+            label = localize("dragqueen_ui_swears_enabled"),
+            ref_table = DRAGQUEENMOD.config,
+            ref_value = "swears_enabled",
+            w = 4.5
+          },
+          -- If there's more than 1 "Does Not REquire Restart" option, sort into two below node columns
+          -- {
+          --   n = G.UIT.C,
+          --   config = {align = "cl"},
+          --   nodes = {
+          --   }
+          -- },
+          -- {
+          --   n = G.UIT.C,
+          --   config = {align = "cr"},
+          --   nodes = {
+          --   }
+          -- }
+        }
+      },
     }
   }
 end
