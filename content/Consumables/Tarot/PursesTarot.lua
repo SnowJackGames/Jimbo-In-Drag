@@ -5,7 +5,7 @@ SMODS.Consumable{
   atlas = "Tarot",
   pos = { x = 0, y = 0 },
 
-  config = { max_highlighted = 3, suit_conv = "dragqueen_Pumps" },
+  config = { max_highlighted = 3, suit_conv = "dragqueen_Purses" },
 
   loc_vars = function(self, info_queue, card)
     local key = self.key
