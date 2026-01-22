@@ -85,10 +85,10 @@ return {
       j_dragqueen_shoes = {
         name = "Shoes",
         text = {
-          "Costs all your money {s:0.8,C:inactive}(up to {}{s:0.8,C:money}$300{}{s:0.8,C:inactive}){}",
-          "If played hand is a pair of {C:dragqueen_pumps}Pumps{},",
-          "{C:green}#1# in #2#{} chance for cards in hand",
-          "to gain a random {C:dark_edition}edition{} and you earn $#3#",
+          "Costs {C:money}all your money{} {s:0.8,C:inactive}(up to {}{s:0.8,C:money}$300{}{s:0.8,C:inactive}){}",
+          "If {C:attention}poker hand{} is a {C:attention}Pair{} of {C:dragqueen_pumps}Pumps{},",
+          "earn {C:money}$#1#{}, and {C:green}#2# in #3#{} chance",
+          "for scored cards to gain a random {C:dark_edition}Edition{}",
           "{C:white,X:dragqueen_keyword}Accessorize{} {C:dragqueen_pumps}Pumps{} {C:attention}#4#{}",
           "",
           "{s:0.8,C:inactive,E:1}\"#5#\"{}"
