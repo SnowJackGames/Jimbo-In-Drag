@@ -4,7 +4,6 @@ SMODS.Consumable{
   name = "The Purses Placeholder",
   atlas = "Tarot",
   pos = { x = 0, y = 0 },
-  discovered = true,
 
   config = { max_highlighted = 3, suit_conv = "dragqueen_Pumps" },
 
