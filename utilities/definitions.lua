@@ -116,9 +116,9 @@ DRAGQUEENMOD.suits_to_tarot = {
   ["Spades"] = "c_world",
   ["Hearts"] = "c_sun",
   ["Clubs"] = "c_moon",
-  ["Diamonds"] = "c_star"
-  --["dragqueen_purses"] =
-  --["dragqueen_pumps"] =
+  ["Diamonds"] = "c_star",
+  ["dragqueen_Purses"] = "c_dragqueen_purses_placeholder",
+  ["dragqueen_Pumps"] = "c_dragqueen_pumps_placeholder"
 }
 
 DRAGQUEENMOD.valid_playing_card_set_categories = {"Playing Card", "Base", "Enhanced"}

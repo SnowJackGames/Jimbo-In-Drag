@@ -216,7 +216,7 @@ end
 
 --- Tries to spawn a Joker, Consumable, or Playing Card, ensuring
 --- that there is space available, using the respective buffer.
---- DOES NOT TAKE INTO ACCOUNT ANY OTHER AREAS
+--- <br>DOES NOT TAKE INTO ACCOUNT ANY OTHER AREAS
 --- @param args CreateCard | { card: Card?, strip_edition: boolean? } | { instant: boolean?, func: function? } info:
 --- Either a table passed to SMODS.create_card, which will create a new card.
 --- Or a table with 'card', which will copy the passed card and remove its edition based on 'strip_edition'.
@@ -226,7 +226,11 @@ end
 --- Thanks Paperback
 function DRAGQUEENMOD.try_spawn_card(args, saveroom)
   -- As best that we can, let's prevent code from spilling through SMODS.add_card, temp_create_card, get_current_pool etc
-  assert(args.set or args.key or args.card or args.instant or args.area or args.soulable or args.front or args.rank or args.suit, "missing minimum info for DRAGQUEENMOD.try_spawn_card()")
+  assert(args.set or args.key or args.card or args.area or args.front or args.rank or args.suit, "missing minimum info for DRAGQUEENMOD.try_spawn_card()")
+  if args.key and G.P_CENTERS[args.key] == nil then
+    error("Could not find args.key " .. tostring(args.key) .. " in G.P_CENTERS")
+  end
+
 
   local is_joker = DRAGQUEENMOD.is_joker(args.card, args.set, args.key)
   local is_playing_card = DRAGQUEENMOD.is_playing_card(args.set, args.front, args.rank, args.suit)
@@ -305,10 +309,6 @@ function DRAGQUEENMOD.accessorize(suit, count, saveroom)
   local tarot = ""
   local reservespace = saveroom or 0
   
-  if suit == ("dragqueen_pumps") or suit == ("dragqueen_purses") then
-    print("Placeholder, Jimbo In Drag suits not existant yet")
-    suit = "random"
-  end
   -- To get a random suit tarot in our table, we have to iterate to find the length,
   -- determine a random position, then iterate again until we can retrieve the suit
   -- at that position
@@ -319,7 +319,7 @@ function DRAGQUEENMOD.accessorize(suit, count, saveroom)
     end
     local current_position = 1
     local randomed_position = math.random(length)
-    for u, v in pairs(DRAGQUEENMOD.suits_to_tarot) do
+    for _, v in pairs(DRAGQUEENMOD.suits_to_tarot) do
       if current_position == randomed_position then tarot = v end
       current_position = current_position + 1
     end
@@ -335,7 +335,7 @@ function DRAGQUEENMOD.accessorize(suit, count, saveroom)
       tarot = random_tarot_suit()
     end
 
-    DRAGQUEENMOD.try_spawn_card({ key = tarot}, reservespace)
+    DRAGQUEENMOD.try_spawn_card({ key = tarot }, reservespace)
   end
 end
 
