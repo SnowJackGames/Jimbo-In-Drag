@@ -417,3 +417,73 @@ function DRAGQUEENMOD.is_playing_card(set, front, rank, suit)
   if suit and not SMODS.Suits[suit] then return false end
   return true
 end
+
+
+-- Convert attributes of a card; code thanks to Pokermon
+-- <br> Could be the effects of a consumable, a joker, etc
+---@param cards Card|table Card you're modifing
+---@param t table That which is being changed
+---@param flip? boolean If the card should flip, default to false
+---@param immediate? boolean If it should happen without delay, default to false
+---@param set_delay? number in seconds (affected by game speed)
+---TODO: Any time we use another one of these `t.whatever` attributes (like edition),
+---<br> Check to see if the function (like `set_edition`) already applies `Card:Juice_up()`
+---<br> We must not wiggle in excess...
+function DRAGQUEENMOD.convert_cards_to(cards, t, flip, immediate, set_delay)
+  local shouldflip = flip or false
+  local shouldimmediate = immediate or false
+  local shoulddelay = set_delay or nil
+  if not cards then return end
+  if cards and cards.is and cards:is(Card) then cards = {cards} end
+  for i = 1, #cards do
+    if shouldflip then
+      DRAGQUEENMOD.conversion_event_helper(function() cards[i]:flip() end, 0.2)
+    end
+
+    if t.enhancement_conv then
+      DRAGQUEENMOD.conversion_event_helper(function() cards[i]:set_ability(G.P_CENTERS[t.enhancement_conv]) end, shoulddelay, shouldimmediate)
+    end
+    if t.edition then
+      DRAGQUEENMOD.conversion_event_helper(function() cards[i]:set_edition(t.edition, true) end, shoulddelay, shouldimmediate)
+    end
+    if t.suit_conv then
+      DRAGQUEENMOD.conversion_event_helper(function() cards[i]:change_suit(t.suit_conv) end, shoulddelay, shouldimmediate)
+    end
+    if t.seal then
+      DRAGQUEENMOD.conversion_event_helper(function() cards[i]:set_seal(t.seal, nil, true) end, shoulddelay, shouldimmediate)
+    end
+    if t.bonus_chips then
+      local bonus_add = function()
+        cards[i].ability.perma_bonus = cards[i].ability.perma_bonus or 0
+        cards[i].ability.perma_bonus = cards[i].ability.perma_bonus + t.bonus_chips
+      end
+      DRAGQUEENMOD.conversion_event_helper(bonus_add, shoulddelay, shouldimmediate)
+    end
+    -- Can set up other attributes of a card we want to modify
+  end
+  if flip then delay(0.3) end
+  if cards == G.hand.highlighted then
+    DRAGQUEENMOD.conversion_event_helper(function() G.hand:unhighlight_all() end)
+  end
+end
+
+
+-- Helps `DRAGQUEENMOD.convert_cards_to()` function interface functions of cards
+---@param func function Ex. `Card:flip()`, `Card:juice_up()`,`Card:set_edition()`, etc
+---@param set_delay? number In seconds (affected by game speed)
+---@param immediate? boolean Run function immediately if true, otherwise pass to `add_event` with delay (default 0.5)
+function DRAGQUEENMOD.conversion_event_helper(func, set_delay, immediate)
+  local shouldimmediate = immediate or false
+  if shouldimmediate then
+    func()
+  else
+    G.E_MANAGER:add_event(Event({
+      trigger = 'after',
+      delay = set_delay or 0.5,
+      func = function()
+        func()
+        return true
+      end
+    }))
+  end
+end
