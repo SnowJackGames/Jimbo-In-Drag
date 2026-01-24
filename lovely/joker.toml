@@ -1,0 +1,30 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 11
+
+#Joker specific patches
+
+
+# Shoes cost
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "self.sell_cost = math.max(1, math.floor(self.cost/2)) + (self.ability.extra_value or 0)"
+position = "after"
+payload = '''
+-- Jimbo In Drag shoes patch
+if self.config.center.key == "j_dragqueen_shoes" then
+  local existing_money = DRAGQUEENMOD.to_big(G.GAME.dollars) + (DRAGQUEENMOD.to_big(G.GAME.dollar_buffer or 0))
+  self.sell_cost = 5
+  if type(existing_money) == "number" then
+    if existing_money < 300 then
+      self.cost = existing_money
+    else
+      self.cost = 300
+    end
+  end
+end
+-- Jimbo In Drag shoes patch end
+'''
+match_indent = true

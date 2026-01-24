@@ -87,7 +87,7 @@ return {
         text = {
           "Costs {C:money}all your money{} {s:0.8,C:inactive}(up to {}{s:0.8,C:money}$300{}{s:0.8,C:inactive}){}",
           "If {C:attention}poker hand{} is a {C:attention}Pair{} of {C:dragqueen_pumps}Pumps{},",
-          "earn {C:money}$#1#{}, and {C:green}#2# in #3#{} chance",
+          "earn {C:money}$#1#{}, then {C:green}#2# in #3#{} chance",
           "for scored cards to gain a random {C:dark_edition}Edition{}",
           "{C:white,X:dragqueen_keyword}Accessorize{} {C:dragqueen_pumps}Pumps{} {C:attention}#4#{}",
           "",
@@ -613,6 +613,8 @@ return {
     dictionary = {
       -- Tooltip under cards
       k_dragqueen_joker = "Drag Queen",
+      k_dragqueen_shoes_rule = "Rule!",
+      k_dragqueen_shoes_suck = "Suck!",
       -- When a card says something like "Expired!"
       dragqueen_yas = "Yas!",
       dragqueen_slay = "Slay!",

@@ -228,7 +228,8 @@ DRAGQUEENMOD.ENABLEDJOKERS = {
   "broke_joker",
   "vain_joker",
   "lipstick",
-  "tights"
+  "tights",
+  "shoes"
 }
 
 DRAGQUEENMOD.ENABLEDDECKS = {
