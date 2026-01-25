@@ -1,10 +1,20 @@
+------------------------------
+-- SMODS stuff, mod path stuff
+------------------------------
+
+
+
 -- Load mod config
 DRAGQUEENMOD.config = SMODS.current_mod.config
+
+
 
 -- Get this mod's path
 DRAGQUEENMOD.dragqueen_path = string.gsub(tostring(SMODS.Mods["dragqueen"].path), "\\", "/")
 DRAGQUEENMOD.dragqueen_path_from_save_folder = string.gsub(DRAGQUEENMOD.dragqueen_path,
   love.filesystem.getSaveDirectory(), "")
+
+
 
 -- Enable optional features
 SMODS.current_mod.optional_features = {
@@ -14,12 +24,22 @@ SMODS.current_mod.optional_features = {
   cardareas = { deck = false, discard = false }
 }
 
+
+
 -- Update values that get reset at the start of each round
 ---@diagnostic disable-next-line: duplicate-set-field
 SMODS.current_mod.reset_game_globals = function(run_start)
   if run_start then
   end
 end
+
+
+
+------------------------------
+-- Dictionary and credits
+------------------------------
+
+
 
 DRAGQUEENMOD.credits = {
   artists = {
@@ -35,15 +55,12 @@ DRAGQUEENMOD.credits = {
 }
 
 
--- Define some suit categories
-DRAGQUEENMOD.dark_suits = { "Spades", "Clubs", "dragqueen_Purses" }
-DRAGQUEENMOD.light_suits = { "Hearts", "Diamonds", "dragqueen_Pumps" }
-DRAGQUEENMOD.base_suits = { "Spades", "Hearts", "Clubs", "Diamonds" }
-DRAGQUEENMOD.modded_suits = { "dragqueen_Purses", "dragqueen_Pumps" }
-DRAGQUEENMOD.suit_groups = {
-  ["plain"] = { "Spades", "Hearts", "Clubs", "Diamonds"},
-  ["accessory"] = { "dragqueen_Purses", "dragqueen_Pumps" }
-}
+
+------------------------------
+-- Colors
+------------------------------
+-- Can be built into via cross-mod.lua
+
 
 
 DRAGQUEENMOD.inject_into_loc_colours = {
@@ -61,6 +78,7 @@ DRAGQUEENMOD.inject_into_loc_colours = {
   ink_inks = G.C.SUITS.ink_Inks or G.C.INK_INKS or HEX('374649'),
   ink_colors = G.C.SUITS.ink_Colors or G.C.INK_COLORS or HEX('eb8920'),
 }
+
 
 
 -- Called by `DRAGQUEENMOD.wavy_color_updater()`
@@ -96,6 +114,35 @@ DRAGQUEENMOD.sine_colors = {
   }
 }
 
+
+
+------------------------------
+-- Dynamic references
+------------------------------
+-- Can be built into via cross-mod.lua
+
+
+
+DRAGQUEENMOD.valid_playing_card_set_categories = {"Playing Card", "Base", "Enhanced"}
+
+
+
+-- Define modifiers
+DRAGQUEENMOD.modifiers = {}
+
+
+
+-- Define some suit categories
+DRAGQUEENMOD.dark_suits = { "Spades", "Clubs", "dragqueen_Purses" }
+DRAGQUEENMOD.light_suits = { "Hearts", "Diamonds", "dragqueen_Pumps" }
+DRAGQUEENMOD.modded_suits = { "dragqueen_Purses", "dragqueen_Pumps" }
+DRAGQUEENMOD.suit_groups = {
+  ["plain"] = { "Spades", "Hearts", "Clubs", "Diamonds"},
+  ["accessory"] = { "dragqueen_Purses", "dragqueen_Pumps" }
+}
+
+
+
 -- every type but light and dark has a clear-cut answer
 -- "plain" and "accessory" don't have a mod prefix bc they're only referenced in our mod
 DRAGQUEENMOD.suit_types_to_mod_prefixes = {
@@ -112,6 +159,8 @@ DRAGQUEENMOD.suit_types_to_mod_prefixes = {
   ["tictactoe"] = "unik_",
 }
 
+
+
 DRAGQUEENMOD.suits_to_tarot = {
   ["Spades"] = "c_world",
   ["Hearts"] = "c_sun",
@@ -121,30 +170,17 @@ DRAGQUEENMOD.suits_to_tarot = {
   ["dragqueen_Pumps"] = "c_dragqueen_pumps_placeholder"
 }
 
-DRAGQUEENMOD.valid_playing_card_set_categories = {"Playing Card", "Base", "Enhanced"}
-
--- Define modifiers
-DRAGQUEENMOD.modifiers = {}
 
 
-DRAGQUEENMOD.base_poker_hands = {
-  "Straight Flush",
-  "Four of a Kind",
-  "Full House",
-  "Flush",
-  "Straight",
-  "Three of a Kind",
-  "Two Pair",
-  "Pair",
-  "High Card"
-}
+------------------------------
+-- Base / dependancy reference
+------------------------------
 
-DRAGQUEENMOD.spectrum_poker_hands = {
-  "Spectrum",
-  "Straight Spectrum",
-  "Spectrum House",
-  "Spectrum Five",
-}
+
+
+DRAGQUEENMOD.base_suits = { "Spades", "Hearts", "Clubs", "Diamonds" }
+
+
 
 DRAGQUEENMOD.base_ranks = {
   "Ace",
@@ -162,9 +198,38 @@ DRAGQUEENMOD.base_ranks = {
   "2"
 }
 
+
+
+DRAGQUEENMOD.base_poker_hands = {
+  "Straight Flush",
+  "Four of a Kind",
+  "Full House",
+  "Flush",
+  "Straight",
+  "Three of a Kind",
+  "Two Pair",
+  "Pair",
+  "High Card"
+}
+
+
+
+DRAGQUEENMOD.spectrum_poker_hands = {
+  "Spectrum",
+  "Straight Spectrum",
+  "Spectrum House",
+  "Spectrum Five",
+}
+
+
+
+------------------------------
+-- Core content 
+------------------------------
 -- The user can disable specific Drag Queen Mod items in the "enabled" tables
 -- by commenting them out if they hate it
 -- But watch out!
+
 
 
 DRAGQUEENMOD.ENABLEDSUITS = {
@@ -172,9 +237,23 @@ DRAGQUEENMOD.ENABLEDSUITS = {
   "pumps"
 }
 
+
+
 DRAGQUEENMOD.ENABLEDRANKS = {
   "Mother",
 }
+
+
+
+DRAGQUEENMOD.ENABLEDJOKERS = {
+  "broke_joker",
+  "vain_joker",
+  "lipstick",
+  "tights",
+  "shoes"
+}
+
+
 
 -- Modifiers
 DRAGQUEENMOD.MODIFIERS = {
@@ -193,6 +272,8 @@ DRAGQUEENMOD.MODIFIERS = {
   ENABLEDGEMSTONES = {
   }
 }
+
+
 
 -- Consumables
 DRAGQUEENMOD.CONSUMABLES = {
@@ -223,32 +304,38 @@ DRAGQUEENMOD.CONSUMABLES = {
   }
 }
 
--- Other Core Content
-DRAGQUEENMOD.ENABLEDJOKERS = {
-  "broke_joker",
-  "vain_joker",
-  "lipstick",
-  "tights",
-  "shoes"
-}
+
 
 DRAGQUEENMOD.ENABLEDDECKS = {
   "accessory"
 }
+
+
 
 DRAGQUEENMOD.ENABLEDBLINDS = {
   "Rent",
   "Gig"
 }
 
+
+
 DRAGQUEENMOD.ENABLEDSKINS = {
 }
+
+
 
 DRAGQUEENMOD.ENABLEDVANILLA_REWORKS = {
 
 }
 
--- Cross-Mod Specific
+
+
+------------------------------
+-- Cross-mod specific stuff
+------------------------------
+
+
+
 DRAGQUEENMOD.ENABLEDSLEEVES = {
 }
 
@@ -280,6 +367,14 @@ DRAGQUEENMOD.requirement_map = {
     tooltip = "dragqueen_requires_cross_mods"
   }
 }
+
+
+
+------------------------------
+-- Custom objects
+------------------------------
+
+
 
 -- Define kiss objects
 DRAGQUEENMOD.kiss = SMODS.Sticker:extend {
