@@ -4,6 +4,7 @@ SMODS.Joker {
     extra = {
       odds = 4,
       xdollars = 0.1,
+      accessorize_suit = "dragqueen_Purses",
       accessorize_count = 1,
       money_cap = 20
     }
@@ -22,8 +23,9 @@ SMODS.Joker {
   },
 
   loc_vars = function(self, info_queue, card)
-    info_queue[#info_queue + 1] = { set = "Other", key = "dragqueen_accessorize_tooltip" }
-    info_queue[#info_queue + 1] = G.P_CENTERS.c_sun
+    info_queue[#info_queue + 1] = DRAGQUEENMOD.dragqueen_accessorize_tooltip(card)
+    info_queue[#info_queue + 1] = G.P_CENTERS[DRAGQUEENMOD.suits_to_tarot[card.ability.extra.accessorize_suit]]
+    
     local num, denom = SMODS.get_probability_vars(
       card, 1, card.ability.extra.odds)
     return {
@@ -57,6 +59,6 @@ SMODS.Joker {
   end,
   
   add_to_deck = function(self, card, from_debuff)
-    DRAGQUEENMOD.accessorize("dragqueen_Purses", card.ability.extra.accessorize_count)
+    DRAGQUEENMOD.accessorize(card.ability.extra.accessorize_suit, card.ability.extra.accessorize_count)
   end
 }

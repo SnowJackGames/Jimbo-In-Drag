@@ -10,10 +10,10 @@
 -- Capitalize tooltip text like a book title
 
 -- Colors implemented in lovely/colors.toml
--- {C:hearts}
--- {C:diamonds}
 -- {C:spades}
+-- {C:hearts}
 -- {C:clubs}
+-- {C:diamonds}
 -- {C:attention}
 -- {C:red}
 -- {C:dragqueen_pumps}
@@ -596,17 +596,20 @@ return {
         text = {
         }
       },
+      -- #1# is accessorize_count, #2# is relevant suit-converting tarot, #3# is suit color
       dragqueen_accessorize_tooltip = {
         name = "Accessorize",
         text = {
-          "{s:0.8}When this item is obtained, create{}",
-          "{s:0.8}up to {}{C:attention,s:0.8}X{}{s:0.8} number of {}{s:0.8,C:tarot}Tarot{}{s:0.8} cards{}",
-          "{s:0.8}that convert cards to the named suit{}",
-          "{s:0.8}if you have room; i.e.{}",
-          "{s:0.8}\"{}{C:white,X:dragqueen_keyword,s:0.8}Accessorize{}{s:0.8} {}{C:hearts,s:0.8}Hearts{}{s:0.8} {}{C:attention,s:0.8}1{}{s:0.8}\" creates{}",
-          "{s:0.8}up to {}{C:attention,s:0.8}1{}{s:0.8} {}{C:tarot,s:0.8}The Sun{}"
-        }
-      }
+          "When obtained, creates {C:attention}#1#{}",
+          "{C:#3#}#2#{}",
+          "{s:0.8,C:inactive}(must have room){}"
+        },
+      },
+      -- Dynamically generated through UI.lua:DRAGQUEENMOD.dragqueen_accessorize_tooltip()
+      dragqueen_accessorize_tooltip_dynamic = {
+        name = "Accessorize",
+        text = {},
+      },
     }
   },
   misc = {
@@ -643,6 +646,18 @@ return {
       dragqueen_card_badge_rgmc_chaotic_suit = "Chaotic Suit",
       dragqueen_card_badge_unik_tictactoe_suit = "Tic Tac Toe Suit",
       -- dictionary tab
+      dragqueen_dictionary_accessorize = {
+        name = "Accessorize",
+        tooltip = {
+          "{s:0.8}When this item is obtained, create{}",
+          "{s:0.8}up to {}{C:attention,s:0.8}X{}{s:0.8} number of {}{s:0.8,C:tarot}Tarot{}{s:0.8} cards{}",
+          "{s:0.8}that convert cards to the named suit{}",
+          "{s:0.8}if you have room; i.e.{}",
+          "{s:0.8}\"{}{C:white,X:dragqueen_keyword,s:0.8}Accessorize{}{s:0.8} {}{C:hearts,s:0.8}Hearts{}{s:0.8} {}{C:attention,s:0.8}1{}{s:0.8}\" creates{}",
+          "{s:0.8}up to {}{C:attention,s:0.8}1{}{s:0.8} {}{C:tarot,s:0.8}The Sun{}"
+        },
+        example = {}
+      }
 
       
     },

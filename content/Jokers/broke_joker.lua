@@ -4,7 +4,8 @@ SMODS.Joker {
   config = {
     extra = {
       s_mult = 5,
-      suit = "dragqueen_purses",
+      suit = "dragqueen_Purses",
+      accessorize_suit = "dragqueen_Purses",
       accessorize_count = 2
     }
   },
@@ -22,8 +23,9 @@ SMODS.Joker {
   },
 
   loc_vars = function(self, info_queue, card)
-    info_queue[#info_queue + 1] = { set = "Other", key = "dragqueen_accessorize_tooltip" }
-    info_queue[#info_queue + 1] = G.P_CENTERS.c_sun
+    info_queue[#info_queue + 1] = DRAGQUEENMOD.dragqueen_accessorize_tooltip(card)
+    info_queue[#info_queue + 1] = G.P_CENTERS[DRAGQUEENMOD.suits_to_tarot[card.ability.extra.accessorize_suit]]
+    
     return {
       vars = {
         card.ability.extra.s_mult,
@@ -32,6 +34,6 @@ SMODS.Joker {
     }
   end,
   add_to_deck = function(self, card, from_debuff)
-    DRAGQUEENMOD.accessorize("dragqueen_Purses", card.ability.extra.accessorize_count)
+    DRAGQUEENMOD.accessorize(card.ability.extra.accessorize_suit, card.ability.extra.accessorize_count)
   end
 }
