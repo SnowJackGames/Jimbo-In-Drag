@@ -210,19 +210,18 @@ DRAGQUEENMOD.suits_to_tarot = {
 }
 
 
-
 DRAGQUEENMOD.suits_to_tarot_local_description = {
-  ["Spades"] = { G.localization.descriptions.Tarot.c_world },
-  ["Hearts"] = { G.localization.descriptions.Tarot.c_sun },
-  ["Clubs"] = { G.localization.descriptions.Tarot.c_moon },
-  ["Diamonds"] = { G.localization.descriptions.Tarot.c_star },
+  ["Spades"] = { { "Tarot", "c_world"} },
+  ["Hearts"] = { { "Tarot", "c_sun" } },
+  ["Clubs"] = { { "Tarot", "c_moon" } },
+  ["Diamonds"] = { { "Tarot", "c_star" } },
   ["dragqueen_Purses"] = {
-    G.localization.descriptions.Tarot.c_dragqueen_purses_placeholder_plural,
-    G.localization.descriptions.Tarot.c_dragqueen_purses_placeholder_singular
+    { "Tarot", "c_dragqueen_purses_placeholder_plural" },
+    { "Tarot", "c_dragqueen_purses_placeholder_singular" }
   },
   ["dragqueen_Pumps"] = {
-    G.localization.descriptions.Tarot.c_dragqueen_purses_placeholder_plural,
-    G.localization.descriptions.Tarot.c_dragqueen_purses_placeholder_singular
+    { "Tarot", "c_dragqueen_pumps_placeholder_plural" },
+    { "Tarot", "c_dragqueen_pumps_placeholder_singular" }
   }
 }
 
