@@ -1,8 +1,7 @@
 -- Use "color", not "colour" etc
 -- Exception is when referencing specific variables in Balatro's source code,
 -- Which is coded in Canadian
--- Mod's name "Drag Queen Balatro Mod" not final
--- Search for "placeholder" or "tempname" (any capitalization) for placeholder text
+-- Search for "placeholder" or "tempname" or "TODO" (any capitalization) for placeholder text or stuff to do
 
 DRAGQUEENMOD = {}
 
