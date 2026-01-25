@@ -55,6 +55,20 @@ DRAGQUEENMOD.credits = {
 }
 
 
+DRAGQUEENMOD.dictionary = {
+  accessorize = {
+    name = "",
+    toolip = "",
+    example = ""
+  },
+  slay = {
+    name = "",
+    toolip = "",
+    example = ""
+  },
+}
+
+
 
 DRAGQUEENMOD.requirement_map = {
   requires_jokers = {

@@ -60,19 +60,19 @@ SMODS.current_mod.config_tab = function ()
             config = {align = "cr"},
             nodes = {
               create_toggle {
-                label = localize("dragqueen_UI_skins_enabled"),
+                label = localize("dragqueen_ui_skins_enabled"),
                 ref_table = DRAGQUEENMOD.config,
                 ref_value = "skins_enabled",
                 w = 4.5
               },
               create_toggle {
-                label = localize("dragqueen_UI_vanilla_reworks_enabled"),
+                label = localize("dragqueen_ui_vanilla_reworks_enabled"),
                 ref_table = DRAGQUEENMOD.config,
                 ref_value = "vanilla_reworks_enabled",
                 w = 4.5
               },
               create_toggle {
-                label = localize("dragqueen_UI_cross_mod_enabled"),
+                label = localize("dragqueen_ui_cross_mod_enabled"),
                 ref_table = DRAGQUEENMOD.config,
                 ref_value = "cross_mod_enabled",
                 w = 4.5

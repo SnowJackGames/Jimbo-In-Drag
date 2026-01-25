@@ -622,9 +622,9 @@ return {
       dragqueen_ui_jokers_enabled = "Enable Jokers",
       dragqueen_ui_decks_enabled = "Enable Decks",
       dragqueen_ui_blinds_enabled = "Enable Blinds",
-      dragqueen_UI_skins_enabled = "Enable Skins",
-      dragqueen_UI_vanilla_reworks_enabled = "Enable Vanilla Reworks",
-      dragqueen_UI_cross_mod_enabled = "Enable Cross-Mod Content",
+      dragqueen_ui_skins_enabled = "Enable Skins",
+      dragqueen_ui_vanilla_reworks_enabled = "Enable Vanilla Reworks",
+      dragqueen_ui_cross_mod_enabled = "Enable Cross-Mod Content",
       dragqueen_ui_swears_enabled = "Enable Swears",
       dragqueen_ui_requires_restart = "Requires Restart",
       dragqueen_ui_does_not_require_restart = "Does Not Require Restart",
@@ -642,6 +642,8 @@ return {
       dragqueen_card_badge_rgmc_parallel_suit = "Parallel Suit",
       dragqueen_card_badge_rgmc_chaotic_suit = "Chaotic Suit",
       dragqueen_card_badge_unik_tictactoe_suit = "Tic Tac Toe Suit",
+      -- dictionary tab
+
       
     },
     v_dictionary = {
