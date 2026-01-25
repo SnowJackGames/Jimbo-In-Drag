@@ -36,7 +36,7 @@ end
 
 
 ------------------------------
--- Dictionary and credits
+-- Mod info tabs, collection
 ------------------------------
 
 
@@ -51,6 +51,31 @@ DRAGQUEENMOD.credits = {
   },
   developers = {
     "KassLavender aka polyphonetic"
+  }
+}
+
+
+
+DRAGQUEENMOD.requirement_map = {
+  requires_jokers = {
+    setting = "jokers_enabled",
+    tooltip = "dragqueen_requires_jokers"
+  },
+  requires_decks = {
+    setting = "decks_enabled",
+    tooltip = "dragqueen_requires_decks"
+  },
+  requires_blinds = {
+    setting = "blinds_enabled",
+    tooltip = "dragqueen_requires_blinds"
+  },
+  requires_skins = {
+    setting = "skins_enabled",
+    tooltip = "dragqueen_requires_skins"
+  },
+  requires_cross_mods = {
+    setting = "cross_mod_enabled",
+    tooltip = "dragqueen_requires_cross_mods"
   }
 }
 
@@ -343,29 +368,6 @@ DRAGQUEENMOD.ENABLEDPARTNERS = {
 }
 
 DRAGQUEENMOD.ENABLEDCHARMS = {
-}
-
-DRAGQUEENMOD.requirement_map = {
-  requires_jokers = {
-    setting = "jokers_enabled",
-    tooltip = "dragqueen_requires_jokers"
-  },
-  requires_decks = {
-    setting = "decks_enabled",
-    tooltip = "dragqueen_requires_decks"
-  },
-  requires_blinds = {
-    setting = "blinds_enabled",
-    tooltip = "dragqueen_requires_blinds"
-  },
-  requires_skins = {
-    setting = "skins_enabled",
-    tooltip = "dragqueen_requires_skins"
-  },
-  requires_cross_mods = {
-    setting = "cross_mod_enabled",
-    tooltip = "dragqueen_requires_cross_mods"
-  }
 }
 
 
