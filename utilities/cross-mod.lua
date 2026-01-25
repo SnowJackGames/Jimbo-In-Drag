@@ -3,9 +3,13 @@ DRAGQUEENMOD.to_big = to_big or function(n)
   return n
 end
 
+
+
 DRAGQUEENMOD.to_number = to_number or function(n)
   return n
 end
+
+
 
 -- Searching for other mods for cross-mod content and integration
 function DRAGQUEENMOD.cross_mod_content_register()
@@ -13,6 +17,7 @@ function DRAGQUEENMOD.cross_mod_content_register()
   DRAGQUEENMOD.load_cross_mod_ours_to_theirs = true
   DRAGQUEENMOD.cross_mod_dependent_and_duplicate_content()
 end
+
 
 
 -- We add other mods' definitions to our own,
@@ -38,6 +43,8 @@ function DRAGQUEENMOD.cross_mod_theirs_to_ours()
     table.insert(DRAGQUEENMOD.modded_suits, prefix .. "_Fleurons")
     DRAGQUEENMOD.suits_to_tarot[prefix .. "_Halberds"] = "c_" .. prefix .. "_abyss"
     DRAGQUEENMOD.suits_to_tarot[prefix .. "_Fleurons"] = "c_" .. prefix .. "_sky"
+    DRAGQUEENMOD.suits_to_color[prefix .. "_Halberds"] = "bunc_halberds"
+    DRAGQUEENMOD.suits_to_color[prefix .. "_Fleurons"] = "bunc_fleurons"
     DRAGQUEENMOD.suit_groups["exotic"] = { prefix .. "_Halberds", prefix .. "_Fleurons" }
     DRAGQUEENMOD.sine_colors.DRAGQUEEN_BUNC_EXOTIC_SUIT = { "bunc_halberds", "bunc_halberds", "bunc_fleurons", "bunc_fleurons" }
   end
@@ -53,6 +60,8 @@ function DRAGQUEENMOD.cross_mod_theirs_to_ours()
     table.insert(DRAGQUEENMOD.modded_suits, prefix .. "_Stars")
     DRAGQUEENMOD.suits_to_tarot[prefix .. "_Crowns"] = "c_" .. prefix .. "_ace_of_swords"
     DRAGQUEENMOD.suits_to_tarot[prefix .. "_Stars"] = "c_" .. prefix .. "_ace_of_pentacles"
+    DRAGQUEENMOD.suits_to_color[prefix .. "_Crowns"] = "paperback_crowns"
+    DRAGQUEENMOD.suits_to_color[prefix .. "_Stars"] = "paperback_stars"
     DRAGQUEENMOD.suit_groups["proud"] = { prefix .. "_Crowns", prefix .. "_Stars" }
     DRAGQUEENMOD.sine_colors.DRAGQUEEN_PAPERBACK_PROUD_SUIT = { "paperback_crowns", "paperback_crowns", "paperback_stars", "paperback_stars" }
   end
@@ -68,6 +77,8 @@ function DRAGQUEENMOD.cross_mod_theirs_to_ours()
     table.insert(DRAGQUEENMOD.modded_suits, prefix .. "_Stars")
     DRAGQUEENMOD.suits_to_tarot[prefix .. "_Crowns"] = "c_" .. prefix .. "_moon_q"
     DRAGQUEENMOD.suits_to_tarot[prefix .. "_Stars"] = "c_" .. prefix .. "_star_q"
+    DRAGQUEENMOD.suits_to_color[prefix .. "_Moons"] = "six_moons"
+    DRAGQUEENMOD.suits_to_color[prefix .. "_Stars"] = "six_stars"
     DRAGQUEENMOD.suit_groups["night"] = { prefix .. "_Moons",prefix .. "_Stars" }
     DRAGQUEENMOD.sine_colors.DRAGQUEEN_SIX_NIGHT_SUIT = { "six_moons", "six_moons", "six_stars", "six_stars" }
 
@@ -81,6 +92,7 @@ function DRAGQUEENMOD.cross_mod_theirs_to_ours()
     table.insert(DRAGQUEENMOD.light_suits, prefix .. "_3s")
     table.insert(DRAGQUEENMOD.modded_suits, prefix .. "_3s")
     DRAGQUEENMOD.suits_to_tarot[prefix .. "_3s"] = "c_" .. prefix .. "_cat"
+    DRAGQUEENMOD.suits_to_color[prefix .. "_3s"] = "minty_3s"
     DRAGQUEENMOD.suit_groups["treat"] = { prefix .. "_3s" }
     DRAGQUEENMOD.sine_colors.DRAGQUEEN_MINTY_TREAT_SUIT = { "minty_3s" }
   end
@@ -94,6 +106,8 @@ function DRAGQUEENMOD.cross_mod_theirs_to_ours()
     table.insert(DRAGQUEENMOD.modded_suits, prefix .. "_Suitless")
     DRAGQUEENMOD.suits_to_tarot[prefix .. "_Clovers"] = "c_" .. prefix .. "_forest"
     DRAGQUEENMOD.suits_to_tarot[prefix .. "_Suitless"] = "c_" .. prefix .. "_Wastes"
+    DRAGQUEENMOD.suits_to_color[prefix .. "_Clovers"] = "clover"
+    DRAGQUEENMOD.suits_to_color[prefix .. "_Suitless"] = "white"
     DRAGQUEENMOD.suit_groups["magic"] = { prefix .. "_Clovers", prefix .. "_Suitless" }
     DRAGQUEENMOD.sine_colors.DRAGQUEEN_MTG_MAGIC_SUIT = { "clover", "clover", "white", "white" }
   end
@@ -109,6 +123,8 @@ function DRAGQUEENMOD.cross_mod_theirs_to_ours()
     table.insert(DRAGQUEENMOD.modded_suits, prefix .. "_Colors")
     DRAGQUEENMOD.suits_to_tarot[prefix .. "_Inks"] = "c_" .. prefix .. "_the_blob"
     DRAGQUEENMOD.suits_to_tarot[prefix .. "_Colors"] = "c_" .. prefix .. "_the_paint"
+    DRAGQUEENMOD.suits_to_color[prefix .. "_Inks"] = "ink_inks"
+    DRAGQUEENMOD.suits_to_color[prefix .. "_Colors"] = "ink_colors"
     DRAGQUEENMOD.suit_groups["stained"] = { prefix .. "_Inks", prefix .. "_Colors" }
     DRAGQUEENMOD.sine_colors.DRAGQUEEN_INK_STAINED_SUIT = { "ink_inks", "ink_inks", "ink_colors", "ink_colors" }
   end
@@ -132,6 +148,12 @@ function DRAGQUEENMOD.cross_mod_theirs_to_ours()
     table.insert(DRAGQUEENMOD.modded_suits, prefix .. "_lanterns")
     DRAGQUEENMOD.suit_groups["parallel"] = { prefix .. "_goblets", prefix .. "_towers", prefix .. "_blooms", prefix .. "_daggers" }
     DRAGQUEENMOD.suit_groups["chaotic"] = { prefix .. "_voids", prefix .. "_lanterns" }
+    DRAGQUEENMOD.suits_to_color[prefix .. "_goblets"] = "rgmc_goblets"
+    DRAGQUEENMOD.suits_to_color[prefix .. "_towers"] = "rgmc_towers"
+    DRAGQUEENMOD.suits_to_color[prefix .. "_blooms"] = "rgmc_blooms"
+    DRAGQUEENMOD.suits_to_color[prefix .. "_daggers"] = "rgmc_daggers"
+    DRAGQUEENMOD.suits_to_color[prefix .. "_voids"] = "rgmc_voids"
+    DRAGQUEENMOD.suits_to_color[prefix .. "_lanterns"] = "rgmc_lanterns"
     DRAGQUEENMOD.sine_colors.DRAGQUEEN_RGMC_PARALLEL_SUIT = { "rgmc_goblets", "rgmc_goblets", "rgmc_towers", "rgmc_towers", "rgmc_blooms", "rgmc_blooms", "rgmc_daggers", "rgmc_daggers" }
     DRAGQUEENMOD.sine_colors.DRAGQUEEN_RGMC_CHAOTIC_SUIT = { "rgmc_voids", "rgmc_voids", "rgmc_lanterns", "rgmc_lanterns" }
   end
@@ -145,10 +167,14 @@ function DRAGQUEENMOD.cross_mod_theirs_to_ours()
     table.insert(DRAGQUEENMOD.light_suits, prefix .. "_Noughts")
     table.insert(DRAGQUEENMOD.modded_suits, prefix .. "_Crosses")
     table.insert(DRAGQUEENMOD.modded_suits, prefix .. "_Noughts")
+    DRAGQUEENMOD.suits_to_color[prefix .. "_Crosses"] = "unik_crosses"
+    DRAGQUEENMOD.suits_to_color[prefix .. "_Noughts"] = "unik_noughts"
     DRAGQUEENMOD.suit_groups["tictactoe"] = { prefix .. "_Crosses", prefix .. "_Noughts" }
     DRAGQUEENMOD.sine_colors.DRAGQUEEN_UNIK_TICTACTOE_SUIT = { "unik_crosses", "unik_crosses", "unik_noughts", "unik_noughts" }
   end
 end
+
+
 
 -- We add our mod's definitions to others and patch others' content; 
 -- Run at the last possible second in our hooks.lua: dragqueen_hook_splash_screen
@@ -281,6 +307,8 @@ function DRAGQUEENMOD.cross_mod_ours_to_theirs()
   end
 
 end
+
+
 
 -- register content that is dependent on other mods
 -- remove content that is already implemented in another mod

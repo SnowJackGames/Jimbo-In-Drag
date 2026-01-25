@@ -211,6 +211,17 @@ DRAGQUEENMOD.suits_to_tarot = {
 
 
 
+DRAGQUEENMOD.suits_to_color = {
+  ["Spades"] = "spades",
+  ["Hearts"] = "hearts",
+  ["Clubs"] = "clubs",
+  ["Diamonds"] = "diamonds",
+  ["dragqueen_Purses"] = "dragqueen_purses",
+  ["dragqueen_Pumps"] = "dragqueen_pumps"
+}
+
+
+
 ------------------------------
 -- Base / dependancy reference
 ------------------------------
