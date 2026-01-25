@@ -1,3 +1,9 @@
+------------------------------
+-- Mod tabs and displayed info
+------------------------------
+
+
+
 -- Create config UI
 -- In create_toggle could make active_colour something cute
 ---@diagnostic disable-next-line: duplicate-set-field
@@ -120,9 +126,16 @@ SMODS.current_mod.config_tab = function ()
 end
 
 
+
 -- Create Credits tab in our mod UI
 
 -- Create collection entries for Kisses if we have multiple types, or just stick them in stickers
+
+
+
+------------------------------
+-- Tooltips
+------------------------------
 
 
 
@@ -186,6 +199,7 @@ function DRAGQUEENMOD.suit_tooltip(tooltiptype)
     }
   }
 end
+
 
 
 -- Build the tooltip for light and dark suits
@@ -269,6 +283,7 @@ function DRAGQUEENMOD.suit_tooltip_build_for_light_or_dark(tooltiptype, key, usi
 end
 
 
+
 -- Build the light and dark suits for NonPlain == false 
 --- @param tooltiptype "dark" | "light"
 --- @param messageparts table
@@ -294,6 +309,7 @@ function DRAGQUEENMOD.suit_tooltip_build_for_light_or_dark_for_plain(tooltiptype
 
   return(messageparts)
 end
+
 
 
 -- Build the light and dark suits for NonPlain == false 
@@ -373,6 +389,13 @@ function DRAGQUEENMOD.suit_tooltip_build_for_light_or_dark_for_nonplain(tooltipt
 end
 
 
+
+------------------------------
+-- Badges
+------------------------------
+
+
+
 -- Puts a badge under a suited card indicating if it is a Light Suit, a Dark Suit, or both
 function DRAGQUEENMOD.card_suit_badge(obj, badges)
   if obj then
@@ -390,6 +413,7 @@ function DRAGQUEENMOD.card_suit_badge(obj, badges)
     end
   end
 end
+
 
 
 function DRAGQUEENMOD.get_dark_or_light_suit_badge(obj, givenbadgecolor, giventextcolor)
@@ -442,6 +466,7 @@ function DRAGQUEENMOD.get_dark_or_light_suit_badge(obj, givenbadgecolor, givente
 end
 
 
+
 function DRAGQUEENMOD.get_suit_type_badge(obj, giventextcolor)
   local obj_suit_to_eval = obj.base_card.config.card.suit
   local obj_suit_category = nil
@@ -472,6 +497,7 @@ function DRAGQUEENMOD.get_suit_type_badge(obj, giventextcolor)
     end
   end
 end
+
 
 
 function DRAGQUEENMOD.get_badge_template(badgetext, badgecolor, textcolor)
@@ -529,6 +555,7 @@ function DRAGQUEENMOD.get_badge_template(badgetext, badgecolor, textcolor)
 
   return badgetobuild
 end
+
 
 
 -- Kiss tooltip, if we only have one then add to stickers
