@@ -48,7 +48,7 @@ SMODS.Joker {
     -- When being purchased and is in shop, cost is reduced to existing_money (implemented in joker.toml)
     -- When scoring a pair of Pumps, earn 8 dollars, then 1 in 2 chance for scored cards to all gain a random edition
     if context.cardarea == G.jokers and context.scoring_hand then
-      if context.before and next(context.poker_hands["Pair"]) then
+      if context.before and context.scoring_name == "Pair" then
         -- Figure out which cards in the pair are the same rank; can technically be more than two with certain mods, such as Ice Card Enhancement in the mod All in Jest
         local scoring_pump_card_index_to_rank = {}
         local pair_positions = {}
@@ -81,9 +81,8 @@ SMODS.Joker {
         if #pair_positions > 1 then
             -- earn 8 dollars
           SMODS.calculate_effect({
-            dollars = card.ability.extra.dollars
+            dollars = card.ability.extra.dollars,
           }, card)
-          delay(0.2)
 
           -- 1 in 2 chance for scored cards to all gain a random edition
           if SMODS.pseudorandom_probability(card, "shoes", 1, card.ability.extra.odds) then
@@ -99,11 +98,12 @@ SMODS.Joker {
             SMODS.calculate_effect({
               message = DRAGQUEENMOD.easymisclocalize("dictionary", "k_dragqueen_shoes_rule")
             }, card)
-            delay(0.2)
 
+            -- Add Editions
             for _, uneditioned in ipairs(uneditioned_cards) do
               local randomedition = poll_edition("shoes", nil, nil, true)
               DRAGQUEENMOD.convert_cards_to(uneditioned, {edition = randomedition}, false, true)
+              delay(0.5)
             end
             return {}
           else
