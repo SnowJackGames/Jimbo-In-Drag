@@ -4,13 +4,13 @@
 
 --- Tries to spawn a Joker, Consumable, or Playing Card, ensuring
 --- that there is space available, using the respective buffer.
---- <br>DOES NOT TAKE INTO ACCOUNT ANY OTHER AREAS
+--- <br><b>Does not take into account any other areas.</b><br>
 --- @param args CreateCard | { card: Card?, strip_edition: boolean? } | { instant: boolean?, func: function? } info:
---- Either a table passed to SMODS.create_card, which will create a new card.
---- Or a table with 'card', which will copy the passed card and remove its edition based on 'strip_edition'.
+--- Either a table passed to `SMODS.create_card`, which will create a new card,
+--- Or a table with `card`, which will copy the passed card and remove its edition based on `strip_edition`.
 --- @param saveroom? integer info:
---- if slots (in consumables or jokers) need to be reserved (for perhaps something immediately spawning in the slot afterwards)
---- @return boolean? spawned whether the card was able to spawn
+--- If slots (in consumables or jokers) need to be reserved (for perhaps something immediately spawning in the slot afterwards)
+--- @return boolean -- If the card was able to spawn or not
 --- Thanks Paperback
 function DRAGQUEENMOD.try_spawn_card(args, saveroom)
   -- As best that we can, let's prevent code from spilling through SMODS.add_card, temp_create_card, get_current_pool etc
@@ -19,19 +19,45 @@ function DRAGQUEENMOD.try_spawn_card(args, saveroom)
     error("Could not find args.key " .. tostring(args.key) .. " in G.P_CENTERS")
   end
 
-
   local is_joker = DRAGQUEENMOD.is_joker(args.card, args.set, args.key)
   local is_playing_card = DRAGQUEENMOD.is_playing_card(args.set, args.front, args.rank, args.suit)
   local is_consumable = DRAGQUEENMOD.is_consumable(args.set, args.key)
   local setsaveroom = saveroom or 0
 
-  -- Pulls from Balatro code, so "consumable" here spelt with an "e"
-  local area = args.area or (is_joker and G.jokers) or (is_consumable and G.consumeables)
-  local buffer = area == G.jokers and 'joker_buffer' or 'consumeable_buffer'
-
-  -- It has to be one of three
+    -- It has to be one of three
   if not (is_joker or is_playing_card or is_consumable) then
-    error("DRAGQUEENMOD.try_spawn_card() called to create that which is neither a joker, playing card, nor consumable")
+    error("DRAGQUEENMOD.try_spawn_card() called to create that which is considered neither a joker, playing card, nor consumable")
+  end
+
+  if is_joker and is_playing_card and is_consumable then
+    error("DRAGQUEENMOD.try_spawn_card() called to create that which is considered a joker, playing card, and consumable all at once")
+  end
+
+  if is_joker and is_playing_card then
+    error("DRAGQUEENMOD.try_spawn_card() called to create that which is considered both a joker and a playing card")
+  end
+
+  if is_joker and is_consumable then
+    error("DRAGQUEENMOD.try_spawn_card() called to create that which is considered both a joker and a consumable")
+  end
+
+  if is_playing_card and is_consumable then
+    error("DRAGQUEENMOD.try_spawn_card() called to create that which is considered both a playing card and a consumable")
+  end
+
+  -- Determine the relevant area and buffer where a thing will spawn
+  -- Pulls from Balatro code, so "consumable" here spelt with an "e"
+  local area = nil
+  local buffer = nil
+  
+  if is_joker == true then
+    area = G.jokers
+    buffer = "joker_buffer"
+  end
+
+  if is_consumable == true then
+    area = G.consumeables
+    buffer = "consumeable_buffer"
   end
 
   -- Notice about key / set handling by create_card() 
@@ -42,7 +68,7 @@ function DRAGQUEENMOD.try_spawn_card(args, saveroom)
   local should_spawn = false
   if is_playing_card then should_spawn = true
   else
-    if not area then
+    if not (area) then
       error("DRAGQUEENMOD.try_spawn_card() can't spawn joker or consumable without an area, or can't reach G.jokers or G.consumeables")
     else
       if is_joker and ((#area.cards + G.GAME["joker_buffer"] + setsaveroom) < area.config.card_limit) then should_spawn = true end
@@ -66,15 +92,18 @@ function DRAGQUEENMOD.try_spawn_card(args, saveroom)
     if args.instant then
       add()
     else
-      G.GAME[buffer] = G.GAME[buffer] + 1
+      -- If there is a relevant buffer, then we increase it
+      if buffer then
+        G.GAME[buffer] = G.GAME[buffer] + 1
 
-      G.E_MANAGER:add_event(Event {
-        func = function()
-          add()
-          G.GAME[buffer] = 0
-          return true
-        end
-      })
+        G.E_MANAGER:add_event(Event {
+          func = function()
+            add()
+            G.GAME[buffer] = 0
+            return true
+          end
+        })
+      end
     end
 
     if args.func and type(args.func) == "function" then
@@ -82,6 +111,8 @@ function DRAGQUEENMOD.try_spawn_card(args, saveroom)
     end
 
     return true
+  else
+    return false
   end
 end
 
@@ -89,15 +120,12 @@ end
 
 -- Convert attributes of a card; code thanks to Pokermon
 -- <br> Could be the effects of a consumable, a joker, etc
----@param cards Card|table Card you're modifing
----@param t table That which is being changed
+---@param cards Card|table Card(s) you're modifing
+---@param attribute_table table How you want the card(s) to change
 ---@param flip? boolean If the card should flip, default to false
 ---@param immediate? boolean If it should happen without delay, default to false
 ---@param set_delay? number in seconds (affected by game speed)
----TODO: Any time we use another one of these `t.whatever` attributes (like edition),
----<br> Check to see if the function (like `set_edition`) already applies `Card:Juice_up()`
----<br> We must not wiggle in excess...
-function DRAGQUEENMOD.convert_cards_to(cards, t, flip, immediate, set_delay)
+function DRAGQUEENMOD.convert_cards_to(cards, attribute_table, flip, immediate, set_delay)
   local shouldflip = flip or false
   local shouldimmediate = immediate or false
   local shoulddelay = set_delay or nil
@@ -108,22 +136,22 @@ function DRAGQUEENMOD.convert_cards_to(cards, t, flip, immediate, set_delay)
       DRAGQUEENMOD.conversion_event_helper(function() cards[i]:flip() end, 0.2)
     end
 
-    if t.enhancement_conv then
-      DRAGQUEENMOD.conversion_event_helper(function() cards[i]:set_ability(G.P_CENTERS[t.enhancement_conv]) end, shoulddelay, shouldimmediate)
+    if attribute_table.enhancement_conv then
+      DRAGQUEENMOD.conversion_event_helper(function() cards[i]:set_ability(G.P_CENTERS[attribute_table.enhancement_conv]) end, shoulddelay, shouldimmediate)
     end
-    if t.edition then
-      DRAGQUEENMOD.conversion_event_helper(function() cards[i]:set_edition(t.edition, true) end, shoulddelay, shouldimmediate)
+    if attribute_table.edition then
+      DRAGQUEENMOD.conversion_event_helper(function() cards[i]:set_edition(attribute_table.edition, true) end, shoulddelay, shouldimmediate)
     end
-    if t.suit_conv then
-      DRAGQUEENMOD.conversion_event_helper(function() cards[i]:change_suit(t.suit_conv) end, shoulddelay, shouldimmediate)
+    if attribute_table.suit_conv then
+      DRAGQUEENMOD.conversion_event_helper(function() cards[i]:change_suit(attribute_table.suit_conv) end, shoulddelay, shouldimmediate)
     end
-    if t.seal then
-      DRAGQUEENMOD.conversion_event_helper(function() cards[i]:set_seal(t.seal, nil, true) end, shoulddelay, shouldimmediate)
+    if attribute_table.seal then
+      DRAGQUEENMOD.conversion_event_helper(function() cards[i]:set_seal(attribute_table.seal, nil, true) end, shoulddelay, shouldimmediate)
     end
-    if t.bonus_chips then
+    if attribute_table.bonus_chips then
       local bonus_add = function()
         cards[i].ability.perma_bonus = cards[i].ability.perma_bonus or 0
-        cards[i].ability.perma_bonus = cards[i].ability.perma_bonus + t.bonus_chips
+        cards[i].ability.perma_bonus = cards[i].ability.perma_bonus + attribute_table.bonus_chips
       end
       DRAGQUEENMOD.conversion_event_helper(bonus_add, shoulddelay, shouldimmediate)
     end
@@ -160,12 +188,11 @@ end
 
 
 -- Attempts to create a tarot that converts cards to the inputted suit
----@param suit string
+---@param suit string If `random`, then it gives a random suit-converting tarot card (see 'cross-mods.lua')
 ---@param count integer
 ---@param saveroom? integer info: 
 -- In case space needs to be reserved, like if this effect was generated by
 -- something about to enter the consumables zone.
--- If suit is "random", then it gives a random suit-converting tarot card, built in cross-mods.lua
 function DRAGQUEENMOD.accessorize(suit, count, saveroom)
   local tarot = ""
   local reservespace = saveroom or 0

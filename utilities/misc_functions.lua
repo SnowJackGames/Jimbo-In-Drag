@@ -27,7 +27,7 @@ end
 
 
 -- Removes style modifier codes from a string;
--- i.e. "{C:clubs}Clubs{}" returns "Clubs"
+-- i.e. `{C:clubs}Clubs{}` returns `Clubs`
 ---@param styledstring string
 ---@return string
 function DRAGQUEENMOD.remove_style_modifier_codes(styledstring)
@@ -44,7 +44,7 @@ end
 
 
 -- When given a quote table of strings,
--- Pulls a random quote and returns it
+-- pulls a random quote and returns it
 ---@param quotes table
 ---@return string | nil
 function DRAGQUEENMOD.get_quote(quotes)
@@ -87,13 +87,10 @@ function DRAGQUEENMOD.getprefix(name, guessedprefix)
 end
 
 
-
----@param set string
----@param key string
----@return table
--- Easily pulls a set and key from G.localization.descriptions
--- Ex. "Blind","bl_dragqueen_tempnamekissblind"
--- Returned table has a name string, and a text table of one or more strings
+-- Easily pulls a set and key from `G.localization.descriptions`
+---@param set string Ex. `Blind`
+---@param key string Ex. `bl_dragqueen_tempnamekissblind`
+---@return table -- has a name string, and a text table of one or more strings
 function DRAGQUEENMOD.easydescriptionlocalize(set, key)
   local localized
   assert(G.localization.descriptions[set], "Could not find " .. set .. " in descriptions")
@@ -103,12 +100,10 @@ end
 
 
 
----@param set string
----@param key string
----@return table | string
--- Easily pulls a set and key from G.localization.misc
--- Ex. "dictionary","dragqueen_yas"
--- Returned table is either a string, or a table of strings
+-- Easily pulls a set and key from `G.localization.misc`
+---@param set string Ex. `dictionary`
+---@param key string Ex. `dragqueen_yas`
+---@return table | string -- either a string, or a table of strings
 function DRAGQUEENMOD.easymisclocalize(set, key)
   local localized
   assert(G.localization.misc[set], "Could not find " .. set .. " in localization.misc")
@@ -118,10 +113,9 @@ end
 
 
 
-
+-- Determines if score flames were activated
 ---@param context table
 ---@return true | nil
--- Determines if score flames were activated
 function DRAGQUEENMOD.final_scoring_step_slay(context)
   if context.final_scoring_step and (hand_chips * mult > G.GAME.blind.chips) then
     return true
@@ -137,8 +131,8 @@ end
 
 
 -- Determines if current deck is playing with anything other than "plain suits" (spades, hearts, clubs, diamonds)
--- If so then we want to communicate this to things communicating what light and dark suits are there available
--- Maybe we'll come up with a better term than "non-plain"
+-- <br>If so then we want to communicate this to things communicating what light and dark suits are there available
+-- <br>Maybe we'll come up with a better term than "non-plain"
 function DRAGQUEENMOD.enable_non_plains()
   if G.GAME then
     G.GAME.NonPlain = true
@@ -164,7 +158,7 @@ end
 
 ---Used to check whether a card is a light or dark suit
 ---@param card table
----@param type 'light' | 'dark'
+---@param type "light" | "dark"
 ---@return boolean
 function DRAGQUEENMOD.is_suit(card, type)
   for _, v in ipairs(type == 'light' and DRAGQUEENMOD.light_suits or DRAGQUEENMOD.dark_suits) do
@@ -175,31 +169,39 @@ end
 
 
 
--- First character of a joker key is j; this is added by SMODS
--- determined by how Balatro and SMODS figure out how to make a card in a variety of circumstances
--- see common_events.lua:create_card, SMODS.create_card, SMODS.add_card
+-- First character of a joker key is "j"; this is added by SMODS
+-- <br>Determined by how Balatro and SMODS figure out how to make a card in a variety of circumstances
+---@param card? table | Card
+---@param set? string
+---@param key? string
+---<br>
+---@see SMODS.create_card
+---@see SMODS.add_card
+---@return boolean
 function DRAGQUEENMOD.is_joker(card, set, key)
   if not (card or set or key) then return false end
   if card and not (card.ability.set == "Joker") then return false end
   if set and not ((set == "Joker")) then return false end
-  if key and (not G.P_CENTERS[key]) and (not key:sub(1, 1) == 'j') then return false end
+  if key and not (key:sub(1, 1) == "j") then return false end
   return true
 end
 
 
 
----determined by how Balatro and SMODS figure out how to make a card in a variety of circumstances
--- see common_events.lua:create_card, SMODS.create_card, SMODS.add_card
--- PLEASE NOTE: Balatro will randomly spell "consumeable" with and without an "e": 
--- Consumables have a "consumeable" field;
--- c_fool has a "consumeable" field that equals true;
--- Cards you can consume are located in area "G.consumeables";
--- SMODS stores "SMODS.ConsumableTypes[]";
--- in en-us, crystal_ball creates "+1 consumable slot";
--- SMODS.Challenge and their CalcContext has a "consumeable?" field;
--- https://www.youtube.com/watch?v=CmsLicrjGRg
----@param set any
----@param key any
+-- Determined by how Balatro and SMODS figure out how to make a card in a variety of circumstances
+-- <br><b>Please note</b>: Balatro will randomly spell "consumeable" with and without an "e": 
+-- - Consumables have a `consumeable` field
+-- - `c_fool` has a "consumeable" field that equals true
+-- - Cards you can consume are located in area `G.consumeables`
+-- - SMODS stores `SMODS.ConsumableTypes[]`
+-- - In en-us, `crystal_ball` creates "+1 consumable slot"
+-- - `SMODS.Challenge` and their `CalcContext` has a `consumeable?` field
+-- ##### "[Oh no!](https://www.youtube.com/watch?v=CmsLicrjGRg)"
+-- ***
+---@param set? string
+---@param key? string
+---@see SMODS.create_card
+---@see SMODS.add_card
 ---@return boolean
 function DRAGQUEENMOD.is_consumable(set, key)
   if not (set or key) then return false end
@@ -210,9 +212,15 @@ end
 
 
 
--- Front is usually of format H_2 (correspends to 2 of Hearts); 
+-- Front is usually of format `H_2` (correspends to 2 of Hearts); 
 -- in base game, set is only "Playing Card", "Base", or "Enhanced",
 -- but if for some reason you change create_card() that it can be allowed via adding to DRAGQUEENMOD.valid_playing_card_set_categories
+---comment
+---@param set? string
+---@param front? string
+---@param rank? string | integer
+---@param suit? string
+---@return boolean
 function DRAGQUEENMOD.is_playing_card(set, front, rank, suit)
   if not (set or front or rank or suit) then return false end
   if set and not DRAGQUEENMOD.indexof(DRAGQUEENMOD.valid_playing_card_set_categories, set) then return false end
