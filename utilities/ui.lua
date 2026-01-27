@@ -506,57 +506,67 @@ function DRAGQUEENMOD.get_dark_or_light_suit_badge(obj, givenbadgecolor, givente
   local suittext = nil
   local badgecolor = givenbadgecolor or G.C.GREEN
   local textcolor = giventextcolor or G.C.WHITE
-  local isdark = false
-  local islight = false
-  local isbothdarkandlight = false
-  local isneitherdarkandlight = true
+  local is_dark = nil
+  local is_light = nil
+  local is_both_dark_and_light = nil
+  local is_neither_dark_nor_light = nil
 
 
   for _, v in pairs(DRAGQUEENMOD.dark_suits) do
     if obj.key == v then
-      isdark = true
+      is_dark = true
     end
   end
   for _, v in pairs(DRAGQUEENMOD.light_suits) do
     if obj.key == v then
-      islight = true
+      is_light = true
     end
   end
 
-  local islucky = false
-  if obj.base_card.config.center.key == "m_wild" then islucky = true end
-  if islucky == true then isbothdarkandlight = true end
+  -- Enhancements can override what the underlying card's suit is considered (ex. Stone Card, Wild Card)
+  -- Enhancement is stored at obj.base_card.config.center.key as a string
+  if SMODS.has_no_suit(obj.base_card) then
+    is_dark = false
+    is_light = false
+  end
 
-  -- Patch target for DRAGQUEENMOD.get_dark_or_light_suit_badge if you want more conditions to be considered both dark and light
+  if SMODS.has_any_suit(obj.base_card) then
+    is_dark = true
+    is_light = true
+  end
 
-  if (isdark == true and islight == true) or isbothdarkandlight == true then
+  -- Patch target for DRAGQUEENMOD.get_dark_or_light_suit_badge if you want more conditions to be considered dark, light, or both
+
+  if (is_dark == true and is_light == true) or is_both_dark_and_light == true then
     suitkey = "dragqueen_card_badge_dark_and_light_suit"
     badgecolor = G.C.DRAGQUEEN_DARK_AND_LIGHT_SUIT
-    isneitherdarkandlight = false
-  elseif isdark == true then
+    is_neither_dark_nor_light = false
+  elseif is_dark == true then
     suitkey = "dragqueen_card_badge_dark_suit"
     badgecolor = G.C.DRAGQUEEN_DARK_SUIT
-    isneitherdarkandlight = false
-  elseif islight == true then
+    is_neither_dark_nor_light = false
+  elseif is_light == true then
     suitkey = "dragqueen_card_badge_light_suit"
     badgecolor = G.C.DRAGQUEEN_LIGHT_SUIT
-    isneitherdarkandlight = false
+    is_neither_dark_nor_light = false
   else
-
+    is_neither_dark_nor_light = true
   end
 
   -- suitkey value check
   if (suitkey ~= nil) then
-    if isneitherdarkandlight == false then
+    if is_neither_dark_nor_light == false then
       suittext = DRAGQUEENMOD.easymisclocalize("dictionary", suitkey)
       assert(type(suittext) == "string", "issue pulling " .. suitkey .. " string in 'Jimbo in Drag' mod")
+    elseif is_neither_dark_nor_light == true then
+      -- Do nothing
     else
       print(suitkey)
       error("suitkey value in DRAGQUEENMOD.get_dark_or_light_suit_badge is nonsensical")
     end
   end
 
-  return suittext, badgecolor, textcolor, isneitherdarkandlight
+  return suittext, badgecolor, textcolor, is_neither_dark_nor_light
 end
 
 
@@ -566,7 +576,6 @@ function DRAGQUEENMOD.get_suit_type_badge(obj, giventextcolor)
   local obj_suit_category = nil
   local suittext = nil
 
-  -- obj.base_card.config.card.suit
   for suitcategory, suitsets in pairs(DRAGQUEENMOD.suit_groups) do
     for _, individual_suit in ipairs(suitsets) do
       if obj_suit_to_eval == individual_suit then
@@ -574,6 +583,13 @@ function DRAGQUEENMOD.get_suit_type_badge(obj, giventextcolor)
       end
     end
   end
+
+  -- Enhancements can override what the underlying card's suit is considered (ex. Stone Card, Wild Card)
+  if SMODS.has_no_suit(obj.base_card) then
+    obj_suit_category = nil
+  end
+
+  -- Patch target for DRAGQUEENMOD.get_suit_type_badge if you want say a particular enhancement to count as one of our suit categories
 
   if obj_suit_category ~= nil then
     local prefix = DRAGQUEENMOD.suit_types_to_mod_prefixes[obj_suit_category]
