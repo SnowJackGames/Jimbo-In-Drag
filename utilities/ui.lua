@@ -214,7 +214,8 @@ local TEST_poke_get_artist_list = function()
   return list
 end
 
-
+-- TODO: All the entries are along a series of rows, with the option cycle stuck at the bottom
+-- We want to move the dictionary entries into a nested node, so that its box can have a different color
 local TEST_pokermon_actual_credits_artists_create_grid = function()
   local page = G.pokermon_actual_credits_artists_grid_page or 1
   local rows, cols = 3, 1
@@ -231,7 +232,7 @@ local TEST_pokermon_actual_credits_artists_create_grid = function()
       local info = TEST_poke_get_artist_info(artist)
       local button = {
         n = G.UIT.C,
-        config = { align = "tm", padding = 0.1, },
+        config = { align = "tm", padding = 0.1 },
         nodes = {
           {
             n = G.UIT.T,
@@ -256,18 +257,23 @@ local TEST_pokermon_actual_credits_artists_create_grid = function()
     cycle_options[#cycle_options+1] = localize('k_page') .. " " .. i .. "/" .. total_pages
   end
 
-  row_nodes[#row_nodes+1] = {n = G.UIT.R, config = {align = "cm"}, nodes={
-    create_option_cycle {
-      options = cycle_options,
-      w = 2.5,
-      cycle_shoulders = true,
-      opt_callback = 'TEST_pokermon_actual_credits_artists_page',
-      current_option = page,
-      colour = G.C.RED,
-      no_pips = true,
-      focus_args = {snap_to = true, nav = 'wide'}
+  -- Final row holds the "[<] PAGE 1/X [>]" thing
+  row_nodes[#row_nodes+1] = {
+    n = G.UIT.R,
+    config = { align = "cm" },
+    nodes = {
+      create_option_cycle {
+        options = cycle_options,
+        w = 2.5,
+        cycle_shoulders = true,
+        opt_callback = 'TEST_pokermon_actual_credits_artists_page',
+        current_option = page,
+        colour = G.C.RED,
+        no_pips = true,
+        focus_args = {snap_to = true, nav = 'wide'}
+      }
     }
-  }}
+  }
 
   return {
     n = G.UIT.ROOT,
@@ -275,7 +281,7 @@ local TEST_pokermon_actual_credits_artists_create_grid = function()
       align = "cm",
       r = 0.1,
       padding = 0.1,
-      colour = G.C.CLEAR,
+      colour = G.C.CLEAR
     },
     nodes = row_nodes,
   }
@@ -287,10 +293,23 @@ local TEST_pokermon_actual_credits_artists = function()
     tab_definition_function = function()
       return {
         n = G.UIT.ROOT,
-        config = {align = "cm", padding = 0.05, emboss = 0.05, r = 0.1, colour = G.C.BLACK},
+        config = {
+          align = "cm",
+          padding = 0.1,
+          emboss = 0.05,
+          r = 0.1,
+          minw = 10,
+          colour = G.C.CLEAR
+        },
+        -- "Dictionary" title
         nodes = {
           { n = G.UIT.R,
-            config = { align = "cm", padding = 0.1, minh = 1 },
+            config = {
+              align = "tm",
+              padding = 0.2,
+              emboss = 0.05,
+              r = 0.1
+            },
             nodes = {
               { n = G.UIT.T,
                 config = {
@@ -302,15 +321,24 @@ local TEST_pokermon_actual_credits_artists = function()
               }
             }
           },
-          {n = G.UIT.R, config = {align = "tm"}, nodes={
-            {n = G.UIT.O, config = { id = 'poke_artist_grid_wrap', object = UIBox {
-              definition = TEST_pokermon_actual_credits_artists_create_grid(),
-              config = { align = "cm" }
-            }}}
-          }},
-        },
+          -- Display grid of dictionary entries
+          {n = G.UIT.R,
+            config = { align = "tm" },
+            nodes = {
+              { n = G.UIT.O,
+                config = {
+                  id = "TEST_poke_artist_grid_wrap",
+                  object = UIBox {
+                    definition = TEST_pokermon_actual_credits_artists_create_grid(),
+                    config = { align = "cm" }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
-    end,
+    end
   }
 end
 
@@ -322,7 +350,7 @@ G.FUNCS.TEST_pokermon_actual_credits_artists_page = function(e)
   G.pokermon_actual_credits_artists_grid_page = page
 
   if G.OVERLAY_MENU then
-    local grid_wrap = G.OVERLAY_MENU:get_UIE_by_ID('poke_artist_grid_wrap')
+    local grid_wrap = G.OVERLAY_MENU:get_UIE_by_ID("TEST_poke_artist_grid_wrap")
 
     grid_wrap.config.object:remove()
     grid_wrap.config.object = UIBox {
