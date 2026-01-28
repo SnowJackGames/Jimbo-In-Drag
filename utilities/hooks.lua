@@ -56,6 +56,8 @@ function DRAGQUEENMOD.last_second_code()
   if DRAGQUEENMOD.load_cross_mod_ours_to_theirs then
     DRAGQUEENMOD.cross_mod_ours_to_theirs()
   end
+  --DRAGQUEENMOD.build_dictionary()
+  DRAGQUEENMOD.build_test()
 end
 
 

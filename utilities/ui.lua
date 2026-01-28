@@ -126,6 +126,226 @@ SMODS.current_mod.config_tab = function ()
 end
 
 
+DRAGQUEENMOD.create_hover_tooltip = function(args)
+    args = args or {}
+    return {
+        n = args.top_level_node or G.UIT.C,
+        config = { 
+            align = "cm"
+        },
+        nodes = {
+            {
+                n = G.UIT.R,
+                config = {
+                    align = "cm",
+                    hover = true,
+                    can_collide = true, 
+                    r = args.round or 0.1,
+                    maxh = args.w or 0.5,
+                    maxw = args.h or 0.5,
+                    minh = args.w or 0.5,
+                    minw = args.h or 0.5,
+                    focus_args = { snap_to = true },
+                    detailed_tooltip = "dd_akyrs_yona_yona_ex",
+                    func = args.func,
+                    colour = args.colour or G.C.BLUE,
+                    padding = args.padding or 0.1,
+                },
+                nodes = {
+                    {
+                        n = G.UIT.T,
+                        config = {
+                            text = args.text or "i",
+                            colour = args.text_colour or G.C.WHITE,
+                            scale = args.scale or 0.3,
+                        }
+                    }
+                }
+            }
+        }
+    }
+end
+
+
+
+
+function DRAGQUEENMOD.build_test()
+  local TEST_poke_artist_info = {}
+--   Alber_Pro = {name = 'Alber_Pro'},
+--   bt = {name = 'bt'},
+--   Captain_Slime = {name = 'Captain Slime'},
+--   Catzzadilla = {name = 'Catzzadilla'},
+--   CBMX = {name = 'CBMX'},
+--   Celsie_RS = {name = 'Celsie_RS'},
+-- }
+  for _, word in ipairs(DRAGQUEENMOD.dictionary) do
+    local fetched = DRAGQUEENMOD.easydescriptionlocalize("Other", "dragqueen_dictionary_" .. word)
+    local entry = {}
+    entry.name = fetched.name
+    entry.text = fetched.text
+    entry.set = "Other"
+    entry.key = "dragqueen_dictionary_" .. word
+
+    TEST_poke_artist_info[word] = entry
+  end
+
+  DRAGQUEENMOD.TEST_poke_artist_info = TEST_poke_artist_info
+end
+
+
+
+
+
+local artistname = function(record)
+  return type(record) == 'table' and record.name or record
+end
+
+local TEST_poke_get_artist_info = function(name_or_record)
+  return DRAGQUEENMOD.TEST_poke_artist_info[artistname(name_or_record)]
+end
+
+
+local TEST_poke_get_artist_list = function()
+  local list = {}
+  for artist, _ in pairs(DRAGQUEENMOD.TEST_poke_artist_info) do
+    list[#list+1] = artist
+  end
+  table.sort(list, function(a,b) return a:lower() < b:lower() end)
+  return list
+end
+
+
+local TEST_pokermon_actual_credits_artists_create_grid = function()
+  local page = G.pokermon_actual_credits_artists_grid_page or 1
+  local rows, cols = 3, 1
+  local artist_list = TEST_poke_get_artist_list()
+  local row_nodes = {}
+
+  local marker = 1 + rows * cols * (page - 1)
+  for i = 1, rows do
+    local col_nodes = {}
+    local row_end = math.min(marker + cols - 1, #artist_list)
+    for j = marker, row_end do
+      local artist = artist_list[j]
+      if not artist then break end
+      local info = TEST_poke_get_artist_info(artist)
+      local button = {
+        n = G.UIT.C,
+        config = { align = "tm", padding = 0.1, },
+        nodes = {
+          {
+            n = G.UIT.T,
+            config = {
+              text = info.name,
+              detailed_tooltip = { set = info.set, key = info.key },
+              colour = G.C.WHITE,
+              scale = 0.5,
+              shadow = true
+            }
+          }
+        }}
+      col_nodes[#col_nodes+1] = button
+    end
+    row_nodes[i] = {n=G.UIT.R, config={align="tm", minw = 3 * cols, minh = 1}, nodes=col_nodes}
+    marker = marker + cols
+  end
+
+  local total_pages = math.ceil(#artist_list / (rows * cols))
+  local cycle_options = {}
+  for i = 1, total_pages do
+    cycle_options[#cycle_options+1] = localize('k_page') .. " " .. i .. "/" .. total_pages
+  end
+
+  row_nodes[#row_nodes+1] = {n = G.UIT.R, config = {align = "cm"}, nodes={
+    create_option_cycle {
+      options = cycle_options,
+      w = 2.5,
+      cycle_shoulders = true,
+      opt_callback = 'TEST_pokermon_actual_credits_artists_page',
+      current_option = page,
+      colour = G.C.RED,
+      no_pips = true,
+      focus_args = {snap_to = true, nav = 'wide'}
+    }
+  }}
+
+  return {
+    n = G.UIT.ROOT,
+    config = {
+      align = "cm",
+      r = 0.1,
+      padding = 0.1,
+      colour = G.C.CLEAR,
+    },
+    nodes = row_nodes,
+  }
+end
+
+local TEST_pokermon_actual_credits_artists = function()
+  return {
+    label = localize("dragqueen_ui_dictionary"),
+    tab_definition_function = function()
+      return {
+        n = G.UIT.ROOT,
+        config = {align = "cm", padding = 0.05, emboss = 0.05, r = 0.1, colour = G.C.BLACK},
+        nodes = {
+          { n = G.UIT.R,
+            config = { align = "cm", padding = 0.1, minh = 1 },
+            nodes = {
+              { n = G.UIT.T,
+                config = {
+                  text = localize("dragqueen_ui_dictionary"),
+                  colour = G.C.DRAGQUEEN_KEYWORD,
+                  scale = 1,
+                  shadow = true
+                }
+              }
+            }
+          },
+          {n = G.UIT.R, config = {align = "tm"}, nodes={
+            {n = G.UIT.O, config = { id = 'poke_artist_grid_wrap', object = UIBox {
+              definition = TEST_pokermon_actual_credits_artists_create_grid(),
+              config = { align = "cm" }
+            }}}
+          }},
+        },
+      }
+    end,
+  }
+end
+
+
+G.FUNCS.TEST_pokermon_actual_credits_artists_page = function(e)
+  if not e or not e.cycle_config then return end
+  local page = e.cycle_config.current_option
+
+  G.pokermon_actual_credits_artists_grid_page = page
+
+  if G.OVERLAY_MENU then
+    local grid_wrap = G.OVERLAY_MENU:get_UIE_by_ID('poke_artist_grid_wrap')
+
+    grid_wrap.config.object:remove()
+    grid_wrap.config.object = UIBox {
+      definition = TEST_pokermon_actual_credits_artists_create_grid(),
+      config = { parent = grid_wrap, type = "cm" }
+    }
+
+    grid_wrap.UIBox:recalculate()
+  end
+end
+
+
+
+
+
+---@diagnostic disable-next-line: duplicate-set-field
+SMODS.current_mod.extra_tabs = function()
+  return {
+    TEST_pokermon_actual_credits_artists()
+  }
+end
+
+
 
 -- Create Credits tab in our mod UI
 

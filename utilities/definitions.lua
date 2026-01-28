@@ -56,16 +56,8 @@ DRAGQUEENMOD.credits = {
 
 
 DRAGQUEENMOD.dictionary = {
-  accessorize = {
-    name = "",
-    toolip = "",
-    example = ""
-  },
-  slay = {
-    name = "",
-    toolip = "",
-    example = ""
-  },
+  "accessorize",
+  "slay"
 }
 
 

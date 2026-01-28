@@ -610,6 +610,24 @@ return {
         name = "Accessorize",
         text = {},
       },
+      -- dictionary tab
+      dragqueen_dictionary_accessorize = {
+        name = "Accessorize",
+        text = {
+          "{s:0.9}When this item is obtained, create{}",
+          "{s:0.9}up to {}{C:attention,s:0.9}X{}{s:0.9} number of {}{s:0.9,C:tarot}Tarot{}{s:0.9} cards{}",
+          "{s:0.9}that convert cards to the named suit{}",
+          "{s:0.9}if you have room; i.e.{}",
+          "{s:0.9}\"{}{C:white,X:dragqueen_keyword,s:0.9}Accessorize{}{s:0.9} {}{C:hearts,s:0.9}Hearts{}{s:0.9} {}{C:attention,s:0.9}1{}{s:0.9}\" creates{}",
+          "{s:0.9}up to {}{C:attention,s:0.9}1{}{s:0.9} {}{C:tarot,s:0.9}The Sun{}"
+        }
+      },
+      dragqueen_dictionary_slay = {
+        name = "Slay",
+        text = {
+          "mrowwwww"
+        }
+      }
     }
   },
   misc = {
@@ -631,6 +649,8 @@ return {
       dragqueen_ui_swears_enabled = "Enable Swears",
       dragqueen_ui_requires_restart = "Requires Restart",
       dragqueen_ui_does_not_require_restart = "Does Not Require Restart",
+      dragqueen_ui_dictionary = "Dictionary",
+
       dragqueen_card_badge_dark_suit = "Dark Suit",
       dragqueen_card_badge_light_suit = "Light Suit",
       dragqueen_card_badge_dark_and_light_suit = "Dark and Light Suit",
@@ -645,21 +665,6 @@ return {
       dragqueen_card_badge_rgmc_parallel_suit = "Parallel Suit",
       dragqueen_card_badge_rgmc_chaotic_suit = "Chaotic Suit",
       dragqueen_card_badge_unik_tictactoe_suit = "Tic Tac Toe Suit",
-      -- dictionary tab
-      dragqueen_dictionary_accessorize = {
-        name = "Accessorize",
-        tooltip = {
-          "{s:0.8}When this item is obtained, create{}",
-          "{s:0.8}up to {}{C:attention,s:0.8}X{}{s:0.8} number of {}{s:0.8,C:tarot}Tarot{}{s:0.8} cards{}",
-          "{s:0.8}that convert cards to the named suit{}",
-          "{s:0.8}if you have room; i.e.{}",
-          "{s:0.8}\"{}{C:white,X:dragqueen_keyword,s:0.8}Accessorize{}{s:0.8} {}{C:hearts,s:0.8}Hearts{}{s:0.8} {}{C:attention,s:0.8}1{}{s:0.8}\" creates{}",
-          "{s:0.8}up to {}{C:attention,s:0.8}1{}{s:0.8} {}{C:tarot,s:0.8}The Sun{}"
-        },
-        example = {}
-      }
-
-      
     },
     v_dictionary = {
       -- Variable information; like challenges_completed = "Completed#1#/#2# Challenges"
