@@ -55,9 +55,24 @@ DRAGQUEENMOD.credits = {
 }
 
 
+
+-- Referenced by the Dictionary tab in the mod's entry
+-- <br>Can optionally define additional tooltips
+-- Entries automatically sorted by localized alphabet
 DRAGQUEENMOD.dictionary = {
-  "accessorize",
-  "slay"
+  {
+    entry = "accessorize",
+    extra_tooltips = {
+      {
+        category = "descriptions",
+        set = "Tarot",
+        key = "c_sun"
+      }
+    }
+  },
+  {
+    entry = "slay"
+  }
 }
 
 
