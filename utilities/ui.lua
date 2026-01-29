@@ -134,102 +134,119 @@ end
 
 
 
-DRAGQUEENMOD.create_hover_tooltip = function(args)
-    args = args or {}
-    return {
-        n = args.top_level_node or G.UIT.C,
-        config = { 
-            align = "cm"
-        },
-        nodes = {
-            {
-                n = G.UIT.R,
-                config = {
-                    align = "cm",
-                    hover = true,
-                    can_collide = true, 
-                    r = args.round or 0.1,
-                    maxh = args.w or 0.5,
-                    maxw = args.h or 0.5,
-                    minh = args.w or 0.5,
-                    minw = args.h or 0.5,
-                    focus_args = { snap_to = true },
-                    detailed_tooltip = { set = "Other", key = "dragqueen_dictionary_accessorize" },
-                    func = args.func,
-                    colour = args.colour or G.C.BLUE,
-                    padding = args.padding or 0.1,
-                },
-                nodes = {
-                    {
-                        n = G.UIT.T,
-                        config = {
-                            text = args.text or "i",
-                            colour = args.text_colour or G.C.WHITE,
-                            scale = args.scale or 0.3,
-                        }
-                    }
-                }
-            }
-        }
-    }
-end
+-- Take entries in `DRAGQUEENMOD.dictionary` and localize and alphabetize the entries
+function DRAGQUEENMOD.build_dictionary()
+  local built_dictionary = {}
 
-
-
-function DRAGQUEENMOD.build_test()
-  local TEST_poke_artist_info = {}
---   Alber_Pro = {name = 'Alber_Pro'},
---   bt = {name = 'bt'},
---   Captain_Slime = {name = 'Captain Slime'},
---   Catzzadilla = {name = 'Catzzadilla'},
---   CBMX = {name = 'CBMX'},
---   Celsie_RS = {name = 'Celsie_RS'},
--- }
+  -- Get all the entries, and localize their values
   for _, word in ipairs(DRAGQUEENMOD.dictionary) do
-    local fetched = DRAGQUEENMOD.easydescriptionlocalize("Other", "dragqueen_dictionary_" .. word)
-    local entry = {}
-    entry.name = fetched.name
-    entry.text = fetched.text
-    entry.set = "Other"
-    entry.key = "dragqueen_dictionary_" .. word
+    assert(type(word.entry) == "string", "word.entry in DRAGQUEENMOD.dictionary is not string")
+    if word.set ~= nil then
+      assert(type(word.set) == "string", "word.set in DRAGQUEENMOD.dictionary is not string")
+    end
+    if word.key ~= nil then
+      assert(type(word.key) == "string", "word.key in DRAGQUEENMOD.dictionary is not string")
+    end
 
-    TEST_poke_artist_info[word] = entry
+    local set = word.set or "Other"
+    local key = word.key or ("dragqueen_dictionary_" .. word.entry)
+    local localized_entry = DRAGQUEENMOD.easydescriptionlocalize(set, key)
+    localized_entry.set = set
+    localized_entry.key = key
+
+    -- Associate tooltips if present
+    if word.extra_tooltips ~= nil then
+      local associated_tooltips = {}
+
+      for _, tooltip in ipairs(word.extra_tooltips) do
+        if (tooltip.category and tooltip.set and tooltip.key) then
+          assert(type(tooltip.category) == "string", "tooltip.category in DRAGQUEENMOD.dictionary is not string")
+          assert(type(tooltip.set) == "string", "tooltip.set in DRAGQUEENMOD.dictionary is not string")
+          assert(type(tooltip.key) == "string", "tooltip.key in DRAGQUEENMOD.dictionary is not string")
+
+          local localized_tooltip = nil
+          if tooltip.category == "descriptions" then
+            localized_tooltip = DRAGQUEENMOD.easydescriptionlocalize(tooltip.set, tooltip.key)
+          elseif tooltip.category == "misc" then
+            localized_tooltip = DRAGQUEENMOD.easymisclocalize(tooltip.set, tooltip.key)
+          else
+            error("tooltip.category \"" .. tooltip.category .. "\" associated with \"" .. word.entry .. "\" given to DRAGQUEENMOD.dictionary must be \"descriptions\" or \"misc\"")
+          end
+          localized_tooltip.set = tooltip.set
+          localized_tooltip.key = tooltip.key
+
+          -- Remember, localized_tooltip is either a string or a table of strings 
+          associated_tooltips[#associated_tooltips+1] = localized_tooltip
+        end
+      end
+
+      localized_entry.extra_tooltips = associated_tooltips
+    end
+
+    built_dictionary[word.entry] = localized_entry
   end
 
-  DRAGQUEENMOD.TEST_poke_artist_info = TEST_poke_artist_info
+  -- Entries have:
+  -- - `name` table
+  -- - `text` table
+  -- - `name_parsed` table
+  -- - `text_parsed` table
+  -- - `set` string
+  -- - `key` string
+  --
+  -- Potentially, a `extra_tooltips` table, each item within having similar variables to the listed above
+  DRAGQUEENMOD.built_dictionary = built_dictionary
 end
 
 
 
-local artistname = function(record)
-  return type(record) == 'table' and record.name or record
+local function dictionary_entry(word)
+  return type(word) == "table" and word.name or word
 end
 
 
 
-local TEST_poke_get_artist_info = function(name_or_record)
-  return DRAGQUEENMOD.TEST_poke_artist_info[artistname(name_or_record)]
+local function get_dictionary_entry(word_name)
+  return DRAGQUEENMOD.built_dictionary[dictionary_entry(word_name)]
 end
 
 
 
-local TEST_poke_get_artist_list = function()
-  local list = {}
-  for artist, _ in pairs(DRAGQUEENMOD.TEST_poke_artist_info) do
-    list[#list+1] = artist
+-- In English, `DRAGQUEENMOD.dictionary[accessorize]` has the localized name `Accessorize`,
+-- <br>but other languages will be different
+-- <br>Thusly, word variable `accessorize` is associated with localized name "Accessorize" or "Personalizar" etc
+-- <br>We want words to be sorted by the present language
+function DRAGQUEENMOD.locally_sort_built_dictionary()
+  -- Ex. "Accessorize" or "Personalizar"
+  local alphabetized_localized_name = {}
+  -- Ex. "Personalizar" = accessorize
+  local localized_name_to_word_variable = {}
+  local word_variables_sorted_locally = {}
+
+  -- Get the local names, and associate them with their word variable
+  for word_variable, word_data in pairs(DRAGQUEENMOD.built_dictionary) do
+    table.insert(alphabetized_localized_name, word_data.name)
+    localized_name_to_word_variable[word_data.name] = word_variable
   end
-  table.sort(list, function(a,b) return a:lower() < b:lower() end)
-  return list
+
+  -- Create local assortment
+  table.sort(alphabetized_localized_name, function(a,b) return a:lower() < b:lower() end)
+
+  -- Build the word variables to be sorted locally
+  for _, word_variable in pairs(localized_name_to_word_variable) do
+    word_variables_sorted_locally[#word_variables_sorted_locally+1] = word_variable
+  end
+
+  DRAGQUEENMOD.word_variables_sorted_locally = word_variables_sorted_locally
+  return word_variables_sorted_locally
 end
 
 
 
--- TODO: All the entries are along a series of rows, with the option cycle stuck at the bottom
--- We want to move the dictionary entries into a nested node, so that its box can have a different color
-local TEST_pokermon_actual_credits_artists_create_grid = function()
-  local page = G.pokermon_actual_credits_artists_grid_page or 1
+local dictionary_tab_create_grid = function()
+  local page = G.dictionary_grid_page or 1
   local rows, cols = 4, 1
-  local artist_list = TEST_poke_get_artist_list()
+  local word_variable_list = DRAGQUEENMOD.word_variables_sorted_locally
   local row_nodes = {}
   local option_cycle_node = {}
 
@@ -237,11 +254,11 @@ local TEST_pokermon_actual_credits_artists_create_grid = function()
   local marker = 1 + rows * cols * (page - 1)
   for i = 1, rows do
     local col_nodes = {}
-    local row_end = math.min(marker + cols - 1, #artist_list)
+    local row_end = math.min(marker + cols - 1, #word_variable_list)
     for j = marker, row_end do
-      local artist = artist_list[j]
-      if not artist then break end
-      local info = TEST_poke_get_artist_info(artist)
+      local word_variable = word_variable_list[j]
+      if not word_variable then break end
+      local info = get_dictionary_entry(word_variable)
       local button = {
         n = G.UIT.C,
         config = { align = "tm", padding = 0.1 },
@@ -268,7 +285,7 @@ local TEST_pokermon_actual_credits_artists_create_grid = function()
   -- Now we put the row nodes into an overall dictionary_rows
 
 
-  local total_pages = math.ceil(#artist_list / (rows * cols))
+  local total_pages = math.ceil(#word_variable_list / (rows * cols))
   local cycle_options = {}
   for i = 1, total_pages do
     cycle_options[#cycle_options+1] = localize('k_page') .. " " .. i .. "/" .. total_pages
@@ -286,7 +303,7 @@ local TEST_pokermon_actual_credits_artists_create_grid = function()
         options = cycle_options,
         w = 2.5,
         cycle_shoulders = true,
-        opt_callback = 'TEST_pokermon_actual_credits_artists_page',
+        opt_callback = 'dictionary_page',
         current_option = page,
         colour = G.C.RED,
         no_pips = true,
@@ -343,7 +360,7 @@ end
 
 
 
-local TEST_pokermon_actual_credits_artists = function()
+local dragqueen_dictionary_tab = function()
   return {
     label = localize("dragqueen_ui_dictionary"),
     tab_definition_function = function()
@@ -384,9 +401,9 @@ local TEST_pokermon_actual_credits_artists = function()
             nodes = {
               { n = G.UIT.O,
                 config = {
-                  id = "TEST_poke_artist_grid_wrap",
+                  id = "dragqueen_dictionary_grid_wrap",
                   object = UIBox {
-                    definition = TEST_pokermon_actual_credits_artists_create_grid(),
+                    definition = dictionary_tab_create_grid(),
                     config = { align = "cm" }
                   }
                 }
@@ -401,18 +418,19 @@ end
 
 
 
-G.FUNCS.TEST_pokermon_actual_credits_artists_page = function(e)
+G.FUNCS.dragqueen_dictionary_page = function(e)
   if not e or not e.cycle_config then return end
   local page = e.cycle_config.current_option
 
-  G.pokermon_actual_credits_artists_grid_page = page
+  G.dictionary_grid_page = page
 
   if G.OVERLAY_MENU then
-    local grid_wrap = G.OVERLAY_MENU:get_UIE_by_ID("TEST_poke_artist_grid_wrap")
+    ---@diagnostic disable-next-line: undefined-field
+    local grid_wrap = G.OVERLAY_MENU:get_UIE_by_ID("dragqueen_dictionary_grid_wrap")
 
     grid_wrap.config.object:remove()
     grid_wrap.config.object = UIBox {
-      definition = TEST_pokermon_actual_credits_artists_create_grid(),
+      definition = dictionary_tab_create_grid(),
       config = { parent = grid_wrap, type = "cm" }
     }
 
@@ -425,7 +443,7 @@ end
 ---@diagnostic disable-next-line: duplicate-set-field
 SMODS.current_mod.extra_tabs = function()
   return {
-    TEST_pokermon_actual_credits_artists()
+    dragqueen_dictionary_tab()
   }
 end
 
