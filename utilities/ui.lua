@@ -10,7 +10,14 @@
 SMODS.current_mod.config_tab = function ()
   return {
     n = G.UIT.ROOT,
-    config = {align = "cm", padding = 0.05, emboss = 0.05, r = 0.1, colour = G.C.BLACK},
+    config = {
+      align = "tm",
+      padding = 0.05,
+      emboss = 0.05,
+      r = 0.1,
+      colour = G.C.BLACK,
+      minh = 6,
+    },
     nodes = {
       {
         n = G.UIT.R,
@@ -126,6 +133,7 @@ SMODS.current_mod.config_tab = function ()
 end
 
 
+
 DRAGQUEENMOD.create_hover_tooltip = function(args)
     args = args or {}
     return {
@@ -146,7 +154,7 @@ DRAGQUEENMOD.create_hover_tooltip = function(args)
                     minh = args.w or 0.5,
                     minw = args.h or 0.5,
                     focus_args = { snap_to = true },
-                    detailed_tooltip = "dd_akyrs_yona_yona_ex",
+                    detailed_tooltip = { set = "Other", key = "dragqueen_dictionary_accessorize" },
                     func = args.func,
                     colour = args.colour or G.C.BLUE,
                     padding = args.padding or 0.1,
@@ -165,7 +173,6 @@ DRAGQUEENMOD.create_hover_tooltip = function(args)
         }
     }
 end
-
 
 
 
@@ -194,15 +201,16 @@ end
 
 
 
-
-
 local artistname = function(record)
   return type(record) == 'table' and record.name or record
 end
 
+
+
 local TEST_poke_get_artist_info = function(name_or_record)
   return DRAGQUEENMOD.TEST_poke_artist_info[artistname(name_or_record)]
 end
+
 
 
 local TEST_poke_get_artist_list = function()
@@ -214,14 +222,18 @@ local TEST_poke_get_artist_list = function()
   return list
 end
 
+
+
 -- TODO: All the entries are along a series of rows, with the option cycle stuck at the bottom
 -- We want to move the dictionary entries into a nested node, so that its box can have a different color
 local TEST_pokermon_actual_credits_artists_create_grid = function()
   local page = G.pokermon_actual_credits_artists_grid_page or 1
-  local rows, cols = 3, 1
+  local rows, cols = 4, 1
   local artist_list = TEST_poke_get_artist_list()
   local row_nodes = {}
+  local option_cycle_node = {}
 
+  -- Build all the individual rows (and columns)
   local marker = 1 + rows * cols * (page - 1)
   for i = 1, rows do
     local col_nodes = {}
@@ -241,15 +253,20 @@ local TEST_pokermon_actual_credits_artists_create_grid = function()
               detailed_tooltip = { set = info.set, key = info.key },
               colour = G.C.WHITE,
               scale = 0.5,
-              shadow = true
+              shadow = true,
+              juice = true
             }
-          }
-        }}
+          },
+        }
+      }
       col_nodes[#col_nodes+1] = button
     end
-    row_nodes[i] = {n=G.UIT.R, config={align="tm", minw = 3 * cols, minh = 1}, nodes=col_nodes}
+    row_nodes[i] = {n=G.UIT.R, config={align="tm", minw = 3 * cols, minh = 0.7}, nodes=col_nodes}
     marker = marker + cols
   end
+
+  -- Now we put the row nodes into an overall dictionary_rows
+
 
   local total_pages = math.ceil(#artist_list / (rows * cols))
   local cycle_options = {}
@@ -257,10 +274,13 @@ local TEST_pokermon_actual_credits_artists_create_grid = function()
     cycle_options[#cycle_options+1] = localize('k_page') .. " " .. i .. "/" .. total_pages
   end
 
-  -- Final row holds the "[<] PAGE 1/X [>]" thing
-  row_nodes[#row_nodes+1] = {
+  -- Holds the "[<] PAGE 1/X [>]" thing
+  option_cycle_node[1] = {
     n = G.UIT.R,
-    config = { align = "cm" },
+    config = {
+      align = "cm",
+      padding = 0,
+    },
     nodes = {
       create_option_cycle {
         options = cycle_options,
@@ -276,16 +296,52 @@ local TEST_pokermon_actual_credits_artists_create_grid = function()
   }
 
   return {
+    -- Root structure
     n = G.UIT.ROOT,
     config = {
       align = "cm",
-      r = 0.1,
-      padding = 0.1,
+      padding = 0,
       colour = G.C.CLEAR
     },
-    nodes = row_nodes,
+    --nodes = row_nodes,
+    -- The column containing dictionary box plus the option cycle
+    nodes = {
+      {
+        n = G.UIT.C,
+        config = {
+          align = "cm",
+          padding = 0
+        },
+        nodes = {
+          -- contains dictionary box
+          {
+            n = G.UIT.R,
+            config = {
+              align = "cm",
+              r = 0.1,
+              padding = 0.1,
+              minw = 8,
+              colour = G.C.BLACK,
+              emboss = 0.05
+            },
+            nodes = row_nodes
+          },
+          -- contains option cycle
+          {
+            n = G.UIT.R,
+            config = {
+              align = "cm",
+              padding = 0,
+            },
+            nodes = option_cycle_node
+          }
+        }
+      }
+    }
   }
 end
+
+
 
 local TEST_pokermon_actual_credits_artists = function()
   return {
@@ -295,8 +351,7 @@ local TEST_pokermon_actual_credits_artists = function()
         n = G.UIT.ROOT,
         config = {
           align = "cm",
-          padding = 0.1,
-          emboss = 0.05,
+          padding = 0,
           r = 0.1,
           minw = 10,
           colour = G.C.CLEAR
@@ -307,8 +362,7 @@ local TEST_pokermon_actual_credits_artists = function()
             config = {
               align = "tm",
               padding = 0.2,
-              emboss = 0.05,
-              r = 0.1
+              minh = 1.5
             },
             nodes = {
               { n = G.UIT.T,
@@ -323,7 +377,10 @@ local TEST_pokermon_actual_credits_artists = function()
           },
           -- Display grid of dictionary entries
           {n = G.UIT.R,
-            config = { align = "tm" },
+            config = {
+              align = "tm",
+              padding = 0
+            },
             nodes = {
               { n = G.UIT.O,
                 config = {
@@ -341,6 +398,7 @@ local TEST_pokermon_actual_credits_artists = function()
     end
   }
 end
+
 
 
 G.FUNCS.TEST_pokermon_actual_credits_artists_page = function(e)
@@ -361,8 +419,6 @@ G.FUNCS.TEST_pokermon_actual_credits_artists_page = function(e)
     grid_wrap.UIBox:recalculate()
   end
 end
-
-
 
 
 
