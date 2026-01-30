@@ -172,6 +172,13 @@ function DRAGQUEENMOD.build_dictionary()
           else
             error("tooltip.category \"" .. tooltip.category .. "\" associated with \"" .. word.entry .. "\" given to DRAGQUEENMOD.dictionary must be \"descriptions\" or \"misc\"")
           end
+
+          local passed_config = tooltip.config or nil
+
+          if passed_config ~= nil then
+            localized_tooltip.config = passed_config
+          end
+
           localized_tooltip.set = tooltip.set
           localized_tooltip.key = tooltip.key
 
@@ -242,7 +249,7 @@ function DRAGQUEENMOD.locally_sort_built_dictionary()
 end
 
 
-
+-- Creates a box holding a grid of dictionary entries, and an option cycle
 local dictionary_tab_create_grid = function()
   local page = G.dictionary_grid_page or 1
   local rows, cols = 4, 1
@@ -258,7 +265,15 @@ local dictionary_tab_create_grid = function()
     for j = marker, row_end do
       local word_variable = word_variable_list[j]
       if not word_variable then break end
+      -- Build the information for the node, as well as hover tooltip(s)
       local info = get_dictionary_entry(word_variable)
+      local tooltip = {}
+      tooltip[#tooltip+1] = { set = info.set, key = info.key }
+      if info.extra_tooltips ~= nil then
+        for _, additional_tooltips in ipairs(info.extra_tooltips) do
+          tooltip[#tooltip+1] = additional_tooltips
+        end
+      end
       local button = {
         n = G.UIT.C,
         config = { align = "tm", padding = 0.1 },
@@ -267,7 +282,7 @@ local dictionary_tab_create_grid = function()
             n = G.UIT.T,
             config = {
               text = info.name,
-              detailed_tooltip = { set = info.set, key = info.key },
+              detailed_tooltip = tooltip,
               colour = G.C.WHITE,
               scale = 0.5,
               shadow = true,
