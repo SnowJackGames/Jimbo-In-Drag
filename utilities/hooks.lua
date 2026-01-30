@@ -28,6 +28,7 @@ local dragqueen_hook_create_UIBox_detailed_tooltip = create_UIBox_detailed_toolt
 -- Lets UI key "detailed_tooltip" create a set of tooltips instead of just one
 function create_UIBox_detailed_tooltip(_center_or_set_of_centers, badges, ...)
   local is_a_set_of_centers = false
+  local passed_badges = badges or nil
 
   -- We have to determine if we're being passed a _center or a set of _centers
   for _, item in pairs(_center_or_set_of_centers) do
@@ -42,7 +43,8 @@ function create_UIBox_detailed_tooltip(_center_or_set_of_centers, badges, ...)
 
     -- Get the localized UI for each item
     for _, individual_center in pairs(_center_or_set_of_centers) do
-      local UI_box = dragqueen_hook_create_UIBox_detailed_tooltip(individual_center, ...)
+      passed_badges = individual_center.badges or nil
+      local UI_box = dragqueen_hook_create_UIBox_detailed_tooltip(individual_center, passed_badges, ...)
 
       UI_box_set[#UI_box_set+1] = UI_box
     end
@@ -79,7 +81,7 @@ function create_UIBox_detailed_tooltip(_center_or_set_of_centers, badges, ...)
   -- Regular single detailed_tooltip item
     else
       local _center = _center_or_set_of_centers
-      return dragqueen_hook_create_UIBox_detailed_tooltip(_center, ...)
+      return dragqueen_hook_create_UIBox_detailed_tooltip(_center, passed_badges, ...)
     end
   end
 
