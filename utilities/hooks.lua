@@ -32,42 +32,31 @@ function create_UIBox_detailed_tooltip(_center_or_set_of_centers, badges, ...)
   -- We have to determine if we're being passed a _center or a set of _centers
   for _, item in pairs(_center_or_set_of_centers) do
     if type(item) == "table" then
-      _center_or_set_of_centers = true
+      is_a_set_of_centers = true
     end
   end
 
   if is_a_set_of_centers then
-    local full_UI_table = {
-        main = {},
-        info = {},
-        type = {},
-        name = "done",
-        badges = badges or {}
-    }
-    local desc_set = {}
+    local UI_box_set = {}
     local nodes_set = {}
 
     -- Get the localized UI for each item
     for _, individual_center in pairs(_center_or_set_of_centers) do
-      local desc = generate_card_ui(individual_center, full_UI_table, nil, individual_center.set, nil)
-      table.insert(desc_set, desc)
+      local UI_box = dragqueen_hook_create_UIBox_detailed_tooltip(individual_center, ...)
+
+      UI_box_set[#UI_box_set+1] = UI_box
     end
 
-    for _, tooltip in ipairs(desc_set) do
-      local tooltip_node_instance = {
-        n = G.UIT.R,
-        config = {
-          align = "cm",
-          colour = lighten(G.C.JOKER_GREY, 0.5),
-          r = 0.1,
-          padding = 0.05,
-          emboss = 0.05
-        },
-        nodes = {
-          info_tip_from_rows(tooltip.info[1], tooltip.info[1].name),
-        }
+    for _, UI_box in ipairs(UI_box_set) do
+      local tooltip_node_instance = UI_box.nodes[1]
+      local arranged_node = {
+          n = G.UIT.C,
+          config = {
+            align = "tl",
+          },
+          nodes = {tooltip_node_instance}
       }
-      table.insert(nodes_set, tooltip_node_instance)
+      nodes_set[#nodes_set+1] = arranged_node
     end
     
     return {
@@ -77,11 +66,12 @@ function create_UIBox_detailed_tooltip(_center_or_set_of_centers, badges, ...)
         colour = G.C.CLEAR
       },
       nodes = {
-        { n = G.UIT.R,
+        { n = G.UIT.C,
           config = {
-            colour = G.C.CLEAR
+            padding = 0.05
           },
           nodes = nodes_set
+
         }
       }
     }
