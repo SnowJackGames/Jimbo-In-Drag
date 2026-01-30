@@ -56,9 +56,37 @@ DRAGQUEENMOD.credits = {
 
 
 
--- Referenced by the Dictionary tab in the mod's entry
--- <br>Can optionally define additional tooltips
--- Entries automatically sorted by localized alphabet
+-- Referenced by the Dictionary tab in Jimbo In Drag's mod entry in main menu
+-- <br>Can optionally define additional tooltips with `extra_tooltips`
+-- <br>Entries automatically sorted by localized alphabet
+-- ### Structure:
+-- ```
+-- {
+--   -- Corresponds to `G.localization.descriptions.Other.dragqueen_dictionary_accessorize`
+--   entry = "accessorize",
+--   -- Optional table of tooltip instances
+--   extra_tooltips = {
+--     {
+--       -- "descriptions" or "misc" table in `G.localization`
+--       category = "descriptions",
+--       set = "Tarot",
+--       key = "c_sun",
+--       -- Optional, contains variables that are passed to the tooltip instance
+--       config = {           
+--         max_highlighted = 3,
+--         suit_conv = "Hearts"
+--       }
+--     }
+--   }
+-- }
+-- ```
+-- ### Or simply:
+-- ```
+-- {
+--   -- Corresponds to `G.localization.descriptions.Other.dragqueen_dictionary_accessorize`
+--   entry = "slay"
+-- }
+-- ```
 DRAGQUEENMOD.dictionary = {
   {
     entry = "accessorize",
@@ -66,7 +94,11 @@ DRAGQUEENMOD.dictionary = {
       {
         category = "descriptions",
         set = "Tarot",
-        key = "c_sun"
+        key = "c_sun",
+        config = {
+          max_highlighted = 3,
+          suit_conv = "Hearts"
+        }
       }
     }
   },
