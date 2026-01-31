@@ -27,13 +27,13 @@ local dragqueen_hook_create_UIBox_detailed_tooltip = create_UIBox_detailed_toolt
 
 -- Lets UI key "detailed_tooltip" create a set of tooltips instead of just one
 function create_UIBox_detailed_tooltip(_center_or_set_of_centers, badges, ...)
-  local is_a_set_of_centers = false
+  local is_a_set_of_centers = true
   local passed_badges = badges or nil
 
   -- We have to determine if we're being passed a _center or a set of _centers
   for _, item in pairs(_center_or_set_of_centers) do
-    if type(item) == "table" then
-      is_a_set_of_centers = true
+    if type(item) ~= "table" then
+      is_a_set_of_centers = false
     end
   end
 
