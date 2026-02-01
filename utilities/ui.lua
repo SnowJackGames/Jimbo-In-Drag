@@ -184,6 +184,8 @@ function DRAGQUEENMOD.build_dictionary()
 
           -- Remember, localized_tooltip is either a string or a table of strings 
           associated_tooltips[#associated_tooltips+1] = localized_tooltip
+        elseif (tooltip.tooltip_from_function) then
+          associated_tooltips[#associated_tooltips+1] = tooltip
         end
       end
 
@@ -469,9 +471,23 @@ end
 -- Create collection entries for Kisses if we have multiple types, or just stick them in stickers
 
 
+------------------------------
+-- Extending UI functionality
+------------------------------
+
+
+
+-- Alternative way to create a detailed tooltip from node from a function,
+-- <br>as opposed to through info_tip_from_rows
+--
+---@see create_UIBox_detailed_tooltip
+function DRAGQUEENMOD.create_UIBox_detailed_tooltip_from_function(_center)
+end
+
+
 
 ------------------------------
--- Tooltips
+-- Mod-specific tooltips
 ------------------------------
 
 
@@ -816,12 +832,147 @@ end
 -- Dynamically create a "suit to consumable" conversion table
 -- <br>to be displayed in Dictionary for Accessorize
 -- <br>Cannot be stored directly in localization as it'll be a table within a tooltip
-function DRAGQUEENMOD.suit_to_consumable_tooltip()
-  local node_structure = {}
+function DRAGQUEENMOD.suit_to_consumable_table_tooltip()
+  local title = DRAGQUEENMOD.easymisclocalize("dictionary", "dragqueen_ui_suit_to_consumable_table")
+  print(title)
+  local suit_column = {}
+  local consumable_column = {}
+  
 
-
-  return {
+  local suit_column_title = {
+    n = G.UIT.R,
+    config = {
+      align = "cm",
+      padding = 0,
+      colour = G.C.GREY
+    },
+    nodes = {
+      {
+        n = G.UIT.T,
+        config = {
+          align = "cm",
+          text = "ack!",
+          scale = 0.5,
+          colour = loc_colour("dragqueen_keyword")
+        }
+      }
+    }
   }
+
+  local consumable_column_title = {
+    n = G.UIT.R,
+    config = {
+      align = "cm",
+      padding = 0,
+      colour = G.C.GREY
+    },
+    nodes = {
+      {
+        n = G.UIT.T,
+        config = {
+          align = "cm",
+          text = "yeowch!",
+          scale = 0.5,
+          colour = loc_colour("dragqueen_keyword")
+        }
+      }
+    }
+  }
+
+  suit_column[#suit_column+1] = suit_column_title
+  consumable_column[#consumable_column+1] = consumable_column_title
+
+
+  local suit_to_consumable_table_node = {
+    n = G.UIT.C,
+    config = {
+      align = "cm",
+      padding = 0
+    },
+    -- Holds the table titles and entries
+    nodes = {
+      -- Suits column
+      suit_column,
+      -- Consumable column
+      consumable_column
+    }
+  }
+
+  local tooltip_node = {
+    n = G.UIT.ROOT,
+    config = {
+      align = "cm",
+      colour = G.C.CLEAR
+    },
+    nodes = {
+    { n = G.UIT.R,
+      config = {
+        align = "cm",
+        colour = lighten(G.C.JOKER_GREY, 0.5),
+        r = 0.1,
+        padding = 0.05,
+        emboss = 0.05
+      },
+        nodes = {
+          -- info_tip_from_rows(desc.info[1], desc.info[1].name),
+          {
+            n = G.UIT.R,
+            config = {
+              align  = "cm",
+              colour = lighten(G.C.GREY, 0.15),
+              r = 0.1
+            },
+            nodes = {
+              {
+                n = G.UIT.R,
+                config = {
+                  align = "tm",
+                  minh = 0.36,
+                  padding = 0.03
+                },
+                nodes = {
+                  {
+                    -- "Suit to Consumable Table" Title
+                    n = G.UIT.R,
+                    config = {
+                      align = "tm",
+                      minh = 0.36,
+                      padding = 0.03,
+                    },
+                    nodes = {
+                      {
+                        n = G.UIT.T,
+                        config = {
+                          text = title,
+                          scale = 0.32,
+                          colour = G.C.UI.TEXT_LIGHT
+                        }
+                      }
+                    }
+                  },
+                  -- suit_to_consumable tooltip
+                  {
+                    n = G.UIT.R,
+                    config = {
+                      align = "cm",
+                      minw = 1.5,
+                      minh = 0.4,
+                      r = 0.1,
+                      padding = 0.05,
+                      colour = G.C.WHITE
+                    },
+                    -- nodes = suit_to_consumable_table_node
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  return tooltip_node
 end
 
 

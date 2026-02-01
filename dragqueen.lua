@@ -6,8 +6,8 @@
 DRAGQUEENMOD = {}
 
 -- Load utility functions into DRAGQUEENMOD
-SMODS.load_file("utilities/definitions.lua")()
 SMODS.load_file("utilities/misc_functions.lua")()
+SMODS.load_file("utilities/definitions.lua")()
 SMODS.load_file("utilities/content_patches.lua")()
 SMODS.load_file("utilities/cross-mod.lua")()
 SMODS.load_file("utilities/colors_and_fonts.lua")()
@@ -22,11 +22,14 @@ DRAGQUEENMOD.font_symbols()
 SMODS.load_file("content/atlas.lua")()
 
 
+
 -- Check for Cross-Mod Content
 -- Cross-Mod Content
 if DRAGQUEENMOD.config.cross_mod_enabled then
   DRAGQUEENMOD.cross_mod_content_register()
 end
+
+
 
 -- Load Contents of Drag Queen Mod
 -- Core Content
@@ -38,7 +41,6 @@ DRAGQUEENMOD.register_items(DRAGQUEENMOD.MODIFIERS.ENABLEDENHANCEMENTS, "content
 DRAGQUEENMOD.register_items(DRAGQUEENMOD.MODIFIERS.ENABLEDEDITIONS, "content/Modifiers/Editions")
 DRAGQUEENMOD.register_items(DRAGQUEENMOD.MODIFIERS.ENABLEDSTICKERS, "content/Modifiers/Stickers")
 DRAGQUEENMOD.register_items(DRAGQUEENMOD.MODIFIERS.ENABLEDKISSES, "content/Modifiers/Kisses")
-
 
 -- Consumables
 DRAGQUEENMOD.register_items(DRAGQUEENMOD.CONSUMABLES.ENABLEDTAROT, "content/Consumables/Tarot")
@@ -73,6 +75,8 @@ end
 if DRAGQUEENMOD.config.vanilla_reworks_enabled then
   DRAGQUEENMOD.register_items(DRAGQUEENMOD.ENABLEDVANILLA_REWORKS,"")
 end
+
+
 
 -- Apply our config to particular findable objects
 local objects = {}
@@ -129,3 +133,8 @@ for _, v in ipairs(objects) do
     end
   end
 end
+
+
+
+-- Any additional code that needs to be run after everything else in this file
+SMODS.load_file("utilities/late_code.lua")()
