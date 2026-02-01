@@ -37,6 +37,10 @@ function create_UIBox_detailed_tooltip(_center_or_set_of_centers, badges, ...)
     end
   end
 
+  -- If it's a tooltip_from_function we treat it differently
+  if _center_or_set_of_centers.tooltip_from_function ~= nil then is_a_set_of_centers = false end
+
+  
   if is_a_set_of_centers then
     local UI_box_set = {}
     local nodes_set = {}
@@ -44,7 +48,7 @@ function create_UIBox_detailed_tooltip(_center_or_set_of_centers, badges, ...)
     -- Get the localized UI for each item
     for _, individual_center in pairs(_center_or_set_of_centers) do
       passed_badges = individual_center.badges or nil
-      local UI_box = dragqueen_hook_create_UIBox_detailed_tooltip(individual_center, passed_badges, ...)
+      local UI_box = create_UIBox_detailed_tooltip(individual_center, passed_badges, ...)
 
       UI_box_set[#UI_box_set+1] = UI_box
     end
@@ -73,17 +77,31 @@ function create_UIBox_detailed_tooltip(_center_or_set_of_centers, badges, ...)
             padding = 0.05
           },
           nodes = nodes_set
-
         }
       }
     }
 
-  -- Regular single detailed_tooltip item
+-- Regular single detailed_tooltip item
+  else
+    local _center = _center_or_set_of_centers
+    local UI_box = nil
+
+    -- Alternative way to build tooltip from function
+    if _center.tooltip_from_function ~= nil then
+      if (_center.set ~= nil) or (_center.key ~= nil) then
+        error("_center passed through dragqueen_hook_create_UIBox_detailed_tooltip hooking create_UIBox_detailed_tooltip can't process both _center.tooltip_from_function along with _center.set or _center.key at same time")
+      else
+        UI_box = _center.tooltip_from_function
+      end
+
+    -- Standard way to build tooltip
     else
-      local _center = _center_or_set_of_centers
-      return dragqueen_hook_create_UIBox_detailed_tooltip(_center, passed_badges, ...)
+      UI_box = dragqueen_hook_create_UIBox_detailed_tooltip(_center, passed_badges, ...)
     end
+
+    return UI_box
   end
+end
 
 
 
@@ -136,9 +154,10 @@ end
 -- Hooking Balatro's set_language()
 local dragqueen_hook_set_language = Game.set_language
 
--- Hook that sorts the dictionary in case language changes
+-- Hook that sorts the dictionary / things that reference localization in case language changes
 function Game:set_language(...)
   dragqueen_hook_set_language(self, ...)
+  DRAGQUEENMOD.locally_sort_built_dictionary()
   DRAGQUEENMOD.build_dictionary()
   DRAGQUEENMOD.locally_sort_built_dictionary()
 end
@@ -156,6 +175,7 @@ function DRAGQUEENMOD.last_second_code()
   if DRAGQUEENMOD.load_cross_mod_ours_to_theirs then
     DRAGQUEENMOD.cross_mod_ours_to_theirs()
   end
+  DRAGQUEENMOD.build_custom_structure_dictionary_tooltips()
   DRAGQUEENMOD.build_dictionary()
   DRAGQUEENMOD.locally_sort_built_dictionary()
 end
