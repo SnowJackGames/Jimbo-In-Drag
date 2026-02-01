@@ -76,7 +76,11 @@ DRAGQUEENMOD.credits = {
 --         max_highlighted = 3,
 --         suit_conv = "Hearts"
 --       }
---     }
+--     },
+--    {
+--     -- Define a tooltip from a function rather than from localization
+--     tooltip_from_function = {whatever}
+--    }
 --   }
 -- }
 -- ```
