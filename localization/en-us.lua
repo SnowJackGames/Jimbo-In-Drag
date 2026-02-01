@@ -650,6 +650,10 @@ return {
       dragqueen_ui_requires_restart = "Requires Restart",
       dragqueen_ui_does_not_require_restart = "Does Not Require Restart",
       dragqueen_ui_dictionary = "Dictionary",
+      dragqueen_ui_suit_to_consumable_table = "Suit to Consumable Table",
+      dragqueen_ui_suit_to_consumable_table_suit = "Suit",
+      dragqueen_ui_suit_to_consumable_table_consumable = "Consumable",
+
 
       dragqueen_card_badge_dark_suit = "Dark Suit",
       dragqueen_card_badge_light_suit = "Light Suit",
