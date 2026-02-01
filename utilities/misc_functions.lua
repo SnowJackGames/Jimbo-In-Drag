@@ -37,6 +37,7 @@ function DRAGQUEENMOD.remove_style_modifier_codes(styledstring)
 end
 
 
+
 ------------------------------
 -- Getters
 ------------------------------
@@ -85,6 +86,7 @@ function DRAGQUEENMOD.getprefix(name, guessedprefix)
   local foundprefix = SMODS.find_mod(name)[1].prefix or guessedprefix
   return foundprefix
 end
+
 
 
 -- Easily pulls a set and key from `G.localization.descriptions`
