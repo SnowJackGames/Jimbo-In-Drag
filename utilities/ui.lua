@@ -726,6 +726,7 @@ function DRAGQUEENMOD.suit_tooltip_build_for_light_or_dark_for_nonplain(tooltipt
 end
 
 
+
 -- Dynamically create the "Accessorize" tooltip
 ---@param card table | Card -- Card to give tooltip to
 ---@return table -- Add to info_queue
@@ -750,13 +751,13 @@ function DRAGQUEENMOD.dragqueen_accessorize_tooltip(card)
   end
   assert(suit_exists_check == true, "DRAGQUEENMOD.dragqueen_accessorize_tooltip() could not find " .. given_suit)
 
-  -- Find the associated suit-converting tarot card, make sure it exists
-  local suit_tarot = DRAGQUEENMOD.suits_to_tarot[given_suit]
-  assert(type(suit_tarot) == "string", "Could not find suit-converting tarot for suit " .. given_suit .. "for DRAGQUEENMOD.dragqueen_accessorize_tooltip()")
+  -- Find the associated suit-converting consumable card, make sure it exists
+  local suit_consumable = DRAGQUEENMOD.suits_to_consumable[given_suit]
+  assert(type(suit_consumable) == "string", "Could not find suit-converting consumable for suit " .. given_suit .. "for DRAGQUEENMOD.dragqueen_accessorize_tooltip()")
 
-  -- Get the localized name for that tarot
-  local suit_tarot_local_info = DRAGQUEENMOD.suits_to_tarot_local_description[given_suit][1]
-  local suit_tarot_local_name = DRAGQUEENMOD.easydescriptionlocalize(suit_tarot_local_info[1], suit_tarot_local_info[2]).name
+  -- Get the localized name for that consumable
+  local suit_consumable_local_info = DRAGQUEENMOD.suits_to_consumable_local_description[given_suit].localization_entry
+  local suit_consumable_local_name = DRAGQUEENMOD.easydescriptionlocalize(suit_consumable_local_info[1], suit_consumable_local_info[2]).name
 
   -- Build the tooltip
   local given_count = tostring(card.ability.extra.accessorize_count)
@@ -771,7 +772,7 @@ function DRAGQUEENMOD.dragqueen_accessorize_tooltip(card)
   for index, string in ipairs(DRAGQUEENMOD.easydescriptionlocalize(set, key).text) do
     local subbed_string = ""
     subbed_string = string.gsub(string, "#1#", given_count)
-    subbed_string = string.gsub(subbed_string, "#2#", suit_tarot_local_name)
+    subbed_string = string.gsub(subbed_string, "#2#", suit_consumable_local_name)
     subbed_string = string.gsub(subbed_string, "#3#", suit_color)
     text[index] = subbed_string
   end
@@ -780,7 +781,7 @@ function DRAGQUEENMOD.dragqueen_accessorize_tooltip(card)
   local colours = {}
   colours[#colours+1] = G.C.SUITS[given_suit] or G.C.IMPORTANT
   colours[#colours+1] = G.C.FILTER
-  colours[#colours+1] = G.C.SET.Tarot
+  colours[#colours+1] = loc_colour(DRAGQUEENMOD.suits_to_consumable_local_description[given_suit].consumable_color)
   colours[#colours+1] = G.C.UI.TEXT_INACTIVE
 
   -- We let Balatro's misc_functions.lua:loc_parse_string() handle the text
@@ -808,6 +809,19 @@ function DRAGQUEENMOD.dragqueen_accessorize_tooltip(card)
     }
   }
 
+end
+
+
+
+-- Dynamically create a "suit to consumable" conversion table
+-- <br>to be displayed in Dictionary for Accessorize
+-- <br>Cannot be stored directly in localization as it'll be a table within a tooltip
+function DRAGQUEENMOD.suit_to_consumable_tooltip()
+  local node_structure = {}
+
+
+  return {
+  }
 end
 
 

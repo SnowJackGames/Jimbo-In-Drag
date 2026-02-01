@@ -239,7 +239,7 @@ DRAGQUEENMOD.suit_types_to_mod_prefixes = {
 
 
 
-DRAGQUEENMOD.suits_to_tarot = {
+DRAGQUEENMOD.suits_to_consumable = {
   ["Spades"] = "c_world",
   ["Hearts"] = "c_sun",
   ["Clubs"] = "c_moon",
@@ -249,18 +249,38 @@ DRAGQUEENMOD.suits_to_tarot = {
 }
 
 
-DRAGQUEENMOD.suits_to_tarot_local_description = {
-  ["Spades"] = { { "Tarot", "c_world"} },
-  ["Hearts"] = { { "Tarot", "c_sun" } },
-  ["Clubs"] = { { "Tarot", "c_moon" } },
-  ["Diamonds"] = { { "Tarot", "c_star" } },
+DRAGQUEENMOD.suits_to_consumable_local_description = {
+  ["Spades"] = {
+    localization_entry = { "Tarot", "c_world"},
+    consumable_category = { "misc", "dictionary", "k_tarot"},
+    consumable_color = "tarot"
+  },
+  ["Hearts"] = {
+    localization_entry = { "Tarot", "c_sun" },
+    consumable_category = { "misc", "dictionary", "k_tarot"},
+    consumable_color = "tarot"
+  },
+  ["Clubs"] = {
+    localization_entry = { "Tarot", "c_moon" },
+    consumable_category = { "misc", "dictionary", "k_tarot"},
+    consumable_color = "tarot"
+  },
+  ["Diamonds"] = {
+    localization_entry = { "Tarot", "c_star" },
+    consumable_category = { "misc", "dictionary", "k_tarot"},
+    consumable_color = "tarot"
+  },
   ["dragqueen_Purses"] = {
-    { "Tarot", "c_dragqueen_purses_placeholder_plural" },
-    { "Tarot", "c_dragqueen_purses_placeholder_singular" }
+    localization_entry = { "Tarot", "c_dragqueen_purses_placeholder_plural" },
+    localization_entry_singular = { "Tarot", "c_dragqueen_purses_placeholder_singular" },
+    consumable_category = { "misc", "dictionary", "k_tarot"},
+    consumable_color = "tarot"
   },
   ["dragqueen_Pumps"] = {
-    { "Tarot", "c_dragqueen_pumps_placeholder_plural" },
-    { "Tarot", "c_dragqueen_pumps_placeholder_singular" }
+    localization_entry = { "Tarot", "c_dragqueen_pumps_placeholder_plural" },
+    localization_entry_singular = { "Tarot", "c_dragqueen_pumps_placeholder_singular" },
+    consumable_category = { "misc", "dictionary", "k_tarot"},
+    consumable_color = "tarot"
   }
 }
 

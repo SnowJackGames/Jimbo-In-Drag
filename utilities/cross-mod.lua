@@ -42,12 +42,12 @@ function DRAGQUEENMOD.cross_mod_theirs_to_ours()
     table.insert(DRAGQUEENMOD.modded_suits, prefix .. "_Halberds")
     table.insert(DRAGQUEENMOD.modded_suits, prefix .. "_Fleurons")
     DRAGQUEENMOD.suit_groups["exotic"] = { prefix .. "_Halberds", prefix .. "_Fleurons" }
-    DRAGQUEENMOD.suits_to_tarot[prefix .. "_Halberds"] = "c_" .. prefix .. "_abyss"
-    DRAGQUEENMOD.suits_to_tarot[prefix .. "_Fleurons"] = "c_" .. prefix .. "_sky"
+    DRAGQUEENMOD.suits_to_consumable[prefix .. "_Halberds"] = "c_" .. prefix .. "_abyss"
+    DRAGQUEENMOD.suits_to_consumable[prefix .. "_Fleurons"] = "c_" .. prefix .. "_sky"
     DRAGQUEENMOD.suits_to_color[prefix .. "_Halberds"] = "bunc_halberds"
     DRAGQUEENMOD.suits_to_color[prefix .. "_Fleurons"] = "bunc_fleurons"
-    DRAGQUEENMOD.suits_to_tarot_local_description[prefix .. "_Halberds"] = { { "Tarot", "c_bunc_abyss" } }
-    DRAGQUEENMOD.suits_to_tarot_local_description[prefix .. "_Fleurons"] = { { "Tarot", "c_bunc_sky" } }
+    DRAGQUEENMOD.suits_to_consumable_local_description[prefix .. "_Halberds"] = { localization_entry = { "Tarot", "c_bunc_abyss" }, consumable_category = { "misc", "dictionary", "k_tarot" }, consumable_color = "tarot" }
+    DRAGQUEENMOD.suits_to_consumable_local_description[prefix .. "_Fleurons"] = { localization_entry = { "Tarot", "c_bunc_sky" }, consumable_category = { "misc", "dictionary", "k_tarot" }, consumable_color = "tarot" }
     DRAGQUEENMOD.sine_colors.DRAGQUEEN_BUNC_EXOTIC_SUIT = { "bunc_halberds", "bunc_halberds", "bunc_fleurons", "bunc_fleurons" }
   end
 
@@ -61,12 +61,12 @@ function DRAGQUEENMOD.cross_mod_theirs_to_ours()
     table.insert(DRAGQUEENMOD.modded_suits, prefix .. "_Crowns")
     table.insert(DRAGQUEENMOD.modded_suits, prefix .. "_Stars")
     DRAGQUEENMOD.suit_groups["proud"] = { prefix .. "_Crowns", prefix .. "_Stars" }
-    DRAGQUEENMOD.suits_to_tarot[prefix .. "_Crowns"] = "c_" .. prefix .. "_ace_of_swords"
-    DRAGQUEENMOD.suits_to_tarot[prefix .. "_Stars"] = "c_" .. prefix .. "_ace_of_pentacles"
+    DRAGQUEENMOD.suits_to_consumable[prefix .. "_Crowns"] = "c_" .. prefix .. "_ace_of_swords"
+    DRAGQUEENMOD.suits_to_consumable[prefix .. "_Stars"] = "c_" .. prefix .. "_ace_of_pentacles"
     DRAGQUEENMOD.suits_to_color[prefix .. "_Crowns"] = "paperback_crowns"
     DRAGQUEENMOD.suits_to_color[prefix .. "_Stars"] = "paperback_stars"
-    DRAGQUEENMOD.suits_to_tarot_local_description[prefix .. "_Crowns"] = { { "paperback_minor_arcana", "c_paperback_ace_of_swords" } }
-    DRAGQUEENMOD.suits_to_tarot_local_description[prefix .. "_Stars"] = { { "paperback_minor_arcana", "c_paperback_ace_of_pentacles" } }
+    DRAGQUEENMOD.suits_to_consumable_local_description[prefix .. "_Crowns"] = { localization_entry = { "paperback_minor_arcana", "c_paperback_ace_of_swords" }, consumable_category = { "misc", "dictionary", "k_paperback_minor_arcana" }, consumable_color = "paperback_minor_arcana" }
+    DRAGQUEENMOD.suits_to_consumable_local_description[prefix .. "_Stars"] = { localization_entry = { "paperback_minor_arcana", "c_paperback_ace_of_pentacles" }, consumable_category = { "misc", "dictionary", "k_paperback_minor_arcana" }, consumable_color = "paperback_minor_arcana" }
     DRAGQUEENMOD.sine_colors.DRAGQUEEN_PAPERBACK_PROUD_SUIT = { "paperback_crowns", "paperback_crowns", "paperback_stars", "paperback_stars" }
   end
 
@@ -80,12 +80,12 @@ function DRAGQUEENMOD.cross_mod_theirs_to_ours()
     table.insert(DRAGQUEENMOD.modded_suits, prefix .. "_Moons")
     table.insert(DRAGQUEENMOD.modded_suits, prefix .. "_Stars")
     DRAGQUEENMOD.suit_groups["night"] = { prefix .. "_Moons",prefix .. "_Stars" }
-    DRAGQUEENMOD.suits_to_tarot[prefix .. "_Moons"] = "c_" .. prefix .. "_moon_q"
-    DRAGQUEENMOD.suits_to_tarot[prefix .. "_Stars"] = "c_" .. prefix .. "_star_q"
+    DRAGQUEENMOD.suits_to_consumable[prefix .. "_Moons"] = "c_" .. prefix .. "_moon_q"
+    DRAGQUEENMOD.suits_to_consumable[prefix .. "_Stars"] = "c_" .. prefix .. "_star_q"
     DRAGQUEENMOD.suits_to_color[prefix .. "_Moons"] = "six_moons"
     DRAGQUEENMOD.suits_to_color[prefix .. "_Stars"] = "six_stars"
-    DRAGQUEENMOD.suits_to_tarot_local_description[prefix .. "_Moons"] = { { "Tarot", "c_six_moon_q" } }
-    DRAGQUEENMOD.suits_to_tarot_local_description[prefix .. "_Stars"] = { { "Tarot", "c_six_star_q" } }
+    DRAGQUEENMOD.suits_to_consumable_local_description[prefix .. "_Moons"] = { localization_entry = { "Tarot", "c_six_moon_q" }, consumable_category = { "misc", "dictionary", "k_tarot" }, consumable_color = "tarot" }
+    DRAGQUEENMOD.suits_to_consumable_local_description[prefix .. "_Stars"] = { localization_entry = { "Tarot", "c_six_star_q" }, consumable_category = { "misc", "dictionary", "k_tarot" }, consumable_color = "tarot" }
     DRAGQUEENMOD.sine_colors.DRAGQUEEN_SIX_NIGHT_SUIT = { "six_moons", "six_moons", "six_stars", "six_stars" }
 
   end
@@ -98,11 +98,8 @@ function DRAGQUEENMOD.cross_mod_theirs_to_ours()
     table.insert(DRAGQUEENMOD.light_suits, prefix .. "_3s")
     table.insert(DRAGQUEENMOD.modded_suits, prefix .. "_3s")
     DRAGQUEENMOD.suit_groups["treat"] = { prefix .. "_3s" }
-    DRAGQUEENMOD.suits_to_tarot[prefix .. "_3s"] = "c_" .. prefix .. "_cat"
-    DRAGQUEENMOD.suits_to_tarot_local_description[prefix .. "_3s"] = {
-      { "Tarot", "c_minty_cat" },
-      { "Tarot", "c_minty_cat_flavor" }
-    }
+    DRAGQUEENMOD.suits_to_consumable[prefix .. "_3s"] = "c_" .. prefix .. "_cat"
+    DRAGQUEENMOD.suits_to_consumable_local_description[prefix .. "_3s"] = { localization_entry = { "Tarot", "c_minty_cat" }, consumable_category = { "misc", "dictionary", "k_tarot" }, consumable_color = "tarot" }
     DRAGQUEENMOD.suits_to_color[prefix .. "_3s"] = "minty_3s"
     DRAGQUEENMOD.sine_colors.DRAGQUEEN_MINTY_TREAT_SUIT = { "minty_3s" }
   end
@@ -114,10 +111,10 @@ function DRAGQUEENMOD.cross_mod_theirs_to_ours()
     -- Adds their suits to our definition of magic and modded
     table.insert(DRAGQUEENMOD.modded_suits, prefix .. "_Clovers")
     table.insert(DRAGQUEENMOD.modded_suits, prefix .. "_Suitless")
-    DRAGQUEENMOD.suits_to_tarot[prefix .. "_Clovers"] = "c_" .. prefix .. "_forest"
-    DRAGQUEENMOD.suits_to_tarot[prefix .. "_Suitless"] = "c_" .. prefix .. "_Wastes"
-    DRAGQUEENMOD.suits_to_tarot_local_description[prefix .. "_Clovers"] = { { "Tarot", "c_mtg_forest" } }
-    DRAGQUEENMOD.suits_to_tarot_local_description[prefix .. "_Suitless"] = { { "Tarot", "c_mtg_Wastes" } }
+    DRAGQUEENMOD.suits_to_consumable[prefix .. "_Clovers"] = "c_" .. prefix .. "_forest"
+    DRAGQUEENMOD.suits_to_consumable[prefix .. "_Suitless"] = "c_" .. prefix .. "_Wastes"
+    DRAGQUEENMOD.suits_to_consumable_local_description[prefix .. "_Clovers"] = { localization_entry = { "Tarot", "c_mtg_forest" }, consumable_category = { "misc", "dictionary", "k_tarot" }, consumable_color = "tarot" }
+    DRAGQUEENMOD.suits_to_consumable_local_description[prefix .. "_Suitless"] = { localization_entry = { "Tarot", "c_mtg_Wastes" }, consumable_category = { "misc", "dictionary", "k_tarot" }, consumable_color = "tarot" }
     DRAGQUEENMOD.suits_to_color[prefix .. "_Clovers"] = "clover"
     DRAGQUEENMOD.suits_to_color[prefix .. "_Suitless"] = "white"
     DRAGQUEENMOD.suit_groups["magic"] = { prefix .. "_Clovers", prefix .. "_Suitless" }
@@ -134,10 +131,10 @@ function DRAGQUEENMOD.cross_mod_theirs_to_ours()
     table.insert(DRAGQUEENMOD.modded_suits, prefix .. "_Inks")
     table.insert(DRAGQUEENMOD.modded_suits, prefix .. "_Colors")
     DRAGQUEENMOD.suit_groups["stained"] = { prefix .. "_Inks", prefix .. "_Colors" }
-    DRAGQUEENMOD.suits_to_tarot[prefix .. "_Inks"] = "c_" .. prefix .. "_the_blob"
-    DRAGQUEENMOD.suits_to_tarot[prefix .. "_Colors"] = "c_" .. prefix .. "_the_paint"
-    DRAGQUEENMOD.suits_to_tarot_local_description[prefix .. "_Inks"] = { { "Tarot", "c_" .. prefix .. "_the_blob" } }
-    DRAGQUEENMOD.suits_to_tarot_local_description[prefix .. "_Colors"] = { { "Tarot", "c_" .. prefix .. "_the_paint" } }
+    DRAGQUEENMOD.suits_to_consumable[prefix .. "_Inks"] = "c_" .. prefix .. "_the_blob"
+    DRAGQUEENMOD.suits_to_consumable[prefix .. "_Colors"] = "c_" .. prefix .. "_the_paint"
+    DRAGQUEENMOD.suits_to_consumable_local_description[prefix .. "_Inks"] = { localization_entry = { "Tarot", "c_" .. prefix .. "_the_blob" }, consumable_category = { "misc", "dictionary", "k_tarot" }, consumable_color = "tarot" }
+    DRAGQUEENMOD.suits_to_consumable_local_description[prefix .. "_Colors"] = { localization_entry = { "Tarot", "c_" .. prefix .. "_the_paint" }, consumable_category = { "misc", "dictionary", "k_tarot" }, consumable_color = "tarot" }
     DRAGQUEENMOD.suits_to_color[prefix .. "_Inks"] = "ink_inks"
     DRAGQUEENMOD.suits_to_color[prefix .. "_Colors"] = "ink_colors"
     DRAGQUEENMOD.sine_colors.DRAGQUEEN_INK_STAINED_SUIT = { "ink_inks", "ink_inks", "ink_colors", "ink_colors" }
@@ -182,10 +179,10 @@ function DRAGQUEENMOD.cross_mod_theirs_to_ours()
     table.insert(DRAGQUEENMOD.modded_suits, prefix .. "_Crosses")
     table.insert(DRAGQUEENMOD.modded_suits, prefix .. "_Noughts")
     DRAGQUEENMOD.suit_groups["tictactoe"] = { prefix .. "_Crosses", prefix .. "_Noughts" }
-    DRAGQUEENMOD.suits_to_tarot[prefix .. "_Crosses"] = "c_" .. prefix .. "_denial"
-    DRAGQUEENMOD.suits_to_tarot[prefix .. "_Noughts"] = "c_" .. prefix .. "_ring"
-    DRAGQUEENMOD.suits_to_tarot_local_description[prefix .. "_Crosses"] = { { "Spectral", "c_unik_denial" } }
-    DRAGQUEENMOD.suits_to_tarot_local_description[prefix .. "_Noughts"] = { { "Spectral", "c_unik_ring" } }
+    DRAGQUEENMOD.suits_to_consumable[prefix .. "_Crosses"] = "c_" .. prefix .. "_denial"
+    DRAGQUEENMOD.suits_to_consumable[prefix .. "_Noughts"] = "c_" .. prefix .. "_ring"
+    DRAGQUEENMOD.suits_to_consumable_local_description[prefix .. "_Crosses"] = { localization_entry = { "Spectral", "c_unik_denial" }, consumable_category = { "misc", "dictionary", "k_spectral" }, consumable_color = "spectral" }
+    DRAGQUEENMOD.suits_to_consumable_local_description[prefix .. "_Noughts"] = { localization_entry = { "Spectral", "c_unik_ring" }, consumable_category = { "misc", "dictionary", "k_spectral" }, consumable_color = "spectral" }
     DRAGQUEENMOD.suits_to_color[prefix .. "_Crosses"] = "unik_crosses"
     DRAGQUEENMOD.suits_to_color[prefix .. "_Noughts"] = "unik_noughts"
     DRAGQUEENMOD.sine_colors.DRAGQUEEN_UNIK_TICTACTOE_SUIT = { "unik_crosses", "unik_crosses", "unik_noughts", "unik_noughts" }

@@ -26,7 +26,7 @@ SMODS.Joker {
 
   loc_vars = function(self, info_queue, card)
     info_queue[#info_queue + 1] = DRAGQUEENMOD.dragqueen_accessorize_tooltip(card)
-    info_queue[#info_queue + 1] = G.P_CENTERS[DRAGQUEENMOD.suits_to_tarot[card.ability.extra.accessorize_suit]]
+    info_queue[#info_queue + 1] = G.P_CENTERS[DRAGQUEENMOD.suits_to_consumable[card.ability.extra.accessorize_suit]]
 
     local quotelocation = DRAGQUEENMOD.easydescriptionlocalize(self.set, self.key)
     local quote = DRAGQUEENMOD.get_quote(quotelocation.quote)
