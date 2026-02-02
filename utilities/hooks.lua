@@ -157,7 +157,7 @@ local dragqueen_hook_set_language = Game.set_language
 -- Hook that sorts the dictionary / things that reference localization in case language changes
 function Game:set_language(...)
   dragqueen_hook_set_language(self, ...)
-  DRAGQUEENMOD.locally_sort_built_dictionary()
+  DRAGQUEENMOD.build_custom_structure_dictionary_tooltips()
   DRAGQUEENMOD.build_dictionary()
   DRAGQUEENMOD.locally_sort_built_dictionary()
 end
@@ -187,6 +187,6 @@ end
 local dragqueen_hook_splash_screen = Game.splash_screen
 
 function Game:splash_screen(...)
-  dragqueen_hook_splash_screen(self, ...)
   DRAGQUEENMOD.last_second_code()
+  dragqueen_hook_splash_screen(self, ...)
 end
