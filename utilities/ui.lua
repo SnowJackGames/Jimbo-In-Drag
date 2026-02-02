@@ -833,8 +833,6 @@ end
 -- <br>to be displayed in Dictionary for Accessorize
 -- <br>Cannot be stored directly in localization as it'll be a table within a tooltip
 function DRAGQUEENMOD.suit_to_consumable_table_tooltip()
-  local title = DRAGQUEENMOD.easymisclocalize("dictionary", "dragqueen_ui_suit_to_consumable_table")
-  print(title)
   local suit_column = {}
   local consumable_column = {}
   
@@ -844,15 +842,13 @@ function DRAGQUEENMOD.suit_to_consumable_table_tooltip()
     config = {
       align = "cm",
       padding = 0,
-      colour = G.C.GREY
     },
     nodes = {
-      {
-        n = G.UIT.T,
+      { n = G.UIT.T,
         config = {
           align = "cm",
-          text = "ack!",
-          scale = 0.5,
+          text = DRAGQUEENMOD.easymisclocalize("dictionary", "dragqueen_ui_suit_to_consumable_table_suit"),
+          scale = 0.36,
           colour = loc_colour("dragqueen_keyword")
         }
       }
@@ -864,15 +860,13 @@ function DRAGQUEENMOD.suit_to_consumable_table_tooltip()
     config = {
       align = "cm",
       padding = 0,
-      colour = G.C.GREY
     },
     nodes = {
-      {
-        n = G.UIT.T,
+      { n = G.UIT.T,
         config = {
           align = "cm",
-          text = "yeowch!",
-          scale = 0.5,
+          text = DRAGQUEENMOD.easymisclocalize("dictionary", "dragqueen_ui_suit_to_consumable_table_consumable"),
+          scale = 0.36,
           colour = loc_colour("dragqueen_keyword")
         }
       }
@@ -882,19 +876,128 @@ function DRAGQUEENMOD.suit_to_consumable_table_tooltip()
   suit_column[#suit_column+1] = suit_column_title
   consumable_column[#consumable_column+1] = consumable_column_title
 
+  -- Now we put all the entries into the two columns
+  for suit, suitdata in pairs(DRAGQUEENMOD.suits_to_consumable_local_description) do
+    -- pull variables
+    local suitname = DRAGQUEENMOD.easymisclocalize("suits_plural", suit)
+    local suitcolor = DRAGQUEENMOD.suits_to_color[suit]
+    local consumable = DRAGQUEENMOD.easydescriptionlocalize(suitdata.localization_entry[1], suitdata.localization_entry[2]).name
+    local consumable_color = suitdata.consumable_color
+    local consumable_category = nil
+
+
+    if suitdata.consumable_category[1] == "misc" then
+      consumable_category = DRAGQUEENMOD.easymisclocalize(suitdata.consumable_category[2], suitdata.consumable_category[3])
+    elseif suitdata.consumable_category[1] == "descriptions" then
+      consumable_category = DRAGQUEENMOD.easydescriptionlocalize(suitdata.consumable_category[2], suitdata.consumable_category[3])
+    else
+      error("suitdata.consumable_category[1] not \"misc\" or \"descriptions\"")
+    end
+
+
+    -- For the consumable description coloring to work, we build a dynamic (temporary) localization entry
+    -- Kind of like `dragqueen_accessorize_tooltip_dynamic` for the accessory tooltip
+    local dynamic_entry_text = { "{C:" .. consumable_color .. "}" .. consumable .."{}" .. " ({C:" .. consumable_color .. "}".. consumable_category .. "{})" }
+    local dynamic_entry_text_parsed = {}
+    for _, line in ipairs(dynamic_entry_text) do
+      dynamic_entry_text_parsed[#dynamic_entry_text_parsed+1] = loc_parse_string(line)
+    end
+
+
+    -- Pass the text and text_parsed to the dynamic localization entry
+    G.localization.descriptions.Other["dragqueen_suit_to_consumable_table_tooltip_dynamic"].text = dynamic_entry_text
+    G.localization.descriptions.Other["dragqueen_suit_to_consumable_table_tooltip_dynamic"].text_parsed = dynamic_entry_text_parsed
+
+
+
+    -- We now pull from the dynamic entry we build to pass to generate_card_ui
+    local consumable_center = { set = "Other", key = "dragqueen_suit_to_consumable_table_tooltip_dynamic" }
+    local full_UI_table = {
+        main = {},
+        info = {},
+        type = {},
+        name = 'done',
+        badges = {}
+    }
+
+    --TODO: Weird investigation thing. When the below variable is called,
+    --for some reason dragqueen_suit_to_consumable_table_tooltip_dynamic's .name entry is created at the start of splash_screen?
+    --Unsure why. Fix for now is just not have the tooltip have a .name function, which isn't called by anything anyways
+    local consumable_card_ui = generate_card_ui(consumable_center, full_UI_table, nil, consumable_center.set, nil)
+    
+    -- This line is to clear some lines of text rendered on the screen after
+    remove_all(G.STAGE_OBJECTS[G.STAGE])
+
+
+    -- We organize the information in the generated consumable_card_ui to be displayed
+    -- This code is similar to Balatro's `info_tip_from_rows`
+    local consumable_info_as_nodes = {}
+    for _, parts_of_text_as_nodes in ipairs(consumable_card_ui.info[1]) do
+      -- We also need to manually set the scale for the pieces of text we're calling "parts_of_text_as_nodes"
+      for _, part_of_text_as_a_node in ipairs(parts_of_text_as_nodes) do
+        part_of_text_as_a_node.config.scale = 0.2
+      end
+      consumable_info_as_nodes[#consumable_info_as_nodes+1] = { n = G.UIT.R, config = { align = "cm" }, nodes = parts_of_text_as_nodes }
+    end
+
+
+    -- Now we take all the info we built and put it into a node on the left and right column
+    local suit_column_instance = {
+      n = G.UIT.R,
+      config = {
+        align = "cm",
+        padding = 0
+      },
+      nodes = {
+        { n = G.UIT.T,
+          config = {
+            align = "cm",
+            text = suitname,
+            scale = 0.2,
+            colour = loc_colour(suitcolor)
+          }
+        }
+      }
+    }
+
+    local consumable_column_instance = {
+      n = G.UIT.R,
+      config = {
+        align = "cm",
+        padding = 0
+      },
+      nodes = consumable_info_as_nodes
+    }
+
+  suit_column[#suit_column+1] = suit_column_instance
+  consumable_column[#consumable_column+1] = consumable_column_instance
+  end
+
 
   local suit_to_consumable_table_node = {
     n = G.UIT.C,
     config = {
       align = "cm",
-      padding = 0
+      padding = 0.1
     },
     -- Holds the table titles and entries
     nodes = {
       -- Suits column
-      suit_column,
+      {
+        n = G.UIT.C,
+        config = {
+          align = "cm"
+        },
+        nodes = suit_column
+      },
       -- Consumable column
-      consumable_column
+      {
+        n = G.UIT.C,
+        config = {
+          align = "cm"
+        },
+        nodes = consumable_column
+      },
     }
   }
 
@@ -938,12 +1041,13 @@ function DRAGQUEENMOD.suit_to_consumable_table_tooltip()
                       align = "tm",
                       minh = 0.36,
                       padding = 0.03,
+                      colour = G.C.CLEAR
                     },
                     nodes = {
                       {
                         n = G.UIT.T,
                         config = {
-                          text = title,
+                          text = DRAGQUEENMOD.easymisclocalize("dictionary", "dragqueen_ui_suit_to_consumable_table"),
                           scale = 0.32,
                           colour = G.C.UI.TEXT_LIGHT
                         }
@@ -961,7 +1065,9 @@ function DRAGQUEENMOD.suit_to_consumable_table_tooltip()
                       padding = 0.05,
                       colour = G.C.WHITE
                     },
-                    -- nodes = suit_to_consumable_table_node
+                    nodes = {
+                      suit_to_consumable_table_node
+                    }
                   }
                 }
               }
@@ -971,7 +1077,6 @@ function DRAGQUEENMOD.suit_to_consumable_table_tooltip()
       }
     }
   }
-
   return tooltip_node
 end
 

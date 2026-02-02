@@ -610,6 +610,11 @@ return {
         name = "Accessorize",
         text = {},
       },
+      -- Dynamically generated through UI.lua:DRAGQUEENMOD.suit_to_consumable_table_tooltip()
+      dragqueen_suit_to_consumable_table_tooltip_dynamic = {
+        name = "Suit To Consumable Table",
+        text = {},
+      },
       -- dictionary tab
       dragqueen_dictionary_accessorize = {
         name = "Accessorize",
