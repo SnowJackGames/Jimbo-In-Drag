@@ -148,20 +148,28 @@ end
 ---@param key string Ex. `bl_dragqueen_tempnamekissblind`
 ----@return table -- has a name string, and a text table of one or more strings
 function DRAGQUEENMOD.easydescriptionlocalize(set, key)
+  assert(type(set) == "string", "set passed to DRAGQUEENMOD.easydescriptionlocalize must be a string")
+  assert(type(key) == "string", "set passed to DRAGQUEENMOD.easydescriptionlocalize must be a string")
+
   local parsed_entry = nil
   local current_language_entry = G.localization.descriptions[set][key]
 
   -- If the entry doesn't exist in the current language, maybe it's in en-us
   if current_language_entry == nil then
-
     local back_up_entries = DRAGQUEENMOD.backup_localization_entries
     parsed_entry = back_up_entries["en-us"].descriptions[set][key]
-    
+
+  -- Otherwise we just pass what we found in G.localization
   else
     parsed_entry = current_language_entry
   end
 
-  return parsed_entry
+  -- Pass the entry if it exists
+  if parsed_entry ~= nil then
+    return parsed_entry
+  else
+    error(set .. ", " .. key .. " passed to DRAGQUEENMOD.easydescriptionlocalize not found in current localization table nor en-us backup")
+  end
 end
 
 
@@ -171,10 +179,28 @@ end
 ---@param key string Ex. `dragqueen_yas`
 ---@return table | string -- either a string, or a table of strings
 function DRAGQUEENMOD.easymisclocalize(set, key)
-  local localized
-  assert(G.localization.misc[set], "Could not find " .. set .. " in localization.misc")
-  localized = assert(G.localization.misc[set][key], "Could not find " .. key .. " in " .. set)
-  return localized
+  assert(type(set) == "string", "set passed to DRAGQUEENMOD.easymisclocalize must be a string")
+  assert(type(key) == "string", "set passed to DRAGQUEENMOD.easymisclocalize must be a string")
+
+  local parsed_entry = nil
+  local current_language_entry = G.localization.misc[set][key]
+
+  -- If the entry doesn't exist in the current language, maybe it's in en-us
+  if current_language_entry == nil then
+    local back_up_entries = DRAGQUEENMOD.backup_localization_entries
+    parsed_entry = back_up_entries["en-us"].misc[set][key]
+    
+  -- Otherwise we just pass what we found in G.localization
+  else
+    parsed_entry = current_language_entry
+  end
+
+  -- Pass the entry if it exists
+  if parsed_entry ~= nil then
+    return parsed_entry
+  else
+    error(set .. ", " .. key .. " passed to DRAGQUEENMOD.easymisclocalize not found in current localization table nor en-us backup")
+  end
 end
 
 
