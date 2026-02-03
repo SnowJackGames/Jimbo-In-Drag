@@ -153,15 +153,10 @@ function DRAGQUEENMOD.easydescriptionlocalize(set, key)
 
   -- If the entry doesn't exist in the current language, maybe it's in en-us
   if current_language_entry == nil then
-    local backup_en_us_entry = localize({ type = "descriptions", set = set, key = key})
-    parsed_entry = backup_en_us_entry
 
-    -- local backup_en_us_entry = DRAGQUEENMOD.backup_en_us_localization.descriptions[set][key]
-    -- if backup_en_us_entry == nil then
-    --   error("Could not find " .. key .. " in " .. set .. " in descriptions, even in backup_en_us_entry")
-    -- else
-    --   parsed_entry = backup_en_us_entry
-    -- end
+    local back_up_entries = DRAGQUEENMOD.backup_localization_entries
+    parsed_entry = back_up_entries["en-us"].descriptions[set][key]
+    
   else
     parsed_entry = current_language_entry
   end
