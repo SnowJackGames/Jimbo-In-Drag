@@ -40,7 +40,7 @@ function create_UIBox_detailed_tooltip(_center_or_set_of_centers, badges, ...)
   -- If it's a tooltip_from_function we treat it differently
   if _center_or_set_of_centers.tooltip_from_function ~= nil then is_a_set_of_centers = false end
 
-  
+
   if is_a_set_of_centers then
     local UI_box_set = {}
     local nodes_set = {}
