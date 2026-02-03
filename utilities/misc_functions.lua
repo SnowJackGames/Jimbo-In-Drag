@@ -38,6 +38,60 @@ end
 
 
 
+-- Based on the local `recurse` function in `SMODS/src/utils.lua` used by `SMODS.handle_loc_file`
+-- <br>Used for merging together localization files, but can take any two tables
+-- <br>If `target` is like:
+--```
+-- { fruits = {
+--     apples = { "SweeTango", "Envy" }
+--   }
+-- }
+--```
+-- and `ref_table` is like: 
+--```
+-- { fruits = {
+--     apples = { "Pink Lady" }, 
+--     bananas = { "Goldfinger", "Fe'i" }
+--   }
+-- }
+--```
+-- Then the returned `combined_table` will become:
+--```
+-- { fruits = {
+--     apples = { "Envy", "SweeTango", "Pink Lady" }, 
+--     bananas = { "Goldfinger", "Fe'i" }
+--   }
+-- }
+--```
+---@param target table
+---@param ref_table table
+---@param force? boolean
+---@return table | nil
+---@see SMODS.handle_loc_file
+function DRAGQUEENMOD.recursively_add_entries_from_one_table_into_another(target, ref_table, force)
+  local combined_table = ref_table
+
+  local recurse = DRAGQUEENMOD.recursively_add_entries_from_one_table_into_another
+    if type(target) ~= 'table' then return end --this shouldn't happen unless there's a bad return value
+
+    for k, v in pairs(target) do
+      -- If the value doesn't exist *or*
+      -- force mode is on and the value is not a table,
+      -- change/add the thing
+      if type(combined_table) ~= "nil" then
+        if (not combined_table[k] and type(k) ~= 'number') or (force and ((type(v) ~= 'table') or type(v[1]) == 'string')) then
+          combined_table[k] = v
+        else
+          recurse(v, combined_table[k])
+        end
+      end
+    end
+    
+    return combined_table
+  end
+
+
+
 ------------------------------
 -- Getters
 ------------------------------
@@ -92,70 +146,27 @@ end
 -- Easily pulls a set and key from `G.localization.descriptions`
 ---@param set string Ex. `Blind`
 ---@param key string Ex. `bl_dragqueen_tempnamekissblind`
----@return table -- has a name string, and a text table of one or more strings
+----@return table -- has a name string, and a text table of one or more strings
 function DRAGQUEENMOD.easydescriptionlocalize(set, key)
-  local en_us_localization = nil
-  local evaluated_set = nil
-  local evaluated_entry = nil
+  local parsed_entry = nil
+  local current_language_entry = G.localization.descriptions[set][key]
 
-  ------------------------------
-  -- Set evaluation
-  ------------------------------
+  -- If the entry doesn't exist in the current language, maybe it's in en-us
+  if current_language_entry == nil then
+    local backup_en_us_entry = localize({ type = "descriptions", set = set, key = key})
+    parsed_entry = backup_en_us_entry
 
-  -- We try to find the set either in the current language or as a fallback in en-us
-  local set_table_for_current_language = G.localization.descriptions[set]
-
-  if set_table_for_current_language == nil then
-    -- Wasn't found in current language, maybe it's in en-us
-    en_us_localization = assert(loadstring(love.filesystem.read('localization/en-us.lua')))()
-
-    local set_table_for_en_us = en_us_localization.descriptions[set]
-
-    if set_table_for_en_us == nil then
-      error("Could not find " .. set .. " in descriptions, even using backup en-us")
-    else
-      evaluated_set = set
-    end
-
-  -- Was found in current language
+    -- local backup_en_us_entry = DRAGQUEENMOD.backup_en_us_localization.descriptions[set][key]
+    -- if backup_en_us_entry == nil then
+    --   error("Could not find " .. key .. " in " .. set .. " in descriptions, even in backup_en_us_entry")
+    -- else
+    --   parsed_entry = backup_en_us_entry
+    -- end
   else
-    evaluated_set = set
+    parsed_entry = current_language_entry
   end
 
-  -- Additional nil check to make sure we found the set
-  if evaluated_set == nil then
-    error("Could not find " .. set .. " in descriptions")
-  end
-
-  ------------------------------
-  -- Key evaluation
-  ------------------------------
-
-  -- Assuming the set is okay, now let's search for the key
-  local localized_entry_for_current_language = G.localization.descriptions[evaluated_set][key]
-
-  if localized_entry_for_current_language == nil then
-    en_us_localization = assert(loadstring(love.filesystem.read('localization/en-us.lua')))()
-
-    local localized_entry_for_en_us = en_us_localization.descriptions[set][key]
-
-    if localized_entry_for_en_us == nil then
-      error("Could not find " .. key .. " in " .. set .. " in descriptions, even using backup en-us")
-    else
-      evaluated_entry = localized_entry_for_en_us
-    end
-
-  -- Was found in current language
-  else
-    evaluated_entry = localized_entry_for_current_language
-  end
-
-  -- Additional nil check to make sure we found the entry
-  if evaluated_entry == nil then
-    error("Could not find " .. key .. " in " .. set .. " in descriptions")
-  end
-
-  return evaluated_entry
+  return parsed_entry
 end
 
 
