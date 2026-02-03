@@ -94,10 +94,68 @@ end
 ---@param key string Ex. `bl_dragqueen_tempnamekissblind`
 ---@return table -- has a name string, and a text table of one or more strings
 function DRAGQUEENMOD.easydescriptionlocalize(set, key)
-  local localized
-  assert(G.localization.descriptions[set], "Could not find " .. set .. " in descriptions")
-  localized = assert(G.localization.descriptions[set][key], "Could not find " .. key .. " in " .. set)
-  return localized
+  local en_us_localization = nil
+  local evaluated_set = nil
+  local evaluated_entry = nil
+
+  ------------------------------
+  -- Set evaluation
+  ------------------------------
+
+  -- We try to find the set either in the current language or as a fallback in en-us
+  local set_table_for_current_language = G.localization.descriptions[set]
+
+  if set_table_for_current_language == nil then
+    -- Wasn't found in current language, maybe it's in en-us
+    en_us_localization = assert(loadstring(love.filesystem.read('localization/en-us.lua')))()
+
+    local set_table_for_en_us = en_us_localization.descriptions[set]
+
+    if set_table_for_en_us == nil then
+      error("Could not find " .. set .. " in descriptions, even using backup en-us")
+    else
+      evaluated_set = set
+    end
+
+  -- Was found in current language
+  else
+    evaluated_set = set
+  end
+
+  -- Additional nil check to make sure we found the set
+  if evaluated_set == nil then
+    error("Could not find " .. set .. " in descriptions")
+  end
+
+  ------------------------------
+  -- Key evaluation
+  ------------------------------
+
+  -- Assuming the set is okay, now let's search for the key
+  local localized_entry_for_current_language = G.localization.descriptions[evaluated_set][key]
+
+  if localized_entry_for_current_language == nil then
+    en_us_localization = assert(loadstring(love.filesystem.read('localization/en-us.lua')))()
+
+    local localized_entry_for_en_us = en_us_localization.descriptions[set][key]
+
+    if localized_entry_for_en_us == nil then
+      error("Could not find " .. key .. " in " .. set .. " in descriptions, even using backup en-us")
+    else
+      evaluated_entry = localized_entry_for_en_us
+    end
+
+  -- Was found in current language
+  else
+    evaluated_entry = localized_entry_for_current_language
+  end
+
+  -- Additional nil check to make sure we found the entry
+  if evaluated_entry == nil then
+    error("Could not find " .. key .. " in " .. set .. " in descriptions")
+  end
+
+  return evaluated_entry
 end
 
 
