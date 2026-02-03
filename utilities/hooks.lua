@@ -172,9 +172,12 @@ end
 
 -- Code to be hooked into the end of Game:splash_screen
 function DRAGQUEENMOD.last_second_code()
+  DRAGQUEENMOD.build_backup_localization()
+
   if DRAGQUEENMOD.load_cross_mod_ours_to_theirs then
     DRAGQUEENMOD.cross_mod_ours_to_theirs()
   end
+
   DRAGQUEENMOD.build_custom_structure_dictionary_tooltips()
   DRAGQUEENMOD.build_dictionary()
   DRAGQUEENMOD.locally_sort_built_dictionary()
