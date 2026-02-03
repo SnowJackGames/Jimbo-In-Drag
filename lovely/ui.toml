@@ -1,0 +1,21 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 1
+
+# Prevents some crashes in `localize()` when a colour is being defined such as ex.
+# `colour = part.control.V and args.vars.colours[tonumber(part.control.V)] or not part.control.C and args.text_colour or loc_colour(part.control.C or nil, args.default_col),`
+# Makes sure that trying to call `args.vars.colours[tonumber(part.control.V)]` doesn't crash,
+# if `args.vars.colours` happens to not exist or be blank
+[[patches]]
+[patches.pattern]
+target = "functions/misc_functions.lua"
+pattern = '''
+local loc_target = nil
+'''
+position = "before"
+match_indent = true
+payload = '''
+args.vars = args.vars or {}
+args.vars.colours = args.vars.colours or {}
+'''
