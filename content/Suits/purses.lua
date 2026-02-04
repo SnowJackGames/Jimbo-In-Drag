@@ -16,7 +16,7 @@ SMODS.Suit{
 
     in_pool = function(self, args)
         -- Allows forcing this suit to be included
-        if args and args.dragqueen and args.dragqueen.include_pumps then
+        if args and args.dragqueen and args.dragqueen.include_purses then
             return true
         end
 
@@ -29,7 +29,7 @@ SMODS.Suit{
       local sleeve_config = (G.P_CENTERS[sleeve] or {}).dragqueen
 
       return (back_config and back_config.create_purses)
-          or (sleeve_config and sleeve_config.create_pumps)
+          or (sleeve_config and sleeve_config.create_purses)
     else
       -- If not creating a deck
       return DRAGQUEENMOD.has_suit_in_deck('dragqueen_Purses', true) or DRAGQUEENMOD.non_plain_in_pool()
