@@ -147,7 +147,7 @@ end
 ---@param set string Ex. `Blind`
 ---@param key string Ex. `bl_dragqueen_tempnamekissblind`
 ----@return table -- has a name string, and a text table of one or more strings
-function DRAGQUEENMOD.easydescriptionslocalize(set, key)
+function DRAGQUEENMOD.easydescriptionlocalize(set, key)
   assert(type(set) == "string", "set passed to DRAGQUEENMOD.easydescriptionslocalize must be a string")
   assert(type(key) == "string", "set passed to DRAGQUEENMOD.easydescriptionslocalize must be a string")
 
@@ -248,6 +248,26 @@ function DRAGQUEENMOD.easymisclocalize(set, key)
           end
         end
       end
+    end
+  end
+
+  -- Final resort, there's a chance that the item is using a loc_txt to handle localization. Let's find the item by key
+  if parsed_entry == nil then
+    if G.P_CENTERS[key]["loc_txt"] ~= nil then
+      if G.P_CENTERS[key]["loc_txt"]["default"] ~= nil then
+        parsed_entry = G.P_CENTERS[key]["loc_txt"]["default"]
+      elseif G.P_CENTERS[key]["loc_txt"]["en-us"] ~= nil then
+        parsed_entry = G.P_CENTERS[key]["loc_txt"]["en-us"]
+      else
+        for _, data in pairs(G.P_CENTERS[key]["loc_txt"]) do
+          if parsed_entry ~= nil then
+            break
+          else
+            parsed_entry = data
+          end
+        end
+      end
+
     end
   end
 
