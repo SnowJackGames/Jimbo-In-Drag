@@ -150,8 +150,12 @@ end
 function DRAGQUEENMOD.easydescriptionlocalize(set, key)
   assert(type(set) == "string", "set passed to DRAGQUEENMOD.easydescriptionslocalize must be a string")
   assert(type(key) == "string", "set passed to DRAGQUEENMOD.easydescriptionslocalize must be a string")
+  local parsed_entry = nil
 
-  local parsed_entry = G.localization.descriptions[set][key]
+  if G.localization.descriptions[set] then
+    parsed_entry = G.localization.descriptions[set][key]
+  end
+
   local back_up_entries = DRAGQUEENMOD.backup_localization_entries
 
   ------------------------------
@@ -160,12 +164,20 @@ function DRAGQUEENMOD.easydescriptionlocalize(set, key)
 
   -- If the entry doesn't exist in the current language, maybe it's in default
   if parsed_entry == nil then
-    parsed_entry = back_up_entries["default"].descriptions[set][key]
+    if back_up_entries["default"].descriptions then
+      if back_up_entries["default"].descriptions[set] then
+        parsed_entry = back_up_entries["default"].descriptions[set][key]
+      end
+    end
   end
 
   -- If the entry doesn't exist in the current language, maybe it's in en-us?
   if parsed_entry == nil then
-    parsed_entry = back_up_entries["en-us"].descriptions[set][key]
+    if back_up_entries["default"].descriptions then
+      if back_up_entries["en-us"].descriptions[set] then
+        parsed_entry = back_up_entries["en-us"].descriptions[set][key]
+      end
+    end
   end
 
   -- If we still can't find the entry, then we just gotta pull from a random language
@@ -177,9 +189,8 @@ function DRAGQUEENMOD.easydescriptionlocalize(set, key)
     end
 
     for _, language in ipairs(language_names) do
-      print(language_names)
-      if back_up_entries[language].descriptions ~= nil then
-        if back_up_entries[language].descriptions[set] ~= nil then
+      if back_up_entries[language].descriptions then
+        if back_up_entries[language].descriptions[set] then
           if parsed_entry ~= nil then
             break
           else
@@ -190,12 +201,49 @@ function DRAGQUEENMOD.easydescriptionlocalize(set, key)
     end
   end
 
+  -- Final resort, there's a chance that the item is using a loc_txt to handle localization. Let's find the item by key
+  if parsed_entry == nil then
+    local types_of_entries = {
+      "P_CENTERS",
+      "P_SEALS",
+      "P_TAGS",
+      "P_STAKES",
+      "P_BLINDS",
+    }
+    for _, entry_type in ipairs(types_of_entries) do
+      local entry = entry_type
+      if G[entry][key] then
+        if G[entry][key].loc_txt then
+          local loc_txt = G[entry][key].loc_txt
+          if parsed_entry == nil then
+            parsed_entry = loc_txt["default"]
+          end
+          if parsed_entry == nil then
+            parsed_entry = loc_txt["en-us"]
+          end
+          if parsed_entry == nil then
+            for _, data in pairs(loc_txt) do
+              if parsed_entry then
+                break
+              else
+                parsed_entry = data
+              end
+            end
+          end
+        end
+      end
+    if parsed_entry == nil then
+      break
+    end
+    end
+  end
+
   ------------------------------
   -- Passing entry
   ------------------------------
 
   -- Pass the entry if it exists
-  if parsed_entry ~= nil then
+  if parsed_entry then
     return parsed_entry
   else
     error(set .. ", " .. key .. " passed to DRAGQUEENMOD.easydescriptionslocalize not found in current localization table nor default nor en-us nor any other language")
@@ -211,8 +259,12 @@ end
 function DRAGQUEENMOD.easymisclocalize(set, key)
   assert(type(set) == "string", "set passed to DRAGQUEENMOD.easymisclocalize must be a string")
   assert(type(key) == "string", "set passed to DRAGQUEENMOD.easymisclocalize must be a string")
+  local parsed_entry = nil
 
-  local parsed_entry = G.localization.misc[set][key]
+  if G.localization.misc[set] then
+    parsed_entry = G.localization.misc[set][key]
+  end
+
   local back_up_entries = DRAGQUEENMOD.backup_localization_entries
 
   ------------------------------
@@ -221,13 +273,22 @@ function DRAGQUEENMOD.easymisclocalize(set, key)
 
   -- If the entry doesn't exist in the current language, maybe it's in default
   if parsed_entry == nil then
-    parsed_entry = back_up_entries["default"].misc[set][key]
+    if back_up_entries["default"].misc then
+      if back_up_entries["default"].misc[set] then
+        parsed_entry = back_up_entries["default"].misc[set][key]
+      end
+    end
   end
 
   -- If the entry doesn't exist in the current language, maybe it's in en-us?
   if parsed_entry == nil then
-    parsed_entry = back_up_entries["en-us"].misc[set][key]
+    if back_up_entries["default"].misc then
+      if back_up_entries["en-us"].misc[set] then
+        parsed_entry = back_up_entries["en-us"].misc[set][key]
+      end
+    end
   end
+
 
   -- If we still can't find the entry, then we just gotta pull from a random language
   if parsed_entry == nil then
@@ -238,9 +299,8 @@ function DRAGQUEENMOD.easymisclocalize(set, key)
     end
 
     for _, language in ipairs(language_names) do
-      print(language_names)
-      if back_up_entries[language].misc ~= nil then
-        if back_up_entries[language].misc[set] ~= nil then
+      if back_up_entries[language].misc then
+        if back_up_entries[language].misc[set] then
           if parsed_entry ~= nil then
             break
           else
@@ -253,21 +313,38 @@ function DRAGQUEENMOD.easymisclocalize(set, key)
 
   -- Final resort, there's a chance that the item is using a loc_txt to handle localization. Let's find the item by key
   if parsed_entry == nil then
-    if G.P_CENTERS[key]["loc_txt"] ~= nil then
-      if G.P_CENTERS[key]["loc_txt"]["default"] ~= nil then
-        parsed_entry = G.P_CENTERS[key]["loc_txt"]["default"]
-      elseif G.P_CENTERS[key]["loc_txt"]["en-us"] ~= nil then
-        parsed_entry = G.P_CENTERS[key]["loc_txt"]["en-us"]
-      else
-        for _, data in pairs(G.P_CENTERS[key]["loc_txt"]) do
-          if parsed_entry ~= nil then
-            break
-          else
-            parsed_entry = data
+    local types_of_entries = {
+      "P_CENTERS",
+      "P_SEALS",
+      "P_TAGS",
+      "P_STAKES",
+      "P_BLINDS",
+    }
+    for _, entry_type in ipairs(types_of_entries) do
+      local entry = entry_type
+      if G[entry][key] then
+        if G[entry][key].loc_txt then
+          local loc_txt = G[entry][key].loc_txt
+          if parsed_entry == nil then
+            parsed_entry = loc_txt["default"]
+          end
+          if parsed_entry == nil then
+            parsed_entry = loc_txt["en-us"]
+          end
+          if parsed_entry == nil then
+            for _, data in pairs(loc_txt) do
+              if parsed_entry then
+                break
+              else
+                parsed_entry = data
+              end
+            end
           end
         end
       end
-
+    if parsed_entry == nil then
+      break
+    end
     end
   end
 
