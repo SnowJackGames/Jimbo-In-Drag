@@ -86,6 +86,15 @@ function create_UIBox_detailed_tooltip(_center_or_set_of_centers, badges, ...)
     local _center = _center_or_set_of_centers
     local UI_box = nil
 
+    -- In en-us, G.P_CENTERS["c_sun"].name returns "The Sun",
+    -- and G.localization.descriptions.Tarot.c_sun.name returns "The Sun"
+    -- However, in other languages, the name entry in G.P_CENTERS stays the same, but the localization
+    -- entry is different (ex. "Die Sonne" in Dutch)
+    -- If a `_center` has a center and a key, and it corresponds to an item in G.P_CENTERS,
+    -- *and* `_center` has a name_parsed table already,
+    -- Then we need to override `_center.name` with the G.P_CENTERS one before passing through `create_UIBox_detailed_tooltip`
+    -- Why? Because 
+
     -- Alternative way to build tooltip from function
     if _center.tooltip_from_function ~= nil then
       if (_center.set ~= nil) or (_center.key ~= nil) then
@@ -102,6 +111,32 @@ function create_UIBox_detailed_tooltip(_center_or_set_of_centers, badges, ...)
     return UI_box
   end
 end
+
+
+
+-- Hooking Balatro's generate_card_ui
+local dragqueen_hook_generate_card_ui = generate_card_ui
+
+-- If `_c` passed to generate_card_ui has a `.set`, `.key`, and `.name`
+-- <br>and the key refers to a particular entry in `G.P_CENTERS`
+-- <br>Let's make sure that .name is the same as `G.P_CENTERS[particular object].name`,
+-- <br> in case that the `.name` value had been pulled from building an item through localization
+-- <br>(which may be different if it's a language other than en-us.lua)
+-- <br>this fixes a particular issue with our dictionary tooltip stuff when using different languages
+function generate_card_ui(_c, full_UI_table, specific_vars, card_type, badges, hide_desc, main_start, main_end, card)
+  if _c.set and _c.key and _c.name then
+    local name_in_P_CENTERS = G.P_CENTERS[_c.key].name
+    if name_in_P_CENTERS ~= nil then
+      if _c.name ~= name_in_P_CENTERS then
+        _c.name = name_in_P_CENTERS
+      end
+    end
+  end
+
+return dragqueen_hook_generate_card_ui(_c, full_UI_table, specific_vars, card_type, badges, hide_desc, main_start, main_end, card)
+end
+
+
 
 
 
