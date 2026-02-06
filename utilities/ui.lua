@@ -845,15 +845,36 @@ function DRAGQUEENMOD.suit_to_consumable_table_tooltip(given_suits_to_consumable
   local and_more_node = {}
 
   ------------------------------
+  -- Spacers
+  ------------------------------
+  
+  -- thin spacer between rows
+  local horizontal_spacer_node = {
+    n = G.UIT.R,
+    config = {
+      align = "cm",
+      minh = 0.03
+    }
+  }
+
+  -- thin spacer between columns
+  local vertical_spacer_node = {
+    n = G.UIT.C,
+    config = {
+      align = "cm",
+      minw = 0.03
+    }
+  }
+  ------------------------------
   -- Column titles, "and more" entry
   ------------------------------
+
 
   local suit_column_title = {
     n = G.UIT.R,
     config = {
       align = "tm",
-      padding = 0,
-      minh = 0.4
+      padding = 0
     },
     nodes = {
       { n = G.UIT.T,
@@ -871,8 +892,7 @@ function DRAGQUEENMOD.suit_to_consumable_table_tooltip(given_suits_to_consumable
     n = G.UIT.R,
     config = {
       align = "tm",
-      padding = 0,
-      minh = 0.4
+      padding = 0
     },
     nodes = {
       { n = G.UIT.T,
@@ -901,8 +921,7 @@ function DRAGQUEENMOD.suit_to_consumable_table_tooltip(given_suits_to_consumable
           n = G.UIT.R,
           config = {
             align = "cm",
-            padding = 0,
-            minh = 0.2
+            padding = 0
           },
           nodes = {
             {
@@ -920,7 +939,9 @@ function DRAGQUEENMOD.suit_to_consumable_table_tooltip(given_suits_to_consumable
   end
 
   suit_column[#suit_column+1] = suit_column_title
+  suit_column[#suit_column+1] = horizontal_spacer_node
   consumable_column[#consumable_column+1] = consumable_column_title
+  consumable_column[#consumable_column+1] = horizontal_spacer_node
 
   ------------------------------
   -- Adding suit entries
@@ -1041,19 +1062,16 @@ function DRAGQUEENMOD.suit_to_consumable_table_tooltip(given_suits_to_consumable
   ------------------------------
 
   local titles_and_entries_node = {
+    horizontal_spacer_node,
+    horizontal_spacer_node,
     {
       n = G.UIT.R,
       config = {
         align = "cm"
       },
       nodes = {
-        {
-          n = G.UIT.C,
-          config = {
-            align = "cm",
-            minw = 0.05
-          }
-        },
+        vertical_spacer_node,
+        vertical_spacer_node,
         {
           n = G.UIT.C,
           config = {
@@ -1062,13 +1080,7 @@ function DRAGQUEENMOD.suit_to_consumable_table_tooltip(given_suits_to_consumable
           },
           nodes = suit_column
         },
-        {
-          n = G.UIT.C,
-          config = {
-            align = "cm",
-            minw = 0.05
-          },
-        },
+        vertical_spacer_node,
         {
           n = G.UIT.C,
           config = {
@@ -1077,16 +1089,14 @@ function DRAGQUEENMOD.suit_to_consumable_table_tooltip(given_suits_to_consumable
           },
           nodes = consumable_column
         },
-        {
-          n = G.UIT.C,
-          config = {
-            align = "cm",
-            minw = 0.05
-          }
-        }
+        vertical_spacer_node,
+        vertical_spacer_node
       }
     }
   }
+
+  table.insert(titles_and_entries_node, horizontal_spacer_node)
+
 
   if etc_amount > 0 then
     local structured_and_more_node = {
@@ -1100,13 +1110,15 @@ function DRAGQUEENMOD.suit_to_consumable_table_tooltip(given_suits_to_consumable
     }
 
     table.insert(titles_and_entries_node, structured_and_more_node)
+    table.insert(titles_and_entries_node, horizontal_spacer_node)
   end
+
+  table.insert(titles_and_entries_node, horizontal_spacer_node)
 
   local suit_to_consumable_table_node = {
     n = G.UIT.C,
     config = {
-      align = "cm",
-      padding = 0.05
+      align = "cm"
     },
     -- Holds the table titles and entries
     nodes = titles_and_entries_node
@@ -1131,7 +1143,7 @@ function DRAGQUEENMOD.suit_to_consumable_table_tooltip(given_suits_to_consumable
         emboss = 0.05
       },
         nodes = {
-          -- info_tip_from_rows(desc.info[1], desc.info[1].name),
+          -- Below looks similar to Balatro's info_tip_from_rows()
           {
             n = G.UIT.R,
             config = {
@@ -1141,48 +1153,35 @@ function DRAGQUEENMOD.suit_to_consumable_table_tooltip(given_suits_to_consumable
             },
             nodes = {
               {
+                -- "Suit to Consumable Table" Title
                 n = G.UIT.R,
                 config = {
-                  align = "tm",
-                  minh = 0.36,
-                  padding = 0
+                  align = "cm",
+                  minh = 0.41,
+                  padding = 0.06
                 },
                 nodes = {
                   {
-                    -- "Suit to Consumable Table" Title
-                    n = G.UIT.R,
+                    n = G.UIT.T,
                     config = {
-                      align = "tm",
-                      minh = 0.36,
-                      padding = 0.03,
-                      colour = G.C.CLEAR
-                    },
-                    nodes = {
-                      {
-                        n = G.UIT.T,
-                        config = {
-                          text = DRAGQUEENMOD.easymisclocalize("dictionary", "dragqueen_ui_suit_to_consumable_table"),
-                          scale = 0.32,
-                          colour = G.C.UI.TEXT_LIGHT
-                        }
-                      }
-                    }
-                  },
-                  -- suit_to_consumable tooltip
-                  {
-                    n = G.UIT.R,
-                    config = {
-                      align = "cm",
-                      minw = 1.5,
-                      minh = 0.4,
-                      r = 0.1,
-                      padding = 0,
-                      colour = G.C.WHITE
-                    },
-                    nodes = {
-                      suit_to_consumable_table_node
+                      text = DRAGQUEENMOD.easymisclocalize("dictionary", "dragqueen_ui_suit_to_consumable_table"),
+                      scale = 0.32,
+                      colour = G.C.UI.TEXT_LIGHT
                     }
                   }
+                },
+              },
+              -- suit_to_consumable tooltip
+              {
+                n = G.UIT.R,
+                config = {
+                  align = "cm",
+                  minw = 1.5,
+                  r = 0.1,
+                  colour = G.C.WHITE
+                },
+                nodes = {
+                  suit_to_consumable_table_node
                 }
               }
             }
