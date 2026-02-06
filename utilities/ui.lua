@@ -1050,17 +1050,40 @@ function DRAGQUEENMOD.suit_to_consumable_table_tooltip(given_suits_to_consumable
         {
           n = G.UIT.C,
           config = {
-            align = "cm"
+            align = "cm",
+            minw = 0.05
+          }
+        },
+        {
+          n = G.UIT.C,
+          config = {
+            align = "cm",
+            minw = 1
           },
           nodes = suit_column
         },
         {
           n = G.UIT.C,
           config = {
-            align = "cm"
+            align = "cm",
+            minw = 0.05
+          },
+        },
+        {
+          n = G.UIT.C,
+          config = {
+            align = "cm",
+            minw = 2
           },
           nodes = consumable_column
         },
+        {
+          n = G.UIT.C,
+          config = {
+            align = "cm",
+            minw = 0.05
+          }
+        }
       }
     }
   }
