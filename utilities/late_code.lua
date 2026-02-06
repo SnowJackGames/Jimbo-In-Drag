@@ -27,16 +27,18 @@ function DRAGQUEENMOD.build_custom_structure_dictionary_tooltips()
       local suits_to_consumable_local_description = DRAGQUEENMOD.suits_to_consumable_local_description
       local index_sorted = {}
       local set_of_localized_names = {}
+      local total_suit_count = 0
 
       -- We find the local name for the entries and store in set_of_localized_names
       for suit, data in pairs(suits_to_consumable_local_description) do
         local localized_suit_name = DRAGQUEENMOD.easymisclocalize("suits_plural", suit)
+        total_suit_count = total_suit_count + 1
 
         -- This is silly but sometimes there can be multiple suits with the same name from different mods,
         -- most notably Paperback's Stars and Six Suits' Stars
         local number_of_suits_with_same_name = 0
-        for _, suit in ipairs(set_of_localized_names) do
-          if localized_suit_name == suit then
+        for _, particular_suit in ipairs(set_of_localized_names) do
+          if localized_suit_name == particular_suit then
             number_of_suits_with_same_name = number_of_suits_with_same_name + 1
           end
         end
@@ -76,13 +78,13 @@ function DRAGQUEENMOD.build_custom_structure_dictionary_tooltips()
       -- So let's make a set of the tooltips, each entry having 10 suits
       local set_of_stctt_tooltips = {}
       local current_tooltip = {}
-      local count = 1
+      local count = 0
 
       for _, suitdata in ipairs(alphabetized_suits_to_consumable_local_description) do
         -- Still room, we put them in
-        if count < 16 then
-          current_tooltip[count] = suitdata
+        if count < 15 then
           count = count + 1
+          current_tooltip[count] = suitdata
 
         -- Out of room, new line
         else
@@ -100,10 +102,30 @@ function DRAGQUEENMOD.build_custom_structure_dictionary_tooltips()
       -- Sending tooltips to be built and added
       ------------------------------
       
-      for _, tooltip_table in ipairs(set_of_stctt_tooltips) do
-        local special_tooltip = {tooltip_from_function = DRAGQUEENMOD.suit_to_consumable_table_tooltip(tooltip_table)}
-        table.insert(item.extra_tooltips, special_tooltip)
+      -- We don't actually want to pass more than 60 total suits (4 full stctt tooltips)
+      local stctt_count = 0
 
+      -- We build up to 4 tooltips
+      for _, tooltip_table in ipairs(set_of_stctt_tooltips) do
+        stctt_count = stctt_count + 1
+
+        -- Less than 4 full tooltips have been built, go ahead and pass them
+        if stctt_count < 4 then
+          local special_tooltip = {tooltip_from_function = DRAGQUEENMOD.suit_to_consumable_table_tooltip(tooltip_table)}
+          table.insert(item.extra_tooltips, special_tooltip)
+        -- This is the fourth tooltip, and must be the last one
+        elseif stctt_count == 4 then
+          -- If there's exactly 60 suits then we can treat the last one normally
+          if total_suit_count == 60 then
+            local special_tooltip = {tooltip_from_function = DRAGQUEENMOD.suit_to_consumable_table_tooltip(tooltip_table)}
+            table.insert(item.extra_tooltips, special_tooltip)
+          -- There's more than 60, so we have the tooltip have an "...And X more" message
+          else
+            local suits_in_exess = total_suit_count - 60
+            local special_tooltip = {tooltip_from_function = DRAGQUEENMOD.suit_to_consumable_table_tooltip(tooltip_table, suits_in_exess)}
+            table.insert(item.extra_tooltips, special_tooltip)
+          end
+        end
       end
     end
   end
