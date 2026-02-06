@@ -658,6 +658,7 @@ return {
       dragqueen_ui_suit_to_consumable_table = "Suit to Consumable Table",
       dragqueen_ui_suit_to_consumable_table_suit = "Suit",
       dragqueen_ui_suit_to_consumable_table_consumable = "Consumable",
+      dragqueen_ui_suit_to_consumable_table_and_more = "...And #1# more unlisted entries",
 
 
       dragqueen_card_badge_dark_suit = "Dark Suit",
