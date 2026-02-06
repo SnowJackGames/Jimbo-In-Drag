@@ -6,18 +6,104 @@
 
 function DRAGQUEENMOD.build_custom_structure_dictionary_tooltips()
   for _, item in ipairs(DRAGQUEENMOD.dictionary) do
+
+    -- Accessorize entry
     if item.entry == "accessorize" then
       -- Make sure we're not duplicating this tooltip somehow
-      local added_tooltip = false
+      item.extra_tooltips = item.extra_tooltips or {}
+      local unduplicated_extra_tooltips = {}
       for _, tooltip in ipairs(item.extra_tooltips) do
-        if tooltip.tooltip_from_function ~= nil then
-          added_tooltip = true
+        if tooltip.tooltip_from_function == nil then
+          table.insert(unduplicated_extra_tooltips, tooltip)
+        end
+      end
+      item.extra_tooltips = unduplicated_extra_tooltips
+
+      ------------------------------
+      -- Arranging suit entries for sorting
+      ------------------------------
+
+      -- We convert the entries into a way to index them, so we can alphabetize by localized name
+      local suits_to_consumable_local_description = DRAGQUEENMOD.suits_to_consumable_local_description
+      local index_sorted = {}
+      local set_of_localized_names = {}
+
+      -- We find the local name for the entries and store in set_of_localized_names
+      for suit, data in pairs(suits_to_consumable_local_description) do
+        local localized_suit_name = DRAGQUEENMOD.easymisclocalize("suits_plural", suit)
+
+        -- This is silly but sometimes there can be multiple suits with the same name from different mods,
+        -- most notably Paperback's Stars and Six Suits' Stars
+        local number_of_suits_with_same_name = 0
+        for _, suit in ipairs(set_of_localized_names) do
+          if localized_suit_name == suit then
+            number_of_suits_with_same_name = number_of_suits_with_same_name + 1
+          end
+        end
+
+        -- Handles duplicate localized names; i.e the second "stars" becomes "stars_1"
+        -- This particular value isn't ever rendered in game, just used for sorting
+        if number_of_suits_with_same_name ~= 0 then
+          localized_suit_name = localized_suit_name .. "_" .. tostring(number_of_suits_with_same_name)
+        end
+
+        -- Finally, we add the localized name to our reference table to alphabetize,
+        -- And index all the items in suits_to_consumable_local_description
+        table.insert(set_of_localized_names, localized_suit_name)
+        index_sorted[localized_suit_name] = { ["suit"] = suit, ["data"] = data }
+      end
+
+      ------------------------------
+      -- Alphabetizing
+      ------------------------------
+
+      local alphabetized_suits_to_consumable_local_description = {}
+
+      -- Sort set_of_localized_names alphabetically
+      table.sort(set_of_localized_names, function(a,b) return a:lower() < b:lower() end)
+
+      -- Now, rearrange suits_to_consumable_local_description to be alphabetical
+      for _, localized_name in ipairs(set_of_localized_names) do
+        alphabetized_suits_to_consumable_local_description[#alphabetized_suits_to_consumable_local_description+1] = index_sorted[localized_name]
+      end
+
+      ------------------------------
+      -- Making table entries
+      ------------------------------
+
+      -- We don't want more than 10 suits in a "suit to consumable table tooltip" (stctt), otherwise
+      -- It'll be too long and go off the screen
+      -- So let's make a set of the tooltips, each entry having 10 suits
+      local set_of_stctt_tooltips = {}
+      local current_tooltip = {}
+      local count = 1
+
+      for _, suitdata in ipairs(alphabetized_suits_to_consumable_local_description) do
+        -- Still room, we put them in
+        if count < 16 then
+          current_tooltip[count] = suitdata
+          count = count + 1
+
+        -- Out of room, new line
+        else
+          table.insert(set_of_stctt_tooltips, current_tooltip)
+          current_tooltip = {}
+          count = 1
+          current_tooltip[count] = suitdata
         end
       end
 
-      if added_tooltip == false then
-        local special_tooltip = {tooltip_from_function = DRAGQUEENMOD.suit_to_consumable_table_tooltip()}
-        table.insert(item.extra_tooltips, 2, special_tooltip)
+      -- Remaining entries
+      table.insert(set_of_stctt_tooltips, current_tooltip)
+
+      ------------------------------
+      -- Sending tooltips to be built and added
+      ------------------------------
+      
+      for _, tooltip_table in ipairs(set_of_stctt_tooltips) do
+        local special_tooltip = {tooltip_from_function = DRAGQUEENMOD.suit_to_consumable_table_tooltip(tooltip_table)}
+        table.insert(item.extra_tooltips, special_tooltip)
+
       end
     end
   end

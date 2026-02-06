@@ -831,22 +831,34 @@ end
 
 -- Dynamically create a "suit to consumable" conversion table
 -- <br>to be displayed in Dictionary for Accessorize
--- <br>Cannot be stored directly in localization as it'll be a table within a tooltip
-function DRAGQUEENMOD.suit_to_consumable_table_tooltip()
+-- <br>Cannot be stored directly in localization as it'll be an organized table within a tooltip
+---@param given_suits_to_consumable_entries table
+---@param and_more? number
+---@return table | nil
+function DRAGQUEENMOD.suit_to_consumable_table_tooltip(given_suits_to_consumable_entries, and_more)
+  local etc_amount = and_more or 0
+  local suits_to_consumable_local_description = given_suits_to_consumable_entries
+  if suits_to_consumable_local_description == nil then return end
+
   local suit_column = {}
   local consumable_column = {}
-  
+  local and_more_node = {}
+
+  ------------------------------
+  -- Column titles, "and more" entry
+  ------------------------------
 
   local suit_column_title = {
     n = G.UIT.R,
     config = {
-      align = "cm",
+      align = "tm",
       padding = 0,
+      minh = 0.4
     },
     nodes = {
       { n = G.UIT.T,
         config = {
-          align = "cm",
+          align = "tm",
           text = DRAGQUEENMOD.easymisclocalize("dictionary", "dragqueen_ui_suit_to_consumable_table_suit"),
           scale = 0.36,
           colour = loc_colour("dragqueen_keyword")
@@ -858,13 +870,14 @@ function DRAGQUEENMOD.suit_to_consumable_table_tooltip()
   local consumable_column_title = {
     n = G.UIT.R,
     config = {
-      align = "cm",
+      align = "tm",
       padding = 0,
+      minh = 0.4
     },
     nodes = {
       { n = G.UIT.T,
         config = {
-          align = "cm",
+          align = "tm",
           text = DRAGQUEENMOD.easymisclocalize("dictionary", "dragqueen_ui_suit_to_consumable_table_consumable"),
           scale = 0.36,
           colour = loc_colour("dragqueen_keyword")
@@ -873,23 +886,66 @@ function DRAGQUEENMOD.suit_to_consumable_table_tooltip()
     }
   }
 
+  -- if there's more suits than we're willing to build, bottom of table will have "...And [number] more"
+  if etc_amount > 0 then
+    local and_more_localized_entry = DRAGQUEENMOD.easymisclocalize("dictionary", "dragqueen_ui_suit_to_consumable_table_and_more")
+    local etc_count = string.gsub(tostring(and_more_localized_entry), "#1#", tostring(etc_amount))
+
+    and_more_node = {
+      n = G.UIT.R,
+      config = {
+        align = "cm"
+      },
+      nodes = {
+        {
+          n = G.UIT.R,
+          config = {
+            align = "cm",
+            padding = 0,
+            minh = 0.2
+          },
+          nodes = {
+            {
+              n = G.UIT.T,
+              config = {
+                text = etc_count,
+                scale = 0.2,
+                colour = G.C.UI.TEXT_INACTIVE
+              }
+            }
+          }
+        }
+      }
+    }
+  end
+
   suit_column[#suit_column+1] = suit_column_title
   consumable_column[#consumable_column+1] = consumable_column_title
 
+  ------------------------------
+  -- Adding suit entries
+  ------------------------------
+
   -- Now we put all the entries into the two columns
-  for suit, suitdata in pairs(DRAGQUEENMOD.suits_to_consumable_local_description) do
-    -- pull variables
-    local suitname = DRAGQUEENMOD.easymisclocalize("suits_plural", suit)
-    local suitcolor = DRAGQUEENMOD.suits_to_color[suit]
-    local consumable = DRAGQUEENMOD.easydescriptionlocalize(suitdata.localization_entry[1], suitdata.localization_entry[2]).name
-    local consumable_color = suitdata.consumable_color
+  for _, entry in pairs(suits_to_consumable_local_description) do
+    ------------------------------
+    -- Pulling data
+    ------------------------------
+
+    local suitname = DRAGQUEENMOD.easymisclocalize("suits_plural", entry.suit)
+    local suitcolor = DRAGQUEENMOD.suits_to_color[entry.suit]
+    local consumable = DRAGQUEENMOD.easydescriptionlocalize(entry.data.localization_entry[1], entry.data.localization_entry[2]).name
+    local consumable_color = entry.data.consumable_color
     local consumable_category = nil
 
+    ------------------------------
+    -- Validating consumable categories
+    ------------------------------
 
-    if suitdata.consumable_category[1] == "misc" then
-      consumable_category = DRAGQUEENMOD.easymisclocalize(suitdata.consumable_category[2], suitdata.consumable_category[3])
-    elseif suitdata.consumable_category[1] == "descriptions" then
-      consumable_category = DRAGQUEENMOD.easydescriptionlocalize(suitdata.consumable_category[2], suitdata.consumable_category[3])
+    if entry.data.consumable_category[1] == "misc" then
+      consumable_category = DRAGQUEENMOD.easymisclocalize(entry.data.consumable_category[2], entry.data.consumable_category[3])
+    elseif entry.data.consumable_category[1] == "descriptions" then
+      consumable_category = DRAGQUEENMOD.easydescriptionlocalize(entry.data.consumable_category[2], entry.data.consumable_category[3])
     else
       error("suitdata.consumable_category[1] not \"misc\" or \"descriptions\"")
     end
@@ -903,8 +959,14 @@ function DRAGQUEENMOD.suit_to_consumable_table_tooltip()
       dynamic_entry_text_parsed[#dynamic_entry_text_parsed+1] = loc_parse_string(line)
     end
 
+    ------------------------------
+    -- Generating UI
+    ------------------------------
 
     -- Pass the text and text_parsed to the dynamic localization entry
+    if G.localization.descriptions.Other["dragqueen_suit_to_consumable_table_tooltip_dynamic"] == nil then
+      G.localization.descriptions.Other["dragqueen_suit_to_consumable_table_tooltip_dynamic"] = { name = "Suit To Consumable Table", text = {} }
+    end
     G.localization.descriptions.Other["dragqueen_suit_to_consumable_table_tooltip_dynamic"].text = dynamic_entry_text
     G.localization.descriptions.Other["dragqueen_suit_to_consumable_table_tooltip_dynamic"].text_parsed = dynamic_entry_text_parsed
 
@@ -920,17 +982,19 @@ function DRAGQUEENMOD.suit_to_consumable_table_tooltip()
         badges = {}
     }
 
-    --TODO: Weird investigation thing. When the below variable is called,
-    --for some reason dragqueen_suit_to_consumable_table_tooltip_dynamic's .name entry is created at the start of splash_screen?
-    --Unsure why. Fix for now is just not have the tooltip have a .name function, which isn't called by anything anyways
+    -- We nab a card UI from generate_card_ui
     local consumable_card_ui = generate_card_ui(consumable_center, full_UI_table, nil, consumable_center.set, nil)
-    
-    -- This line is to clear some lines of text rendered on the screen after
+
+    -- This line is to clear some lines of text rendered on the screen after generate_card_ui is called, for some reason
     remove_all(G.STAGE_OBJECTS[G.STAGE])
 
+    ------------------------------
+    -- Building nodes
+    ------------------------------
 
     -- We organize the information in the generated consumable_card_ui to be displayed
     -- This code is similar to Balatro's `info_tip_from_rows`
+    ---@see info_tip_from_rows
     local consumable_info_as_nodes = {}
     for _, parts_of_text_as_nodes in ipairs(consumable_card_ui.info[1]) do
       -- We also need to manually set the scale for the pieces of text we're calling "parts_of_text_as_nodes"
@@ -939,7 +1003,6 @@ function DRAGQUEENMOD.suit_to_consumable_table_tooltip()
       end
       consumable_info_as_nodes[#consumable_info_as_nodes+1] = { n = G.UIT.R, config = { align = "cm" }, nodes = parts_of_text_as_nodes }
     end
-
 
     -- Now we take all the info we built and put it into a node on the left and right column
     local suit_column_instance = {
@@ -969,43 +1032,71 @@ function DRAGQUEENMOD.suit_to_consumable_table_tooltip()
       nodes = consumable_info_as_nodes
     }
 
-  suit_column[#suit_column+1] = suit_column_instance
-  consumable_column[#consumable_column+1] = consumable_column_instance
+    suit_column[#suit_column+1] = suit_column_instance
+    consumable_column[#consumable_column+1] = consumable_column_instance
   end
 
+  ------------------------------
+  -- Building and sending remaining structure
+  ------------------------------
+
+  local titles_and_entries_node = {
+    {
+      n = G.UIT.R,
+      config = {
+        align = "cm"
+      },
+      nodes = {
+        {
+          n = G.UIT.C,
+          config = {
+            align = "cm"
+          },
+          nodes = suit_column
+        },
+        {
+          n = G.UIT.C,
+          config = {
+            align = "cm"
+          },
+          nodes = consumable_column
+        },
+      }
+    }
+  }
+
+  if etc_amount > 0 then
+    local structured_and_more_node = {
+      n = G.UIT.R,
+      config = {
+        align = "cm"
+      },
+      nodes = {
+        and_more_node
+      }
+    }
+
+    table.insert(titles_and_entries_node, structured_and_more_node)
+  end
 
   local suit_to_consumable_table_node = {
     n = G.UIT.C,
     config = {
       align = "cm",
-      padding = 0.1
+      padding = 0.05
     },
     -- Holds the table titles and entries
-    nodes = {
-      -- Suits column
-      {
-        n = G.UIT.C,
-        config = {
-          align = "cm"
-        },
-        nodes = suit_column
-      },
-      -- Consumable column
-      {
-        n = G.UIT.C,
-        config = {
-          align = "cm"
-        },
-        nodes = consumable_column
-      },
-    }
+    nodes = titles_and_entries_node
   }
+
+  ------------------------------
+  -- Final node to return
+  ------------------------------
 
   local tooltip_node = {
     n = G.UIT.ROOT,
     config = {
-      align = "cm",
-      colour = G.C.CLEAR
+      align = "cm"
     },
     nodes = {
     { n = G.UIT.R,
@@ -1031,7 +1122,7 @@ function DRAGQUEENMOD.suit_to_consumable_table_tooltip()
                 config = {
                   align = "tm",
                   minh = 0.36,
-                  padding = 0.03
+                  padding = 0
                 },
                 nodes = {
                   {
@@ -1062,7 +1153,7 @@ function DRAGQUEENMOD.suit_to_consumable_table_tooltip()
                       minw = 1.5,
                       minh = 0.4,
                       r = 0.1,
-                      padding = 0.05,
+                      padding = 0,
                       colour = G.C.WHITE
                     },
                     nodes = {
