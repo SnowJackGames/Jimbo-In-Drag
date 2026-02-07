@@ -230,6 +230,19 @@ DRAGQUEENMOD.suit_types_to_mod_prefixes = {
   ["tictactoe"] = "unik_",
 }
 
+DRAGQUEENMOD.suit_symbols = {
+    ["Diamonds"] = '♦',
+    ["Hearts"] = '♥',
+    ["Spades"] = '♠',
+    ["Clubs"] = '♣',
+    ["bunc_Fleurons"] = '✤',
+    ["bunc_Halberds"] = '✠',
+    ["paperback_Crowns"] = '♛',
+    ["paperback_Stars"] = '★',
+    ["dragqueen_Pumps"] = '',
+    ["dragqueen_Purses"] = '',
+    ["six_Moons"] = '',
+}
 
 
 DRAGQUEENMOD.suits_to_consumable = {
