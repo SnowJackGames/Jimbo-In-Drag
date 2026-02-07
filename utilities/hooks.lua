@@ -125,10 +125,22 @@ local dragqueen_hook_generate_card_ui = generate_card_ui
 -- <br>this fixes a particular issue with our dictionary tooltip stuff when using different languages
 function generate_card_ui(_c, full_UI_table, specific_vars, card_type, badges, hide_desc, main_start, main_end, card)
   if _c.set and _c.key and _c.name then
-    local name_in_P_CENTERS = G.P_CENTERS[_c.key].name
-    if name_in_P_CENTERS ~= nil then
-      if _c.name ~= name_in_P_CENTERS then
-        _c.name = name_in_P_CENTERS
+    local item_location_values = {
+      "P_CENTERS",
+      "P_SEALS",
+      "P_TAGS",
+      "P_STAKES",
+      "P_BLINDS",
+      -- dragqueen_hook_generate_card_ui item_location_values patch target
+    }
+    for _, item_location in ipairs(item_location_values) do
+      if G[item_location][_c.key] ~= nil then
+        local name_in_location = G[item_location][_c.key].name
+        if name_in_location ~= nil then
+          if _c.name ~= name_in_location then
+            _c.name = name_in_location
+          end
+        end
       end
     end
   end
