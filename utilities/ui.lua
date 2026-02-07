@@ -150,7 +150,7 @@ function DRAGQUEENMOD.build_dictionary()
 
     local set = word.set or "Other"
     local key = word.key or ("dragqueen_dictionary_" .. word.entry)
-    local localized_entry = DRAGQUEENMOD.easydescriptionlocalize(set, key)
+    local localized_entry = DRAGQUEENMOD.easydescriptionslocalize(set, key)
     localized_entry.set = set
     localized_entry.key = key
 
@@ -166,7 +166,7 @@ function DRAGQUEENMOD.build_dictionary()
 
           local localized_tooltip = nil
           if tooltip.category == "descriptions" then
-            localized_tooltip = DRAGQUEENMOD.easydescriptionlocalize(tooltip.set, tooltip.key)
+            localized_tooltip = DRAGQUEENMOD.easydescriptionslocalize(tooltip.set, tooltip.key)
           elseif tooltip.category == "misc" then
             localized_tooltip = DRAGQUEENMOD.easymisclocalize(tooltip.set, tooltip.key)
           else
@@ -532,7 +532,7 @@ function DRAGQUEENMOD.suit_tooltip(tooltiptype)
     end
     
     -- Check if the dynamic tooltips have already been generated this session
-    if next(DRAGQUEENMOD.easydescriptionlocalize("Other", key).text) == nil then
+    if next(DRAGQUEENMOD.easydescriptionslocalize("Other", key).text) == nil then
       ---@diagnostic disable-next-line: param-type-mismatch
       colours = DRAGQUEENMOD.suit_tooltip_build_for_light_or_dark(tooltiptype, key, usingnonplain)
     end
@@ -598,8 +598,8 @@ function DRAGQUEENMOD.suit_tooltip_build_for_light_or_dark(tooltiptype, key, usi
   local line = ""
   local text = {}
   local textparsed = {}
-  local conj3 = DRAGQUEENMOD.easydescriptionlocalize("Grammar", "dragqueen_suit_conjunction3").text[1]
-  local conj4 = DRAGQUEENMOD.easydescriptionlocalize("Grammar", "dragqueen_suit_conjunction4").text[1]
+  local conj3 = DRAGQUEENMOD.easydescriptionslocalize("Grammar", "dragqueen_suit_conjunction3").text[1]
+  local conj4 = DRAGQUEENMOD.easydescriptionslocalize("Grammar", "dragqueen_suit_conjunction4").text[1]
   for _, textstring in ipairs(messagestrings) do
     -- If line has room, we can keep typing
     -- we determine the length without the style codes (like {C:Clubs}) because those are invisible
@@ -647,17 +647,17 @@ end
 --- @return table
 function DRAGQUEENMOD.suit_tooltip_build_for_light_or_dark_for_plain(tooltiptype, messageparts, spadesstring, clubsstring, heartsstring, diamondsstring)
   if tooltiptype == "dark" then
-    table.insert(messageparts, DRAGQUEENMOD.easydescriptionlocalize("Grammar", "dragqueen_suit_conjunction1").text)
+    table.insert(messageparts, DRAGQUEENMOD.easydescriptionslocalize("Grammar", "dragqueen_suit_conjunction1").text)
     table.insert(messageparts, spadesstring)
-    table.insert(messageparts, DRAGQUEENMOD.easydescriptionlocalize("Grammar", "dragqueen_suit_conjunction4short").text)
+    table.insert(messageparts, DRAGQUEENMOD.easydescriptionslocalize("Grammar", "dragqueen_suit_conjunction4short").text)
     table.insert(messageparts, clubsstring)
-    table.insert(messageparts, DRAGQUEENMOD.easydescriptionlocalize("Grammar", "dragqueen_suit_conjunction5").text)
+    table.insert(messageparts, DRAGQUEENMOD.easydescriptionslocalize("Grammar", "dragqueen_suit_conjunction5").text)
   else
-    table.insert(messageparts, DRAGQUEENMOD.easydescriptionlocalize("Grammar", "dragqueen_suit_conjunction1").text)
+    table.insert(messageparts, DRAGQUEENMOD.easydescriptionslocalize("Grammar", "dragqueen_suit_conjunction1").text)
     table.insert(messageparts, heartsstring)
-    table.insert(messageparts, DRAGQUEENMOD.easydescriptionlocalize("Grammar", "dragqueen_suit_conjunction4short").text)
+    table.insert(messageparts, DRAGQUEENMOD.easydescriptionslocalize("Grammar", "dragqueen_suit_conjunction4short").text)
     table.insert(messageparts, diamondsstring)
-    table.insert(messageparts, DRAGQUEENMOD.easydescriptionlocalize("Grammar", "dragqueen_suit_conjunction5").text)
+    table.insert(messageparts, DRAGQUEENMOD.easydescriptionslocalize("Grammar", "dragqueen_suit_conjunction5").text)
   end
 
   return(messageparts)
@@ -698,24 +698,24 @@ function DRAGQUEENMOD.suit_tooltip_build_for_light_or_dark_for_nonplain(tooltipt
   -- Referencing G.localization.grammar for conjunction order
   -- Starting out with adding the vanilla and drag queen suits
   if tooltiptype == "dark" then
-    table.insert(messageparts, DRAGQUEENMOD.easydescriptionlocalize("Grammar", "dragqueen_suit_conjunction1").text)
+    table.insert(messageparts, DRAGQUEENMOD.easydescriptionslocalize("Grammar", "dragqueen_suit_conjunction1").text)
     table.insert(messageparts, spadesstring)
-    table.insert(messageparts, DRAGQUEENMOD.easydescriptionlocalize("Grammar", "dragqueen_suit_conjunction2").text)
+    table.insert(messageparts, DRAGQUEENMOD.easydescriptionslocalize("Grammar", "dragqueen_suit_conjunction2").text)
     table.insert(messageparts, clubsstring)
   else
-    table.insert(messageparts, DRAGQUEENMOD.easydescriptionlocalize("Grammar", "dragqueen_suit_conjunction1").text)
+    table.insert(messageparts, DRAGQUEENMOD.easydescriptionslocalize("Grammar", "dragqueen_suit_conjunction1").text)
     table.insert(messageparts, heartsstring)
-    table.insert(messageparts, DRAGQUEENMOD.easydescriptionlocalize("Grammar", "dragqueen_suit_conjunction2").text)
+    table.insert(messageparts, DRAGQUEENMOD.easydescriptionslocalize("Grammar", "dragqueen_suit_conjunction2").text)
     table.insert(messageparts, diamondsstring)
   end
 
   -- Then we add our mod's suit
   if not mods_in_play then
-    table.insert(messageparts, DRAGQUEENMOD.easydescriptionlocalize("Grammar", "dragqueen_suit_conjunction4").text)
-    table.insert(messageparts, DRAGQUEENMOD.easydescriptionlocalize("Other", "dragqueen_accessory_" .. tooltiptype .. "_suits").text)
+    table.insert(messageparts, DRAGQUEENMOD.easydescriptionslocalize("Grammar", "dragqueen_suit_conjunction4").text)
+    table.insert(messageparts, DRAGQUEENMOD.easydescriptionslocalize("Other", "dragqueen_accessory_" .. tooltiptype .. "_suits").text)
   else
-    table.insert(messageparts, DRAGQUEENMOD.easydescriptionlocalize("Grammar", "dragqueen_suit_conjunction3").text)
-    table.insert(messageparts, DRAGQUEENMOD.easydescriptionlocalize("Other", "dragqueen_accessory_" .. tooltiptype .. "_suits").text)
+    table.insert(messageparts, DRAGQUEENMOD.easydescriptionslocalize("Grammar", "dragqueen_suit_conjunction3").text)
+    table.insert(messageparts, DRAGQUEENMOD.easydescriptionslocalize("Other", "dragqueen_accessory_" .. tooltiptype .. "_suits").text)
   end
 
   if mods_in_play then
@@ -724,19 +724,19 @@ function DRAGQUEENMOD.suit_tooltip_build_for_light_or_dark_for_nonplain(tooltipt
       -- First we check to make sure that mod does have the category of light and dark suits (ex. MintysSillyMod only has a light suit)
       if next(SMODS.find_mod(modname)) then
         local modsuits = "dragqueen_" .. DRAGQUEENMOD.getprefix(modname) .. "_" .. tooltiptype .. "_suits"
-        if pcall(DRAGQUEENMOD.easydescriptionlocalize, "Other", modsuits) then
-          for _, v in ipairs(DRAGQUEENMOD.easydescriptionlocalize("Other", modsuits).text) do
-            table.insert(messageparts, DRAGQUEENMOD.easydescriptionlocalize("Grammar", "dragqueen_suit_conjunction3").text)
+        if pcall(DRAGQUEENMOD.easydescriptionslocalize, "Other", modsuits) then
+          for _, v in ipairs(DRAGQUEENMOD.easydescriptionslocalize("Other", modsuits).text) do
+            table.insert(messageparts, DRAGQUEENMOD.easydescriptionslocalize("Grammar", "dragqueen_suit_conjunction3").text)
             table.insert(messageparts, {v})
           end
         end
       end
     end
   end
-  table.insert(messageparts, DRAGQUEENMOD.easydescriptionlocalize("Grammar", "dragqueen_suit_conjunction5").text)
+  table.insert(messageparts, DRAGQUEENMOD.easydescriptionslocalize("Grammar", "dragqueen_suit_conjunction5").text)
 
   -- Then we have to insert conj4 at the correct position; third to last. In en-us, this is ", and "
-  messageparts[(#messageparts) - 2] = DRAGQUEENMOD.easydescriptionlocalize("Grammar", "dragqueen_suit_conjunction4").text
+  messageparts[(#messageparts) - 2] = DRAGQUEENMOD.easydescriptionslocalize("Grammar", "dragqueen_suit_conjunction4").text
 
   return(messageparts)
 end
@@ -773,7 +773,7 @@ function DRAGQUEENMOD.dragqueen_accessorize_tooltip(card)
 
   -- Get the localized name for that consumable
   local suit_consumable_local_info = DRAGQUEENMOD.suits_to_consumable_local_description[given_suit].localization_entry
-  local suit_consumable_local_name = DRAGQUEENMOD.easydescriptionlocalize(suit_consumable_local_info[1], suit_consumable_local_info[2]).name
+  local suit_consumable_local_name = DRAGQUEENMOD.easydescriptionslocalize(suit_consumable_local_info[1], suit_consumable_local_info[2]).name
 
   -- Build the tooltip
   local given_count = tostring(card.ability.extra.accessorize_count)
@@ -785,7 +785,7 @@ function DRAGQUEENMOD.dragqueen_accessorize_tooltip(card)
     suit_color = "attention"
   end
 
-  for index, string in ipairs(DRAGQUEENMOD.easydescriptionlocalize(set, key).text) do
+  for index, string in ipairs(DRAGQUEENMOD.easydescriptionslocalize(set, key).text) do
     local subbed_string = ""
     subbed_string = string.gsub(string, "#1#", given_count)
     subbed_string = string.gsub(subbed_string, "#2#", suit_consumable_local_name)
@@ -955,7 +955,7 @@ function DRAGQUEENMOD.suit_to_consumable_table_tooltip(given_suits_to_consumable
 
     local suitname = tostring(DRAGQUEENMOD.easymisclocalize("suits_plural", entry.suit))
     local suitcolor = DRAGQUEENMOD.suits_to_color[entry.suit]
-    local consumable = DRAGQUEENMOD.easydescriptionlocalize(entry.data.localization_entry[1], entry.data.localization_entry[2]).name
+    local consumable = DRAGQUEENMOD.easydescriptionslocalize(entry.data.localization_entry[1], entry.data.localization_entry[2]).name
     local consumable_color = entry.data.consumable_color
     local consumable_category = nil
 
@@ -978,7 +978,7 @@ function DRAGQUEENMOD.suit_to_consumable_table_tooltip(given_suits_to_consumable
     if entry.data.consumable_category[1] == "misc" then
       consumable_category = DRAGQUEENMOD.easymisclocalize(entry.data.consumable_category[2], entry.data.consumable_category[3])
     elseif entry.data.consumable_category[1] == "descriptions" then
-      consumable_category = DRAGQUEENMOD.easydescriptionlocalize(entry.data.consumable_category[2], entry.data.consumable_category[3])
+      consumable_category = DRAGQUEENMOD.easydescriptionslocalize(entry.data.consumable_category[2], entry.data.consumable_category[3])
     else
       error("suitdata.consumable_category[1] not \"misc\" or \"descriptions\"")
     end

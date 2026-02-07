@@ -147,7 +147,7 @@ end
 ---@param set string Ex. `Blind`
 ---@param key string Ex. `bl_dragqueen_tempnamekissblind`
 ----@return table -- has a name string, and a text table of one or more strings
-function DRAGQUEENMOD.easydescriptionlocalize(set, key)
+function DRAGQUEENMOD.easydescriptionslocalize(set, key)
   assert(type(set) == "string", "set passed to DRAGQUEENMOD.easydescriptionslocalize must be a string")
   assert(type(key) == "string", "set passed to DRAGQUEENMOD.easydescriptionslocalize must be a string")
   local parsed_entry = nil
