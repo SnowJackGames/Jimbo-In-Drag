@@ -5,6 +5,42 @@
 
 
 function DRAGQUEENMOD.build_custom_structure_dictionary_tooltips()
+  ------------------------------
+  -- Type checking
+  ------------------------------
+
+  -- Let's just make sure all the entries are correctly formatted before building with them
+  for _, item in ipairs(DRAGQUEENMOD.dictionary) do
+    if item.extra_tooltips ~= nil then
+      for _, tooltip in ipairs(item.extra_tooltips) do
+        if tooltip.tooltip_from_function == nil then
+          -- Type checking
+          assert(type(tooltip.category) == "string", "tooltip.category in tooltip passed to DRAGQUEENMOD.dictionary is not string")
+          assert(type(tooltip.set) == "string", "tooltip.set in tooltip passed to DRAGQUEENMOD.dictionary is not string")
+          assert(type(tooltip.key) == "string", "tooltip.key in tooltip passed to DRAGQUEENMOD.dictionary is not string")
+
+          if not ((tooltip.category == "descriptions") or (tooltip.category == "misc")) then
+            print(tooltip)
+            error("Tooltip category" .. tooltip.category .. " in DRAGQUEENMOD.dictionary must be \"misc\" or \"descriptions\"")
+          end
+
+          if tooltip.category == "descriptions" then
+            DRAGQUEENMOD.easydescriptionslocalize(tooltip.set, tooltip.key)
+          elseif tooltip.category == "misc" then
+            DRAGQUEENMOD.easymisclocalize(tooltip.set, tooltip.key)
+          else
+            error("logic error in DRAGQUEENMOD.build_custom_structure_dictionary_tooltips()")
+          end
+        end
+      end
+    end
+  end
+
+  ------------------------------
+  -- Adding extra information to particular entries
+  ------------------------------
+
+  -- Creating some precise additional tooltips for different dictionary entries
   for _, item in ipairs(DRAGQUEENMOD.dictionary) do
 
     -- Accessorize entry
@@ -138,7 +174,7 @@ end
 -- <br><b>NOTE</b>: This cannot find entries that are stored in `loc_txt` entries for objects
 -- 
 -- <br> See the [SMODS Localization Page](https://github.com/Steamodded/smods/wiki/Localization) on their wiki
--- <br>If a localization entry sought from `DRAGQUEENMOD.easydescriptionlocalize` or `DRAGQUEENMOD.easymisclocalize`
+-- <br>If a localization entry sought from `DRAGQUEENMOD.easydescriptionslocalize` or `DRAGQUEENMOD.easymisclocalize`
 -- <br>doesn't exist in the current language, it can try to find another entry in `DRAGQUEENMOD.backup_localization_entries`,
 -- <br>which this function builds
 --
