@@ -620,9 +620,10 @@ return {
         name = "Accessorize",
         text = {
           "{s:0.9}When this item is obtained, create{}",
-          "{s:0.9}up to {}{C:attention,s:0.9}X{}{s:0.9} number of {}{s:0.9,C:tarot}Tarot{}{s:0.9} cards{}",
-          "{s:0.9}that convert cards to the named suit{}",
-          "{s:0.9}if you have room; i.e.{}",
+          "{s:0.9}up to {}{C:attention,s:0.9}X{}{s:0.9} number of the{}",
+          "{s:0.9}associated {}{C:dragqueen_consumable,s:0.9}Consumable{}{s:0.9} on the{}",
+          "{s:0.9}{}{C:attention,s:0.9}\"Suit To Consumable Table\"{}",
+          "{s:0.9}for that {}{C:attention,s:0.9}suit{}{s:0.9} if you have room; i.e.{}",
           "{s:0.9}\"{}{C:white,X:dragqueen_keyword,s:0.9}Accessorize{}{s:0.9} {}{C:hearts,s:0.9}Hearts{}{s:0.9} {}{C:attention,s:0.9}1{}{s:0.9}\" creates{}",
           "{s:0.9}up to {}{C:attention,s:0.9}1{}{s:0.9} {}{C:tarot,s:0.9}The Sun{}"
         }
