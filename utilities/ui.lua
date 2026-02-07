@@ -953,11 +953,23 @@ function DRAGQUEENMOD.suit_to_consumable_table_tooltip(given_suits_to_consumable
     -- Pulling data
     ------------------------------
 
-    local suitname = DRAGQUEENMOD.easymisclocalize("suits_plural", entry.suit)
+    local suitname = tostring(DRAGQUEENMOD.easymisclocalize("suits_plural", entry.suit))
     local suitcolor = DRAGQUEENMOD.suits_to_color[entry.suit]
     local consumable = DRAGQUEENMOD.easydescriptionlocalize(entry.data.localization_entry[1], entry.data.localization_entry[2]).name
     local consumable_color = entry.data.consumable_color
     local consumable_category = nil
+
+    -- If the suitname is found in DRAGQUEENMOD.suit_symbols, let's add the suit symbol to the front of the string
+    for symbolablesuit, symbol in pairs(DRAGQUEENMOD.suit_symbols) do
+      local _, attempt_to_find_suit = pcall(DRAGQUEENMOD.easymisclocalize, "suits_plural", symbolablesuit)
+
+      if attempt_to_find_suit ~= nil then
+        local result = string.find(suitname, tostring(attempt_to_find_suit))
+        if result ~= nil then
+          suitname = symbol .. suitname
+        end
+      end
+    end
 
     ------------------------------
     -- Validating consumable categories
