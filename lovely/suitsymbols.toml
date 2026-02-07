@@ -25,6 +25,19 @@ six_Moons = '',
 # ink_Colors = '',
 
 
+# This patches a line in the above Bunco code if an applicable suit name appears in some instance where it hadn't been translated,
+# Like in a description of some sort
+[[patches]]
+[patches.pattern]
+target = 'functions/misc_functions.lua'
+pattern = "local result = string.find(assembled_string, localize(key, 'suits_singular')) or string.find(assembled_string, localize(key, 'suits_plural'))"
+position = 'at'
+match_indent = true
+payload = '''
+local result = string.find(assembled_string, localize(key, 'suits_singular')) or string.find(assembled_string, localize(key, 'suits_plural')) or string.find(assembled_string, key)
+'''
+
+
 # Text icons
 # Otherwise if Bunco doesn't happen to be installed, then we can run pretty much
 # The same code as their function
