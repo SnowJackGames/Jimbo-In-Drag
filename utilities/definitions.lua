@@ -77,10 +77,10 @@ DRAGQUEENMOD.credits = {
 --         suit_conv = "Hearts"
 --       }
 --     },
---    {
---     -- Define a tooltip from a function rather than from localization
---     tooltip_from_function = {whatever}
---    }
+--     {
+--       -- Define a tooltip from a function rather than from localization
+--       tooltip_from_function = {whatever}
+--     }
 --   }
 -- }
 -- ```
@@ -94,6 +94,17 @@ DRAGQUEENMOD.credits = {
 DRAGQUEENMOD.dictionary = {
   {
     entry = "accessorize",
+    extra_tooltips = {
+      {
+        category = "descriptions",
+        set = "Tarot",
+        key = "c_sun",
+        config = {
+          max_highlighted = 3,
+          suit_conv = "Hearts"
+        }
+      }
+    }
   },
   {
     entry = "slay"
