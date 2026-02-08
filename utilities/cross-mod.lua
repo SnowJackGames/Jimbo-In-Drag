@@ -321,6 +321,23 @@ function DRAGQUEENMOD.cross_mod_ours_to_theirs()
     end
   end
 
+  if next(SMODS.find_mod("aikoyorisshenanigans")) then
+    if AKYRS ~= nil then
+      --hooking Aikoyori's Schenanigans' `AKYRS.should_hide_ui` function
+      local dragqueen_hook_AKYRS_should_hide_UI = AKYRS.should_hide_ui
+      
+      -- Hooking this because we're doing weird stuff with `generate_card_ui` whilst not in a game session
+      --<br>(generating a custom hover table for our Dictionary entries),
+      -- <br>so their function searching for `G.GAME.akyrs_no_hints` crashes when `G.GAME` is not found
+      ---@diagnostic disable-next-line: duplicate-set-field
+      AKYRS.should_hide_ui = function()
+        if not G.GAME then
+          G.GAME = {}
+        end
+        return dragqueen_hook_AKYRS_should_hide_UI()
+      end
+    end
+  end
 end
 
 
