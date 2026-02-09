@@ -10,8 +10,9 @@ SMODS.Joker {
     }
   },
   rarity = 1,
-  pos = { x = 0, y = 0 },
-  atlas = "placeholder",
+  pos = { x = 2, y = 0 },
+  soul_pos = { x = 3, y = 0 },
+  atlas = "Joker_Doodles",
   cost = 5,
   unlocked = true,
   discovered = true,
