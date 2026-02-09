@@ -1,5 +1,12 @@
 -- Registers the atlases for:
     -- Jokers
+SMODS.Atlas {
+    key = "Joker_Doodles",
+    px = 71,
+    py = 95,
+    path = "Jokers/Joker_Doodles.png"
+
+}
     -- Suits
 SMODS.Atlas { key = "lc_cards", path = "Suits/8BitDeck.png", px = 71, py = 95 }
 SMODS.Atlas { key = "hc_cards", path = "Suits/8BitDeck_opt2.png", px = 71, py = 95 }
