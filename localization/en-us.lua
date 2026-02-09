@@ -142,6 +142,13 @@ return {
             "Gimme those %$!#&^@ shoes."
           }
         }
+      },
+      j_dragqueen_tipsy_queen = {
+        name = "Tipsy Queen",
+        text = {
+          "{C:attention}Glass Cards{} score an additional {X:mult,C:white}X#1#{},",
+          "but always break if able to"
+        }
       }
       -- Patching vanilla jokers
       -- Patching other mods' jokers

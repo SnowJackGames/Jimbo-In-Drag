@@ -21,7 +21,7 @@ SMODS.Joker {
       vars = {
         type = "name_text",
         set = "Enhanced",
-        key = 'm_mult',
+        key = 'm_glass',
 
         card.ability.extra.x_mult
       }
@@ -31,9 +31,16 @@ SMODS.Joker {
   calculate = function (self, card, context)
     -- Glass cards score an additional x2 mult but are guaranteed to break
 
-    -- Whenever a glass card breaks, its probability is set to 100%
-                -- if scoring_hand[i].ability.name == 'Glass Card' then 
-                --     scoring_hand[i].shattered = true
+    -- Whenever a glass card could break, it does so
+    if context.destroy_card and context.cardarea == G.play then
+      for _, individual_card in ipairs(context.scoring_hand) do
+        if individual_card.ability.name == "Glass Card" then
+          return {
+            remove = true
+          }
+        end
+      end
+    end
   end
 }
 
