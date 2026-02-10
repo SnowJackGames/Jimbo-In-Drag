@@ -149,6 +149,28 @@ return {
           "{C:attention}Glass Cards{} score an additional {X:mult,C:white}X#1#{},",
           "but always break if able to"
         }
+      },
+      j_dragqueen_dayjob_nightclub_A = {
+        name = "Dayjob",
+        text = {
+          "Cards with a {C:dragqueen_dark_suit}dark suit{}",
+          "give {C:chips}+#1#{} Chips per unique {C:dragqueen_dark_suit}dark suit{}",
+          "when scored, and earn {C:money}$#2#{}"
+        }
+      },
+      j_dragqueen_dayjob_nightclub_B = {
+        name = "Nightclub",
+        text = {
+          "Cards with a {C:dragqueen_light_suit}light suit{}",
+          "give {C:mult}+#3#{} Mult per unique {C:dragqueen_light_suit}light suit{}",
+          "when scored, but costs {C:money}$#4#{} to do so",
+          "{C:inactive,s:0.8}(Will not trigger if money is at {C:money,s:0.8}$0{}{C:inactive,s:0.8} or less}{}"
+        }
+      },
+      j_dragqueen_dayjob_nightclub_extra = {
+        text = {
+          "{C:inactive}On discard, flip this Joker{}"
+        }
       }
       -- Patching vanilla jokers
       -- Patching other mods' jokers
