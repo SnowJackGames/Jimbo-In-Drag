@@ -19,7 +19,7 @@ SMODS.Atlas { key = "hc_ui", path = "Suits/ui_assets_opt2.png", px = 18, py = 18
         -- Enhancements
         -- Editions
         -- Stickers
-        -- Kisses
+SMODS.Atlas { key = "kiss", path = "Modifiers/kiss.png", px = 71, py = 95 }
         -- Gemstones
     -- Consumables
         -- Planets
