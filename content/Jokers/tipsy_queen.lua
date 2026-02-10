@@ -44,21 +44,3 @@ SMODS.Joker {
     end
   end
 }
-
-
-local dragqueen_hook_get_chip_x_mult = Card.get_chip_x_mult
----@diagnostic disable-next-line: duplicate-set-field
-function Card.get_chip_x_mult(self)
-  local amt = dragqueen_hook_get_chip_x_mult(self)
-
-  if SMODS.has_enhancement(self, "m_glass") then
-    local _, joker = next(SMODS.find_card('j_dragqueen_tipsy_queen', false))
-
-    if joker then
-      -- When a glass card scores, score an additional x2 mult
-      amt = amt + joker.ability.extra.x_mult
-    end
-  end
-
-  return amt
-end
