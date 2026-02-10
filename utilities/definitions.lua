@@ -497,13 +497,28 @@ DRAGQUEENMOD.ENABLEDCHARMS = {
 
 
 -- Define kiss objects
-DRAGQUEENMOD.kiss = SMODS.Sticker:extend {
+DRAGQUEENMOD.Kiss = SMODS.Sticker:extend {
   prefix_config = { key = true },
-  should_apply = false,
+  should_apply = function(self, card, center, area, bypass_roll)
+    return bypass_roll
+  end,
   config = {},
   rate = 0,
   sets = {
     Default = true
-  }
+  },
+  draw = function(self, card)
+    local x_offset = (card.T.w / 71) * -4 * card.T.scale
+    G.shared_stickers[self.key].role.draw_major = card
+    G.shared_stickers[self.key]:draw_shader('dissolve', nil, nil, nil, card.children.center, nil, nil, x_offset)
+    if self.shiny then
+      G.shared_stickers[self.key]:draw_shader('voucher', nil, card.ARGS.send_to_shader, nil, card.children.center, nil,
+        nil, x_offset)
+    end
+  end,
+
+  apply = function(self, card, val)
+    card.ability[self.key] = val and copy_table(self.config) or nil
+  end
 
 }
