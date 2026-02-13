@@ -192,8 +192,30 @@ end
 
 
 -- Hooking Balatro's Card.flip()
+local dragqueen_hook_flip = Card.flip
 
+-- Flips our two-sided Joker "Dayjob / Nightclub"
+function Card.flip(self)
+  local is_front_and_dayjob_nightclub = false
+  
+  if self.config ~= nil then
+    if self.config.center ~= nil then
+      if self.config.center.key == "j_dragqueen_dayjob_nightclub" and self.facing == "front" then
+        is_front_and_dayjob_nightclub = true
+      end
+    end
+  end
 
+  if is_front_and_dayjob_nightclub == true then
+    self.flipping = "f2b"
+    self.facing = "back"
+    self:flip()
+    SMODS.calculate_context({ flip = true, card_flipped = self })
+    self.pinch.x = true
+  else
+    dragqueen_hook_flip(self)
+  end
+end
 
 ------------------------------
 -- Game events
