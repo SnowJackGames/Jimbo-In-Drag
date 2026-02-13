@@ -393,7 +393,8 @@ DRAGQUEENMOD.ENABLEDJOKERS = {
   "lipstick",
   "tights",
   "shoes",
-  "tipsy_queen"
+  "tipsy_queen",
+  "dayjob_nightclub"
 }
 
 
