@@ -551,6 +551,106 @@ end
 
 
 
+---Gets the number of unique dark suits in a provided scoring hand
+---@param scoring_hand table
+---@param bypass_debuff boolean?
+---@param flush_calc boolean?
+---@return integer
+function DRAGQUEENMOD.get_unique_dark_suits(scoring_hand, bypass_debuff, flush_calc)
+  -- Set each suit's count to 0
+  local dark_suits = {}
+
+  for _, dark_suit in pairs(DRAGQUEENMOD.dark_suits) do
+    dark_suits[dark_suit] = 0
+  end
+
+  -- First we cover all the non Wild Cards in the hand
+  for _, card in ipairs(scoring_hand) do
+    if not SMODS.has_any_suit(card) then
+      for dark_suit, count in pairs(dark_suits) do
+        if card:is_suit(dark_suit, bypass_debuff, flush_calc) and count == 0 then
+          dark_suits[dark_suit] = count + 1
+          break
+        end
+      end
+    end
+  end
+
+  -- Then we cover Wild Cards, filling the missing suits
+  for _, card in ipairs(scoring_hand) do
+    if SMODS.has_any_suit(card) then
+      for dark_suit, count in pairs(dark_suits) do
+        if card:is_suit(dark_suit, bypass_debuff, flush_calc) and count == 0 then
+          dark_suits[dark_suit] = count + 1
+          break
+        end
+      end
+    end
+  end
+
+  -- Count the amount of suits that were found
+  local num_dark_suits = 0
+
+  for _, v in pairs(dark_suits) do
+    if v > 0 then num_dark_suits = num_dark_suits + 1 end
+  end
+
+  return num_dark_suits
+end
+
+
+
+---Gets the number of unique light suits in a provided scoring hand
+---@param scoring_hand table
+---@param bypass_debuff boolean?
+---@param flush_calc boolean?
+---@return integer
+function DRAGQUEENMOD.get_light_suits(scoring_hand, bypass_debuff, flush_calc)
+  -- Set each suit's count to 0
+  local light_suits = {}
+
+  for _, light_suit in pairs(DRAGQUEENMOD.light_suits) do
+    light_suits[light_suit] = 0
+  end
+
+  -- First we cover all the non Wild Cards in the hand
+  for _, card in ipairs(scoring_hand) do
+    if not SMODS.has_any_suit(card) then
+      for light_suit, count in pairs(light_suits) do
+        if card:is_suit(light_suit, bypass_debuff, flush_calc) and count == 0 then
+          light_suits[light_suit] = count + 1
+          break
+        end
+      end
+    end
+  end
+
+  -- Then we cover Wild Cards, filling the missing suits
+  for _, card in ipairs(scoring_hand) do
+    if SMODS.has_any_suit(card) then
+      for light_suit, count in pairs(light_suits) do
+        if card:is_suit(light_suit, bypass_debuff, flush_calc) and count == 0 then
+          light_suits[light_suit] = count + 1
+          break
+        end
+      end
+    end
+  end
+
+  -- Count the amount of suits that were found
+  local num_light_suits = 0
+
+  for _, v in pairs(light_suits) do
+    if v > 0 then num_light_suits = num_light_suits + 1 end
+  end
+
+  return num_light_suits
+end
+
+
+
+
+
 -- Checks if non-plain cards are allowed to spawn
 function DRAGQUEENMOD.non_plain_in_pool()
   -- Returns true if in a run and NonPlain has been activated
