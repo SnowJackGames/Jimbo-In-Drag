@@ -150,21 +150,23 @@ return {
           "but always break if able to"
         }
       },
-      j_dragqueen_dayjob_nightclub_A = {
+      j_dragqueen_dayjob_nightclub_a = {
         name = "Dayjob",
         text = {
-          "Cards with a {C:dragqueen_dark_suit}dark suit{}",
-          "give {C:chips}+#1#{} Chips per unique {C:dragqueen_dark_suit}dark suit{}",
-          "when scored, and earn {C:money}$#2#{}"
+          "Cards with a {C:dragqueen_light_suit}light suit{}",
+          "give {C:chips}+#1#{} Chips per unique scoring",
+          "{C:dragqueen_light_suit}light suit{} in hand when scored,",
+          "and earn {C:money}$#2#{}"
         }
       },
-      j_dragqueen_dayjob_nightclub_B = {
+      j_dragqueen_dayjob_nightclub_b = {
         name = "Nightclub",
         text = {
-          "Cards with a {C:dragqueen_light_suit}light suit{}",
-          "give {C:mult}+#3#{} Mult per unique {C:dragqueen_light_suit}light suit{}",
-          "when scored, but costs {C:money}$#4#{} to do so",
-          "{C:inactive,s:0.8}(Will not trigger if money is at {C:money,s:0.8}$0{}{C:inactive,s:0.8} or less}{}"
+          "Cards with a {C:dragqueen_dark_suit}dark suit{}",
+          "give {C:mult}+#3#{} Mult per unique scoring",
+          "{C:dragqueen_dark_suit}dark suit{} in hand when scored,",
+          "but cost {C:money}$#4#{} to do so",
+          "{C:inactive,s:0.8}(Will not trigger if money is less than {C:money,s:0.8}$#4#{}"
         }
       },
       j_dragqueen_dayjob_nightclub_extra = {
@@ -709,6 +711,9 @@ return {
       dragqueen_card_badge_rgmc_parallel_suit = "Parallel Suit",
       dragqueen_card_badge_rgmc_chaotic_suit = "Chaotic Suit",
       dragqueen_card_badge_unik_tictactoe_suit = "Tic Tac Toe Suit",
+
+      dragqueen_dayjob_nightclub_a = "Dayjob",
+      dragqueen_dayjob_nightclub_b = "Nightclub",
     },
     v_dictionary = {
       -- Variable information; like challenges_completed = "Completed#1#/#2# Challenges"
