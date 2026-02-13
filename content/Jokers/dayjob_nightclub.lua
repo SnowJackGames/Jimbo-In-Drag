@@ -255,10 +255,6 @@ SMODS.Joker {
 
             if DRAGQUEENMOD.to_number(existing_money) > DRAGQUEENMOD.to_number(card.ability.extra.cost) then
               -- Otherwise, reduce total money by cost,
-              print("running dollars")
-              print(DRAGQUEENMOD.to_number(existing_money))
-              print(-card.ability.extra.cost)
-              print("--")
               ease_dollars(-card.ability.extra.cost, true)
 
               -- then multiply unique dark suits by card.ability.extra.mult, and return that
