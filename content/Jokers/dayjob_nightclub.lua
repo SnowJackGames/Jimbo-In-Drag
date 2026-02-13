@@ -228,7 +228,7 @@ SMODS.Joker {
             ------------------------------
 
             -- Get number of unique light suits
-            local unique_light_suits = DRAGQUEENMOD.get_unique_dark_suits(context.scoring_hand)
+            local unique_light_suits = DRAGQUEENMOD.get_unique_light_suits(context.scoring_hand)
 
             -- multiply by card.ability.extra.chips, and return that and money to earn
             local multiplied_chips = unique_light_suits * DRAGQUEENMOD.to_number(card.ability.extra.chips)
