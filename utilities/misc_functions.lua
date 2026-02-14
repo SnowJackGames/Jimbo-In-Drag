@@ -605,7 +605,7 @@ end
 ---@param bypass_debuff boolean?
 ---@param flush_calc boolean?
 ---@return integer
-function DRAGQUEENMOD.get_light_suits(scoring_hand, bypass_debuff, flush_calc)
+function DRAGQUEENMOD.get_unique_light_suits(scoring_hand, bypass_debuff, flush_calc)
   -- Set each suit's count to 0
   local light_suits = {}
 
