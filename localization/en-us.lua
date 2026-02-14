@@ -173,6 +173,15 @@ return {
         text = {
           "{C:inactive}On discard, flip this Joker{}"
         }
+      },
+      j_dragqueen_fishnets = {
+        name = "Fishnets",
+        text = {
+          "Each card with",
+          "{C:dragqueen_pumps}Pump{} suit held in hand",
+          "gives {X:chips,C:white}X#1#{} Chips",
+          "{C:white,X:dragqueen_keyword}Accessorize{} {C:dragqueen_pumps}Pumps{} {C:attention}#2#{}"
+        }
       }
       -- Patching vanilla jokers
       -- Patching other mods' jokers
