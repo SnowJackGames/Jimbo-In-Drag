@@ -1398,6 +1398,72 @@ end
 
 
 
+------------------------------
+-- DrawStep
+------------------------------
+
+
+
+-- Renders the "JOKER" letter layer for Snow White's Apple
+SMODS.DrawStep {
+  key = "second_floating_sprite",
+  order = 61,
+
+  func = function(self)
+    if self.config.center.second_soul_pos and (self.config.center.discovered or self.bypass_discovery_center) then
+      ------------------------------
+      -- Scaling and rotating
+      ------------------------------
+
+      local scale_mod = 0
+      local rotate_mod = 0
+
+      if self.config.center.second_soul_pos.no_scale == nil then
+        local default_scale_mod = 0.18 + 0.02 * math.sin(1.8 * G.TIMERS.REAL)
+        scale_mod = self.config.center.second_soul_pos.scale or default_scale_mod
+      end
+
+      if self.config.center.second_soul_pos.no_rotate == nil then
+        local default_rotate_mod = 0.1 * math.sin(1.219 * G.TIMERS.REAL)
+        rotate_mod = self.config.center.second_soul_pos.rotate or default_rotate_mod
+      end
+
+      ------------------------------
+      -- Determine if there are editions
+      ------------------------------
+
+      local edition_soul_sprite = false
+      if self.edition then
+        for _, v in pairs(G.P_CENTER_POOLS.Edition) do
+          if v.apply_to_float and v.apply_to_float == true and self.edition[v.key:sub(3)] then
+            edition_soul_sprite = true
+          end
+        end
+      end
+
+      if edition_soul_sprite == false then
+        if type(self.config.center.second_soul_pos.draw) == "function" then
+          self.config.center.second_soul_pos.draw(self, scale_mod, rotate_mod)
+        elseif self.children.floating_sprite_2 then
+          self.children.floating_sprite_2:draw_shader("dissolve", 0, nil, nil, self.children.center, scale_mod, rotate_mod, nil, 0.1 + 0.03*math.sin(1.8*G.TIMERS.REAL),nil, 0.6)
+          self.children.floating_sprite_2:draw_shader("dissolve", nil, nil, nil, self.children.center, scale_mod, rotate_mod)
+        end
+      end
+
+      if self.edition then
+        local edition = G.P_CENTERS[self.edition.key]
+        if (edition.apply_to_float or self.config.center.poke_apply_soul_edition) and self.children.floating_sprite_2 then
+          self.children.floating_sprite_2:draw_shader(edition.shader, nil, nil, nil, self.children.center, scale_mod, rotate_mod)
+        end
+      end
+    end
+  end,
+
+  conditions = { vortex = false, facing = "front" }
+}
+
+
+
 -- Kiss tooltip, if we only have one then add to stickers
 -- But if there's different types then can add to its own 
 

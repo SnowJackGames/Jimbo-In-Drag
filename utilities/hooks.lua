@@ -217,6 +217,52 @@ function Card.flip(self)
   end
 end
 
+
+
+-- Hooking Balatro's Card.set_sprites to handle a second soul_pos for hover
+local dragqueen_hook_set_sprites = Card.set_sprites
+
+-- Lets us render another soul_pos layer
+function Card.set_sprites(self, _center, _front, ...)
+
+  if _center then
+    if _center.second_soul_pos then
+      self.children.floating_sprite_2 = Sprite(
+        self.T.x,
+        self.T.y,
+        self.T.w,
+        self.T.h,
+        G.ASSET_ATLAS["dragqueen_Joker_Doodles"],
+        self.config.center.second_soul_pos)
+
+      self.children.floating_sprite_2.role.draw_major = self
+      self.children.floating_sprite_2.states.hover.can = false
+      self.children.floating_sprite_2.states.click.can = false
+      self.children.floating_sprite_2.states.visible = false
+    end
+  end
+
+  dragqueen_hook_set_sprites(self, _center, _front, ...)
+end
+
+
+
+-- Hooking Balatro's Card.align() to let us handle second floating sprite
+local dragqueen_hook_card_align = Card.align
+
+-- Makes second floating sprite follow alignment
+function Card.align(self)
+  if self.children.floating_sprite_2 then
+    self.children.floating_sprite_2.T.y = self.T.y
+    self.children.floating_sprite_2.T.x = self.T.x
+    self.children.floating_sprite_2.T.r = self.T.r
+  end
+
+  dragqueen_hook_card_align(self)
+end
+
+
+
 ------------------------------
 -- Game events
 ------------------------------
