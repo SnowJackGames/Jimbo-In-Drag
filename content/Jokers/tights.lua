@@ -3,7 +3,7 @@ SMODS.Joker {
   config = {
     extra = {
       odds = 3,
-      xchips = 1.5,
+      x_chips = 1.5,
       accessorize_suit = "dragqueen_Pumps",
       accessorize_count = 1}
   },
@@ -30,7 +30,7 @@ SMODS.Joker {
       vars = {
         num,
         denom,
-        card.ability.extra.xchips,
+        card.ability.extra.x_chips,
         card.ability.extra.accessorize_count
       }
     }
@@ -42,7 +42,7 @@ SMODS.Joker {
       if context.other_card:is_suit("dragqueen_Pumps") then
         if SMODS.pseudorandom_probability(card, 'example_seed', 1, card.ability.extra.odds) then
           return {
-            xchips = card.ability.extra.xchips
+            x_chips = card.ability.extra.x_chips
           }
         end
       end

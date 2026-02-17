@@ -2,7 +2,7 @@ SMODS.Joker {
   key = "fishnets",
   config = {
     extra = {
-      xchips = 1.5,
+      x_chips = 1.5,
       accessorize_suit = "dragqueen_Pumps",
       accessorize_count = 1
     }
@@ -26,7 +26,7 @@ SMODS.Joker {
 
     return {
       vars = {
-        card.ability.extra.xchips,
+        card.ability.extra.x_chips,
         card.ability.extra.accessorize_count
       }
     }
@@ -39,7 +39,7 @@ SMODS.Joker {
         -- If held_card is a pump, it returns xchips
         if context.other_card:is_suit("dragqueen_Pumps") or SMODS.has_any_suit(context.other_card) then
           return {
-            xchips = card.ability.extra.xchips
+            x_chips = card.ability.extra.x_chips
           }
         end
       end
