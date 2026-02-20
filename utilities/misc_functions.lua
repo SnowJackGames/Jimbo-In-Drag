@@ -404,7 +404,6 @@ end
 
 
 
-
 ---Used to check whether a card is a light or dark suit
 ---@param card table
 ---@param type "light" | "dark"
@@ -414,6 +413,24 @@ function DRAGQUEENMOD.is_suit(card, type)
     if card:is_suit(v) then return true end
   end
   return false
+end
+
+
+
+--- Checks whether a given card is a certain rank; thanks Paperback
+---@param card Card | table
+---@param rank string | integer a rank's name, like "Jack" or "4", or an id like 11 or 4
+---@return boolean | nil
+function DRAGQUEENMOD.is_rank(card, rank)
+  if not card or not card.get_id then return end
+  local id = card:get_id()
+
+  if type(rank) == "string" then
+    local rank_obj = SMODS.Ranks[rank]
+    return rank_obj and rank_obj.id == id
+  elseif type(rank) == "number" then
+    return id == rank
+  end
 end
 
 
