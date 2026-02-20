@@ -1,4 +1,9 @@
--- Talisman compatibility
+------------------------------
+-- Talisman compatibility 
+------------------------------
+
+
+
 DRAGQUEENMOD.to_big = to_big or function(n)
   return n
 end
@@ -8,6 +13,46 @@ end
 DRAGQUEENMOD.to_number = to_number or function(n)
   return n
 end
+
+
+
+------------------------------
+-- Cross-mod rank sprite overrides
+------------------------------
+
+
+
+-- Adding our suits' cross-mod ranks (like Paperback Apostles) to their callable atlases
+-- <br>May hopefully be removed if SMODS implements 'rank_map'
+-- <br>Code thanks to UNIK, which took from Aikoyori
+function DRAGQUEENMOD.sprite_info_override(_center, _front, card, orig_a, orig_p)
+  _center = _center or card.config.center
+  _front = _front or card.base
+  --local hc = G.SETTINGS.colour_palettes[card.base] == "hc" and "_hc" or ""
+
+  ------------------------------
+  -- Apostles
+  ------------------------------
+
+  if _front.value == "paperback_Apostle" then
+    if _front.suit == "dragqueen_Purses" then
+      return G.ASSET_ATLAS["dragqueen_ranks_hc"], { x = 0, y = 1 }
+    elseif _front.suit == "dragqueen_Pumps" then
+      return G.ASSET_ATLAS["dragqueen_ranks_hc"], { x = 0, y = 2 }
+    end
+
+  --elseif etc for more custom ranks
+
+  end
+
+  return orig_a, orig_p
+end
+
+
+
+------------------------------
+-- general cross-mod integration
+------------------------------
 
 
 
@@ -68,6 +113,9 @@ function DRAGQUEENMOD.cross_mod_theirs_to_ours()
     DRAGQUEENMOD.suits_to_consumable_local_description[prefix .. "_Crowns"] = { localization_entry = { "paperback_minor_arcana", "c_paperback_ace_of_swords" }, consumable_category = { "misc", "dictionary", "k_paperback_minor_arcana" }, consumable_color = "paperback_minor_arcana" }
     DRAGQUEENMOD.suits_to_consumable_local_description[prefix .. "_Stars"] = { localization_entry = { "paperback_minor_arcana", "c_paperback_ace_of_pentacles" }, consumable_category = { "misc", "dictionary", "k_paperback_minor_arcana" }, consumable_color = "paperback_minor_arcana" }
     DRAGQUEENMOD.sine_colors.DRAGQUEEN_PAPERBACK_PROUD_SUIT = { "paperback_crowns", "paperback_crowns", "paperback_stars", "paperback_stars" }
+
+    -- Paperback Apostle stuff
+    DRAGQUEENMOD.ENABLEDJOKERS[#DRAGQUEENMOD.ENABLEDJOKERS + 1] = "snow_whites_apple"
   end
 
   -- Six Suits
