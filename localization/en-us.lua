@@ -146,7 +146,7 @@ return {
       j_dragqueen_tipsy_queen = {
         name = "Tipsy Queen",
         text = {
-          "{C:attention}Glass Cards{} score an additional {X:mult,C:white}X#1#{},",
+          "{C:attention}Glass Cards{} score an additional {X:mult,C:white}X#1#{} Mult,",
           "but always break if able to"
         }
       },
@@ -182,7 +182,23 @@ return {
           "gives {X:chips,C:white}X#1#{} Chips",
           "{C:white,X:dragqueen_keyword}Accessorize{} {C:dragqueen_pumps}Pumps{} {C:attention}#2#{}"
         }
-      }
+      },
+      j_dragqueen_snow_whites_apple = {
+        name = "Snow White's Apple",
+        text = {
+          "If played hand is a {C:attention}High Card{},",
+          "convert a random card in hand",
+          "into a {C:attention}Kissed{} {C:attention}Apostle{} of {C:dragqueen_pumps}Pumps{},",
+          "then permanently debuff",
+          "a different random card",
+          "held in hand",
+          "{C:inactive}---{}",
+          "Scored {C:attention}Kissed{} {C:attention}Apostles{}",
+          "give {X:mult,C:white}X#1#{} Mult for every",
+          "debuffed card in deck",
+          "{s:0.8}(Currently {}{s:0.8,X:mult,C:white}X#2#{}{s:0.8} Mult){}"
+        }
+      },
       -- Patching vanilla jokers
       -- Patching other mods' jokers
     },
