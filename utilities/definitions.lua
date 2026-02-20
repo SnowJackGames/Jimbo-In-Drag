@@ -410,6 +410,7 @@ DRAGQUEENMOD.MODIFIERS = {
   },
 
   ENABLEDSTICKERS = {
+    "permanently_debuffed"
   },
 
   ENABLEDKISSES = {

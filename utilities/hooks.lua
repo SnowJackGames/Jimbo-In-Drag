@@ -170,6 +170,26 @@ end
 
 
 
+-- Hooking Balatro's Card.update() for handling debuffed sticker
+local dragqueen_hook_card_update = Card.update
+
+-- Cards with our debuffed sticker are considered debuffed
+-- <br>Thanks to UNIK for the code
+function Card.update(self, dt, ...)
+  if self.ability and self.ability.dragqueen_debuffed then
+    if not self.debuff and not self.area.config.collection then
+      self.debuff = true
+      self:set_debuff(true)
+      if self.area == G.jokers then
+        self:remove_from_deck(true)
+      end
+    end
+  end
+  return dragqueen_hook_card_update(self, dt, ...)
+end
+
+
+
 -- Hooking Balatro's Card.get_chip_x_mult()
 local dragqueen_hook_get_chip_x_mult = Card.get_chip_x_mult
 

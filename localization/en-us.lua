@@ -188,10 +188,10 @@ return {
         text = {
           "If played hand is a {C:attention}High Card{},",
           "convert a random card in hand",
-          "into a {C:attention}Kissed{} {C:attention}Apostle{} of {C:dragqueen_pumps}Pumps{},",
-          "then permanently debuff",
-          "a different random card",
-          "held in hand",
+          "into a {C:attention}Kissed{} {C:attention}Apostle{} of {C:dragqueen_pumps}Pumps{}",
+          "if able, then permanently debuff",
+          "a {C:attention}different{} random card",
+          "held in hand if able",
           "{C:inactive}---{}",
           "Scored {C:attention}Kissed{} {C:attention}Apostles{}",
           "give {X:mult,C:white}X#1#{} Mult for every",
@@ -270,8 +270,6 @@ return {
     Seal = {
     },
     Kiss = {
-    },
-    Sticker = {
     },
     Clip = {
     },
@@ -709,7 +707,18 @@ return {
         text = {
           "mrowwwww"
         }
-      }
+      },
+
+      -- Stickers
+      dragqueen_debuffed = {
+        name = "Debuffed",
+        text = {
+          "Card is debuffed",
+          "{s:0.8,C:inactive}(Scores no chips,{}",
+          "{s:0.8,C:inactive}and all abilities{}",
+          "{s:0.8,C:inactive}are disabled){}"
+        }
+      },
     }
   },
   misc = {
@@ -792,7 +801,8 @@ return {
       -- Like how seals and editions have badges at the bottom
       dragqueen_sparkle = "Sparkle",
       dragqueen_glitter = "Glitter",
-      dragqueen_gloss = "Gloss"
+      dragqueen_gloss = "Gloss",
+      dragqueen_debuffed = "Debuffed"
     }
   }
 }
