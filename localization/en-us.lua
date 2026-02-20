@@ -189,13 +189,13 @@ return {
           "If played hand is a {C:attention}High Card{},",
           "convert a random card in hand",
           "into a {C:attention}Kissed{} {C:attention}Apostle{} of {C:dragqueen_pumps}Pumps{}",
-          "if able, then permanently debuff",
+          "if able, then permanently {C:attention}debuff{}",
           "a {C:attention}different{} random card",
           "held in hand if able",
           "{C:inactive}---{}",
           "Scored {C:attention}Kissed{} {C:attention}Apostles{}",
           "give {X:mult,C:white}X#1#{} Mult for every",
-          "debuffed card in deck",
+          "{C:attention}debuffed{} card in deck",
           "{s:0.8}(Currently {}{s:0.8,X:mult,C:white}X#2#{}{s:0.8} Mult){}"
         }
       },
@@ -706,6 +706,19 @@ return {
         name = "Slay",
         text = {
           "mrowwwww"
+        }
+      },
+      dragqueen_dictionary_permanently_debuffed = {
+        name = "Permanently Debuffed",
+        text = {
+          "This item is {C:attention}debuffed{};",
+          "it scores no chips, and",
+          "all abilities it has are disabled",
+          "{C:inactive}---{}",
+          "This attribute can be overrided,",
+          "should the card have a separate",
+          "attribute that does not allow it",
+          "to be debuffed",
         }
       },
 

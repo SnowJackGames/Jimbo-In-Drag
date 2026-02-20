@@ -107,7 +107,7 @@ DRAGQUEENMOD.dictionary = {
     }
   },
   {
-    entry = "slay"
+    entry = "permanently_debuffed"
   }
 }
 
