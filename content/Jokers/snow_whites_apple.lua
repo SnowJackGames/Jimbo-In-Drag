@@ -12,7 +12,7 @@ local function turn_into_apostle_of_pumps(card)
   end })
   G.E_MANAGER:add_event(Event { trigger = "before", delay = 0.15, func = function()
     assert(SMODS.change_base(card, "dragqueen_Pumps", "paperback_Apostle"))
-    -- card.ability.dragqueen_kissed = true
+    card.ability.dragqueen_kissed = true
     return true
   end })
   G.E_MANAGER:add_event(Event { trigger = "before", delay = 0.1, func = function()
@@ -108,16 +108,12 @@ SMODS.Joker {
 
     -- Played Kissed Apostles score X0.5 Mult for each debuffed card in hand
     if context.individual and context.cardarea == G.play then
-      print("??")
       if DRAGQUEENMOD.is_rank(context.other_card, "paperback_Apostle") then
-        print("apostle")
         if context.other_card.ability.dragqueen_kissed == true then
-          print("kissed")
           return {
             x_mult = card.ability.extra.x_mult
           }
         else
-          print(context.other_card.ability)
         end
       end
     end
