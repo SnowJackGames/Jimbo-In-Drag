@@ -371,6 +371,7 @@ DRAGQUEENMOD.spectrum_poker_hands = {
 -- The user can disable specific Drag Queen Mod items in the "enabled" tables
 -- by commenting them out if they hate it
 -- But watch out!
+-- Cross-mod specific Jokers and such are found in cross-mod.lua if you wanted to disable those
 
 
 
