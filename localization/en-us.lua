@@ -723,13 +723,14 @@ return {
   },
   misc = {
     dictionary = {
-      -- Tooltip under cards
+      -- When a card says something like "Expired!"
       k_dragqueen_joker = "Drag Queen",
       k_dragqueen_shoes_rule = "Rule!",
       k_dragqueen_shoes_suck = "Suck!",
-      -- When a card says something like "Expired!"
+      k_dragqueen_snow_whites_apple = "Ripen!",
       dragqueen_yas = "Yas!",
       dragqueen_slay = "Slay!",
+      
       -- Config menu stuff
       dragqueen_ui_jokers_enabled = "Enable Jokers",
       dragqueen_ui_decks_enabled = "Enable Decks",
