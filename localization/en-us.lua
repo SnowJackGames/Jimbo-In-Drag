@@ -711,7 +711,7 @@ return {
 
       -- Stickers
       dragqueen_debuffed = {
-        name = "Debuffed",
+        name = "Permanently Debuffed",
         text = {
           "Card is debuffed",
           "{s:0.8,C:inactive}(Scores no chips,{}",
@@ -802,7 +802,7 @@ return {
       dragqueen_sparkle = "Sparkle",
       dragqueen_glitter = "Glitter",
       dragqueen_gloss = "Gloss",
-      dragqueen_debuffed = "Debuffed"
+      dragqueen_debuffed = "P. Debuffed"
     }
   }
 }
