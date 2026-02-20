@@ -414,6 +414,7 @@ DRAGQUEENMOD.MODIFIERS = {
   },
 
   ENABLEDKISSES = {
+    "kiss"
   },
 
   ENABLEDGEMSTONES = {

@@ -269,8 +269,6 @@ return {
     },
     Seal = {
     },
-    Kiss = {
-    },
     Clip = {
     },
     Gemstone = {
@@ -732,6 +730,12 @@ return {
           "{s:0.8,C:inactive}are disabled){}"
         }
       },
+      dragqueen_kissed = {
+        name = "Kissed",
+        text = {
+          "Has been {C:dragqueen_keyword}Kissed{}",
+        }
+      },
     }
   },
   misc = {
@@ -816,7 +820,8 @@ return {
       dragqueen_sparkle = "Sparkle",
       dragqueen_glitter = "Glitter",
       dragqueen_gloss = "Gloss",
-      dragqueen_debuffed = "P. Debuffed"
+      dragqueen_debuffed = "P. Debuffed",
+      dragqueen_kissed = "Kissed"
     }
   }
 }
