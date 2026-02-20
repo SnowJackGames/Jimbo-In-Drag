@@ -13,6 +13,7 @@ SMODS.Atlas { key = "hc_cards", path = "Suits/8BitDeck_opt2.png", px = 71, py = 
 SMODS.Atlas { key = "lc_ui", path = "Suits/ui_assets.png", px = 18, py = 18 }
 SMODS.Atlas { key = "hc_ui", path = "Suits/ui_assets_opt2.png", px = 18, py = 18 }
     -- Ranks
+SMODS.Atlas { key = "dragqueen_ranks_hc", path = "Ranks/ranks_hc.png", px = 71, py = 95 }
     -- Decks
     -- Blinds
     -- Modifiers
