@@ -223,6 +223,14 @@ return {
 
         }
       },
+      j_dragqueen_messy_queen = {
+        name = "Messy Queen",
+        text = {
+          "{X:mult,C:white}X#1#{} Mult if played hand",
+          "contains at least",
+          "{C:attention}3{} {C:dragqueen_keyword}Kissed{} cards"
+        }
+      },
 
       -- Patching vanilla jokers
       -- Patching other mods' jokers
