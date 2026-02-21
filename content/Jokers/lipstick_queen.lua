@@ -22,7 +22,6 @@ SMODS.Joker {
   },
 
   loc_vars = function(self, info_queue, card)
-    info_queue[#info_queue+1] = DRAGQUEENMOD.Card_preview_in_tooltip_instances["cpit_dragqueen_dictionary_kissed"]
 
     return {
       vars = {
