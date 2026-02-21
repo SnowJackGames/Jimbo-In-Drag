@@ -158,6 +158,7 @@ local dragqueen_hook_suit_badge = SMODS.create_mod_badges
 -- Puts a badge under a suited card indicating if it is a Light Suit, a Dark Suit, or both
 function SMODS.create_mod_badges(obj, badges, ...)
   dragqueen_hook_suit_badge(obj, badges, ...)
+  DRAGQUEENMOD.drag_queen_badge(obj, badges)
   DRAGQUEENMOD.card_suit_badge(obj, badges)
 end
 

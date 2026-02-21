@@ -1233,6 +1233,23 @@ end
 
 
 
+-- Puts a badge under a Joker indicating if it is a Drag Queen
+function DRAGQUEENMOD.drag_queen_badge(obj, badges)
+  if obj then
+    if obj.set ~= nil and obj.key ~= nil and obj.dragqueen ~= nil then
+      if DRAGQUEENMOD.is_joker(nil, obj.set, obj.key) then
+        if obj.dragqueen.is_a_drag_queen == true then
+          local dragqueen_badge_text = DRAGQUEENMOD.easymisclocalize("dictionary", "dragqueen_card_badge_drag_queen")
+          badges[#badges + 1] = DRAGQUEENMOD.get_badge_template(dragqueen_badge_text, loc_colour("dragqueen_keyword"), loc_colour("white"))
+        end
+      end
+    end
+  end
+end
+
+
+
+
 function DRAGQUEENMOD.get_dark_or_light_suit_badge(obj, givenbadgecolor, giventextcolor)
   local suitkey = nil
   local suittext = nil

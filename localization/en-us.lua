@@ -828,6 +828,10 @@ return {
       dragqueen_card_badge_rgmc_chaotic_suit = "Chaotic Suit",
       dragqueen_card_badge_unik_tictactoe_suit = "Tic Tac Toe Suit",
 
+
+      dragqueen_card_badge_drag_queen = "Drag Queen",
+
+      
       dragqueen_dayjob_nightclub_a = "Dayjob",
       dragqueen_dayjob_nightclub_b = "Nightclub",
     },
