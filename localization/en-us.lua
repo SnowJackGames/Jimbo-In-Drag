@@ -188,24 +188,23 @@ return {
         text = {
           "If played hand is a {C:attention}High Card{},",
           "convert a random card in hand",
-          "into a {C:attention}Kissed{} {C:attention}Apostle{} of {C:dragqueen_pumps}Pumps{}",
+          "into a {C:dragqueen_keyword}Kissed{} {C:attention}Apostle{} of {C:dragqueen_pumps}Pumps{}",
           "if able, then permanently {C:attention}debuff{}",
           "a {C:attention}different{} random card",
           "held in hand if able",
           "{C:inactive}---{}",
-          "Scored {C:attention}Kissed{} {C:attention}Apostles{}",
+          "Scored {C:dragqueen_keyword}Kissed{} {C:attention}Apostles{}",
           "give {X:mult,C:white}X#1#{} Mult for every",
           "{C:attention}debuffed{} card in deck",
           "{s:0.8,C:inactive}(Currently {}{s:0.8,X:mult,C:white}X#2#{}{s:0.8,C:inactive} Mult){}"
         }
       },
-
       j_dragqueen_lipstick_queen = {
         name = "Lipstick Queen",
         text = {
           "First played {C:attention}face{} card gives,",
           "{X:chips,C:white}X#1#{} Chips per",
-          "{C:attention}Kissed{} card in deck",
+          "{C:dragqueen_keyword}Kissed{} card in deck",
           "{s:0.8,C:inactive}(Currently {}{s:0.8,X:chips,C:white}X#2#{}{s:0.8,C:inactive} Chips){}"
 
         }
