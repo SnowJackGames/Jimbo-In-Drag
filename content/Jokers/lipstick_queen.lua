@@ -17,7 +17,6 @@ SMODS.Joker {
   perishable_compat = false,
   dragqueen = {
     requires_kissed = true,
-    requires_cross_mods = true
   },
 
   loc_vars = function(self, info_queue, card)
