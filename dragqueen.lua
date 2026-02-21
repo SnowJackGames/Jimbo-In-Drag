@@ -129,6 +129,21 @@ for _, v in ipairs(objects) do
         ret = ret and (DRAGQUEENMOD.non_plain_in_pool() or DRAGQUEENMOD.has_modded_suit_in_deck())
       end
 
+      if config.requires_kissed then
+        if G.playing_cards then
+          local kissed_in_deck = false
+
+          -- Determines if at least 1 kissed card is in deck
+          for _, card_in_deck in ipairs(G.playing_cards) do
+            if card_in_deck.ability.dragqueen_kissed then
+              kissed_in_deck = true
+              break
+            end
+          end
+          ret = ret and kissed_in_deck
+        end
+      end
+
       return ret, dupes
     end
   end
