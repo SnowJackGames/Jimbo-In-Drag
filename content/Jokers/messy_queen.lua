@@ -15,7 +15,8 @@ SMODS.Joker {
   eternal_compat = true,
   perishable_compat = false,
   dragqueen = {
-    requires_kissed = true
+    requires_kissed = true,
+    is_a_drag_queen = true,
   },
 
   loc_vars = function(self, info_queue, card)
