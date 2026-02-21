@@ -164,6 +164,22 @@ function DRAGQUEENMOD.build_custom_structure_dictionary_tooltips()
         end
       end
     end
+
+    -- Kissed entry
+    if item.entry == "kissed" then
+      -- Make sure we're not duplicating this tooltip somehow
+      item.extra_tooltips = item.extra_tooltips or {}
+      local unduplicated_extra_tooltips = {}
+      for _, tooltip in ipairs(item.extra_tooltips) do
+        if tooltip.tooltip_from_function == nil then
+          table.insert(unduplicated_extra_tooltips, tooltip)
+        end
+      end
+      item.extra_tooltips = unduplicated_extra_tooltips
+
+      -- TODO: I can add one of our card_area_preview instances when it can be put into info_queue as a loc_var for a card,
+      -- But I can't figure out how to get it here
+    end
   end
 end
 

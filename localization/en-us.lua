@@ -756,6 +756,12 @@ return {
           "Has been {C:dragqueen_keyword}Kissed{}",
         }
       },
+    },
+    Card_preview_in_tooltip = {
+      cpit_dragqueen_dictionary_kissed = {
+        name = "Kissed Example",
+        text = {""}
+      }
     }
   },
   misc = {

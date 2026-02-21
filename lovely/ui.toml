@@ -19,3 +19,15 @@ payload = '''
 args.vars = args.vars or {}
 args.vars.colours = args.vars.colours or {}
 '''
+
+
+# For card preview in tooltip stuff
+[[patches]]
+[patches.pattern]
+target = '''engine/event.lua'''
+pattern = '''        other = {}'''
+position = "after"
+payload = ''',
+dragqueen_desc = {}
+'''
+match_indent = true
