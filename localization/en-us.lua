@@ -209,6 +209,21 @@ return {
 
         }
       },
+      j_dragqueen_book_signing = {
+        name = "Book Signing",
+        text = {
+          "At start of blind,",
+          "{C:dragqueen_keyword}Kisses{} the first card drawn",
+          "{C:inactive}---{}",
+          "Earn {C:money}$#1#{} at end of round",
+          "{s:0.7,C:inactive,E:1}\"Signed copies generally can't be{}",
+          "{s:0.7,C:inactive,E:1}returned to the publisher{}",
+          "{s:0.7,C:inactive,E:1}once they've been purchased.\"{}",
+          "{s:0.5,C:inactive}~ Shouko Ikenami, \"A Mangaka's Weirdly Wonderful Workplace\"{}"
+
+        }
+      },
+
       -- Patching vanilla jokers
       -- Patching other mods' jokers
     },

@@ -400,7 +400,8 @@ DRAGQUEENMOD.ENABLEDJOKERS = {
   "tipsy_queen",
   "dayjob_nightclub",
   "fishnets",
-  "lipstick_queen"
+  "lipstick_queen",
+  "book_signing"
 }
 
 
