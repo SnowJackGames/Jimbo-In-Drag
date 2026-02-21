@@ -719,6 +719,15 @@ return {
           "to be debuffed",
         }
       },
+      dragqueen_dictionary_kissed = {
+        name = "Kissed",
+        text = {
+          "This item has a",
+          "{C:dragqueen_keyword}kiss{} mark",
+          "to indicate that",
+          "it has been {C:dragqueen_keyword}kissed{}"
+        }
+      },
 
       -- Stickers
       dragqueen_debuffed = {

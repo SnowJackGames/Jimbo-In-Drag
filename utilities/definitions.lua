@@ -108,7 +108,10 @@ DRAGQUEENMOD.dictionary = {
   },
   {
     entry = "permanently_debuffed"
-  }
+  },
+  {
+    entry = "kissed",
+  },
 }
 
 
