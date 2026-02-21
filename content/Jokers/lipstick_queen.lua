@@ -1,6 +1,5 @@
 SMODS.Joker {
   key = "lipstick_queen",
-  effect = "Suit Mult",
   config = {
     extra = {
       x_chips_per_kissed = 0.5,
