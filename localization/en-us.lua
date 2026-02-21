@@ -196,7 +196,18 @@ return {
           "Scored {C:attention}Kissed{} {C:attention}Apostles{}",
           "give {X:mult,C:white}X#1#{} Mult for every",
           "{C:attention}debuffed{} card in deck",
-          "{s:0.8}(Currently {}{s:0.8,X:mult,C:white}X#2#{}{s:0.8} Mult){}"
+          "{s:0.8,C:inactive}(Currently {}{s:0.8,X:mult,C:white}X#2#{}{s:0.8,C:inactive} Mult){}"
+        }
+      },
+
+      j_dragqueen_lipstick_queen = {
+        name = "Lipstick Queen",
+        text = {
+          "First played {C:attention}face{} card gives,",
+          "{X:chips,C:white}X#1#{} Chips per",
+          "{C:attention}Kissed{} card in deck",
+          "{s:0.8,C:inactive}(Currently {}{s:0.8,X:chips,C:white}X#2#{}{s:0.8,C:inactive} Chips){}"
+
         }
       },
       -- Patching vanilla jokers
