@@ -402,7 +402,8 @@ DRAGQUEENMOD.ENABLEDJOKERS = {
   "fishnets",
   "lipstick_queen",
   "book_signing",
-  "messy_queen"
+  "messy_queen",
+  "obsession"
 }
 
 

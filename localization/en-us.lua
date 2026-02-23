@@ -231,6 +231,13 @@ return {
           "{C:attention}3{} {C:dragqueen_keyword}Kissed{} cards"
         }
       },
+      j_dragqueen_obsession = {
+        name = "Obsession",
+        text = {
+          "Each {C:dragqueen_keyword}Kissed{} card held in hand",
+          "gives {X:mult,C:white}X#1#{} Mult"
+        }
+      },
 
       -- Patching vanilla jokers
       -- Patching other mods' jokers
