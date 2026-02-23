@@ -1,12 +1,16 @@
 ---@diagnostic disable: undefined-field
 function DRAGQUEENMOD.SpectrumFramework_spectrum_played_hook()
+  -- This line is for if our mod is loaded before spectrum framework is
+  SPECF = SPECF or {}
   local drag_queen_hook_spectrum_played = SPECF.spectrum_played
   function SPECF.spectrum_played()
     if DRAGQUEENMOD.non_plain_in_pool() then
       return true
     end
   end
-  drag_queen_hook_spectrum_played()
+  if drag_queen_hook_spectrum_played ~= nil then
+    drag_queen_hook_spectrum_played()
+  end
 end
 
 

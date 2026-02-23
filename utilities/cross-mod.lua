@@ -70,12 +70,15 @@ end
 function DRAGQUEENMOD.cross_mod_theirs_to_ours()
   -- Spectrum Framework, required
   DRAGQUEENMOD.SpectrumFramework_spectrum_played_hook()
-  if SPECF.config.specflush == true then
-    table.insert(DRAGQUEENMOD.spectrum_poker_hands, "Specflush")
-    table.insert(DRAGQUEENMOD.spectrum_poker_hands, "Straight Specflush")
-    table.insert(DRAGQUEENMOD.spectrum_poker_hands, "Specflush House")
-    table.insert(DRAGQUEENMOD.spectrum_poker_hands, "Specflush Five")
+  if SPECF.config then
+    if SPECF.config.specflush == true then
+      table.insert(DRAGQUEENMOD.spectrum_poker_hands, "Specflush")
+      table.insert(DRAGQUEENMOD.spectrum_poker_hands, "Straight Specflush")
+      table.insert(DRAGQUEENMOD.spectrum_poker_hands, "Specflush House")
+      table.insert(DRAGQUEENMOD.spectrum_poker_hands, "Specflush Five")
+    end
   end
+
   
 -- Bunco
   if next(SMODS.find_mod("Bunco")) then
