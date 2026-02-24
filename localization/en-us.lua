@@ -713,6 +713,19 @@ return {
           "{s:0.8,C:inactive}(must have room){}"
         },
       },
+      -- #1# is accessorize_count
+      dragqueen_accessorize_random_tooltip = {
+        name = "Accessorize",
+        text = {
+          "{s:0.9}When obtained, creates {}{s:0.9,C:attention}#1#{}{s:0.9} random{}",
+          "{s:0.9}suit-converting {}{s:0.9,C:attention}consumables{}",
+          "{s:0.9}from the{}",
+          "{s:0.9,C:attention}\"Suit To Consumable Table\"{}",
+          "{s:0.8,C:inactive}(Table in \"Jimbo In Drag\"'s{}",
+          "{s:0.8,C:dragqueen_keyword}Dictionary{}{s:0.8,C:inactive} tab){}",
+          "{s:0.8,C:inactive}(must have room){}",
+        },
+      },
       -- Dynamically generated through UI.lua:DRAGQUEENMOD.dragqueen_accessorize_tooltip()
       dragqueen_accessorize_tooltip_dynamic = {
         name = "Accessorize",
@@ -735,9 +748,10 @@ return {
           "{s:0.9}\"{}{C:white,X:dragqueen_keyword,s:0.9}Accessorize{}{s:0.9} {}{C:hearts,s:0.9}Hearts{}{s:0.9} {}{C:attention,s:0.9}1{}{s:0.9}\" creates{}",
           "{s:0.9}up to {}{C:attention,s:0.9}1{}{s:0.9} {}{C:tarot,s:0.9}The Sun{}",
           "{C:inactive}---{}",
-          "{s:0.9}\"{}{C:white,X:dragqueen_keyword,s:0.9}Accessorize{}{s:0.9} Random {}{C:attention,s:0.9}X{}{s:0.9}\" instead{}",
-          "{s:0.9}creates {}{C:attention,s:0.9}X{}{s:0.9} random {}{C:attention,s:0.9}consumables{}{s:0.9} from the{}",
-          "{s:0.9}{}{C:attention,s:0.9}\"Suit To Consumable Table\"{}",
+          "{s:0.9}\"{}{C:white,X:dragqueen_keyword,s:0.9}Accessorize{}{s:0.9} random {}{C:attention,s:0.9}X{}{s:0.9}\" instead{}",
+          "{s:0.9}creates up to {}{C:attention,s:0.9}X{}{s:0.9} random {}{C:attention,s:0.9}consumables{}{s:0.9}{}",
+          "{s:0.9}from the {}{C:attention,s:0.9}\"Suit To Consumable Table\"{}",
+          "{s:0.9}if you have room{}"
         }
       },
       dragqueen_dictionary_slay = {

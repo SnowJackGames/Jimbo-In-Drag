@@ -747,7 +747,10 @@ end
 ---@param card table | Card -- Card to give tooltip to
 ---@return table -- Add to info_queue
 function DRAGQUEENMOD.dragqueen_accessorize_tooltip(card)
-  -- Assertions
+  ------------------------------
+  -- assertions and initials
+  ------------------------------
+
   assert(type(card) == "table" or "Card", "object given to DRAGQUEENMOD.dragqueen_accessorize_tooltip() is not a card")
   assert(card.ability, "card given to DRAGQUEENMOD.dragqueen_accessorize_tooltip() does not have .ability")
   assert(card.ability.extra, "card.ability given to DRAGQUEENMOD.dragqueen_accessorize_tooltip() does not have .extra")
@@ -756,6 +759,11 @@ function DRAGQUEENMOD.dragqueen_accessorize_tooltip(card)
 
   local given_suit = card.ability.extra.accessorize_suit
   local suit_exists_check = false
+  local is_random = false
+
+  ------------------------------
+  -- Find the suit
+  ------------------------------
 
   -- Checks if suit exists
   for suitcategory, suitsets in pairs(DRAGQUEENMOD.suit_groups) do
@@ -765,17 +773,22 @@ function DRAGQUEENMOD.dragqueen_accessorize_tooltip(card)
       end
     end
   end
-  assert(suit_exists_check == true, "DRAGQUEENMOD.dragqueen_accessorize_tooltip() could not find " .. given_suit)
 
-  -- Find the associated suit-converting consumable card, make sure it exists
-  local suit_consumable = DRAGQUEENMOD.suits_to_consumable[given_suit]
-  assert(type(suit_consumable) == "string", "Could not find suit-converting consumable for suit " .. given_suit .. "for DRAGQUEENMOD.dragqueen_accessorize_tooltip()")
+  -- could be set to "random"
+  -- This is run after the suit check in case somehow
+  -- there is a suit legitimately called "Random" which I guess?? we'd differ to??
+  if suit_exists_check == false then
+    if card.ability.extra.accessorize_suit == "random" or "Random" then
+      is_random = true
+    else
+      assert(suit_exists_check == true, "DRAGQUEENMOD.dragqueen_accessorize_tooltip() could not find " .. given_suit)
+    end
+  end
 
-  -- Get the localized name for that consumable
-  local suit_consumable_local_info = DRAGQUEENMOD.suits_to_consumable_local_description[given_suit].localization_entry
-  local suit_consumable_local_name = DRAGQUEENMOD.easydescriptionslocalize(suit_consumable_local_info[1], suit_consumable_local_info[2]).name
+  ------------------------------
+  -- Build initials
+  ------------------------------
 
-  -- Build the tooltip
   local given_count = tostring(card.ability.extra.accessorize_count)
   local set = "Other"
   local key = "dragqueen_accessorize_tooltip"
@@ -785,46 +798,97 @@ function DRAGQUEENMOD.dragqueen_accessorize_tooltip(card)
     suit_color = "attention"
   end
 
-  for index, string in ipairs(DRAGQUEENMOD.easydescriptionslocalize(set, key).text) do
-    local subbed_string = ""
-    subbed_string = string.gsub(string, "#1#", given_count)
-    subbed_string = string.gsub(subbed_string, "#2#", suit_consumable_local_name)
-    subbed_string = string.gsub(subbed_string, "#3#", suit_color)
-    text[index] = subbed_string
-  end
+  if is_random == false then
+    ------------------------------
+    -- Non-random suit
+    ------------------------------
 
-  -- We get the colors for "colours"
-  local colours = {}
-  colours[#colours+1] = G.C.SUITS[given_suit] or G.C.IMPORTANT
-  colours[#colours+1] = G.C.FILTER
-  colours[#colours+1] = loc_colour(DRAGQUEENMOD.suits_to_consumable_local_description[given_suit].consumable_color)
-  colours[#colours+1] = G.C.UI.TEXT_INACTIVE
+    -- Find the associated suit-converting consumable card, make sure it exists
+    local suit_consumable = DRAGQUEENMOD.suits_to_consumable[given_suit]
+    assert(type(suit_consumable) == "string", "Could not find suit-converting consumable for suit " .. given_suit .. "for DRAGQUEENMOD.dragqueen_accessorize_tooltip()")
 
-  -- We let Balatro's misc_functions.lua:loc_parse_string() handle the text
-  local textparsed = {}
-  for _, v in ipairs(text) do
-    textparsed[#textparsed+1] = loc_parse_string(v)
-  end
+    -- Get the localized name for that consumable
+    local suit_consumable_local_info = DRAGQUEENMOD.suits_to_consumable_local_description[given_suit].localization_entry
+    local suit_consumable_local_name = DRAGQUEENMOD.easydescriptionslocalize(suit_consumable_local_info[1], suit_consumable_local_info[2]).name
 
-  -- For the grand finale we take our dynamically parsed text and give it back to localization
-  G.localization.descriptions.Other[key .. "_dynamic"].text = text
-  G.localization.descriptions.Other[key .. "_dynamic"].text_parsed = textparsed
 
-  -- Now we return the table which can be handed to info_queue
+    -- Build tooltip info
+    for index, string in ipairs(DRAGQUEENMOD.easydescriptionslocalize(set, key).text) do
+      local subbed_string = ""
+      subbed_string = string.gsub(string, "#1#", given_count)
+      subbed_string = string.gsub(subbed_string, "#2#", suit_consumable_local_name)
+      subbed_string = string.gsub(subbed_string, "#3#", suit_color)
+      text[index] = subbed_string
+    end
 
-  return {
-    -- Balatro's functions/common_events.lua:function generate_card_ui() builds a full_UI_table.name
-    -- which is parsed with Balatro's functions/misc_functions.lua:function localize(args, misc_cat)
-    -- This return gets sent to localize() with type "Other", and using the suit and key the text table is given to loc_target
+    -- We get the colors for "colours"
+    local colours = {}
+    colours[#colours+1] = G.C.SUITS[given_suit] or G.C.IMPORTANT
+    colours[#colours+1] = G.C.FILTER
+    colours[#colours+1] = loc_colour(DRAGQUEENMOD.suits_to_consumable_local_description[given_suit].consumable_color)
+    colours[#colours+1] = G.C.UI.TEXT_INACTIVE
 
-    -- "Colours" here comes from Balatro's own Canadian code
-    set = "Other",
-    key = key .. "_dynamic",
-    vars = {
-      colours = colours
+    -- We let Balatro's misc_functions.lua:loc_parse_string() handle the text
+    local textparsed = {}
+    for _, v in ipairs(text) do
+      textparsed[#textparsed+1] = loc_parse_string(v)
+    end
+
+    -- For the grand finale we take our dynamically parsed text and give it back to localization
+    G.localization.descriptions.Other[key .. "_dynamic"].text = text
+    G.localization.descriptions.Other[key .. "_dynamic"].text_parsed = textparsed
+
+    -- Now we return the table which can be handed to info_queue
+
+    return {
+      -- Balatro's functions/common_events.lua:function generate_card_ui() builds a full_UI_table.name
+      -- which is parsed with Balatro's functions/misc_functions.lua:function localize(args, misc_cat)
+      -- This return gets sent to localize() with type "Other", and using the suit and key the text table is given to loc_target
+
+      -- "Colours" here comes from Balatro's own Canadian code
+      set = "Other",
+      key = key .. "_dynamic",
+      vars = {
+        colours = colours
+      }
     }
-  }
 
+
+
+  else
+    ------------------------------
+    -- Random suit / consumable
+    ------------------------------
+
+    key = "dragqueen_accessorize_random_tooltip"
+
+    -- Build tooltip info
+    for index, string in ipairs(DRAGQUEENMOD.easydescriptionslocalize(set, key).text) do
+      local subbed_string = ""
+      subbed_string = string.gsub(string, "#1#", given_count)
+      text[index] = subbed_string
+    end
+
+    -- We let Balatro's misc_functions.lua:loc_parse_string() handle the text
+    local textparsed = {}
+    for _, v in ipairs(text) do
+      textparsed[#textparsed+1] = loc_parse_string(v)
+    end
+
+    -- For the grand finale we take our dynamically parsed text and give it back to localization
+    G.localization.descriptions.Other["dragqueen_accessorize_tooltip_dynamic"].text = text
+    G.localization.descriptions.Other["dragqueen_accessorize_tooltip_dynamic"].text_parsed = textparsed
+
+    -- Now we return the table which can be handed to info_queue
+
+    return {
+      -- Balatro's functions/common_events.lua:function generate_card_ui() builds a full_UI_table.name
+      -- which is parsed with Balatro's functions/misc_functions.lua:function localize(args, misc_cat)
+      -- This return gets sent to localize() with type "Other", and using the suit and key the text table is given to loc_target
+      set = "Other",
+      key = "dragqueen_accessorize_tooltip_dynamic",
+    }
+  end
 end
 
 
