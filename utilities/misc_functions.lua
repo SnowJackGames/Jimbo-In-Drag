@@ -417,6 +417,39 @@ end
 
 
 
+---Used to check whether a card is a suit that is not plain
+---<br>Plain suits are Spades, Hearts, Clubs, Diamonds
+---@param card table
+---@return boolean
+function DRAGQUEENMOD.is_non_plain_suit(card)
+  -- For things like stone cards, enhanced to have no suit
+  if SMODS.has_no_suit(card) == true then return false end
+
+  -- For things like wild cards
+  if SMODS.has_any_suit(card) == true then return true end
+
+  -- List of suits that a card is, in case it is somehow multiple
+  local is_suits = {}
+  local is_non_plain = false
+
+  -- Get every suit that a card is
+  for suit, _ in pairs(SMODS.Suits) do
+    if card:is_suit(suit) then
+      table.insert(is_suits, suit)
+    end
+  end
+
+  for _, suit in ipairs(is_suits) do
+    if (suit ~= "Spades") and (suit ~= "Hearts") and (suit ~= "Clubs") and (suit ~= "Diamonds") then
+      is_non_plain = true
+    end
+  end
+
+  return is_non_plain
+end
+
+
+
 --- Checks whether a given card is a certain rank; thanks Paperback
 ---@param card Card | table
 ---@param rank string | integer a rank's name, like "Jack" or "4", or an id like 11 or 4
