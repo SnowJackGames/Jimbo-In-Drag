@@ -238,6 +238,15 @@ return {
           "gives {X:mult,C:white}X#1#{} Mult"
         }
       },
+      j_dragqueen_haute_couture = {
+        name = "Haute Couture",
+        text = {
+          "Played cards with a",
+          "non-{C:dragqueen_plain_suit}plain{} suit give",
+          "{C:mult}+#1#{} Mult when scored",
+          "{C:white,X:dragqueen_keyword}Accessorize{} random {C:attention}#2#{}"
+        }
+      },
 
       -- Patching vanilla jokers
       -- Patching other mods' jokers

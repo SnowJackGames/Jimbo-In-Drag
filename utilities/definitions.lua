@@ -152,6 +152,7 @@ DRAGQUEENMOD.inject_into_loc_colours = {
   dragqueen_light_suit = G.C.DRAGQUEEN_LIGHT_SUIT,
   dragqueen_dark_suit = G.C.DRAGQUEEN_DARK_SUIT,
   dragqueen_dark_and_light_suit = G.C.DRAGQUEEN_DARK_AND_LIGHT_SUIT,
+  dragqueen_plain_suit = G.C.DRAGQUEEN_PLAIN_SUIT,
   dragqueen_pumps = G.C.SUITS.dragqueen_Pumps or G.C.DRAGQUEEN_PUMPS_LC,
   dragqueen_purses = G.C.SUITS.dragqueen_Purses or G.C.DRAGQUEEN_PURSES_LC,
   dragqueen_keyword = G.C.DRAGQUEEN_KEYWORD,
@@ -403,7 +404,8 @@ DRAGQUEENMOD.ENABLEDJOKERS = {
   "lipstick_queen",
   "book_signing",
   "messy_queen",
-  "obsession"
+  "obsession",
+  "haute_couture"
 }
 
 
