@@ -869,7 +869,7 @@ return {
       -- Variable information; like challenges_completed = "Completed#1#/#2# Challenges"
     },
     ranks = {
-      dragqueen_mother = "Mother"
+      dragqueen_Mother = "Mother"
     },
     suits_singular = {
       dragqueen_Pumps = "Pump",
