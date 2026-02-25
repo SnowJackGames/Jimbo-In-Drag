@@ -251,8 +251,6 @@ return {
       -- Patching vanilla jokers
       -- Patching other mods' jokers
     },
-    Rank = {
-    },
     Back = {
       b_dragqueen_accessory = {
         name = "Accessory Deck",
@@ -342,8 +340,7 @@ return {
       c_dragqueen_purses_placeholder_singular = {
         name = "The Purses Placeholder",
         text = {
-          "Converts up to",
-          "{C:attention}#1#{} selected card",
+          "Converts {C:attention}#1#{} selected card",
           "to a {C:dragqueen_purses}Purse{}"
         }
       },
@@ -366,9 +363,30 @@ return {
       c_dragqueen_pumps_placeholder_singular = {
         name = "The Pumps Placeholder",
         text = {
-          "Converts up to",
-          "{C:attention}#1#{} selected card",
+          "Converts {C:attention}#1#{} selected card",
           "to a {C:dragqueen_pumps}Pump{}"
+        }
+      },
+      c_dragqueen_the_empress_reversed = {
+        name = "The Empress Reversed",
+        text = {
+          "Converts {C:attention}#1#{} selected card",
+          "into a {C:attention}Mother{}"
+        }
+      },
+      c_dragqueen_the_empress_reversed_singular = {
+        name = "The Empress Reversed",
+        text = {
+          "Converts {C:attention}#1#{} selected card",
+          "into a {C:attention}Mother{}"
+        }
+      },
+      c_dragqueen_the_empress_reversed_plural = {
+        name = "The Empress Reversed",
+        text = {
+          "Converts up to",
+          "{C:attention}#1#{} selected cards",
+          "into a {C:attention}Mother{}"
         }
       },
     },

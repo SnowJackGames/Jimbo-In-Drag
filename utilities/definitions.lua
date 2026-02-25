@@ -437,7 +437,8 @@ DRAGQUEENMOD.CONSUMABLES = {
 
   ENABLEDTAROT = {
     "PursesTarot",
-    "PumpsTarot"
+    "PumpsTarot",
+    "the_empress_reversed"
   },
 
   ENABLEDSPECTRALS = {
