@@ -126,28 +126,98 @@ end
 ---@param immediate? boolean If it should happen without delay, default to false
 ---@param set_delay? number in seconds (affected by game speed)
 function DRAGQUEENMOD.convert_cards_to(cards, attribute_table, flip, immediate, set_delay)
-  local shouldflip = flip or false
+  ------------------------------
+  -- Initials, assertions
+  ------------------------------
+  assert(type(cards) == "table" or "Card",
+    "DRAGQUEENMOD.convert_cards_to handed that which is not a Card or table of cards")
+  assert(type(attribute_table) == "table",
+    "DRAGQUEENMOD.convert_cards_to handed \"attribute_table\" of wrong type")
+  assert(type(flip) == "boolean" or "nil",
+    "DRAGQUEENMOD.convert_cards_to handed \"flip\" of wrong type")
+  assert(type(immediate) == "boolean" or "nil",
+    "DRAGQUEENMOD.convert_cards_to handed \"immediate\" of wrong type")
+  assert(type(set_delay) == "number" or "nil",
+    "DRAGQUEENMOD.convert_cards_to handed \"set_delay\" of wrong type")
+
+  local shouldflip = flip or nil
   local shouldimmediate = immediate or false
   local shoulddelay = set_delay or nil
+  local sound = attribute_table.sound or "tarot1"
   if not cards then return end
   if cards and cards.is and cards:is(Card) then cards = {cards} end
+
+  ------------------------------
+  -- Initial Sounds and Flips
+  ------------------------------
+
   for i = 1, #cards do
-    if shouldflip then
-      DRAGQUEENMOD.conversion_event_helper(function() cards[i]:flip() end, 0.2)
+    -- For attribute changes without sounds / juice_up, we implement that for them
+    if attribute_table.suit_conv or
+    attribute_table.rank_conv or
+    attribute_table.enhancement_conv or
+    attribute_table.bonus_chips then
+      local initial_sound_and_juice = function()
+        play_sound(sound)
+        cards[i]:juice_up(0.3, 0.5)
+      end
+
+      DRAGQUEENMOD.conversion_event_helper(initial_sound_and_juice, 0.4)
     end
 
+    -- Then flip down
+    if shouldflip then
+      -- raises in pitch
+      local percent = 1.15 - (i - 0.999) / (#cards - 0.998) * 0.3
+      local flip_event = function ()
+        cards[i]:flip()
+        play_sound("card1", percent)
+        cards[i]:juice_up(0.3, 0.3)
+      end
+
+      DRAGQUEENMOD.conversion_event_helper(flip_event, 0.15)
+    end
+  end
+
+  ------------------------------
+  -- Changing Attributes
+  ------------------------------
+
+  for i = 1, #cards do
+    -- Does NOT automatically juice / make sounds
+    if attribute_table.suit_conv or attribute_table.rank_conv then
+      local suit_or_rank_change = function()
+        cards[i] = SMODS.change_base(cards[i], attribute_table.suit_conv, attribute_table.rank_conv)
+      end
+      DRAGQUEENMOD.conversion_event_helper(suit_or_rank_change, shoulddelay, shouldimmediate)
+    end
+
+    -- Does NOT automatically juice / make sounds
     if attribute_table.enhancement_conv then
       DRAGQUEENMOD.conversion_event_helper(function() cards[i]:set_ability(G.P_CENTERS[attribute_table.enhancement_conv]) end, shoulddelay, shouldimmediate)
     end
+
+    -- Automatically DOES juicing and sounds
     if attribute_table.edition then
-      DRAGQUEENMOD.conversion_event_helper(function() cards[i]:set_edition(attribute_table.edition, true) end, shoulddelay, shouldimmediate)
+      local edition_override = attribute_table.edition_override or false
+      if edition_override == true then
+        DRAGQUEENMOD.conversion_event_helper(function() cards[i]:set_edition(attribute_table.edition, true) end, shoulddelay, shouldimmediate)
+      else
+        local check_edition_first = function()
+          if not cards[i].edition then
+            cards[i]:set_edition(attribute_table.edition, true)
+          end
+        end
+        DRAGQUEENMOD.conversion_event_helper(check_edition_first, shoulddelay, false)
+      end
     end
-    if attribute_table.suit_conv then
-      DRAGQUEENMOD.conversion_event_helper(function() cards[i]:change_suit(attribute_table.suit_conv) end, shoulddelay, shouldimmediate)
-    end
+
+    -- Automatically DOES juicing and sounds
     if attribute_table.seal then
       DRAGQUEENMOD.conversion_event_helper(function() cards[i]:set_seal(attribute_table.seal, nil, true) end, shoulddelay, shouldimmediate)
     end
+
+    -- Does NOT automatically juice / make sounds
     if attribute_table.bonus_chips then
       local bonus_add = function()
         cards[i].ability.perma_bonus = cards[i].ability.perma_bonus or 0
@@ -155,12 +225,61 @@ function DRAGQUEENMOD.convert_cards_to(cards, attribute_table, flip, immediate, 
       end
       DRAGQUEENMOD.conversion_event_helper(bonus_add, shoulddelay, shouldimmediate)
     end
+
     -- Can set up other attributes of a card we want to modify
+
   end
-  if flip then delay(0.3) end
-  if cards == G.hand.highlighted then
-    DRAGQUEENMOD.conversion_event_helper(function() G.hand:unhighlight_all() end)
+
+  ------------------------------
+  -- End sounds and flips
+  ------------------------------
+
+  for i = 1, #cards do
+    -- Then flip back up
+    if shouldflip then
+      -- raises in pitch
+      local percent = 1.15 - (i - 0.999) / (#cards - 0.998) * 0.3
+      local flip_and_finish_event = function ()
+        cards[i]:flip()
+        play_sound("card1", percent)
+        cards[i]:juice_up(0.3, 0.3)
+
+        -- Update the sprites of cards
+        if cards[i].config and cards[i].config.center then
+          cards[i]:set_sprites(cards[i].config.center)
+        end
+        if cards[i].ability then
+          cards[i].front_hidden = cards[i]:should_hide_front()
+        end
+      end
+
+      DRAGQUEENMOD.conversion_event_helper(flip_and_finish_event, 0.15)
+    else
+      local finish_event = function ()
+        cards[i]:juice_up(0.3, 0.3)
+
+        -- Update the sprites of cards
+        if cards[i].config and cards[i].config.center then
+          cards[i]:set_sprites(cards[i].config.center)
+        end
+        if cards[i].ability then
+          cards[i].front_hidden = cards[i]:should_hide_front()
+        end
+      end
+
+      DRAGQUEENMOD.conversion_event_helper(finish_event, 0.15)
+    end
   end
+
+  ------------------------------
+  -- Unhighlight
+  ------------------------------
+
+  local unhighlight = function()
+    G.hand:unhighlight_all()
+  end
+
+  DRAGQUEENMOD.conversion_event_helper(unhighlight, 0.2)
 end
 
 
