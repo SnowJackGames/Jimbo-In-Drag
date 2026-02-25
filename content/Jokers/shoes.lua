@@ -86,24 +86,20 @@ SMODS.Joker {
 
           -- 1 in 2 chance for scored cards to all gain a random edition
           if SMODS.pseudorandom_probability(card, "shoes", 1, card.ability.extra.odds) then
-            local uneditioned_cards = {}
-            -- find all the cards without an edition
-            for _, scored_card in ipairs(context.scoring_hand) do
-              if not scored_card.edition then
-                table.insert(uneditioned_cards, scored_card)
-              end
-            end
-
             -- "Rule!" message
             SMODS.calculate_effect({
               message = DRAGQUEENMOD.easymisclocalize("dictionary", "k_dragqueen_shoes_rule")
             }, card)
 
             -- Add Editions
-            for _, uneditioned in ipairs(uneditioned_cards) do
-              local randomedition = poll_edition("shoes", nil, nil, true)
-              DRAGQUEENMOD.convert_cards_to(uneditioned, {edition = randomedition}, false, true)
-              delay(0.5)
+            for _, scored_card in ipairs(context.scoring_hand) do
+                if not scored_card.edition then
+                  local randomedition = poll_edition("shoes", nil, nil, true)
+                  local attribute_table = {
+                    edition = randomedition
+                  }
+                  DRAGQUEENMOD.convert_cards_to(scored_card, attribute_table, false, true)
+                end
             end
             return {}
           else
