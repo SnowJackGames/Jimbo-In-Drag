@@ -112,6 +112,9 @@ DRAGQUEENMOD.dictionary = {
   {
     entry = "kissed",
   },
+  {
+    entry = "slay",
+  },
 }
 
 

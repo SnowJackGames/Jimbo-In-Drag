@@ -784,7 +784,13 @@ return {
       dragqueen_dictionary_slay = {
         name = "Slay",
         text = {
-          "mrowwwww"
+          "You Slay whenever",
+          "your scored hand's total",
+          "exceeds the blind's",
+          "chip requirement,",
+          "i.e You Slay whenever",
+          "scoring flames appear"
+
         }
       },
       dragqueen_dictionary_permanently_debuffed = {
