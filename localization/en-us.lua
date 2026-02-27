@@ -133,13 +133,13 @@ return {
             "Stupid boy.",
             "Let's party.",
             "These shoes are three hundred dollars.",
-            "These shoes are three hundred %$!#&^@ dollars.",
+            "These shoes are three hundred %$!#ing dollars.",
             "Let's get 'em!",
             "Oh.",
             "Oh, by the way, %$!# you!",
             "%$!# you!",
             "Those shoes are mine.",
-            "Gimme those %$!#&^@ shoes."
+            "Gimme those %$!#ing shoes."
           }
         }
       },
@@ -245,6 +245,114 @@ return {
           "non-{C:dragqueen_plain_suit}plain{} suit give",
           "{C:mult}+#1#{} Mult when scored",
           "{C:white,X:dragqueen_keyword}Accessorize{} random {C:attention}#2#{}"
+        }
+      },
+      j_dragqueen_joyride = {
+        name = "JOYRIDE.",
+        text = {
+          "Last played card gives",
+          "{X:dragqueen_keyword}Joyride{} when scored, where",
+          "{X:dragqueen_keyword}Joyride{} starts at {X:mult,C:white}X#1#{} Mult",
+          "{C:inactive}---{}",
+          "During each {C:attention}first hand{} of round,",
+          "if you {C:dragqueen_keyword}Slay{}, {X:dragqueen_keyword}Joyride{} gains",
+          "{X:mult,C:white}X#2#{} times {C:attention}Ante{} Mult",
+          "Otherwise, it resets",
+          "(currently {X:mult,C:white}X#3#{} Mult)",
+          "",
+          "{s:0.8,C:inactive,E:1}\"#4#\"{}"
+        },
+        quote = {
+          swear = {
+            "I'm already rich.",
+            "This party sucks.",
+            "Don't even try to give me shit.",
+            "Rev my engine 'til you make it purr.",
+            "Keep it kinky, but I come first.",
+            "Beep-beep, bitch, I'm outside.",
+            "Beep-beep, best night your life.",
+            "Get in, loser, for the joyride.",
+            "Keep your eyes on the road.",
+            "A label whore, but I'm bored of wearing clothes.",
+            "You want kids? Well, I am {}{s:0.8,C:Attention,E:1}Mother{}{s:0.8,C:inactive,E:1}.",
+            "I'm just looking for a good time tonight.",
+            "Making every motherfucker turn.",
+            "Fell from heaven, no, it didn't hurt.",
+            "I'm a bitch."
+          },
+          no_swear = {
+            "I'm already rich.",
+            "This party sucks.",
+            "Don't even try to give me %$!#.",
+            "Rev my engine 'til you make it purr.",
+            "Beep-beep, %$!#&, I'm outside.",
+            "Beep-beep, best night your life.",
+            "Get in, loser, for the joyride.",
+            "Keep your eyes on the road.",
+            "You want kids? Well, I am {}{s:0.8,C:Attention,E:1}Mother{}{s:0.8,C:inactive,E:1}.",
+            "I'm just looking for a good time tonight.",
+            "Making every {}{s:0.8,C:Attention,E:1}Mother{}{s:0.8,C:inactive,E:1}%$!#er turn.",
+            "Fell from heaven, no, it didn't hurt.",
+          }
+        }
+      },
+      j_dragqueen_straight_up = {
+        name = "Straight Up",
+        text = {
+          "If hand contains a {C:attention}Straight{},",
+          "gain {C:chips}+1{} hand and {C:mult}+1{} discard",
+          "{C:inactive}---{}",
+          "Eternal"
+        },
+        quote = {
+          "I've been a fool before.",
+          "How about some information, please?",
+          "Do you really wanna love me forever?",
+          "...Or am I caught in a hit-and-run?",
+          "Is it gonna be you and me together?",
+          "Are you more than hot for me?",
+          "...Or am I a page in your history book?"
+        }
+      },
+      j_dragqueen_slayyyy = {
+        name = "Slayyyy",
+        text = {
+          "During each {C:attention}first hand{} of round,",
+          "If you {C:dragqueen_keyword}Slay{}, gain {C:money}$#1#{}",
+          "{C:inactive}---{}",
+          "Upon {C:attention}discard{}, this Joker is {C:attention}disabled{}",
+          "until end of round"
+        }
+      },
+      j_dragqueen_big_bag = {
+        name = "Big Bag",
+        text = {
+          "Earn {C:money}#1#{} at end of round",
+          "for every card with",
+          "{dragqueen_purses}Purse{} suit in deck",
+          "{C:inactive}(currently {C:attention}#2#{}{C:inactive} cards){}"
+        }
+      },
+      j_dragqueen_rich_queen = {
+        name = "Rich Queen",
+        text = {
+          "Every Joker has {C:money}$#1#{} of",
+          "increased sell value",
+          "for every card with",
+          "{dragqueen_purses}Purse{} suit in deck",
+          "{C:inactive}(currently {C:attention}#2#{}{C:inactive} cards){}",
+          "{C:white,X:dragqueen_keyword}Accessorize{} {C:dragqueen_purses}Purses{} {C:attention}#5#{}"
+        }
+      },
+      j_dragqueen_thrift_queen = {
+        name = "Thrift Queen",
+        text = {
+          "{X:chips,C:white}X#1#{} Chips,",
+          "loses {X:chips,C:white}X#1#{} Chips each {C:attention}reroll{},",
+          "Shop prices reduced by {C:money}$#1#{}",
+          "for every card with",
+          "{dragqueen_purses}Purse{} suit in deck",
+          "{C:inactive}(currently {C:attention}#2#{}{C:inactive} cards){}"
         }
       },
 
@@ -514,7 +622,7 @@ return {
           "disabled in {C:legendary}Drag Queen Mod{}"
         }
       },
-      
+
       dragqueen_plain_suits = {
         name = "Plain Suits",
         text = {
@@ -789,6 +897,7 @@ return {
           "exceeds the blind's",
           "chip requirement,",
           "i.e You Slay whenever",
+          "a played hand causes",
           "scoring flames appear"
 
         }
@@ -816,7 +925,7 @@ return {
         }
       },
 
-      -- Stickers
+      -- Stickers, shortened keywords
       dragqueen_debuffed = {
         name = "Permanently Debuffed",
         text = {
@@ -832,6 +941,16 @@ return {
           "Has been {C:dragqueen_keyword}Kissed{}",
         }
       },
+      dragqueen_slay = {
+        name = "Slay",
+        text = {
+          "You {dragqueen_keyword}Slay{} whenever",
+          "{C:attention}scoring flames{} appear"
+        }
+      },
+
+
+
     },
     Card_preview_in_tooltip = {
       cpit_dragqueen_dictionary_kissed = {
@@ -847,8 +966,11 @@ return {
       k_dragqueen_shoes_rule = "Rule!",
       k_dragqueen_shoes_suck = "Suck!",
       k_dragqueen_snow_whites_apple = "Ripen!",
-      dragqueen_yas = "Yas!",
-      dragqueen_slay = "Slay!",
+      k_dragqueen_yas = "Yas!",
+      k_dragqueen_slay = "Slay!",
+      k_dragqueen_joyride = "Beep-Beep!",
+      k_dragqueen_straight_up_hit = "Hit!",
+      k_dragqueen_straight_up_run = "Run!",
       
       -- Config menu stuff
       dragqueen_ui_jokers_enabled = "Enable Jokers",
