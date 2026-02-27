@@ -358,30 +358,30 @@ return {
       j_dragqueen_starstruck = {
         name = "Starstruck",
         text = {
-          "{C:dragqueen_keyword}Popstar{} Jokers have Sparkle edition",
+          "{C:dragqueen_keyword}Popstar{} Jokers have {C:dark_edition}Sparkle{} edition",
         }
       },
       j_dragqueen_starstruck_paperback = {
         name = "Starstruck",
         text = {
-          "{C:dragqueen_keyword}Popstar{} Jokers have Sparkle edition",
-          "Scored {C:paperback_stars}Stars{} gain Sparkle edition",
+          "{C:dragqueen_keyword}Popstar{} Jokers have {C:dark_edition}Sparkle{} edition",
+          "Scored {C:paperback_stars}Stars{} gain {C:dark_edition}Sparkle{} edition",
           "{C:white,X:dragqueen_keyword}Accessorize{} {C:paperback_stars}Stars{} {C:attention}#1#{}"
         }
       },
       j_dragqueen_starstruck_six = {
         name = "Starstruck",
         text = {
-          "{C:dragqueen_keyword}Popstar{} Jokers have Sparkle edition",
-          "Scored {C:six_stars}Stars{} gain Sparkle edition",
+          "{C:dragqueen_keyword}Popstar{} Jokers have {C:dark_edition}Sparkle{} edition",
+          "Scored {C:six_stars}Stars{} gain {C:dark_edition}Sparkle{} edition",
           "{C:white,X:dragqueen_keyword}Accessorize{} {C:six_stars}Stars{} {C:attention}#1#{}"
         }
       },
       j_dragqueen_starstruck_paperback_six = {
         name = "Starstruck",
         text = {
-          "{C:dragqueen_keyword}Popstar{} Jokers have Sparkle edition",
-          "Scored {C:paperback_stars}Stars{} and {C:six_stars}Stars{} gain Sparkle edition",
+          "{C:dragqueen_keyword}Popstar{} Jokers have {C:dark_edition}Sparkle{} edition",
+          "Scored {C:paperback_stars}Stars{} and {C:six_stars}Stars{} gain {C:dark_edition}Sparkle{} edition",
           "{C:white,X:dragqueen_keyword}Accessorize{} {C:paperback_stars}Stars{} {C:attention}#1#{}",
           "{C:white,X:dragqueen_keyword}Accessorize{} {C:six_stars}Stars{} {C:attention}#1#{}"
         }
@@ -1002,7 +1002,7 @@ return {
       k_dragqueen_joyride = "Beep-Beep!",
       k_dragqueen_straight_up_hit = "Hit!",
       k_dragqueen_straight_up_run = "Run!",
-      
+
       -- Config menu stuff
       dragqueen_ui_jokers_enabled = "Enable Jokers",
       dragqueen_ui_decks_enabled = "Enable Decks",
@@ -1037,8 +1037,8 @@ return {
 
 
       dragqueen_card_badge_drag_queen = "Drag Queen",
+      dragqueen_card_badge_popstar = "Popstar",
 
-      
       dragqueen_dayjob_nightclub_a = "Dayjob",
       dragqueen_dayjob_nightclub_b = "Nightclub",
     },
