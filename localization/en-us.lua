@@ -341,7 +341,7 @@ return {
           "for every card with",
           "{dragqueen_purses}Purse{} suit in deck",
           "{C:inactive}(currently {C:attention}#2#{}{C:inactive} cards){}",
-          "{C:white,X:dragqueen_keyword}Accessorize{} {C:dragqueen_purses}Purses{} {C:attention}#5#{}"
+          "{C:white,X:dragqueen_keyword}Accessorize{} {C:dragqueen_purses}Purses{} {C:attention}#2#{}"
         }
       },
       j_dragqueen_thrift_queen = {
@@ -355,6 +355,37 @@ return {
           "{C:inactive}(currently {C:attention}#2#{}{C:inactive} cards){}"
         }
       },
+      j_dragqueen_starstruck = {
+        name = "Starstruck",
+        text = {
+          "{C:dragqueen_keyword}Popstar{} Jokers have Sparkle edition",
+        }
+      },
+      j_dragqueen_starstruck_paperback = {
+        name = "Starstruck",
+        text = {
+          "{C:dragqueen_keyword}Popstar{} Jokers have Sparkle edition",
+          "Scored {C:paperback_stars}Stars{} gain Sparkle edition",
+          "{C:white,X:dragqueen_keyword}Accessorize{} {C:paperback_stars}Stars{} {C:attention}#1#{}"
+        }
+      },
+      j_dragqueen_starstruck_six = {
+        name = "Starstruck",
+        text = {
+          "{C:dragqueen_keyword}Popstar{} Jokers have Sparkle edition",
+          "Scored {C:six_stars}Stars{} gain Sparkle edition",
+          "{C:white,X:dragqueen_keyword}Accessorize{} {C:six_stars}Stars{} {C:attention}#1#{}"
+        }
+      },
+      j_dragqueen_starstruck_paperback_six = {
+        name = "Starstruck",
+        text = {
+          "{C:dragqueen_keyword}Popstar{} Jokers have Sparkle edition",
+          "Scored {C:paperback_stars}Stars{} and {C:six_stars}Stars{} gain Sparkle edition",
+          "{C:white,X:dragqueen_keyword}Accessorize{} {C:paperback_stars}Stars{} {C:attention}#1#{}",
+          "{C:white,X:dragqueen_keyword}Accessorize{} {C:six_stars}Stars{} {C:attention}#1#{}"
+        }
+      }
 
       -- Patching vanilla jokers
       -- Patching other mods' jokers
