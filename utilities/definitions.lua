@@ -409,7 +409,8 @@ DRAGQUEENMOD.ENABLEDJOKERS = {
   "messy_queen",
   "obsession",
   "haute_couture",
-  "snow_whites_apple"
+  "snow_whites_apple",
+  "joyride"
 }
 
 

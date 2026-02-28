@@ -250,15 +250,15 @@ return {
       j_dragqueen_joyride = {
         name = "JOYRIDE.",
         text = {
-          "Last played card gives",
-          "{X:dragqueen_keyword}Joyride{} when scored, where",
-          "{X:dragqueen_keyword}Joyride{} starts at {X:mult,C:white}X#1#{} Mult",
+          "{C:attention}Last{} played card gives",
+          "{X:dragqueen_keyword,C:white}Joyride{} when scored, where",
+          "{X:dragqueen_keyword,C:white}Joyride{} starts at {X:mult,C:white}X#1#{} Mult",
           "{C:inactive}---{}",
           "During each {C:attention}first hand{} of round,",
-          "if you {C:dragqueen_keyword}Slay{}, {X:dragqueen_keyword}Joyride{} gains",
+          "if you {C:dragqueen_keyword}Slay{}, {X:dragqueen_keyword,C:white}Joyride{} gains",
           "{X:mult,C:white}X#2#{} times {C:attention}Ante{} Mult",
           "Otherwise, it resets",
-          "(currently {X:mult,C:white}X#3#{} Mult)",
+          "{s:0.8,C:inactive}(currently {}{s:0.8,X:mult,C:white}X#3#{}{s:0.8,C:inactive} Mult){}",
           "",
           "{s:0.8,C:inactive,E:1}\"#4#\"{}"
         },
@@ -274,7 +274,7 @@ return {
             "Get in, loser, for the joyride.",
             "Keep your eyes on the road.",
             "A label whore, but I'm bored of wearing clothes.",
-            "You want kids? Well, I am {}{s:0.8,C:Attention,E:1}Mother{}{s:0.8,C:inactive,E:1}.",
+            "You want kids? Well, I am Mother.",
             "I'm just looking for a good time tonight.",
             "Making every motherfucker turn.",
             "Fell from heaven, no, it didn't hurt.",
@@ -289,9 +289,9 @@ return {
             "Beep-beep, best night your life.",
             "Get in, loser, for the joyride.",
             "Keep your eyes on the road.",
-            "You want kids? Well, I am {}{s:0.8,C:Attention,E:1}Mother{}{s:0.8,C:inactive,E:1}.",
+            "You want kids? Well, I am Mother.",
             "I'm just looking for a good time tonight.",
-            "Making every {}{s:0.8,C:Attention,E:1}Mother{}{s:0.8,C:inactive,E:1}%$!#er turn.",
+            "Making every mother%$!#er turn.",
             "Fell from heaven, no, it didn't hurt.",
           }
         }
@@ -923,14 +923,13 @@ return {
       dragqueen_dictionary_slay = {
         name = "Slay",
         text = {
-          "You Slay whenever",
-          "your scored hand's total",
-          "exceeds the blind's",
-          "chip requirement,",
-          "i.e You Slay whenever",
-          "a played hand causes",
-          "scoring flames appear"
-
+          "{s:0.9}You {}{s:0.9,C:dragqueen_keyword}Slay{}{s:0.9} whenever{}",
+          "{s:0.9}your {}{s:0.9,C:attention}scored hand{}{s:0.9}'s {}{s:0.9,C:attention}total{}",
+          "{s:0.9}exceeds the {}{s:0.9,C:attention}Blind{}{s:0.9}'s{}",
+          "{s:0.9,C:attention}chip requirement{}",
+          "{s:0.9}I.e you {}{s:0.9,C:dragqueen_keyword}Slay{}{s:0.9} whenever{}",
+          "{s:0.9}a {}{s:0.9,C:attention}scored hand{}{s:0.9} causes{}",
+          "{s:0.9,C:attention}scoring flames{}{s:0.9} to appear{}"
         }
       },
       dragqueen_dictionary_permanently_debuffed = {
@@ -975,8 +974,9 @@ return {
       dragqueen_slay = {
         name = "Slay",
         text = {
-          "You {dragqueen_keyword}Slay{} whenever",
-          "{C:attention}scoring flames{} appear"
+          "You {C:dragqueen_keyword}Slay{} whenever",
+          "a {C:attention}scored hand{} causes",
+          "{C:attention}scoring flames{} to appear"
         }
       },
 
