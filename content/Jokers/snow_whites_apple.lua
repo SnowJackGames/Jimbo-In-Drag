@@ -55,6 +55,7 @@ SMODS.Joker {
   eternal_compat = true,
   perishable_compat = false,
   dragqueen = {
+    requires_jokers = true,
     requires_purses = true,
     requires_cross_mods = true
   },

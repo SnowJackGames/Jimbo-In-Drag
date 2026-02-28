@@ -20,6 +20,7 @@ SMODS.Joker {
   eternal_compat = true,
   perishable_compat = false,
   dragqueen = {
+    requires_jokers = true,
     requires_purses = true
   },
 

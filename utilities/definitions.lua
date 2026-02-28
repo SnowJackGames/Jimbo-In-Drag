@@ -408,7 +408,8 @@ DRAGQUEENMOD.ENABLEDJOKERS = {
   "book_signing",
   "messy_queen",
   "obsession",
-  "haute_couture"
+  "haute_couture",
+  "snow_whites_apple"
 }
 
 

@@ -144,6 +144,10 @@ for _, v in ipairs(objects) do
         end
       end
 
+      if config.requires_cross_mods then
+        ret = ret and DRAGQUEENMOD.config.cross_mod_enabled
+      end
+
       return ret, dupes
     end
   end
