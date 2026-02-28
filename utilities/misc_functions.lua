@@ -101,16 +101,23 @@ function DRAGQUEENMOD.recursively_add_entries_from_one_table_into_another(target
 -- When given a quote table of strings,
 -- pulls a random quote and returns it
 ---@param quotes table
+---@param never_swears? boolean
 ---@return string | nil
-function DRAGQUEENMOD.get_quote(quotes)
+function DRAGQUEENMOD.get_quote(quotes, never_swears)
   local quotes_to_fetch = nil
   local returnquote = nil
 
-  -- Get from the swear or no_swear table
-  if DRAGQUEENMOD.config.swears_enabled == true then
-    quotes_to_fetch = quotes.swear
+  -- No swear vs no_swear table
+  if never_swears then
+    quotes_to_fetch = quotes
+
   else
-    quotes_to_fetch = quotes.no_swear
+    -- Get from the swear or no_swear table
+    if DRAGQUEENMOD.config.swears_enabled == true then
+      quotes_to_fetch = quotes.swear
+    else
+      quotes_to_fetch = quotes.no_swear
+    end
   end
 
   if quotes_to_fetch then
