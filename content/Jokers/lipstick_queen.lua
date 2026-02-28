@@ -1,3 +1,5 @@
+-- First played face cadr gives XChips per Kissed card in deck
+
 SMODS.Joker {
   key = "lipstick_queen",
   config = {

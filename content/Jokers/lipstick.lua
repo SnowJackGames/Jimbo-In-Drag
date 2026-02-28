@@ -1,3 +1,5 @@
+-- 1 in 4 chance for played cards with Purse suit to earn XMoney when scored (Max of money_cap)
+
 SMODS.Joker {
   key = "lipstick",
   config = {

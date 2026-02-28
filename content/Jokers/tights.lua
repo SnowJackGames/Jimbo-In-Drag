@@ -1,3 +1,5 @@
+-- 1 in 3 chance for played cards with Pump suit to give XChips when scored
+
 SMODS.Joker {
   key = "tights",
   config = {

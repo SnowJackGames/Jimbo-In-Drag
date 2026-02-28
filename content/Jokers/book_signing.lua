@@ -1,3 +1,6 @@
+-- At start of blind, Kisses the first card drawn
+-- Earn money at end of round
+
 SMODS.Joker {
   key = "book_signing",
   config = {

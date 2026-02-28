@@ -1,3 +1,7 @@
+-- If played hand is a High Card, convert a random card in hand into a Kissed Apostle of Pumps if able,
+-- then permanently debuff a different random card in hand held in hand if able
+-- Scored Kissed Apostles give XMult for every debuffed card in deck
+
 local function turn_into_apostle_of_pumps(card)
   G.E_MANAGER:add_event(Event { trigger = "before", delay = 0.15, func = function()
     play_sound("tarot1")
@@ -72,7 +76,7 @@ SMODS.Joker {
 
   calculate = function (self, card, context)
     -- If played card is a high card, convert a random card held in hand into a kissed Apostle of Pumps
-    -- if able, then disable another random card held in hand if able
+    -- if able, then disable another random card held in hand
     if context.after then
       if context.scoring_name == "High Card" then
         local number_of_cards_in_hand = #G.hand.cards

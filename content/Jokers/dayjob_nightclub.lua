@@ -1,3 +1,6 @@
+-- Dayjob: Cards with a light suit gives Chips per unique light suit in scoring hand when scored, and earn money
+-- Nightclub: Cards with a dark suit give Mult per unique dark suit in scoring hand when scored, but costs money to do so (will not trigger if money is less than minimum)
+
 local function dragqueen_dayjob_nightclub_sprite_change(card)
   local position = { x = 5, y = 0 }
   if card.ability then

@@ -1,3 +1,5 @@
+-- XMult if played hand contains at least 3 Kissed cards
+
 SMODS.Joker {
   key = "messy_queen",
   config = {

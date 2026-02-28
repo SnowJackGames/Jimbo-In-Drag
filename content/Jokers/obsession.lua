@@ -1,3 +1,5 @@
+-- Each Kissed card held in hand gives XMult
+
 SMODS.Joker {
   key = "obsession",
   config = {

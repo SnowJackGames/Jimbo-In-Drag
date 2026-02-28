@@ -1,4 +1,5 @@
-
+-- Costs all your money (up to $300)
+-- If poker hand is a Pair of Pumps, earn Money, then 1 in 2 chance for scored cards to gain a random edition
 
 SMODS.Joker {
   key = "shoes",

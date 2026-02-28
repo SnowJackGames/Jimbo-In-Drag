@@ -1,3 +1,5 @@
+-- Played cards with a non-Plain suit give Mult when scored
+
 SMODS.Joker {
   key = "haute_couture",
   config = {
@@ -22,7 +24,7 @@ SMODS.Joker {
   },
 
   loc_vars = function(self, info_queue, card)
-    info_queue[#info_queue + 1] = {set = "Other", key = "dragqueen_plain_suits"}
+    info_queue[#info_queue + 1] = { set = "Other", key = "dragqueen_plain_suits" }
     info_queue[#info_queue + 1] = DRAGQUEENMOD.dragqueen_accessorize_tooltip(card)
 
     return {

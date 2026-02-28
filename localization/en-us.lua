@@ -153,20 +153,20 @@ return {
       j_dragqueen_dayjob_nightclub_a = {
         name = "Dayjob",
         text = {
-          "Cards with a {C:dragqueen_light_suit}light suit{}",
-          "give {C:chips}+#1#{} Chips per unique scoring",
-          "{C:dragqueen_light_suit}light suit{} in hand when scored,",
+          "Cards with a {C:dragqueen_light_suit}light suit{} give",
+          "{C:chips}+#1#{} Chips per unique {C:dragqueen_light_suit}light suit{}",
+          "in scoring hand when scored,",
           "and earn {C:money}$#2#{}"
         }
       },
       j_dragqueen_dayjob_nightclub_b = {
         name = "Nightclub",
         text = {
-          "Cards with a {C:dragqueen_dark_suit}dark suit{}",
-          "give {C:mult}+#3#{} Mult per unique scoring",
-          "{C:dragqueen_dark_suit}dark suit{} in hand when scored,",
+          "Cards with a {C:dragqueen_dark_suit}dark suit{} give",
+          "{C:mult}+#3#{} Mult per unique {C:dragqueen_dark_suit}dark suit{}",
+          " in scoring hand when scored,",
           "but cost {C:money}$#4#{} to do so",
-          "{C:inactive,s:0.8}(Will not trigger if money is less than {C:money,s:0.8}$#4#{}"
+          "{s:0.7,C:inactive}(Will not trigger if money is less than {s:0.7,C:money}$#4#{}{s:0.7,C:inactive}){}"
         }
       },
       j_dragqueen_dayjob_nightclub_extra = {

@@ -1,3 +1,5 @@
+-- Glass Cards score an additional XMult, but always break if able to
+
 SMODS.Joker {
   key = "tipsy_queen",
   config = {

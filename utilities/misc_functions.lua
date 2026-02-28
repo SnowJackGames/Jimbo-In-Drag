@@ -370,10 +370,16 @@ end
 
 
 -- Determines if score flames were activated
----@param context table
 ---@return true | nil
-function DRAGQUEENMOD.final_scoring_step_slay(context)
-  if context.final_scoring_step and (hand_chips * mult > G.GAME.blind.chips) then
+function DRAGQUEENMOD.final_scoring_step_slay()
+  assert(type(DRAGQUEENMOD.to_number(_G.hand_chips)) == "number",
+  "DRAGQUEENMOD.final_scoring_step_slay can't find _G.handchips")
+  assert(type(DRAGQUEENMOD.to_number(_G.mult)) == "number",
+  "DRAGQUEENMOD.final_scoring_step_slay can't find _G.mult")
+  assert(type(DRAGQUEENMOD.to_number(G.GAME.blind.chips)) == "number",
+  "DRAGQUEENMOD.final_scoring_step_slay can't find G.GAME.blind.chips")
+
+  if (DRAGQUEENMOD.to_number(_G.hand_chips) * DRAGQUEENMOD.to_number(_G.mult) > DRAGQUEENMOD.to_number(G.GAME.blind.chips)) then
     return true
   end
 end

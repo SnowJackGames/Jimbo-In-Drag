@@ -1,3 +1,5 @@
+-- Played cards with Pump suit give Mult when scored
+
 SMODS.Joker {
   key = "vain_joker",
   effect = "Suit Mult",

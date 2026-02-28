@@ -1,3 +1,5 @@
+-- Played cards with Purse suit give Mult when scored
+
 SMODS.Joker {
   key = "broke_joker",
   effect = "Suit Mult",

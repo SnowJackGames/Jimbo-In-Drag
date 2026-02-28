@@ -1,3 +1,5 @@
+-- Each card with Pump suit held in hand gives XChips
+
 SMODS.Joker {
   key = "fishnets",
   config = {
