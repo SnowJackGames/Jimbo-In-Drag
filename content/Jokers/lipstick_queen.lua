@@ -1,4 +1,4 @@
--- First played face cadr gives XChips per Kissed card in deck
+-- First played face card gives XChips per Kissed card in deck
 
 SMODS.Joker {
   key = "lipstick_queen",
@@ -36,7 +36,7 @@ SMODS.Joker {
   calculate = function (self, card, context)
     -- --First scored face card gives Xchips for every Kissed card in deck
     if context.individual and not context.end_of_round and context.cardarea == G.play then
-      
+
       -- Find the first scored face
       local first_face = nil
       for i = 1, #context.scoring_hand do
