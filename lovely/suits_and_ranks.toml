@@ -27,3 +27,38 @@ payload = """
 _atlas, _pos = DRAGQUEENMOD.sprite_info_override(_center, _front, self, _atlas, _pos)
 """
 match_indent = true
+
+
+# I don't know why strength_effect (and its equivalent prev_behavior) in SMODS.modify_rank works like this,
+# But entries in rank_data.prev and rank_data.next are strings like "King" etc
+# but strength_effect / prev_behavior requires being an integer. And fixed behavior only pulls
+# index 0 of .prev and .next.
+# this overrides it to work I guess better
+
+[[patches]]
+[patches.pattern]
+target = '=[SMODS _ "src/utils.lua"]'
+pattern = "rank_key = rank_data.next[i]"
+position = "after"
+payload = """
+for _, rank in ipairs(rank_data.next) do
+  if behavior.fixed == rank then
+    rank_key = rank
+  end
+end
+"""
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = '=[SMODS _ "src/utils.lua"]'
+pattern = "rank_key = rank_data.prev[i]"
+position = "after"
+payload = """
+for _, rank in ipairs(rank_data.prev) do
+  if behavior.fixed == rank then
+    rank_key = rank
+  end
+end
+"""
+match_indent = true
