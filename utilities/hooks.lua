@@ -351,6 +351,17 @@ function DRAGQUEENMOD.last_second_code()
   DRAGQUEENMOD.build_custom_structure_dictionary_tooltips()
   DRAGQUEENMOD.build_dictionary()
   DRAGQUEENMOD.locally_sort_built_dictionary()
+
+  -- Rebuilds suit map association for mods that load after this one
+  DRAGQUEENMOD.mother_suit_map_set_up()
+  SMODS.Ranks["dragqueen_Mother"].suit_map = DRAGQUEENMOD.mother_suitmap
+
+  for p_card, data in pairs(G.P_CARDS) do
+    if string.find(p_card, "_MOTHER") then
+      data.lc_atlas = SMODS.Ranks["dragqueen_Mother"].lc_atlas
+      data.hc_atlas = SMODS.Ranks["dragqueen_Mother"].hc_atlas
+    end
+  end
 end
 
 

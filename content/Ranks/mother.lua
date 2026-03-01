@@ -101,7 +101,7 @@ SMODS.Rank:take_ownership("Ace",
     prev_behavior = {
       fixed = "King"
     }
-  }
+  }, true
 )
 
 SMODS.Rank:take_ownership("King",
@@ -112,7 +112,7 @@ SMODS.Rank:take_ownership("King",
     prev_behavior = {
       fixed = "Queen"
     }
-  }
+  }, true
 )
 
 SMODS.Rank:take_ownership("Queen",
@@ -123,7 +123,7 @@ SMODS.Rank:take_ownership("Queen",
     prev_behavior = {
       fixed = "Jack"
     }
-  }
+  }, true
 )
 
 SMODS.Rank:take_ownership("Jack",
@@ -134,7 +134,7 @@ SMODS.Rank:take_ownership("Jack",
     prev_behavior = {
       fixed = "10"
     }
-  }
+  }, true
 )
 
 SMODS.Rank:take_ownership("10",
@@ -145,5 +145,5 @@ SMODS.Rank:take_ownership("10",
     prev_behavior = {
       fixed = "9"
     }
-  }
+  }, true
 )
