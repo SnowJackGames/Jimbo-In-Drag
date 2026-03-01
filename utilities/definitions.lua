@@ -410,7 +410,8 @@ DRAGQUEENMOD.ENABLEDJOKERS = {
   "obsession",
   "haute_couture",
   "snow_whites_apple",
-  "joyride"
+  "joyride",
+  "straight_up"
 }
 
 
