@@ -357,9 +357,13 @@ function DRAGQUEENMOD.last_second_code()
   SMODS.Ranks["dragqueen_Mother"].suit_map = DRAGQUEENMOD.mother_suitmap
 
   for p_card, data in pairs(G.P_CARDS) do
-    if string.find(p_card, "_MOTHER") then
+    if string.find(p_card, "_dragqueen_MOTHER") then
       data.lc_atlas = SMODS.Ranks["dragqueen_Mother"].lc_atlas
       data.hc_atlas = SMODS.Ranks["dragqueen_Mother"].hc_atlas
+      data.pos = {
+        x = SMODS.Ranks["dragqueen_Mother"].pos.x,
+        y = DRAGQUEENMOD.mother_suitmap[data.suit]
+      }
     end
   end
 end

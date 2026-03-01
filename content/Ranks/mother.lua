@@ -24,7 +24,7 @@ function DRAGQUEENMOD.mother_suit_map_set_up()
     paperback_Crowns = 8,
     bunc_Fleurons = 9,
     bunc_Halberds = 10,
-    minty_3s = 9
+    minty_3s = 11
   }
 
   if SMODS.Suits then
