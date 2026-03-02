@@ -353,7 +353,7 @@ return {
       j_dragqueen_big_bag = {
         name = "Big Bag",
         text = {
-          "Earn {C:money}#1#{} at end of round",
+          "Earn {X:money,C:white}#1#{} at end of round",
           "for every card with",
           "{dragqueen_purses}Purse{} suit in deck",
           "{C:inactive}(currently {C:attention}#2#{}{C:inactive} cards){}"

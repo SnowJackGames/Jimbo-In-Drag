@@ -396,22 +396,34 @@ DRAGQUEENMOD.ENABLEDRANKS = {
 
 
 DRAGQUEENMOD.ENABLEDJOKERS = {
+  -- Suit Jokers 
   "broke_joker",
   "vain_joker",
+
+  -- Drag Queens
+  "tipsy_queen",
+  "lipstick_queen",
+  "messy_queen",
+
+  -- Objects
   "lipstick",
   "tights",
-  "shoes",
-  "tipsy_queen",
-  "dayjob_nightclub",
   "fishnets",
-  "lipstick_queen",
+  "big_bag",
+
+  -- Culture
+  "dayjob_nightclub",
   "book_signing",
-  "messy_queen",
   "obsession",
   "haute_couture",
-  "snow_whites_apple",
+
+  -- Popstar Jokers
+  "shoes",
   "joyride",
-  "straight_up"
+  "straight_up",
+
+  -- Crossmod Jokers
+  "snow_whites_apple",
 }
 
 
