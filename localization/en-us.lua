@@ -68,7 +68,7 @@ return {
         text = {
           "{C:green}#1# in #2#{} chance for played",
           "cards with {C:dragqueen_purses}Purse{} suit to earn",
-          "{X:money,C:white}X#3#{} {C:money}money{} when scored",
+          "{X:money,C:white}X#3#{} money when scored",
           "{s:0.8,C:inactive}(Max of {}{s:0.8,C:money}$#4#{}{s:0.8,C:inactive}){}",
           "{C:white,X:dragqueen_keyword}Accessorize{} {C:dragqueen_purses}Purses{} {C:attention}#5#{}"
         }
@@ -353,10 +353,11 @@ return {
       j_dragqueen_big_bag = {
         name = "Big Bag",
         text = {
-          "Earn {X:money,C:white}#1#{} at end of round",
+          "Earn {X:money,C:white}X$#1#{} money at end of round",
           "for every card with",
-          "{dragqueen_purses}Purse{} suit in deck",
-          "{C:inactive}(currently {C:attention}#2#{}{C:inactive} cards){}"
+          "{C:dragqueen_purses}Purse{} suit in deck",
+          "{C:inactive}(currently {C:attention}#2#{}{C:inactive} cards){}",
+          "{C:white,X:dragqueen_keyword}Accessorize{} {C:dragqueen_purses}Purses{} {C:attention}#3#{}"
         }
       },
       j_dragqueen_rich_queen = {
@@ -373,12 +374,11 @@ return {
       j_dragqueen_thrift_queen = {
         name = "Thrift Queen",
         text = {
-          "{X:chips,C:white}X#1#{} Chips,",
-          "loses {X:chips,C:white}X#1#{} Chips each {C:attention}reroll{},",
           "Shop prices reduced by {C:money}$#1#{}",
           "for every card with",
-          "{dragqueen_purses}Purse{} suit in deck",
-          "{C:inactive}(currently {C:attention}#2#{}{C:inactive} cards){}"
+          "{C:dragqueen_purses}Purse{} suit in deck",
+          "{C:inactive}(currently {C:attention}#2#{}{C:inactive} cards){}",
+          "Will not reduce prices below {C:money}$#3#{}",
         }
       },
       j_dragqueen_starstruck = {
