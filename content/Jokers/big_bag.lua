@@ -4,7 +4,7 @@ SMODS.Joker {
   key = "big_bag",
   config = {
     extra = {
-      xdollars_per_purse = 0.05,
+      xdollars_per_purse = 0.01,
       xdollars = 0,
       accessorize_suit = "dragqueen_Purses",
       accessorize_count = 1
