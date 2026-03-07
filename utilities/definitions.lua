@@ -404,6 +404,7 @@ DRAGQUEENMOD.ENABLEDJOKERS = {
   "tipsy_queen",
   "lipstick_queen",
   "messy_queen",
+  "thrift_queen",
 
   -- Objects
   "lipstick",

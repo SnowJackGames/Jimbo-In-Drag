@@ -202,8 +202,8 @@ return {
       j_dragqueen_lipstick_queen = {
         name = "Lipstick Queen",
         text = {
-          "First played {C:attention}face{} card gives,",
-          "{X:chips,C:white}X#1#{} Chips per",
+          "First played {C:attention}face{} card",
+          "gives {X:chips,C:white}X#1#{} Chips per",
           "{C:dragqueen_keyword}Kissed{} card in deck",
           "{s:0.8,C:inactive}(Currently {}{s:0.8,X:chips,C:white}X#2#{}{s:0.8,C:inactive} Chips){}"
 
@@ -377,7 +377,7 @@ return {
           "Shop prices reduced by {C:money}$#1#{}",
           "for every card with",
           "{C:dragqueen_purses}Purse{} suit in deck",
-          "{C:inactive}(currently {C:attention}#2#{}{C:inactive} cards){}",
+          "{C:inactive}(currently {C:money}##2#{}{C:inactive}){}",
           "Will not reduce prices below {C:money}$#3#{}",
         }
       },
@@ -1028,6 +1028,7 @@ return {
       k_dragqueen_joyride = "Beep-Beep!",
       k_dragqueen_straight_up_hit = "Hit!",
       k_dragqueen_straight_up_run = "Run!",
+      k_dragqueen_thrift_queen_thrift = "Thrift!",
 
       -- Config menu stuff
       dragqueen_ui_jokers_enabled = "Enable Jokers",
