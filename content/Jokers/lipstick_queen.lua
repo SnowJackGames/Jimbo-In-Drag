@@ -36,6 +36,17 @@ SMODS.Joker {
   calculate = function (self, card, context)
     -- --First scored face card gives Xchips for every Kissed card in deck
     if context.individual and not context.end_of_round and context.cardarea == G.play then
+      -- Update the X Chips this card gives by counting the amount of Kissed cards
+      if G.playing_cards then
+        local total = 0
+
+        for _, card_in_deck in ipairs(G.playing_cards) do
+          if card_in_deck.ability.dragqueen_kissed then
+            total = total + 1
+          end
+        end
+        card.ability.extra.x_chips = 1 + (total * DRAGQUEENMOD.to_number(card.ability.extra.x_chips_per_kissed))
+      end
 
       -- Find the first scored face
       local first_face = nil
@@ -55,20 +66,5 @@ SMODS.Joker {
         }
       end
     end
-  end,
-
-
-  update = function(self, card, dt)
-    -- Update the X Chips this card gives by counting the amount of Kissed cards
-    if G.playing_cards then
-      local total = 0
-
-      for _, card_in_deck in ipairs(G.playing_cards) do
-        if card_in_deck.ability.dragqueen_kissed then
-          total = total + 1
-        end
-      end
-      card.ability.extra.x_chips = 1 + (total * DRAGQUEENMOD.to_number(card.ability.extra.x_chips_per_kissed))
-    end
-  end,
+  end
 }

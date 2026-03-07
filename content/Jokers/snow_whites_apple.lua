@@ -111,8 +111,20 @@ SMODS.Joker {
       end
     end
 
-    -- Played Kissed Apostles score X0.5 Mult for each debuffed card in hand
     if context.individual and context.cardarea == G.play then
+      -- Update the X mult this card gives by counting the amount of debuffed cards
+      if G.playing_cards then
+        local total = 0
+
+        for _, v in ipairs(G.playing_cards) do
+          if v.debuff then
+            total = total + 1
+          end
+        end
+        card.ability.extra.x_mult = 1 + (total * DRAGQUEENMOD.to_number(card.ability.extra.x_mult_per_debuffed))
+      end
+
+      -- Played Kissed Apostles score X0.5 Mult for each debuffed card in hand
       if DRAGQUEENMOD.is_rank(context.other_card, "paperback_Apostle") then
         if context.other_card.ability.dragqueen_kissed == true then
           return {
@@ -122,20 +134,5 @@ SMODS.Joker {
         end
       end
     end
-  end,
-
-  update = function(self, card, dt)
-    -- Update the X mult this card gives by counting the amount of debuffed cards
-    -- From Paperback's Jester of Nihil
-    if G.playing_cards then
-      local total = 0
-
-      for _, v in ipairs(G.playing_cards) do
-        if v.debuff then
-          total = total + 1
-        end
-      end
-      card.ability.extra.x_mult = 1 + (total * DRAGQUEENMOD.to_number(card.ability.extra.x_mult_per_debuffed))
-    end
-  end,
+  end
 }
