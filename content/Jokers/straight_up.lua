@@ -6,7 +6,7 @@ SMODS.Joker {
     extra = {
       hands_given = 1,
       discards_given = 1,
-      hand_size = -1,
+      hand_size = 1,
     }
   },
   rarity = 2,
@@ -45,9 +45,19 @@ SMODS.Joker {
   calculate = function(self, card, context)
     if context.after and context.main_eval then
       if next(context.poker_hands["Straight"]) then
-        -- Gives a hand and a discard
+        -- Gives a message than a hand
+        SMODS.calculate_effect({
+            message = DRAGQUEENMOD.easymisclocalize("dictionary", "k_dragqueen_straight_up_hit")
+          }, card)
         ease_hands_played(card.ability.extra.hands_given)
-        ease_discard(card.ability.extra.discards_given)
+
+        delay(0.5)
+
+        -- Gives a message then a discard
+        SMODS.calculate_effect({
+            message = DRAGQUEENMOD.easymisclocalize("dictionary", "k_dragqueen_straight_up_run")
+          }, card)
+        ease_discard(card.ability.extra.hands_given)
       end
     end
   end,
@@ -57,12 +67,12 @@ SMODS.Joker {
     card:add_sticker("eternal", true)
   end,
 
-  -- Removes a hand size
+  -- Adds a hand size
   add_to_deck = function(self, card, from_debuff)
     G.hand:change_size(card.ability.extra.hand_size)
   end,
 
-  -- Adds back the hand size
+  -- Removes back the hand size
   remove_from_deck = function(self, card, from_debuff)
     G.hand:change_size(-card.ability.extra.hand_size)
   end,

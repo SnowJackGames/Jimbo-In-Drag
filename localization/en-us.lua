@@ -302,7 +302,7 @@ return {
           "If hand contains a {C:attention}Straight{},",
           "gain {C:chips}#1#{} hand and {C:mult}#2#{} discard",
           "{C:inactive}---{}",
-          "{C:attention}Eternal{}, {C:mult}#3#{} hand size",
+          "{C:attention}Eternal{}, {C:mult}+#3#{} hand size",
           "{s:0.8,C:inactive,E:1}\"#4#\"{}"
         },
         quote = {
