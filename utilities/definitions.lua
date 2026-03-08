@@ -417,6 +417,7 @@ DRAGQUEENMOD.ENABLEDJOKERS = {
   "book_signing",
   "obsession",
   "haute_couture",
+  "slayyyy",
 
   -- Popstar Jokers
   "shoes",

@@ -302,7 +302,7 @@ return {
           "If hand contains a {C:attention}Straight{},",
           "gain {C:chips}#1#{} hand and {C:mult}#2#{} discard",
           "{C:inactive}---{}",
-          "{C:attention}Eternal{}, {C:mult}+#3#{} hand size",
+          "{C:attention}Eternal{}, {C:attention}+#3#{} hand size",
           "{s:0.8,C:inactive,E:1}\"#4#\"{}"
         },
         quote = {
@@ -324,7 +324,7 @@ return {
           "If hand contains a {C:attention}Straight{},",
           "gain {C:chips}#1#{} hand and {C:mult}#2#{} discard",
           "{C:inactive}---{}",
-          "{C:mult}#3#{} hand size",
+          "{C:attention}+#3#{} hand size",
           "{s:0.8,C:inactive,E:1}\"#4#\"{}"
         },
         quote = {
@@ -344,10 +344,8 @@ return {
         name = "Slayyyy",
         text = {
           "During each {C:attention}first hand{} of round,",
-          "If you {C:dragqueen_keyword}Slay{}, gain {C:money}$#1#{}",
-          "{C:inactive}---{}",
-          "Upon {C:attention}discard{}, this Joker is {C:attention}disabled{}",
-          "until end of round"
+          "If you {C:dragqueen_keyword}Slay{} before your {C:attention}first{} discard,",
+          "Earn {C:money}$#1#{} times {C:attention}Ante{}"
         }
       },
       j_dragqueen_big_bag = {
@@ -1029,6 +1027,7 @@ return {
       k_dragqueen_straight_up_hit = "Hit!",
       k_dragqueen_straight_up_run = "Run!",
       k_dragqueen_thrift_queen_thrift = "Thrift!",
+      k_dragqueen_slayyyy_discard = "Discard!",
 
       -- Config menu stuff
       dragqueen_ui_jokers_enabled = "Enable Jokers",
