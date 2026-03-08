@@ -47,7 +47,8 @@ SMODS.Joker {
       if next(context.poker_hands["Straight"]) then
         -- Gives a message than a hand
         SMODS.calculate_effect({
-            message = DRAGQUEENMOD.easymisclocalize("dictionary", "k_dragqueen_straight_up_hit")
+            message = DRAGQUEENMOD.easymisclocalize("dictionary", "k_dragqueen_straight_up_hit"),
+            colour = G.C.CHIPS
           }, card)
         ease_hands_played(card.ability.extra.hands_given)
 
@@ -55,7 +56,8 @@ SMODS.Joker {
 
         -- Gives a message then a discard
         SMODS.calculate_effect({
-            message = DRAGQUEENMOD.easymisclocalize("dictionary", "k_dragqueen_straight_up_run")
+            message = DRAGQUEENMOD.easymisclocalize("dictionary", "k_dragqueen_straight_up_run"),
+            colour = G.C.MULT
           }, card)
         ease_discard(card.ability.extra.hands_given)
       end

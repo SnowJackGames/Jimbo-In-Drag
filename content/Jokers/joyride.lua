@@ -56,7 +56,8 @@ SMODS.Joker {
         if DRAGQUEENMOD.final_scoring_step_slay() then
           card.ability.extra.current_joyride = card.ability.extra.current_joyride + (card.ability.extra.joyride_per_slay * G.GAME.round_resets.ante)
           return {
-            message = DRAGQUEENMOD.easymisclocalize("dictionary", "k_dragqueen_joyride")
+            message = DRAGQUEENMOD.easymisclocalize("dictionary", "k_dragqueen_joyride"),
+            colour = G.C.DRAGQUEEN_KEYWORD
           }
 
         -- Otherwise, reset
