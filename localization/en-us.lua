@@ -361,12 +361,12 @@ return {
       j_dragqueen_rich_queen = {
         name = "Rich Queen",
         text = {
-          "Every Joker has {C:money}$#1#{} of",
-          "increased sell value",
-          "for every card with",
-          "{dragqueen_purses}Purse{} suit in deck",
-          "{C:inactive}(currently {C:attention}#2#{}{C:inactive} cards){}",
-          "{C:white,X:dragqueen_keyword}Accessorize{} {C:dragqueen_purses}Purses{} {C:attention}#2#{}"
+          "Add {C:money}$#1#{} of {C:attention}sell value{}",
+          "to every {C:attention}Joker{} for each card",
+          "with {C:dragqueen_purses}Purse{} suit in deck",
+          "at end of round",
+          "{C:inactive}(currently {C:money}#2#{}{C:inactive} sell value){}",
+          "{C:white,X:dragqueen_keyword}Accessorize{} {C:dragqueen_purses}Purses{} {C:attention}#3#{}"
         }
       },
       j_dragqueen_thrift_queen = {
