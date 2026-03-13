@@ -74,9 +74,8 @@ SMODS.Joker {
           -- Increase sell 
           if individual_joker.set_cost then
             individual_joker.ability.extra_value = (DRAGQUEENMOD.to_number(individual_joker.ability.extra_value) or 0) + DRAGQUEENMOD.to_number(card.ability.extra.sell_value_increase)
-            individual_joker.set_cost()
+            individual_joker:set_cost()
           end
-          
 
           -- Value Up Message
           SMODS.calculate_effect({
