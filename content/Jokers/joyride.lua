@@ -1,4 +1,3 @@
-
 -- Joy Ride [Kesha]
 -- Last played card gives
 -- "Joyride" when scored, where
@@ -28,7 +27,8 @@ SMODS.Joker {
   eternal_compat = true,
   perishable_compat = false,
   dragqueen = {
-    requires_jokers = true
+    requires_jokers = true,
+    is_a_popstar = true
   },
 
   loc_vars = function(self, info_queue, card)

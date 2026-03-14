@@ -159,6 +159,7 @@ local dragqueen_hook_suit_badge = SMODS.create_mod_badges
 function SMODS.create_mod_badges(obj, badges, ...)
   dragqueen_hook_suit_badge(obj, badges, ...)
   DRAGQUEENMOD.drag_queen_badge(obj, badges)
+  DRAGQUEENMOD.popstar_badge(obj, badges)
   DRAGQUEENMOD.card_suit_badge(obj, badges)
 end
 
