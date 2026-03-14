@@ -424,6 +424,7 @@ DRAGQUEENMOD.ENABLEDJOKERS = {
   "shoes",
   "joyride",
   "straight_up",
+  "pink_pony_club",
 
   -- Crossmod Jokers
   "snow_whites_apple",

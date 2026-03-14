@@ -409,7 +409,40 @@ return {
           "{C:white,X:dragqueen_keyword}Accessorize{} {C:paperback_stars}Stars{} {C:attention}#1#{}",
           "{C:white,X:dragqueen_keyword}Accessorize{} {C:six_stars}Stars{} {C:attention}#1#{}"
         }
-      }
+      },
+      j_dragqueen_pink_pony_club = {
+        name = "Pink Pony Club",
+        text = {
+          "Every played {C:attention}card{}",
+          "permanently gains",
+          "{X:mult,C:white}X#1#{} Mult when scored ",
+          "if played hand contains",
+          "a {C:attention}Spectrum{}",
+          "{C:white,X:dragqueen_keyword}Accessorize{} random {C:attention}#2#{}",
+          "",
+          "{s:0.8,C:inactive,E:1}\"#3#\"{}"
+
+        },
+        quote = {
+          "I know you wanted me to stay.",
+          "I can't ignore the crazy visions of my in L.A.",
+          "Boys and girls can all be queens every single day.",
+          "Hear Santa Monica, I swear it's calling me.",
+          "Won't make my mama proud.",
+          "It's gonna cause a scene.",
+          "God, what have you done?",
+          "You're a pink pony girl.",
+          "You're a pink pony girl, and you dance at the club.",
+          "I'm just having fun!",
+          "It's where I belong.",
+          "I'm gonna keep on dancing!",
+          "I'm gonna keep on dancing.",
+          "I'm up, and jaws are on the floor.",
+          "Black lights and a mirrored disco ball.",
+          "Every night's another reason why I left it all.",
+          "I thank my wicked dreams."
+        }
+      },
 
       -- Patching vanilla jokers
       -- Patching other mods' jokers
