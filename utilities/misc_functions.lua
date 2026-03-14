@@ -712,6 +712,68 @@ end
 
 
 
+-- Checks if a played hand contains a particular hand type
+---@param poker_hands table obtained from "context.poker_hands"
+---@param hands_to_find string | table what hand(s) we want to check for
+---@return boolean
+function DRAGQUEENMOD.contains_hand(poker_hands, hands_to_find)
+  ------------------------------
+  -- Initials, type checking
+  ------------------------------
+
+  local given_hands_to_find = {}
+  if type(hands_to_find) == "string" then
+    given_hands_to_find[#given_hands_to_find+1] = hands_to_find
+  elseif type(hands_to_find) == "table" then
+    for _, value in pairs(hands_to_find) do
+      if type(value) ~= "string" then
+        error("item in table `hands_to_find` given to DRAGQUEENMOD.contains_hand() must be a string.")
+      end
+    end
+    given_hands_to_find = hands_to_find
+  else
+    error("`hands_to_find` given to DRAGQUEENMOD.contains_hand() must be a string or a table")
+  end
+
+  ------------------------------
+  -- hand determiner
+  ------------------------------
+
+  -- Iterate over all the hands we search for
+  for _, particular_hand in ipairs(given_hands_to_find) do
+    for type_of_hand, data in pairs(poker_hands) do
+      -- If the hand name has any data, that means that it contains that hand
+      if type_of_hand:find(particular_hand) and #data > 0 then
+        return true
+      end
+
+      -- hand might be all uppercase
+      if type_of_hand:find(string.upper(particular_hand)) and #data > 0 then
+        return true
+      end
+
+      -- hand might be all lowercase
+      local lowercase = string.lower(particular_hand)
+      if type_of_hand:find(lowercase) and #data > 0 then
+        return true
+      end
+
+      -- finally, string might have first letter of each word capitalized
+      -- "^%l" starts from beginning and finds if first character is lowercase
+      -- "%s+%l" starts from any number of space characters and then if the next letter is lowercase
+      local capitalized = lowercase:gsub("^%l", string.upper)
+      capitalized = capitalized:gsub("%s+%l", string.upper)
+      if type_of_hand:find(capitalized) and #data > 0 then
+        return true
+      end
+    end
+  end
+
+  return false
+end
+
+
+
 
 
 -- Checks if non-plain cards are allowed to spawn
