@@ -107,25 +107,30 @@ SMODS.current_mod.config_tab = function ()
         n = G.UIT.R,
         config = { align = "cm"},
         nodes = {
-          create_toggle {
-            label = localize("dragqueen_ui_swears_enabled"),
-            ref_table = DRAGQUEENMOD.config,
-            ref_value = "swears_enabled",
-            w = 4.5
+          {
+            n = G.UIT.C,
+            config = { align = "cl" },
+            nodes = {
+              create_toggle {
+                label = localize("dragqueen_ui_swears_enabled"),
+                ref_table = DRAGQUEENMOD.config,
+                ref_value = "swears_enabled",
+                w = 4.5
+              }
+            },
           },
-          -- If there's more than 1 "Does Not REquire Restart" option, sort into two below node columns
-          -- {
-          --   n = G.UIT.C,
-          --   config = {align = "cl"},
-          --   nodes = {
-          --   }
-          -- },
-          -- {
-          --   n = G.UIT.C,
-          --   config = {align = "cr"},
-          --   nodes = {
-          --   }
-          -- }
+          {
+            n = G.UIT.C,
+            config = { align = "cr" },
+            nodes = {
+              create_toggle {
+                label = localize("dragqueen_ui_beatrice_sounds"),
+                ref_table = DRAGQUEENMOD.config,
+                ref_value = "beatrice_sounds",
+                w = 4.5
+              }
+            }
+          }
         }
       },
     }
@@ -482,6 +487,53 @@ end
 --
 ---@see create_UIBox_detailed_tooltip
 function DRAGQUEENMOD.create_UIBox_detailed_tooltip_from_function(_center)
+end
+
+
+
+--- Shows the "Nope!" text that Wheel of Fortune does when failing on top of a card
+--- @param card table
+--- @param color table? the color of the square that pops up, defaults to Tarot
+function DRAGQUEENMOD.show_nope_text(card, color)
+  -- This is all a copy of how the base game does it
+  G.E_MANAGER:add_event(Event({
+    trigger = 'after',
+    delay = 0.4,
+    func = function()
+      local booster = G.STATE == G.STATES.TAROT_PACK
+          or G.STATE == G.STATES.SPECTRAL_PACK
+          or G.STATE == G.STATES.SMODS_BOOSTER_OPENED
+
+      attention_text({
+        text = localize("k_nope_ex"),
+        scale = 1.3,
+        hold = 1.4,
+        major = card,
+        backdrop_colour = color or G.C.SECONDARY_SET.Tarot,
+        align = booster and "tm" or "cm",
+        offset = {
+          x = 0,
+          y = booster and -0.2 or 0
+        },
+        silent = true
+      })
+
+      G.E_MANAGER:add_event(Event({
+        trigger = "after",
+        delay = 0.06 * G.SETTINGS.GAMESPEED,
+        blockable = false,
+        blocking = false,
+        func = function()
+          play_sound("tarot2", 0.76, 0.4)
+          return true
+        end
+      }))
+
+      play_sound("tarot2", 1, 0.4)
+      card:juice_up(0.3, 0.5)
+      return true
+    end
+  }))
 end
 
 

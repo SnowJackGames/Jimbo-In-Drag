@@ -7,4 +7,5 @@ return {
     skins_enabled = true,
     vanilla_reworks_enabled = true,
     cross_mod_enabled = true,
+    beatrice_sounds = true,
 }
