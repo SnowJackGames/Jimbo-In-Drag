@@ -302,29 +302,7 @@ return {
           "If hand contains a {C:attention}Straight{},",
           "gain {C:chips}#1#{} hand and {C:mult}#2#{} discard",
           "{C:inactive}---{}",
-          "{C:attention}Eternal{}, {C:attention}+#3#{} hand size",
-          "{s:0.8,C:inactive,E:1}\"#4#\"{}"
-        },
-        quote = {
-          "I've been a fool before.",
-          "How about some information, please?",
-          "Do you really wanna love me forever?",
-          "...Or am I caught in a hit-and-run?",
-          "Is it gonna be you and me together?",
-          "Are you more than hot for me?",
-          "...Or am I a page in your history book?",
-          "Do you love me?",
-          "Do you love me, baby?",
-          "I don't mean to make demands..."
-        }
-      },
-      j_dragqueen_straight_up_no_eternal = {
-        name = "Straight Up",
-        text = {
-          "If hand contains a {C:attention}Straight{},",
-          "gain {C:chips}#1#{} hand and {C:mult}#2#{} discard",
-          "{C:inactive}---{}",
-          "{C:attention}+#3#{} hand size",
+          "Always {C:attention}Eternal{}, {C:attention}+#3#{} hand size",
           "{s:0.8,C:inactive,E:1}\"#4#\"{}"
         },
         quote = {

@@ -1,0 +1,1 @@
+-- Starstruck: Popstar Jokers have sparkle. Scored stars gain sparkle. Accessorize Stars 1
