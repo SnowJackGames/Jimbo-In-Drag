@@ -443,6 +443,155 @@ return {
           "I thank my wicked dreams."
         }
       },
+      j_dragqueen_beatrice_eternal_golden_witch = {
+        name = "Beatrice, Eternal Golden Witch",
+        text = {
+          "{s:0.8}When {}{C:attention}Boss Blind{}{s:0.8} is selected,{}",
+          "{C:attention}destroy{}{s:0.8} a random Joker{}",
+          "{C:inactive}---{}",
+          "{s:0.8}When a Joker is {}{C:inactive}destroyed,{}",
+          "{s:0.8}gains {}{X:chips,C:white}X#1#{}{s:0.8} Chips and earn {}{X:money,C:white}X#2#{}{s:0.8} money{}",
+          "{s:0.8}Always {}{C:attention}Eternal{}{s:0.8}, {}{C:attention}Rental{}",
+          "{s:0.8,C:inactive}(Currently {}{s:0.8,X:chips,C:white}X#3#{}{s:0.8,C:inactive} Chips){}",
+          "{C:white,X:dragqueen_keyword}Accessorize{} {C:diamonds}Diamonds{} {C:attention}#4#{}",
+          "",
+          "{s:0.8,C:inactive,E:1}\"#5#\"{}"
+
+        },
+        quote = {
+          swear = {
+            "Hmph!",
+            "Just try and deny me!",
+            "Hiiihhihihhihihihihihihihihihihi!!",
+            "...What sort of tea should I prepare next?",
+            "You really don't understand a woman's heart.",
+            "Come, try to remember.",
+            "Kukikikikakkakakahhyahhyaaaahhahhahhahahhhahahhyaaahh!!",
+            "Kuhhihihihihihihi!!",
+            "I cannot lose here...!",
+            "......Hmph.",
+            "Khehhhuhuhuhuhyahyahya!!",
+            "Come... now is the time!!",
+            "Kneel and show your respect.",
+            "I am fickle by nature.",
+            "Talking rudely is just my personality.",
+            "...Hmph.",
+            "There are no snacks sweeter than a person's love life.",
+            "Without love, it cannot be seen.",
+            "Is the time of the banquet here yet?!",
+            "Let us start a new game.",
+            "How truly amusing!",
+            "Ushiromiya Battleeeeer!!!",
+            "Hoh?",
+            "*cackle*cackle*",
+            "Come. Close your eyes and try to remember.",
+            "Is it love or madness or a delusion?",
+            "*cackle*cackle*cackle*cackle*!",
+            "If you want to kill me, try to do it.",
+            "Kuhihihihihihihihi!!",
+            "You've dug your own grave.",
+            "...I won't apologize. Because I am a witch.",
+            "Be silent, furniture.",
+            "Now you are carp on the chopping board.",
+            "Hahahahahahaha...!!",
+            "Kikikikikikikikikikikikikikiki!!",
+            "How naive.",
+            "Those close to me sometimes call me Beato.",
+            "*cackle*cackle*cackle*cackle*",
+            "...Hoh...!",
+            "*giggle*giggle*giggle*",
+            "Swear your eternal loyalty and lick my shoes!",
+            "I am very much a witch.",
+            "All things in this world are transitory.",
+            "You will still entertain me, right?",
+            "Hihhyahhyahhaaaaaa!!",
+            "Did you watch my big momeeeeeeeeent??",
+            "Kaboom, kabang, it's magic!!",
+            "Come, let us begin!",
+            "Show me what you've got!!",
+            "Nng... Gaaaaahhhh...!!",
+            "Uguu...!! ...Nngg, ooohh...!",
+            ".........Boring.",
+            "I am the Golden Witch Beatrice!",
+            "I am the Golden Witch, Beatrice.",
+            "It's a good idea to have a little elegance...",
+            "Bravo, bravo.",
+            "Shall I slice that in two with the red truth?",
+            "I want to bully Battleeer!!",
+            "Yooohooooooooo!!",
+            "...Roast yourself whole.",
+            "Bring it on.",
+            "I won't be killed so easily.",
+            "It's so fun, toying with people's liiiiiiiiives!!",
+            "Blonde and bouncy is best, right?"
+          },
+          no_swear = {
+            "Hmph!",
+            "Just try and deny me!",
+            "Hiiihhihihhihihihihihihihihihihi!!",
+            "...What sort of tea should I prepare next?",
+            "You really don't understand a woman's heart.",
+            "Come, try to remember.",
+            "Kukikikikakkakakahhyahhyaaaahhahhahhahahhhahahhyaaahh!!",
+            "Kuhhihihihihihihi!!",
+            "I cannot lose here...!",
+            "......Hmph.",
+            "Khehhhuhuhuhuhyahyahya!!",
+            "Come... now is the time!!",
+            "Kneel and show your respect.",
+            "I am fickle by nature.",
+            "Talking rudely is just my personality.",
+            "...Hmph.",
+            "There are no snacks sweeter than a person's love life.",
+            "Without love, it cannot be seen.",
+            "Is the time of the banquet here yet?!",
+            "Let us start a new game.",
+            "How truly amusing!",
+            "Ushiromiya Battleeeeer!!!",
+            "Hoh?",
+            "*cackle*cackle*",
+            "Come. Close your eyes and try to remember.",
+            "Is it love or madness or a delusion?",
+            "*cackle*cackle*cackle*cackle*!",
+            "If you want to kill me, try to do it.",
+            "Kuhihihihihihihihi!!",
+            "You've dug your own grave.",
+            "...I won't apologize. Because I am a witch.",
+            "Be silent, furniture.",
+            "Now you are carp on the chopping board.",
+            "Hahahahahahaha...!!",
+            "Kikikikikikikikikikikikikikiki!!",
+            "How naive.",
+            "Those close to me sometimes call me Beato.",
+            "*cackle*cackle*cackle*cackle*",
+            "...Hoh...!",
+            "*giggle*giggle*giggle*",
+            "Swear your eternal loyalty and lick my shoes!",
+            "I am very much a witch.",
+            "All things in this world are transitory.",
+            "You will still entertain me, right?",
+            "Hihhyahhyahhaaaaaa!!",
+            "Did you watch my big momeeeeeeeeent??",
+            "Kaboom, kabang, it's magic!!",
+            "Come, let us begin!",
+            "Show me what you've got!!",
+            "Nng... Gaaaaahhhh...!!",
+            "Uguu...!! ...Nngg, ooohh...!",
+            ".........Boring.",
+            "I am the Golden Witch Beatrice!",
+            "I am the Golden Witch, Beatrice.",
+            "It's a good idea to have a little elegance...",
+            "Bravo, bravo.",
+            "Shall I slice that in two with the red truth?",
+            "I want to bully Battleeer!!",
+            "Yooohooooooooo!!",
+            "...Roast yourself whole.",
+            "Bring it on.",
+            "I won't be killed so easily.",
+            "It's so fun, toying with people's liiiiiiiiives!!",
+          }
+        }
+      },
 
       -- Patching vanilla jokers
       -- Patching other mods' jokers
@@ -1036,6 +1185,21 @@ return {
           "{C:attention}scoring flames{} to appear"
         }
       },
+      dragqueen_beato_chess = {
+        quote = {
+          "Check!",
+          "Break!",
+          "Capture!",
+          "Crush!",
+          "Domination!",
+          "Fork!",
+          "Kick!",
+          "Tempo!",
+          "Shot!",
+          "Stake!",
+          "Trap!"
+        }
+      }
 
 
 
@@ -1073,6 +1237,7 @@ return {
       dragqueen_ui_requires_restart = "Requires Restart",
       dragqueen_ui_does_not_require_restart = "Does Not Require Restart",
       dragqueen_ui_dictionary = "Dictionary",
+      dragqueen_ui_beatrice_sounds = "Beatrice Sound Effects",
       dragqueen_ui_suit_to_consumable_table = "Suit to Consumable Table",
       dragqueen_ui_suit_to_consumable_table_suit = "Suit",
       dragqueen_ui_suit_to_consumable_table_consumable = "Consumable",
@@ -1103,6 +1268,39 @@ return {
     },
     v_dictionary = {
       -- Variable information; like challenges_completed = "Completed#1#/#2# Challenges"
+    },
+    quips = {
+      special_lose_dragqueen_beatrice_1 = {
+        "I'll decide how many times we'll repeat this game.",
+        "It will be repeated over and over again,",
+        "until I win and you recognize your defeat, okay...?",
+        "In other words, this is torture.",
+        "It's eternal torture that will continue",
+        "until you surrender to me...!",
+        "It will continue eternally, until you",
+        "recognize me and the existence of the witch!"
+      },
+      special_lose_dragqueen_beatrice_2 = {
+        "Even I,",
+        "as a witch who has explored the depths of evil",
+        "find this most difficult to watch!!"
+      },
+      special_lose_dragqueen_beatrice_3 = {
+        "...Fool.",
+        " Just when I was about to praise your good fight",
+        "and hand over victory...",
+        "You shall regret that pride..."
+      },
+      special_win_dragqueen_beatrice_1 = {
+        "...Ku... how...!",
+        "How... c, could I...",
+        "to a lowly human...!!"
+      },
+      special_win_dragqueen_beatrice_2 = {
+        "Hohoh,",
+        "now that you have borrowed the power of demons,",
+        "you are without peer!"
+      }
     },
     ranks = {
       dragqueen_Mother = "Mother"

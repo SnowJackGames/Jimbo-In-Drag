@@ -285,6 +285,129 @@ end
 
 
 
+-- Hooking Balatro's Card.set_eternal()
+local dragqueen_hook_set_eternal = Card.set_eternal
+
+-- Lets us ignore removing Eternal
+function Card:set_eternal(_eternal, ...)
+  ------------------------------
+  -- Initials
+  ------------------------------
+
+  -- Checks what we're doing to the Card
+  local uneternalizing = nil
+  if _eternal == true then
+    uneternalizing = false
+  elseif _eternal == false then
+    uneternalizing = true
+  end
+
+  ------------------------------
+  -- Beatrice
+  ------------------------------
+
+  if self.config and self.config.center.key == "j_dragqueen_beatrice_eternal_golden_witch" and uneternalizing then
+    -- "Nope!" message
+    DRAGQUEENMOD.show_nope_text(self, G.C.RED)
+
+    -- Reject Eternal removal with sound
+    if DRAGQUEENMOD.config.beatrice_sounds then
+      G.E_MANAGER:add_event(Event { func = function()
+        self:juice_up(0.3, 0.5)
+        self.ability.eternal = true
+        play_sound("dragqueen_laugh", 1,0.4)
+        return true
+      end })
+
+    -- Reject without sound
+    else
+      G.E_MANAGER:add_event(Event { func = function()
+        self:juice_up(0.3, 0.5)
+        self.ability.eternal = true
+        return true
+      end })
+    end
+
+  ------------------------------
+  -- Straight Up
+  ------------------------------
+
+  elseif self.config and self.config.center.key == "j_dragqueen_straight_up" and uneternalizing then
+    -- "Nope!" message
+    DRAGQUEENMOD.show_nope_text(self, G.C.DRAGQUEEN_KEYWORD)
+
+    -- Reject
+    G.E_MANAGER:add_event(Event { func = function()
+      self:juice_up(0.3, 0.5)
+      self.ability.eternal = true
+      return true
+    end })
+
+  ------------------------------
+  -- Regular cases
+  ------------------------------
+
+  else
+    dragqueen_hook_set_eternal(self, _eternal, ...)
+  end
+end
+
+
+
+-- Hooking Balatro's Card.set_rental()
+local dragqueen_hook_set_rental = Card.set_rental
+
+-- Lets us ignore removing Rental
+function Card:dragqueen_hook_set_rental(_rental, ...)
+  ------------------------------
+  -- Initials
+  ------------------------------
+
+  -- Checks what we're doing to the Card
+  local unrentalizing = nil
+  if _rental == true then
+    unrentalizing = false
+  elseif _rental == false then
+    unrentalizing = true
+  end
+
+  ------------------------------
+  -- Beatrice
+  ------------------------------
+
+  if self.config and self.config.center.key == "j_dragqueen_beatrice_eternal_golden_witch" and unrentalizing then
+    -- "Nope!" message
+    DRAGQUEENMOD.show_nope_text(self, G.C.RED)
+
+    -- Reject Rental removal with sound
+    if DRAGQUEENMOD.config.beatrice_sounds then
+      G.E_MANAGER:add_event(Event { func = function()
+        self:juice_up(0.3, 0.5)
+        self.ability.rental = true
+        play_sound("dragqueen_laugh", 1,0.4)
+        return true
+      end })
+    
+    -- Reject without sound
+    else
+      G.E_MANAGER:add_event(Event { func = function()
+        self:juice_up(0.3, 0.5)
+        self.ability.rental = true
+        return true
+      end })
+    end
+
+  ------------------------------
+  -- Regular cases
+  ------------------------------
+
+  else
+    dragqueen_hook_set_rental(self, _rental)
+  end
+end
+
+
+
 ------------------------------
 -- Game events
 ------------------------------
@@ -331,6 +454,182 @@ function Game:set_language(...)
   DRAGQUEENMOD.locally_sort_built_dictionary()
 end
 
+
+
+-- Hooking Balatro's Card:start_dissolve()
+local dragqueen_hook_start_dissolve = Card.start_dissolve
+
+-- Hook for modifying how start_dissolve is visually presented when Beatrice Joker is present
+-- We want this to trigger for every instance *except* for during Card:sell_card()
+-- however during sell_card we can just check if G.CONTROLLER.locks.selling_card is set to true
+-- Note that stuff like Turtle Bean uses G.jokers:remove_card(self) conveniently
+-- Stuff like Hanged Man also uses start_dissolve so we'll have to make sure the Card is actually a joker
+function Card:start_dissolve(dissolve_colours, silent, dissolve_time_fac, no_juice, ...)
+  ------------------------------
+  -- Check for Beatrice
+  ------------------------------
+
+  local beatrice = false
+  -- If there are Jokers, and we're not currently selling a card, and beatrice sounds are on
+  if G.jokers and G.jokers.cards and self.getting_sliced and DRAGQUEENMOD.config.beatrice_sounds then
+    for _, individual_joker in ipairs(G.jokers.cards) do
+      if individual_joker.config.center.key == "j_dragqueen_beatrice_eternal_golden_witch" then
+        -- Beatrice exists, so now we'll check if the card dissolving is a joker
+        if DRAGQUEENMOD.is_joker(self) then
+          beatrice = true
+        end
+      end
+    end
+  end
+
+  ------------------------------
+  -- Fancy Joker kill
+  ------------------------------
+
+  -- Beatrice exists, the card dissolving is a Joker, and it's getting_sliced
+  if beatrice then
+    ------------------------------
+    -- Initials, SMODS context
+    ------------------------------
+
+    -- Prevents running the full stake sequence multiple times at start of round, ex. Madness and Dagger
+    local should_run_beatrice_effect = DRAGQUEENMOD.ran_beatrice_effect
+    local flags = SMODS.calculate_context({ joker_type_destroyed = true, card = self })
+    if flags and flags.no_destroy then self.getting_sliced = nil; return end
+    -- Makes stake effect happen at same speed regardless of game speed
+    local speed_modifier = DRAGQUEENMOD.to_number(G.SETTINGS.GAMESPEED) * 0.25
+
+    local childParts = nil
+    local gold_childParts = nil
+    self.destroyed = self.destroyed or {}
+    dissolve_colours = dissolve_colours or (type(self.destroyed) == "table" and self.destroyed.colours) or nil
+    dissolve_time_fac = dissolve_time_fac or (type(self.destroyed) == "table" and self.destroyed.time) or nil
+    local dissolve_time = 0.7*(dissolve_time_fac or 1)
+
+    self.dissolve = 0
+    self.dissolve_colours = dissolve_colours
+      or {G.C.BLACK, G.C.ORANGE, G.C.RED, G.C.GOLD, G.C.JOKER_GREY}
+    -- Add red for Stake blood, just in case
+    self.dissolve_colours[#self.dissolve_colours+1] = G.C.RED
+
+    ------------------------------
+    -- Juice, gold particles
+    ------------------------------
+
+    if not should_run_beatrice_effect then
+      G.E_MANAGER:add_event(Event { trigger = "after", delay = 0.15, func = function()
+        if not no_juice then self:juice_up(0.3, 0.5) end
+
+        -- Spits gold particles
+        gold_childParts = Particles(0, 0, 0, 0, {
+          timer_type = "REAL",
+          timer = 0.01 * dissolve_time,
+          scale = 0.1,
+          speed = 8,
+          lifespan = 0.7 * dissolve_time,
+          -- speed = 8 - (0.5 * DRAGQUEENMOD.to_number(G.SETTINGS.GAMESPEED)),
+          -- lifespan = 0.7 * dissolve_time + (DRAGQUEENMOD.to_number(G.SETTINGS.GAMESPEED) - 0.25),
+          attach = self,
+          colours = { G.C.GOLD },
+          fill = true
+        })
+
+        return true
+      end })
+    else
+      G.E_MANAGER:add_event(Event { trigger = "after", delay = 0.15, func = function()
+        if not no_juice then self:juice_up(0.3, 0.5) end
+        return true
+      end })
+    end
+
+    ------------------------------
+    -- Sounds
+    ------------------------------
+    if not should_run_beatrice_effect then
+      -- Stake sound plays metal_pipe_1, _2, _3 SEVEN times, then metal_pipe_1 once
+      local stake_run = 0
+      while stake_run < 7 do
+        G.E_MANAGER:add_event(Event { trigger = "before", delay = speed_modifier * 0.15, func = function()
+          play_sound("dragqueen_metal_pipe_1", 1,0.4)
+          return true
+        end })
+
+        G.E_MANAGER:add_event(Event { trigger = "before", delay = speed_modifier * 0.15, func = function()
+          play_sound("dragqueen_metal_pipe_2", 1,0.4)
+          return true
+        end })
+
+        G.E_MANAGER:add_event(Event { trigger = "before", delay = speed_modifier * 0.15, func = function()
+          play_sound("dragqueen_metal_pipe_3", 1,0.4)
+          return true
+        end })
+        stake_run = stake_run + 1
+      end
+
+      G.E_MANAGER:add_event(Event { func = function()
+        play_sound("dragqueen_metal_pipe_1", 1,0.4)
+
+        -- Stops the gold particles
+        if gold_childParts then
+          gold_childParts:fade(0.15 * dissolve_time)
+        end
+        return true
+      end })
+    end
+
+    ------------------------------
+    -- Kill sound + kill particles
+    ------------------------------
+
+    G.E_MANAGER:add_event(Event { trigger = "after", delay = speed_modifier * 1, func = function()
+      play_sound("dragqueen_beatrice_kill", 1,0.5)
+
+      -- Spits the kill particles
+      childParts = Particles(0, 0, 0, 0, {
+        timer_type = "TOTAL",
+        timer = 0.01 * dissolve_time,
+        scale = 0.1,
+        speed = 2,
+        lifespan = 0.7 * dissolve_time,
+        attach = self,
+        colours = self.dissolve_colours,
+        fill = true
+      })
+      return true
+    end })
+
+    ------------------------------
+    -- Dissolve
+    ------------------------------
+
+    G.E_MANAGER:add_event(Event { trigger = "after", delay = 1, func = function()
+      if childParts then
+        childParts:fade(0.15 * dissolve_time)
+      end
+      return true
+    end })
+
+    G.E_MANAGER:add_event(Event { trigger = "ease", delay = 0.3, ref_table = self, ref_value = "dissolve", ease_to = 1, func = function(t)
+      return t
+    end })
+
+    G.E_MANAGER:add_event(Event { trigger = "after", delay = 0.05, func = function()
+      self:remove()
+      return true
+    end })
+
+    G.E_MANAGER:add_event(Event { trigger = "after", delay = 0.01, func = function()
+      return true
+    end })
+
+    -- Prevents running stake sequence multiple times per round
+    DRAGQUEENMOD.ran_beatrice_effect = true
+  -- Non-Beatrice instances
+  else
+    dragqueen_hook_start_dissolve(self, dissolve_colours, silent, dissolve_time_fac, no_juice, ...)
+  end
+end
 
 
 ------------------------------

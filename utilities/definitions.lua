@@ -29,8 +29,7 @@ SMODS.current_mod.optional_features = {
 -- Update values that get reset at the start of each round
 ---@diagnostic disable-next-line: duplicate-set-field
 SMODS.current_mod.reset_game_globals = function(run_start)
-  if run_start then
-  end
+  DRAGQUEENMOD.ran_beatrice_effect = false
 end
 
 
@@ -425,6 +424,9 @@ DRAGQUEENMOD.ENABLEDJOKERS = {
   "joyride",
   "straight_up",
   "pink_pony_club",
+
+  -- Fictional Jokers
+  "beatrice_eternal_golden_witch",
 
   -- Crossmod Jokers
   "snow_whites_apple",
