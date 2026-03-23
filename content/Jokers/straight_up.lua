@@ -27,13 +27,7 @@ SMODS.Joker {
     local quotelocation = DRAGQUEENMOD.easydescriptionslocalize(self.set, self.key)
     local quote = DRAGQUEENMOD.get_quote(quotelocation.quote, true)
 
-    local key = self.key
-    if card.ability.eternal == false then
-      key = key .. "_no_eternal"
-    end
-
     return {
-      key = key,
       vars = {
         card.ability.extra.hands_given,
         card.ability.extra.discards_given,
