@@ -675,6 +675,6 @@ end
 local dragqueen_hook_splash_screen = Game.splash_screen
 
 function Game:splash_screen(...)
-  DRAGQUEENMOD.last_second_code()
   dragqueen_hook_splash_screen(self, ...)
+  DRAGQUEENMOD.last_second_code()
 end
