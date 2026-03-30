@@ -424,13 +424,13 @@ return {
       j_dragqueen_beatrice_eternal_golden_witch = {
         name = "Beatrice, Eternal Golden Witch",
         text = {
-          "{s:0.8}When {}{C:attention}Boss Blind{}{s:0.8} is selected,{}",
-          "{C:attention}destroy{}{s:0.8} a random Joker{}",
+          "When {C:attention}Boss Blind{} is selected,",
+          "{C:attention}destroy{} a random Joker",
           "{C:inactive}---{}",
-          "{s:0.8}When a Joker is {}{C:inactive}destroyed,{}",
-          "{s:0.8}gains {}{X:chips,C:white}X#1#{}{s:0.8} Chips and earn {}{X:money,C:white}X#2#{}{s:0.8} money{}",
-          "{s:0.8}Always {}{C:attention}Eternal{}{s:0.8}, {}{C:attention}Rental{}",
-          "{s:0.8,C:inactive}(Currently {}{s:0.8,X:chips,C:white}X#3#{}{s:0.8,C:inactive} Chips){}",
+          "When a Joker is {C:attention}destroyed,{}",
+          "gains {X:chips,C:white}X#1#{} Chips and earn {X:money,C:white}X#2#{} money",
+          "Always {C:attention}Eternal{}, {C:attention}Rental{}",
+          "{C:inactive}(Currently {}{X:chips,C:white}X#3#{}{C:inactive} Chips){}",
           "{C:white,X:dragqueen_keyword}Accessorize{} {C:diamonds}Diamonds{} {C:attention}#4#{}",
           "",
           "{s:0.8,C:inactive,E:1}\"#5#\"{}"

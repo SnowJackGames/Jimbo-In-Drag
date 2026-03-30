@@ -110,12 +110,17 @@ SMODS.Joker {
   set_ability = function(self, card, initial, delay_sprites)
     card:add_sticker("eternal", true)
     card:add_sticker("rental", true)
-    if DRAGQUEENMOD.config.beatrice_sounds then
+    if DRAGQUEENMOD.config.beatrice_sounds and G.playing_cards then
       G.E_MANAGER:add_event(Event { trigger = "after", delay = 0.15, func = function()
         card:juice_up(0.3, 0.5)
         play_sound("dragqueen_laugh", 1,0.4)
         return true
       end })
     end
+  end,
+
+  -- Accessorize
+  add_to_deck = function(self, card, from_debuff)
+    DRAGQUEENMOD.accessorize(card.ability.extra.accessorize_suit, card.ability.extra.accessorize_count)
   end
 }
