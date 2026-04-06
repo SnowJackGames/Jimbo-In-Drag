@@ -1,7 +1,7 @@
 -- +32 Chips
 
 SMODS.Joker {
-  key = "queen",
+  key = "drag_queen",
   config = {
     extra = {
       chips = 32
@@ -17,7 +17,8 @@ SMODS.Joker {
   eternal_compat = true,
   perishable_compat = false,
   dragqueen = {
-    requires_jokers = true
+    requires_jokers = true,
+    is_a_drag_queen = true
   },
 
   loc_vars = function(self, info_queue, card)
@@ -29,7 +30,7 @@ SMODS.Joker {
   end,
 
   calculate = function(self, card, context)
-    if context.joker.main then
+    if context.joker_main then
       return {
         chips = card.ability.extra.chips
       }

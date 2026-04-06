@@ -570,6 +570,12 @@ return {
           }
         }
       },
+      j_dragqueen_drag_queen = {
+        name = "Drag Queen",
+        text = {
+          "{C:chips}+32{} Chips"
+        }
+      }
 
       -- Patching vanilla jokers
       -- Patching other mods' jokers
