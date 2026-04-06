@@ -400,7 +400,7 @@ DRAGQUEENMOD.ENABLEDJOKERS = {
   "vain_joker",
 
   -- Drag Queens
-  "queen",
+  "drag_queen",
   "tipsy_queen",
   "lipstick_queen",
   "messy_queen",
