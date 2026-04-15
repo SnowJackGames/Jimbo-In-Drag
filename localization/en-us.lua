@@ -570,6 +570,45 @@ return {
           }
         }
       },
+      j_dragqueen_lambadelta_witch_of_certainty = {
+        name = "Lambadelta, Witch of Certainty",
+        text = {
+          "All {C:green,E:1}probabilities{} are made {C:attention}certain{}",
+          "{X:mult,C:white}X#1#{} Mult",
+          "{C:white,X:dragqueen_keyword}Accessorize{} {C:hearts}Hearts{} {C:attention}#2#{}",
+          "",
+          "{s:0.8,C:inactive,E:1}\"#3#\"{}"
+
+        },
+        quote = {
+          swear = {
+            "Hmph!",
+          },
+          no_swear = {
+            "Hmph!",
+          }
+        }
+      },
+      j_dragqueen_bernkastel_witch_of_miracles = {
+        name = "Bernkastel, Witch of Miracles",
+        text = {
+          "If you would {C:attention}die{},",
+          "instead {C:attention}restart{} the run",
+          "with a {C:dark_edition}negative{} {C:attention}Bernkastel{}",
+          "{C:white,X:dragqueen_keyword}Accessorize{} {C:spades}Spades{} {C:attention}#1#{}",
+          "",
+          "{s:0.8,C:inactive,E:1}\"#2#\"{}"
+
+        },
+        quote = {
+          swear = {
+            "Hmph!",
+          },
+          no_swear = {
+            "Hmph!",
+          }
+        }
+      },
       j_dragqueen_drag_queen = {
         name = "Drag Queen",
         text = {
