@@ -428,6 +428,8 @@ DRAGQUEENMOD.ENABLEDJOKERS = {
 
   -- Fictional Jokers
   "beatrice_eternal_golden_witch",
+  --"bernkastel_witch_of_miracles",
+  "lambadelta_witch_of_certainty",
 
   -- Crossmod Jokers
   "snow_whites_apple",
