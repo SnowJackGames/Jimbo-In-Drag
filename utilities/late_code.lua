@@ -242,8 +242,8 @@ function DRAGQUEENMOD.build_backup_localization()
       if g_k == 'descriptions' then
         for _, set in pairs(group) do
           for _, center in pairs(set) do
-            center.text_parsed = {}
-            if not center.text then else
+            if center.text and not center.text_parsed then
+              center.text_parsed = {}
               for _, line in ipairs(center.text) do
                   if type(line) == 'table' then
                       center.text_parsed[#center.text_parsed+1] = {}
