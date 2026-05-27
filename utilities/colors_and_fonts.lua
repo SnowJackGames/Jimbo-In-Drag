@@ -203,8 +203,15 @@ function DRAGQUEENMOD.font_symbols()
   -- and added characters created from SVG icons from BigBlueTermPlusNerdFont-Regular (see BigBlueTermPlusNerdFont-RegularSVG-assets-license.txt in /assets/fonts)
   -- used for suit symbols (see: /lovely/suitsymbols.toml)
   local font_location = DRAGQUEENMOD.dragqueen_path_from_save_folder .. "assets/fonts/"
-  local symbol_font = love.graphics.newFont(font_location .. "symbol-font.ttf", G.TILESIZE * 10)
-  local nerd_font = love.graphics.newFont(font_location .. "BigBlueTermPlusNerdFontPropo-Regular.ttf", G.TILESIZE * 8)
+
+  local symbol_font_file = assert(SMODS.NFS.newFileData(font_location .. "symbol-font.ttf"),
+    "Failed to collect file data for dragqueenmod symbol font")
+  local symbol_font = love.graphics.newFont(symbol_font_file, G.TILESIZE * 10)
+
+  local nerd_font_file = assert(SMODS.NFS.newFileData(font_location .. "BigBlueTermPlusNerdFontPropo-Regular.ttf"),
+    "Failed to collect file data for dragqueenmod nerd font")
+  local nerd_font = love.graphics.newFont(nerd_font_file, G.TILESIZE * 8)
+
   for i, v in ipairs(G.FONTS) do
     G.FONTS[i].FONT:setFallbacks(symbol_font, nerd_font)
   end
