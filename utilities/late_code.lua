@@ -242,8 +242,8 @@ function DRAGQUEENMOD.build_backup_localization()
       if g_k == 'descriptions' then
         for _, set in pairs(group) do
           for _, center in pairs(set) do
-            center.text_parsed = {}
-            if not center.text then else
+            if center.text and not center.text_parsed then
+              center.text_parsed = {}
               for _, line in ipairs(center.text) do
                   if type(line) == 'table' then
                       center.text_parsed[#center.text_parsed+1] = {}
@@ -305,11 +305,11 @@ function DRAGQUEENMOD.build_backup_localization()
 
 
   -- Hold onto your butts. We're going to find every localization entry in every mod currently installed
-  for _, mod_name in ipairs(NFS.getDirectoryItems(SMODS.MODS_DIR)) do
+  for _, mod_name in ipairs(SMODS.NFS.getDirectoryItems(SMODS.MODS_DIR)) do
     local localization_file_path = SMODS.MODS_DIR.. "/" .. mod_name .. "/localization/"
 
     -- For every mod that has a localization directory, we go through their localization files (ex. en-us.lua)
-    for _, mod_localization_file_name in ipairs(NFS.getDirectoryItems(localization_file_path)) do
+    for _, mod_localization_file_name in ipairs(SMODS.NFS.getDirectoryItems(localization_file_path)) do
 
       ------------------------------
       -- Seeing if this language already exists or not

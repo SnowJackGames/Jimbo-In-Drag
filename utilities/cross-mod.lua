@@ -138,9 +138,9 @@ function DRAGQUEENMOD.cross_mod_theirs_to_ours()
 
   end
 
-  -- Minty's Silly Little Mod
-  if next(SMODS.find_mod("MintysSillyMod")) then
-    local prefix = SMODS.find_mod("MintysSillyMod")[1].prefix or "minty"
+  -- Menthol (formerly Minty's Silly Little Mod)
+  if next(SMODS.find_mod("Menthol")) or next(SMODS.find_mod("MintysSillyMod")) then
+    local prefix = SMODS.find_mod("Menthol")[1].prefix or SMODS.find_mod("MintysSillyMod")[1].prefix or "minty"
 
     -- Adds their suits to our definitions of light and treat and modded
     table.insert(DRAGQUEENMOD.light_suits, prefix .. "_3s")

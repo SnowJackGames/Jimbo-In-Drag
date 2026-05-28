@@ -3,9 +3,13 @@
 ---@param path string
 function DRAGQUEENMOD.register_items(items, path)
   for i = 1, #items do
-    if path and love.filesystem.getInfo(DRAGQUEENMOD.dragqueen_path_from_save_folder .. path .. "/" .. items[i] .. ".lua") then
-      SMODS.load_file(path .. "/" .. items[i] .. ".lua")()
-    end
+    -- make sure file exists
+    local full_item_path = DRAGQUEENMOD.dragqueen_path_from_save_folder .. path .. "/" .. items[i] .. ".lua"
+    assert(SMODS.NFS.getInfo(full_item_path),"dragqueenmod could not find " .. full_item_path)
+
+    -- load that particular file
+    local file_to_load = path .. "/" .. items[i] .. ".lua"
+    SMODS.load_file(file_to_load)()
   end
 end
 

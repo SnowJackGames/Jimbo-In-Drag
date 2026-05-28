@@ -20,7 +20,7 @@ SMODS.Atlas { key = "dragqueen_ranks_hc", path = "Ranks/ranks_hc.png", px = 71, 
         -- Enhancements
         -- Editions
         -- Stickers
-SMODS.Atlas { key = "kiss", path = "Modifiers/kiss.png", px = 71, py = 95 }
+SMODS.Atlas { key = "kiss", path = "Modifiers/Kiss.png", px = 71, py = 95 }
 SMODS.Atlas { key = "stickers", path = "Modifiers/Stickers.png", px = 71, py = 95 }
         -- Gemstones
     -- Consumables
@@ -42,10 +42,18 @@ SMODS.Atlas { key = "Tarot", path = "Consumables/Tarot.png", px = 71, py = 95 }
 
 
 -- Placeholder
-SMODS.Atlas {
-    key = "placeholder",
-    px = 71,
-    py = 95,
-    path = "placeholder.png"
-
-}
+if DRAGQUEENMOD.config.swears_enabled == true then
+  SMODS.Atlas {
+      key = "placeholder",
+      px = 71,
+      py = 95,
+      path = "placeholder.png"
+  }
+else
+  SMODS.Atlas {
+      key = "placeholder",
+      px = 71,
+      py = 95,
+      path = "placeholder_censored.png"
+  }
+end
