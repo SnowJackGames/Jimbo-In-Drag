@@ -42,10 +42,18 @@ SMODS.Atlas { key = "Tarot", path = "Consumables/Tarot.png", px = 71, py = 95 }
 
 
 -- Placeholder
-SMODS.Atlas {
-    key = "placeholder",
-    px = 71,
-    py = 95,
-    path = "placeholder.png"
-
-}
+if DRAGQUEENMOD.config.swears_enabled == true then
+  SMODS.Atlas {
+      key = "placeholder",
+      px = 71,
+      py = 95,
+      path = "placeholder.png"
+  }
+else
+  SMODS.Atlas {
+      key = "placeholder",
+      px = 71,
+      py = 95,
+      path = "placeholder_censored.png"
+  }
+end
