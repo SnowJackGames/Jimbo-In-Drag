@@ -1,0 +1,2 @@
+-- Base cards are destroyed after scoring. Non-base cards are kissed after scoring.
+-- Played cards with kisses give +20 chips when scored.
