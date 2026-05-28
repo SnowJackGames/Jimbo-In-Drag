@@ -389,7 +389,7 @@ DRAGQUEENMOD.ENABLEDSUITS = {
 
 
 DRAGQUEENMOD.ENABLEDRANKS = {
-  "Mother",
+  "mother",
 }
 
 
@@ -469,11 +469,11 @@ DRAGQUEENMOD.CONSUMABLES = {
   },
 
   ENABLEDSPECTRALS = {
-    "Celebrity"
+    --"Celebrity"
   },
 
   ENABLEDVOUCHERS = {
-    "Serve"
+    --"Serve"
   },
 
   ENABLEDPACKS = {
@@ -498,8 +498,8 @@ DRAGQUEENMOD.ENABLEDDECKS = {
 
 
 DRAGQUEENMOD.ENABLEDBLINDS = {
-  "Rent",
-  "Gig"
+  --"Rent",
+  --"Gig"
 }
 
 
