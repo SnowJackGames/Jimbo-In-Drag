@@ -61,12 +61,32 @@ function DRAGQUEENMOD.bernkastel_reset()
   -- In order for us to emulate Bernkastel resetting the game,
   -- We either need to do our own implementation of the `Controller:key_hold_update()` stuff,
   -- Or (as below) we just spoof the controller pressing and holding 'r' for about a second
-  -- local old_hold_value = G.CONTROLLER.held_key_times.r
-  -- G.CONTROLLER.held_key_times.r = 999
-  -- G.CONTROLLER:key_hold_update("r", 0)
-  -- G.CONTROLLER.held_key_times.r = old_hold_value
-  DRAGQUEENMOD.start_with_bernkastel = true
+  -- restart code inspired by Handy's implementation
 
-  Handy.misc_controls.restart_fun()
-  
+  DRAGQUEENMOD.start_with_bernkastel = true
+  local old_hold_value = G.CONTROLLER.held_key_times.r
+  G.CONTROLLER.held_key_times.r = 999
+
+  -- if the balatro mod "Handy" is installed, we interface with some of their
+  -- variables relevant to restarting
+  local handy_installed = next(SMODS.find_mod("Handy"))
+
+  if handy_installed then
+    Handy.animation_skip.skip_wipe_screen = true
+    Handy.animation_skip.force_non_blocking = true
+    Handy.__restart_from_game_over = G.STATE == G.STATES.GAME_OVER
+  end
+
+  G.CONTROLLER:key_hold_update("r", 0)
+
+  if handy_installed then
+    Handy.__restart_from_game_over = nil
+  end
+
+  G.CONTROLLER.held_key_times.r = old_hold_value
+
+  if handy_installed then
+    Handy.animation_skip.skip_wipe_screen = false
+    Handy.animation_skip.force_non_blocking = false
+  end
 end
