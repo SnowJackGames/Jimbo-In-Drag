@@ -41,6 +41,7 @@ SMODS.Joker {
     -- restart game
     if context.game_over then
       DRAGQUEENMOD.bernkastel_reset()
+      context.game_over = false
     end
   end,
 
@@ -58,52 +59,14 @@ function DRAGQUEENMOD.bernkastel_reset()
   -- Some other mods also embed Lovely patches within this function
   -- THUSLY:
   -- In order for us to emulate Bernkastel resetting the game,
-  -- We would have to either spoof the controller pressing and holding 'r' for about a second,
-  -- or instead (as below) mostly copy the reset code,
-  -- along with a few other mods' known patches
-  -- if you know of a mod that interacts wonkily with this, let me (Kassandra, github KassLavender) know
+  -- We either need to do our own implementation of the `Controller:key_hold_update()` stuff,
+  -- Or (as below) we just spoof the controller pressing and holding 'r' for about a second
+  -- local old_hold_value = G.CONTROLLER.held_key_times.r
+  -- G.CONTROLLER.held_key_times.r = 999
+  -- G.CONTROLLER:key_hold_update("r", 0)
+  -- G.CONTROLLER.held_key_times.r = old_hold_value
+  DRAGQUEENMOD.start_with_bernkastel = true
 
-  -- Below emulates Balatro's base code for `Controller:key_hold_update()`
-
-  -- G.SETTINGS.current_setup = "New Run"
-  -- G.GAME.viewed_back = nil
-  -- G.run_setup_seed = G.GAME.seeded
-  -- G.challenge_tab = G.GAME and G.GAME.challenge and G.GAME.challenge_tab or nil
-
-  -- -- This is some Handy and Aikoyori's Schenanigans stuff from their patches of Balatro's `Controller:key_hold_update()`
-  -- if AKYRS and next(SMODS.find_mod("aikoyorisshenanigans")) and next(SMODS.find_mod("Handy")) then
-  --   if type(G.challenge_tab) == "string" and G.GAME and G.GAME.challenge then
-  --     if get_challenge_int_from_id(G.GAME.challenge or '') then
-  --       G.challenge_tab = G.CHALLENGES[get_challenge_int_from_id(G.GAME.challenge or '') or ''] or {name = 'ERROR'}
-  --       G.challenge_tab = AKYRS.HC_CHALLENGES[AKYRS.get_hc_challenge_int_from_id(G.GAME.challenge or '') or ''] or {name = 'ERROR'}
-  --     end
-  --   end
-
-  -- elseif next(SMODS.find_mod("Handy")) then
-  --   if type(G.challenge_tab) == "string" and G.GAME and G.GAME.challenge then
-  --       G.challenge_tab = G.CHALLENGES[get_challenge_int_from_id(G.GAME.challenge or '') or ''] or {name = 'ERROR'}
-  --   end
-  -- end
-
-  -- -- Now resuming emulating Balatro's base code
-  -- G.forced_seed, G.setup_seed = nil, nil
-  -- if G.GAME.seeded then G.forced_seed = G.GAME.pseudorandom.seed end
-  -- G.forced_stake = G.GAME.stake
-  -- if G.STAGE == G.STAGES.RUN then G.FUNCS.start_setup_run() end
-  -- G.forced_stake = nil
-  -- G.challenge_tab = nil
-  -- G.forced_seed = nil
-
-
-
-print(SMODS.Keybinds)
-
-
-G.CONTROLLER:key_hold_update("r", 2)
-
-
-
-
-
-  print("MEOWWWWWW")
+  Handy.misc_controls.restart_fun()
+  
 end

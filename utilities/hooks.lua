@@ -417,10 +417,24 @@ end
 -- Hooking Balatro's Game:start_run()
 local dragqueen_hook_start_run = Game.start_run
 
--- Hook that sets NonPlain to false at the start of a run
+-- Hook that sets NonPlain to false at the start of a run,
+-- also handles runs that start with a negative Bernkastel
 function Game:start_run(...)
   dragqueen_hook_start_run(self, ...)
   G.GAME.NonPlain = DRAGQUEENMOD.non_plain_in_pool()
+
+  -- If we're starting with a negative Bernkastel, create her
+  local start_with_bernkastel = DRAGQUEENMOD.start_with_bernkastel or false
+  if start_with_bernkastel then
+    DRAGQUEENMOD.start_with_bernkastel = false
+    G.E_MANAGER:add_event(Event {
+      func = function()
+        DRAGQUEENMOD.try_spawn_card({ key = "j_dragqueen_bernkastel_witch_of_miracles", set = "Joker", edition = "e_negative"})
+        return true
+      end
+    })
+  end
+
 end
 
 
