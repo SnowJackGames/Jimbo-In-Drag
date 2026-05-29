@@ -434,7 +434,6 @@ function Game:start_run(...)
       end
     })
   end
-
 end
 
 
