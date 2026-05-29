@@ -13,6 +13,10 @@
 --- @return boolean -- If the card was able to spawn or not
 --- Thanks Paperback
 function DRAGQUEENMOD.try_spawn_card(args, saveroom)
+  ------------------------------
+  -- Check for card typing
+  ------------------------------
+
   -- As best that we can, let's prevent code from spilling through SMODS.add_card, temp_create_card, get_current_pool etc
   assert(args.set or args.key or args.card or args.area or args.front or args.rank or args.suit, "missing minimum info for DRAGQUEENMOD.try_spawn_card()")
   if args.key and G.P_CENTERS[args.key] == nil then
@@ -23,6 +27,10 @@ function DRAGQUEENMOD.try_spawn_card(args, saveroom)
   local is_playing_card = DRAGQUEENMOD.is_playing_card(args.set, args.front, args.rank, args.suit)
   local is_consumable = DRAGQUEENMOD.is_consumable(args.set, args.key)
   local setsaveroom = saveroom or 0
+
+  ------------------------------
+  -- Check for sane typing
+  ------------------------------
 
     -- It has to be one of three
   if not (is_joker or is_playing_card or is_consumable) then
@@ -45,6 +53,10 @@ function DRAGQUEENMOD.try_spawn_card(args, saveroom)
     error("DRAGQUEENMOD.try_spawn_card() called to create that which is considered both a playing card and a consumable")
   end
 
+  ------------------------------
+  -- Check for spawn area
+  ------------------------------  
+
   -- Determine the relevant area and buffer where a thing will spawn
   -- Pulls from Balatro code, so "consumable" here spelt with an "e"
   local area = nil
@@ -60,13 +72,31 @@ function DRAGQUEENMOD.try_spawn_card(args, saveroom)
     buffer = "consumeable_buffer"
   end
 
+  ------------------------------
+  -- Unusual cases
+  ------------------------------
+
   -- Notice about key / set handling by create_card() 
   if args.key and (args.set == "Base") and (args.key ~= "c_base") then
     print("Warning: Attempting to spawn a base card with an incompatible key, create_card() will ignore key")
   end
 
+
+  ------------------------------
+  -- Check for room to spawn
+  ------------------------------  
+
   local should_spawn = false
-  if is_playing_card then should_spawn = true
+  -- If it's a playing card we don't have to worry about consumable or joker slots
+  if is_playing_card then
+    should_spawn = true
+
+  -- OR if its negative edition (and the edition isn't being stripped)
+  elseif args.edition == "e_negative" and not args.strip_edition then
+    should_spawn = true
+
+  -- patch target for other mods if they have negative-like effects
+  -- Otherwise we account for current area space (for Jokers / consumables)
   else
     if not (area) then
       error("DRAGQUEENMOD.try_spawn_card() can't spawn joker or consumable without an area, or can't reach G.jokers or G.consumeables")
@@ -76,34 +106,46 @@ function DRAGQUEENMOD.try_spawn_card(args, saveroom)
     end
   end
 
-  -- If it's a playing card we don't have to worry about consumable or joker slots
+  ------------------------------
+  -- Try to spawn card
+  ------------------------------  
+
+
   if should_spawn then
     local added_card
     local function add()
-      if args.card and area then
+      if args.card then
         added_card = copy_card(args.card, nil, nil, nil, args.strip_edition)
         added_card:add_to_deck()
-        area:emplace(added_card)
+        if area then
+          area:emplace(added_card)
+        end
       else
         added_card = SMODS.add_card(args)
       end
     end
-    
+
     if args.instant then
       add()
-    else
-      -- If there is a relevant buffer, then we increase it
-      if buffer then
-        G.GAME[buffer] = G.GAME[buffer] + 1
+    -- If there is a relevant buffer, then we increase it
+    elseif buffer then
+      G.GAME[buffer] = G.GAME[buffer] + 1
 
-        G.E_MANAGER:add_event(Event {
-          func = function()
-            add()
-            G.GAME[buffer] = 0
-            return true
-          end
-        })
-      end
+      G.E_MANAGER:add_event(Event {
+        func = function()
+          add()
+          G.GAME[buffer] = 0
+          return true
+        end
+      })
+    -- for playing cards
+    else
+      G.E_MANAGER:add_event(Event {
+        func = function()
+          add()
+          return true
+        end
+      })
     end
 
     if args.func and type(args.func) == "function" then
