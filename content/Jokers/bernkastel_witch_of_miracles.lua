@@ -64,29 +64,18 @@ function DRAGQUEENMOD.bernkastel_reset()
   -- restart code inspired by Handy's implementation
 
   DRAGQUEENMOD.start_with_bernkastel = true
-  local old_hold_value = G.CONTROLLER.held_key_times.r
-  G.CONTROLLER.held_key_times.r = 999
 
-  -- if the balatro mod "Handy" is installed, we interface with some of their
-  -- variables relevant to restarting
-  local handy_installed = next(SMODS.find_mod("Handy"))
+  -- if the balatro mod "Handy" is installed, we defer to their restart function
+  if next(SMODS.find_mod("Handy")) then
+    Handy.misc_controls.restart_fun()
 
-  if handy_installed then
-    Handy.animation_skip.skip_wipe_screen = true
-    Handy.animation_skip.force_non_blocking = true
-    Handy.__restart_from_game_over = G.STATE == G.STATES.GAME_OVER
-  end
-
-  G.CONTROLLER:key_hold_update("r", 0)
-
-  if handy_installed then
-    Handy.__restart_from_game_over = nil
-  end
-
-  G.CONTROLLER.held_key_times.r = old_hold_value
-
-  if handy_installed then
-    Handy.animation_skip.skip_wipe_screen = false
-    Handy.animation_skip.force_non_blocking = false
+  -- Otherwise we implement a similar restart function
+  else
+    local old_hold_value = G.CONTROLLER.held_key_times.r
+    G.CONTROLLER.held_key_times.r = 999
+    DRAGQUEENMOD.__restart_from_game_over = G.STATE == G.STATES.GAME_OVER
+    G.CONTROLLER:key_hold_update("r", 0)
+    DRAGQUEENMOD.__restart_from_game_over = nil
+    G.CONTROLLER.held_key_times.r = old_hold_value
   end
 end
