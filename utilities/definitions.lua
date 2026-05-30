@@ -420,6 +420,9 @@ DRAGQUEENMOD.ENABLEDJOKERS = {
   "haute_couture",
   "slayyyy",
 
+  -- Real Life Queens
+  "pink_flamingos",
+
   -- Popstar Jokers
   "shoes",
   "joyride",

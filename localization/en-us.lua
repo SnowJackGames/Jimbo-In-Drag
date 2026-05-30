@@ -614,7 +614,42 @@ return {
         text = {
           "{C:chips}+32{} Chips"
         }
-      }
+      },
+      j_dragqueen_pink_flamingos = {
+        name = "Pink Flamingos",
+        text = {
+          "Unscored cards in hand",
+          "gain {C:chips}#1#{} Chips",
+          "",
+          "{s:0.8,C:inactive,E:1}\"#2#\"{}"
+        },
+        quote = {
+          swear = {
+            "Kill everyone now!",
+            "Condone first-degree murder!",
+            "Advocate cannibalism!",
+            "Eat shit!",
+            "Filth is my politics!",
+            "Filth is my life!",
+            "I *am* God!"
+          },
+          no_swear = {
+            "Filth is my politics!",
+            "Filth is my life!",
+            "I *am* God!"
+          }
+        }
+      },
+      j_dragqueen_pink_flamingos_uniks = {
+        name = "Pink Flamingos",
+        text = {
+          "Unscored cards in hand",
+          "gain {C:chips}#1#{} Chips",
+          "{C:white,X:dragqueen_keyword}Accessorize{} {C:unik_crosses}Crosses{} {C:attention}#2#{}",
+          "",
+          "{s:0.8,C:inactive,E:1}\"#3#\"{}"
+        }
+      },
 
       -- Patching vanilla jokers
       -- Patching other mods' jokers
@@ -1248,6 +1283,7 @@ return {
       k_dragqueen_straight_up_run = "Run!",
       k_dragqueen_thrift_queen_thrift = "Thrift!",
       k_dragqueen_slayyyy_discard = "Discard!",
+      k_dragqueen_divine_chips = "Filth!",
 
       -- Config menu stuff
       dragqueen_ui_jokers_enabled = "Enable Jokers",
@@ -1323,7 +1359,11 @@ return {
         "Hohoh,",
         "now that you have borrowed the power of demons,",
         "you are without peer!"
-      }
+      },
+      special_lose_pink_flamingos = {
+        "This is a direct attack",
+        "on my divinity!"
+      },
     },
     ranks = {
       dragqueen_Mother = "Mother"
