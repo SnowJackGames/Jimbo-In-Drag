@@ -374,7 +374,7 @@ end
 
 
 -- Determines if score flames were activated
----@return true | nil
+---@return boolean | nil
 function DRAGQUEENMOD.final_scoring_step_slay()
   assert(type(DRAGQUEENMOD.to_number(_G.hand_chips)) == "number",
   "DRAGQUEENMOD.final_scoring_step_slay can't find _G.handchips")
