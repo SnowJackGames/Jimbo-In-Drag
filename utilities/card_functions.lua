@@ -393,15 +393,20 @@ end
 -- Sets `card.ability.dragqueen_kissed = true` for a given `card`
 -- <br>works with Balatro's event system 
 ---@param card Card|table
-function DRAGQUEENMOD.kiss_card(card)
+---@param silent? boolean
+function DRAGQUEENMOD.kiss_card(card, silent)
   G.E_MANAGER:add_event(Event { trigger = "before", delay = 0.15, func = function()
-    play_sound("tarot1")
+    if not silent then
+      play_sound("tarot1")
+    end
     card.ability.dragqueen_kissed = true
     card:juice_up(0.3, 0.5)
     return true
   end })
   G.E_MANAGER:add_event(Event { trigger = "before", delay = 0.1, func = function()
-    play_sound("tarot2", 0.85, 0.6)
+    if not silent then
+      play_sound("tarot2", 0.85, 0.6)
+    end
     return true
   end })
 end
