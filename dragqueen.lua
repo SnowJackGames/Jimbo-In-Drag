@@ -72,6 +72,14 @@ if DRAGQUEENMOD.config.skins_enabled then
   DRAGQUEENMOD.register_items(DRAGQUEENMOD.ENABLEDSKINS,"content/Skins")
 end
 
+-- Crossmod
+if DRAGQUEENMOD.config.cross_mod_enabled then
+  -- Sleeves
+  if next(SMODS.find_mod("CardSleeves")) then
+    DRAGQUEENMOD.register_items(DRAGQUEENMOD.ENABLEDSLEEVES,"content/Sleeves")
+  end
+end
+
 -- Vanilla Reworks
 if DRAGQUEENMOD.config.vanilla_reworks_enabled then
   DRAGQUEENMOD.register_items(DRAGQUEENMOD.ENABLEDVANILLA_REWORKS,"")

@@ -36,6 +36,9 @@ SMODS.Atlas { key = "Tarot", path = "Consumables/Tarot.png", px = 71, py = 95 }
         -- Colours
     -- Skins
     -- Sleeves
+if next(SMODS.find_mod("CardSleeves")) then
+  SMODS.Atlas { key = "sleeves", path = "Sleeves/Sleeves.png", px = 73, py = 95 }
+end
     -- Partners
     -- Charms
     -- Mod icon

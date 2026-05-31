@@ -56,6 +56,27 @@ end
 
 
 
+-- Paperback-like extension of CardSleeves object
+if next(SMODS.find_mod("CardSleeves")) then
+  DRAGQUEENMOD.Sleeve = CardSleeves.Sleeve:extend {
+    is_buffed = function(self)
+      return self.get_current_deck_key() == self.deck_buff
+    end,
+
+    loc_key = function(self)
+      return self:is_buffed() and (self.key .. "_buff")
+    end,
+
+    loc_vars = function(self, info_queue, card)
+      return {
+        key = self:loc_key()
+      }
+    end
+  }
+end
+
+
+
 -- Searching for other mods for cross-mod content and integration
 function DRAGQUEENMOD.cross_mod_content_register()
   DRAGQUEENMOD.cross_mod_theirs_to_ours()

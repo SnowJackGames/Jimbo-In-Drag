@@ -815,7 +815,24 @@ return {
     Colour = {
     },
     Sleeve = {
-
+      sleeve_dragqueen_accessory = {
+        name = "Accessory Sleeve",
+        text = {
+          "Start run with an",
+          "additional full set of",
+          "{C:dragqueen_purses}Purses{} and {C:dragqueen_pumps}Pumps{},",
+          "but no {C:attention}face cards{}",
+          "of any set"
+        }
+      },
+      sleeve_dragqueen_accessory_buff = {
+        name = "Accessory Sleeve",
+        text = {
+          "All starting {C:attention}Aces{}",
+          "are {C:dark_edition}Polychrome{}",
+          "and {C:dragqueen_keyword}Kissed{}"
+        }
+      },
     },
     Partner = {
 
