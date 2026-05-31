@@ -13,14 +13,6 @@ if DRAGQUEENMOD.config.decks_enabled then
     config = {
       remove_faces = true
     },
-    loc_vars = function(self)
-      return {
-        key = self:loc_key(),
-        vars = (not self:is_buffed()) and {
-          DRAGQUEENMOD.easydescriptionslocalize("Other", "dragqueen_kissed")
-        }
-      }
-    end,
 
     apply = function(self, sleeve)
       if self:is_buffed() then
