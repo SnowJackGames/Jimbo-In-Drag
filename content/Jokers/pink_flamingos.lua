@@ -34,7 +34,7 @@ SMODS.Joker {
     local quote = DRAGQUEENMOD.get_quote(quotelocation.quote)
 
     -- If Uniks is installed, we use the alternative text entry
-    if next(SMODS.find_mod("unik")) then
+    if next(SMODS.find_mod("unik")) and DRAGQUEENMOD.config.cross_mod_enabled then
       return {
         key = self.key .. "_uniks",
         vars = {
@@ -66,7 +66,7 @@ SMODS.Joker {
 
   -- Accessorize if Uniks installed
   add_to_deck = function(self, card, from_debuff)
-    if next(SMODS.find_mod("unik")) then
+    if next(SMODS.find_mod("unik")) and DRAGQUEENMOD.config.cross_mod_enabled then
       DRAGQUEENMOD.accessorize(card.ability.extra.accessorize_suit, card.ability.extra.accessorize_count)
     end
   end
