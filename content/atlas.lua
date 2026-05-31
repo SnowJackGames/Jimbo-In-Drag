@@ -15,6 +15,7 @@ SMODS.Atlas { key = "hc_ui", path = "Suits/ui_assets_opt2.png", px = 18, py = 18
     -- Ranks
 SMODS.Atlas { key = "dragqueen_ranks_hc", path = "Ranks/ranks_hc.png", px = 71, py = 95 }
     -- Decks
+SMODS.Atlas { key = "decks", path = "Decks/Decks.png", px = 71, py = 95 }
     -- Blinds
     -- Modifiers
         -- Enhancements
