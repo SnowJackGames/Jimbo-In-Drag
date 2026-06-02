@@ -2,17 +2,30 @@
 ---@param items table
 ---@param path string
 function DRAGQUEENMOD.register_items(items, path)
-  for i = 1, #items do
-    -- make sure file exists
-    local full_item_path = DRAGQUEENMOD.dragqueen_path_from_save_folder .. path .. "/" .. items[i] .. ".lua"
-    assert(SMODS.NFS.getInfo(full_item_path),"dragqueenmod could not find " .. full_item_path)
+  -- assertions
+  assert(type(items) == "table", "items passed to DRAGQUEENMOD.register_items not a table")
+  assert(type(path) == "string", "path passed to DRAGQUEENMOD.register_items not a string")
 
-    -- load that particular file
+  -- iterate over items
+  for i = 1, #items do
+    assert(type(items[i]) == "string", "item passed to DRAGQUEENMOD.register_items not a string")
+
     local file_to_load = path .. "/" .. items[i] .. ".lua"
-    SMODS.load_file(file_to_load)()
+    local full_item_path = DRAGQUEENMOD.dragqueen_path_from_save_folder .. file_to_load
+
+    -- try the normal love.filesystem way to find the item
+    if path and pcall(love.filesystem.getInfo, full_item_path) then
+      SMODS.load_file(file_to_load)()
+
+    -- try the NFS way to find the item
+    elseif path and pcall(SMODS.NFS.getInfo, full_item_path) then
+      SMODS.load_file(file_to_load)()
+
+    else
+      error("DRAGQUEENMOD.register_items could not find path for " .. items[i] .. "in" .. path)
+    end
   end
 end
-
 
 
 ---@param array table
