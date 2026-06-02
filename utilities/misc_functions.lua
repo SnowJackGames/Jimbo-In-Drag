@@ -22,7 +22,7 @@ function DRAGQUEENMOD.register_items(items, path)
       SMODS.load_file(file_to_load)()
 
     else
-      error("DRAGQUEENMOD.register_items could not find path for " .. items[i] .. "in" .. path)
+      error("DRAGQUEENMOD.register_items could not find path for " .. items[i] .. " in " .. path)
     end
   end
 end
