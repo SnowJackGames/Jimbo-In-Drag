@@ -14,11 +14,11 @@ function DRAGQUEENMOD.register_items(items, path)
     local full_item_path = DRAGQUEENMOD.dragqueen_path_from_save_folder .. file_to_load
 
     -- try the normal love.filesystem way to find the item
-    if path and pcall(love.filesystem.getInfo, full_item_path) then
+    if pcall(love.filesystem.getInfo, full_item_path) then
       SMODS.load_file(file_to_load)()
 
     -- try the NFS way to find the item
-    elseif path and pcall(SMODS.NFS.getInfo, full_item_path) then
+    elseif pcall(SMODS.NFS.getInfo, full_item_path) then
       SMODS.load_file(file_to_load)()
 
     else
