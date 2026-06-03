@@ -20,8 +20,14 @@ SMODS.Joker {
   eternal_compat = true,
   perishable_compat = false,
   dragqueen = {
-    requires_jokers = true,
-    is_a_drag_queen = true
+    requires_jokers = true
+  },
+  attributes = {
+    "mod_chance",
+    "passive",
+    "xmult",
+    "accessorize",
+    "witch"
   },
 
   loc_vars = function(self, info_queue, card)

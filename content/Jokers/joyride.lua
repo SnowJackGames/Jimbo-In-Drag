@@ -30,6 +30,14 @@ SMODS.Joker {
     requires_jokers = true,
     is_a_popstar = true
   },
+  attributes = {
+    "scaling",
+    "reset",
+    "xmult",
+    "xante",
+    "popstar",
+    "slay"
+  },
 
   loc_vars = function(self, info_queue, card)
     info_queue[#info_queue + 1] = { set = "Other", key = "dragqueen_slay" }

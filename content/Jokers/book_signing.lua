@@ -20,6 +20,11 @@ SMODS.Joker {
   dragqueen = {
     requires_jokers = true
   },
+  attributes = {
+    "economy",
+    "modify_card",
+    "dragqueen_kiss"
+  },
 
   loc_vars = function(self, info_queue, card)
 

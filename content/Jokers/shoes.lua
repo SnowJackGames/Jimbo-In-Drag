@@ -27,6 +27,16 @@ SMODS.Joker {
     is_a_popstar = true,
     is_a_drag_queen = true
   },
+  attributes = {
+    "hand_type",
+    "suit",
+    "economy",
+    "edition",
+    "chance",
+    "dragqueen_pumps",
+    "popstar",
+    "dragqueen"
+  },
 
   loc_vars = function(self, info_queue, card)
     info_queue[#info_queue + 1] = DRAGQUEENMOD.dragqueen_accessorize_tooltip(card)

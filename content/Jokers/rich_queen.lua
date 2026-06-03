@@ -23,6 +23,13 @@ SMODS.Joker {
     requires_jokers = true,
     is_a_drag_queen = true
   },
+  attributes = {
+    "sell_value",
+    "economy",
+    "suit",
+    "dragqueen_purses",
+    "full_deck"
+  },
 
   loc_vars = function(self, info_queue, card)
     info_queue[#info_queue + 1] = DRAGQUEENMOD.dragqueen_accessorize_tooltip(card)

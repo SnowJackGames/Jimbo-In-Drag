@@ -21,6 +21,11 @@ SMODS.Joker {
     requires_kissed = true,
     is_a_drag_queen = true,
   },
+  attributes = {
+    "xmult",
+    "dragqueen_kiss",
+    "dragqueen"
+  },
 
   loc_vars = function(self, info_queue, card)
     return {

@@ -22,6 +22,12 @@ SMODS.Joker {
     requires_jokers = true,
     is_a_popstar = true
   },
+  attribute = {
+    "hand_type",
+    "hands",
+    "discard",
+    "popstar"
+  },
 
   loc_vars = function(self, info_queue, card)
     local quotelocation = DRAGQUEENMOD.easydescriptionslocalize(self.set, self.key)

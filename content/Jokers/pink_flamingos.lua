@@ -25,6 +25,14 @@ SMODS.Joker {
     requires_jokers = true,
     is_a_drag_queen = true
   },
+  attributes = {
+    "modify_card",
+    "perma_bonus",
+    "unscored",
+    "dragqueen",
+    "accessorize",
+    "unix_crosses"
+  },
 
   loc_vars = function(self, info_queue, card)
     info_queue[#info_queue + 1] = DRAGQUEENMOD.dragqueen_accessorize_tooltip(card)

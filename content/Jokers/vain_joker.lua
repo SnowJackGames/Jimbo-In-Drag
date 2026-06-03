@@ -24,6 +24,11 @@ SMODS.Joker {
     requires_jokers = true,
     requires_pumps = true
   },
+  attributes = {
+    "mult",
+    "suit",
+    "dragqueen_pumps"
+  },
 
   loc_vars = function(self, info_queue, card)
     info_queue[#info_queue + 1] = DRAGQUEENMOD.dragqueen_accessorize_tooltip(card)

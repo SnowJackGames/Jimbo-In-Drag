@@ -20,7 +20,16 @@ SMODS.Joker {
   perishable_compat = false,
   dragqueen = {
     requires_jokers = true,
+    requires_purses = true,
     is_a_drag_queen = true
+  },
+  attributes = {
+    "economy",
+    "suit",
+    "scaling",
+    "full_deck",
+    "dragqueen_purses",
+    "dragqueen"
   },
 
   loc_vars = function(self, info_queue, card)

@@ -21,6 +21,11 @@ SMODS.Joker {
     is_a_drag_queen = true
   },
 
+  attributes = {
+    "chips",
+    "dragqueen"
+  },
+
   loc_vars = function(self, info_queue, card)
     return {
       vars = {

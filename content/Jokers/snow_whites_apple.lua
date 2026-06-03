@@ -63,6 +63,17 @@ SMODS.Joker {
     requires_purses = true,
     requires_cross_mods = true
   },
+  attributes = {
+    "hand_type",
+    "modify_card",
+    "rank",
+    "xmult",
+    "full_deck",
+    "debuff",
+    "scaling",
+    "paperback_apostle",
+    "dragqueen_pumps"
+  },
 
   loc_vars = function(self, info_queue, card)
     local current_x_mult = card.ability.extra.x_mult
