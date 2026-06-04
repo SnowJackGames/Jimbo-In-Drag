@@ -28,7 +28,8 @@ SMODS.Joker {
     "economy",
     "suit",
     "dragqueen_purses",
-    "full_deck"
+    "full_deck",
+    "dragqueen"
   },
 
   loc_vars = function(self, info_queue, card)

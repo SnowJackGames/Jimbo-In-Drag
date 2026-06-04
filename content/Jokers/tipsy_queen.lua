@@ -24,7 +24,8 @@ SMODS.Joker {
   attributes = {
     "enhancements",
     "xmult",
-    "destroy"
+    "destroy",
+    "dragqueen"
   },
 
   loc_vars = function(self, info_queue, card)
