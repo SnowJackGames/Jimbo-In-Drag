@@ -5,12 +5,16 @@ if not SMODS.Attribute then return nil end
 
 SMODS.Attribute{
   key = "xmoney",
-  alias = "x_money"
+  alias = {
+    "x_money"
+  }
 }
 
 SMODS.Attribute{ -- scales based off of the current ante
   key = "xante",
-  alias = "x_ante"
+  alias = {
+    "x_ante"
+  }
 }
 
 SMODS.Attribute{
@@ -68,17 +72,25 @@ SMODS.Attribute{
 
 SMODS.Attribute{
   key = "light",
-  alias = "light_suit", "lightsuit"
+alias = {
+  "light_suit",
+  "lightsuit"
+  }
 }
 
 SMODS.Attribute{
   key = "dark",
-  alias = "dark_suit", "darksuit"
+  alias = {
+    "dark_suit",
+    "darksuit"
+  }
 }
 
 SMODS.Attribute{
   key = "nonplain",
-  alias = "non_plain"
+  alias = {
+    "non_plain"
+  }
 }
 
 ------------------------------
@@ -91,24 +103,24 @@ SMODS.Attribute{ -- Effects that would be considered outside of a normal game
 }
 
 SMODS.Attribute{
-    key = "kity",
-    alias = {
-        "kitty", "cat"
-    }
+  key = "kity",
+  alias = {
+      "kitty", "cat"
+  }
 }
 
 SMODS.Attribute{
-    key = "nonstandard"
+  key = "nonstandard"
 }
 
 SMODS.Attribute{ -- Cards which care about unscored cards
-    key = "unscored"
+  key = "unscored"
 }
 
 SMODS.Attribute{
-    key = "unix_crosses"
+  key = "unix_crosses"
 }
 
 SMODS.Attribute{
-    key = "paperback_apostle"
+  key = "paperback_apostle"
 }

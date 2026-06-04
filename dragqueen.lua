@@ -14,6 +14,7 @@ SMODS.load_file("utilities/colors_and_fonts.lua")()
 SMODS.load_file("utilities/card_functions.lua")()
 SMODS.load_file("utilities/sound_register.lua")()
 SMODS.load_file("utilities/ui.lua")()
+SMODS.load_file("utilities/attributes.lua")()
 SMODS.load_file("utilities/hooks.lua")()
 
 -- Do a bit of font magic so that Balatro can support unusual Unicode characters
