@@ -1351,13 +1351,12 @@ end
 
 -- Puts a badge under a Joker indicating if it is a Drag Queen
 function DRAGQUEENMOD.drag_queen_badge(obj, badges)
-  if obj then
-    if obj.set ~= nil and obj.key ~= nil and obj.dragqueen ~= nil then
-      if DRAGQUEENMOD.is_joker(nil, obj.set, obj.key) then
-        if obj.dragqueen.is_a_drag_queen == true then
-          local dragqueen_badge_text = DRAGQUEENMOD.easymisclocalize("dictionary", "dragqueen_card_badge_drag_queen")
-          badges[#badges + 1] = DRAGQUEENMOD.get_badge_template(dragqueen_badge_text, loc_colour("dragqueen_keyword"), loc_colour("white"))
-        end
+  if obj and obj.key then
+    local dragqueenpool = SMODS.get_attribute_pool("dragqueen")
+    for _, key in ipairs(dragqueenpool) do
+      if obj.key == key then
+        local dragqueen_badge_text = DRAGQUEENMOD.easymisclocalize("dictionary", "dragqueen_card_badge_drag_queen")
+        badges[#badges + 1] = DRAGQUEENMOD.get_badge_template(dragqueen_badge_text, loc_colour("dragqueen_keyword"), loc_colour("white"))
       end
     end
   end
@@ -1365,15 +1364,14 @@ end
 
 
 
--- Puts a badge under a Joker indicating if it is a Drag Queen
+-- Puts a badge under a Joker indicating if it is a Popstar
 function DRAGQUEENMOD.popstar_badge(obj, badges)
-  if obj then
-    if obj.set ~= nil and obj.key ~= nil and obj.dragqueen ~= nil then
-      if DRAGQUEENMOD.is_joker(nil, obj.set, obj.key) then
-        if obj.dragqueen.is_a_popstar == true then
-          local dragqueen_badge_text = DRAGQUEENMOD.easymisclocalize("dictionary", "dragqueen_card_badge_popstar")
-          badges[#badges + 1] = DRAGQUEENMOD.get_badge_template(dragqueen_badge_text, loc_colour("dragqueen_keyword"), loc_colour("white"))
-        end
+  if obj and obj.key then
+    local popstarpool = SMODS.get_attribute_pool("popstar")
+    for _, key in ipairs(popstarpool) do
+      if obj.key == key then
+        local dragqueen_badge_text = DRAGQUEENMOD.easymisclocalize("dictionary", "dragqueen_card_badge_popstar")
+        badges[#badges + 1] = DRAGQUEENMOD.get_badge_template(dragqueen_badge_text, loc_colour("dragqueen_keyword"), loc_colour("white"))
       end
     end
   end
