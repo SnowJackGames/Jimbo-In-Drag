@@ -22,8 +22,7 @@ SMODS.Joker {
   eternal_compat = true,
   perishable_compat = false,
   dragqueen = {
-    requires_jokers = true,
-    is_a_drag_queen = true
+    requires_jokers = true
   },
   attributes = {
     "modify_card",

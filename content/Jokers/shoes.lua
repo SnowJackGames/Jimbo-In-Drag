@@ -23,9 +23,7 @@ SMODS.Joker {
   perishable_compat = false,
   dragqueen = {
     requires_jokers = true,
-    requires_purses = true,
-    is_a_popstar = true,
-    is_a_drag_queen = true
+    requires_purses = true
   },
   attributes = {
     "hand_type",

@@ -27,8 +27,7 @@ SMODS.Joker {
   eternal_compat = true,
   perishable_compat = false,
   dragqueen = {
-    requires_jokers = true,
-    is_a_popstar = true
+    requires_jokers = true
   },
   attributes = {
     "scaling",

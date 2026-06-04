@@ -21,9 +21,7 @@ SMODS.Joker {
   perishable_compat = false,
   dragqueen = {
     requires_jokers = true,
-    requires_spectrum_or_suit = true,
-    is_a_drag_queen = true,
-    is_a_popstar = true
+    requires_spectrum_or_suit = true
   },
   attributes = {
     "perma_bonus",
