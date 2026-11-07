@@ -1,1 +1,0 @@
-Take note of various .txt files in assets/1x for spritesheet naming convention and structure
