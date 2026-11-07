@@ -11,8 +11,8 @@
   "badge_colour": "FF00FF",
   "version": "0.0.1",
   "dependencies": [
-    "Steamodded (>=1.0.0~BETA-1016c)",
-    "Lovely (>=0.8)",
+    "Steamodded (>=26.829.0)",
+    "Lovely (>=0.10)",
     "SpectrumFramework (>=0.8.1)"
   ]
 }
