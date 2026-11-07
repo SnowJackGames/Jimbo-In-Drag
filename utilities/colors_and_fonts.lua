@@ -216,6 +216,9 @@ function DRAGQUEENMOD.font_symbols()
   if try_find_symbolfont then
     symbol_font = love.graphics.newFont(font_location .. "symbol-font.ttf", G.TILESIZE * 10)
   else
+    ---@type any
+    -- love.graphics.newFont per love2d.org can accept data object,
+    -- but Lua diagnostics might think it can only accept string|number
     local symbol_font_file = assert(SMODS.NFS.newFileData(font_location .. "symbol-font.ttf"), "Failed to collect file data for dragqueenmod symbol font")
     symbol_font = love.graphics.newFont(symbol_font_file, G.TILESIZE * 10)
   end
@@ -223,7 +226,10 @@ function DRAGQUEENMOD.font_symbols()
   if try_find_nerdfont then
     nerd_font = love.graphics.newFont(font_location .. "BigBlueTermPlusNerdFontPropo-Regular.ttf", G.TILESIZE * 8)
   else
-  local nerd_font_file = assert(SMODS.NFS.newFileData(font_location .. "BigBlueTermPlusNerdFontPropo-Regular.ttf"),
+    ---@type any
+    -- love.graphics.newFont per love2d.org can accept data object,
+    -- but Lua diagnostics might think it can only accept string|number
+    local nerd_font_file = assert(SMODS.NFS.newFileData(font_location .. "BigBlueTermPlusNerdFontPropo-Regular.ttf"),
     "Failed to collect file data for dragqueenmod nerd font")
   nerd_font = love.graphics.newFont(nerd_font_file, G.TILESIZE * 8)
   end
