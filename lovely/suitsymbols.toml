@@ -12,7 +12,7 @@ priority = 11
 
 [[patches]]
 [patches.pattern]
-target = 'functions/misc_functions.lua'
+target = '=[SMODS _ "src/utils.lua"]'
 pattern = "Clubs = '♣',"
 position = 'after'
 match_indent = true
@@ -29,7 +29,7 @@ six_Moons = '',
 # Like in a description of some sort
 [[patches]]
 [patches.pattern]
-target = 'functions/misc_functions.lua'
+target = '=[SMODS _ "src/utils.lua"]'
 pattern = "local result = string.find(assembled_string, localize(key, 'suits_singular')) or string.find(assembled_string, localize(key, 'suits_plural'))"
 position = 'at'
 match_indent = true
@@ -44,12 +44,12 @@ local result = string.find(assembled_string, localize(key, 'suits_singular')) or
 # Difference being the pcall function to see if they've already done it
 [[patches]]
 [patches.pattern]
-target = 'functions/misc_functions.lua'
-pattern = "local desc_scale = *"
+target = '=[SMODS _ "src/utils.lua"]'
+pattern = "local desc_scale = (thunk.font or G.LANG.font).DESCSCALE"
 position = 'before'
 match_indent = true
 payload = '''
-
+-- Jimbo In Drag suit_symbols patch start
 local function add_symbol(text, symbol)
     local leading_spaces = string.match(text, "^%s*")
 
@@ -99,6 +99,9 @@ if pcall(next, found_strings) == false then
         assembled_string = add_symbol(assembled_string, v[2])
     end
 end
+-- Jimbo In Drag suit_symbols patch end
 '''
+
+
 # ink_Inks = '',
 # ink_Colors = '',
