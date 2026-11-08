@@ -79,7 +79,7 @@ end
 
 -- Searching for other mods for cross-mod content and integration
 function DRAGQUEENMOD.cross_mod_content_register()
-  DRAGQUEENMOD.cross_mod_theirs_to_ours()
+  DRAGQUEENMOD.early_cross_mod_theirs_to_ours()
   DRAGQUEENMOD.load_cross_mod_ours_to_theirs = true
   DRAGQUEENMOD.cross_mod_dependent_and_duplicate_content()
 end
@@ -88,7 +88,7 @@ end
 
 -- We add other mods' definitions to our own,
 -- and negate instantiating content already in other mods 
-function DRAGQUEENMOD.cross_mod_theirs_to_ours()
+function DRAGQUEENMOD.early_cross_mod_theirs_to_ours()
   -- Spectrum Framework, required
   DRAGQUEENMOD.SpectrumFramework_spectrum_played_hook()
   if SPECF.config then
@@ -100,7 +100,7 @@ function DRAGQUEENMOD.cross_mod_theirs_to_ours()
     end
   end
 
-  
+
 -- Bunco
   if next(SMODS.find_mod("Bunco")) then
     local prefix = DRAGQUEENMOD.getprefix("Bunco", "bunc")
@@ -209,7 +209,7 @@ function DRAGQUEENMOD.cross_mod_theirs_to_ours()
     DRAGQUEENMOD.sine_colors.DRAGQUEEN_INK_STAINED_SUIT = { "ink_inks", "ink_inks", "ink_colors", "ink_colors" }
   end
 
-  -- Madcap
+  --- Madcap
   if next(SMODS.find_mod("rgmadcap")) then
     local prefix = SMODS.find_mod("rgmadcap")[1].prefix or "rgmc"
 
@@ -260,6 +260,53 @@ end
 
 
 
+-- Additional other mods' definitions that are non-specific,
+-- <br>where we can't guess those mods ahead of time
+-- <br>Must run before [DRAGQUEENMOD.cross_mod_ours_to_theirs](lua://DRAGQUEENMOD.cross_mod_ours_to_theirs)
+function DRAGQUEENMOD.late_cross_mod_theirs_to_ours()
+  -- General suit shade stuff
+  for suit, data in pairs(SMODS.Suits) do
+    -- Checking dark shade
+    if data.shade == "dark" then
+      local should_add_to_dark = true
+      for _, known_dark_suit in ipairs(DRAGQUEENMOD.dark_suits) do
+        -- Skipping, we know about this one
+        if suit == known_dark_suit then
+          should_add_to_dark = false
+          break
+        end
+      end
+
+      -- Add to list
+      if should_add_to_dark then
+        -- Otherwise add it to the list
+        table.insert(DRAGQUEENMOD.dark_suits, suit)
+      end
+    end
+
+
+    -- Checking light shade
+    if data.shade == "light" then
+      local should_add_to_light = true
+      for _, known_light_suit in ipairs(DRAGQUEENMOD.light_suits) do
+        -- Skipping, we know about this one
+        if suit == known_light_suit then
+          should_add_to_light = false
+          break
+        end
+      end
+
+      -- Add to list
+      if should_add_to_light then
+        -- Otherwise add it to the list
+        table.insert(DRAGQUEENMOD.light_suits, suit)
+      end
+    end
+  end
+end
+
+
+
 -- We add our mod's definitions to others and patch others' content; 
 -- Run at the last possible second in our hooks.lua: dragqueen_hook_splash_screen
 function DRAGQUEENMOD.cross_mod_ours_to_theirs()
@@ -281,8 +328,12 @@ function DRAGQUEENMOD.cross_mod_ours_to_theirs()
       local paperback_cross_mod_content = paperback_cross_mod_file:read("*a")
       if not string.find(paperback_cross_mod_content, "dragqueen") then
         if PB_UTIL then
-          PB_UTIL.is_suit = DRAGQUEENMOD.is_suit
-          PB_UTIL.suit_tooltip = DRAGQUEENMOD.suit_tooltip
+          if PB_UTIL.is_suit then
+            PB_UTIL.is_suit = DRAGQUEENMOD.is_suit_shade
+          end
+          -- if PB_UTIL.suit_tooltip then
+          --   PB_UTIL.suit_tooltip = DRAGQUEENMOD.suit_tooltip
+          -- end
         end
       end
     end
@@ -381,7 +432,7 @@ function DRAGQUEENMOD.cross_mod_ours_to_theirs()
       local unik_main = unik_main_file:read("*a")
       if not string.find(unik_main, "dragqueen") then
         if UNIK then
-          UNIK.is_suit_type = DRAGQUEENMOD.is_suit
+          UNIK.is_suit_type = DRAGQUEENMOD.is_suit_shade
           UNIK.suit_tooltip = DRAGQUEENMOD.suit_tooltip
           UNIK.dark_suits = DRAGQUEENMOD.dark_suits
           UNIK.light_suits = DRAGQUEENMOD.light_suits

@@ -658,6 +658,7 @@ function DRAGQUEENMOD.last_second_code()
   DRAGQUEENMOD.build_backup_localization()
 
   if DRAGQUEENMOD.load_cross_mod_ours_to_theirs then
+    DRAGQUEENMOD.late_cross_mod_theirs_to_ours()
     DRAGQUEENMOD.cross_mod_ours_to_theirs()
   end
 

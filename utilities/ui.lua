@@ -1330,21 +1330,24 @@ end
 
 
 -- Puts a badge under a suited card indicating if it is a Light Suit, a Dark Suit, or both
+-- <br>TODO: needs an overhaul due to changes to how SMODS organizes obj attributes.
+-- <br>Will need to split into `shade_badge` and `suit_type_badge`,
+-- <br>But might not fundamentally work without being able to verify stuff like SMODS.has_no_suit
 function DRAGQUEENMOD.card_suit_badge(obj, badges)
-  if obj then
-    if obj.is_suit ~= nil and obj.key ~= nil and obj.base_card.config ~= nil then
+  -- if obj then
+  --   if obj.suit_nominal ~= nil then
+  --     print(obj.key)
+  --     local dark_or_light_suittext, dark_or_light_badgecolor, dark_or_light_textcolor, neither_dark_nor_light = DRAGQUEENMOD.get_dark_or_light_suit_badge(obj)
+  --     if (dark_or_light_suittext and dark_or_light_badgecolor and dark_or_light_textcolor) and neither_dark_nor_light == false then
+  --       badges[#badges + 1] = DRAGQUEENMOD.get_badge_template(dark_or_light_suittext, dark_or_light_badgecolor, dark_or_light_textcolor)
+  --     end
 
-      local dark_or_light_suittext, dark_or_light_badgecolor, dark_or_light_textcolor, neither_dark_nor_light = DRAGQUEENMOD.get_dark_or_light_suit_badge(obj)
-      if (dark_or_light_suittext and dark_or_light_badgecolor and dark_or_light_textcolor) and neither_dark_nor_light == false then
-        badges[#badges + 1] = DRAGQUEENMOD.get_badge_template(dark_or_light_suittext, dark_or_light_badgecolor, dark_or_light_textcolor)
-      end
-
-      local suit_type_suittext, suit_type_badgecolor, suit_type_textcolor = DRAGQUEENMOD.get_suit_type_badge(obj)
-      if suit_type_suittext and suit_type_badgecolor and suit_type_textcolor then
-        badges[#badges + 1] = DRAGQUEENMOD.get_badge_template(suit_type_suittext, suit_type_badgecolor, suit_type_textcolor)
-      end
-    end
-  end
+  --     local suit_type_suittext, suit_type_badgecolor, suit_type_textcolor = DRAGQUEENMOD.get_suit_type_badge(obj)
+  --     if suit_type_suittext and suit_type_badgecolor and suit_type_textcolor then
+  --       badges[#badges + 1] = DRAGQUEENMOD.get_badge_template(suit_type_suittext, suit_type_badgecolor, suit_type_textcolor)
+  --     end
+  --   end
+  -- end
 end
 
 
@@ -1449,39 +1452,41 @@ end
 
 
 
+--- Currently broken due to SMODS changes of obj attributes<br>
+--- @see DRAGQUEENMOD.card_suit_badge
 function DRAGQUEENMOD.get_suit_type_badge(obj, giventextcolor)
-  local obj_suit_to_eval = obj.base_card.config.card.suit
-  local obj_suit_category = nil
-  local suittext = nil
+  -- local obj_suit_to_eval = obj.base_card.config.card.suit
+  -- local obj_suit_category = nil
+  -- local suittext = nil
 
-  for suitcategory, suitsets in pairs(DRAGQUEENMOD.suit_groups) do
-    for _, individual_suit in ipairs(suitsets) do
-      if obj_suit_to_eval == individual_suit then
-        obj_suit_category = suitcategory
-      end
-    end
-  end
+  -- for suitcategory, suitsets in pairs(DRAGQUEENMOD.suit_groups) do
+  --   for _, individual_suit in ipairs(suitsets) do
+  --     if obj_suit_to_eval == individual_suit then
+  --       obj_suit_category = suitcategory
+  --     end
+  --   end
+  -- end
 
-  -- Enhancements can override what the underlying card's suit is considered (ex. Stone Card, Wild Card)
-  if SMODS.has_no_suit(obj.base_card) then
-    obj_suit_category = nil
-  end
+  -- -- Enhancements can override what the underlying card's suit is considered (ex. Stone Card, Wild Card)
+  -- if SMODS.has_no_suit(obj.base_card) then
+  --   obj_suit_category = nil
+  -- end
 
-  -- Patch target for DRAGQUEENMOD.get_suit_type_badge if you want say a particular enhancement to count as one of our suit categories
+  -- -- Patch target for DRAGQUEENMOD.get_suit_type_badge if you want say a particular enhancement to count as one of our suit categories
 
-  if obj_suit_category ~= nil then
-    local prefix = DRAGQUEENMOD.suit_types_to_mod_prefixes[obj_suit_category]
-    local suitkey = "dragqueen_card_badge_" .. prefix .. obj_suit_category .. "_suit"
-    local badgecolor = G.C["DRAGQUEEN_" .. string.upper(prefix) .. string.upper(obj_suit_category) .. "_SUIT"]
-    local textcolor = giventextcolor or G.C.WHITE
+  -- if obj_suit_category ~= nil then
+  --   local prefix = DRAGQUEENMOD.suit_types_to_mod_prefixes[obj_suit_category]
+  --   local suitkey = "dragqueen_card_badge_" .. prefix .. obj_suit_category .. "_suit"
+  --   local badgecolor = G.C["DRAGQUEEN_" .. string.upper(prefix) .. string.upper(obj_suit_category) .. "_SUIT"]
+  --   local textcolor = giventextcolor or G.C.WHITE
 
-    -- suitkey value check
-    if suitkey ~= nil then
-      suittext = DRAGQUEENMOD.easymisclocalize("dictionary", suitkey)
-      assert(type(suittext) == "string", "issue pulling " .. suitkey .. " string in 'Jimbo in Drag' mod")
-    end
-    return suittext, badgecolor, textcolor
-  end
+  --   -- suitkey value check
+  --   if suitkey ~= nil then
+  --     suittext = DRAGQUEENMOD.easymisclocalize("dictionary", suitkey)
+  --     assert(type(suittext) == "string", "issue pulling " .. suitkey .. " string in 'Jimbo in Drag' mod")
+  --   end
+  --   return suittext, badgecolor, textcolor
+  -- end
 end
 
 

@@ -438,10 +438,24 @@ end
 ---@param card table
 ---@param type "light" | "dark"
 ---@return boolean
-function DRAGQUEENMOD.is_suit(card, type)
+function DRAGQUEENMOD.is_suit_shade(card, type)
+  if type == "dark" and card.is_suit_shade("dark") then
+    return true
+  end
+  if type == "light" and card.is_suit_shade("light")then
+    return true
+  end
+
+  -- Compatibility with mods that aren't using suit shades attribute
   for _, v in ipairs(type == 'light' and DRAGQUEENMOD.light_suits or DRAGQUEENMOD.dark_suits) do
     if card:is_suit(v) then return true end
   end
+
+  -- For any other shades should they exist
+  if card.is_suit_shade(type) then
+    return true
+  end
+
   return false
 end
 

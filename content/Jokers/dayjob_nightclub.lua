@@ -237,7 +237,7 @@ SMODS.Joker {
       if other_card ~= nil then
         -- Dayjob side
         if side == "A" then
-          if DRAGQUEENMOD.is_suit(other_card, "light") then
+          if DRAGQUEENMOD.is_suit_shade(other_card, "light") then
             ------------------------------
             -- Dayjob calculations
             ------------------------------
@@ -257,7 +257,7 @@ SMODS.Joker {
 
         -- Nightclub side
         if side == "B" then
-          if DRAGQUEENMOD.is_suit(other_card, "dark") then
+          if DRAGQUEENMOD.is_suit_shade(other_card, "dark") then
             ------------------------------
             -- Nightclub calculations
             ------------------------------

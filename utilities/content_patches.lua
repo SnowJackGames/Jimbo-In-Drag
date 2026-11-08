@@ -89,7 +89,7 @@ function DRAGQUEENMOD.Bunco_joker_patch()
             local side = card.ability.extra.side
 
 
-            if DRAGQUEENMOD.is_suit(other_card, "light") then
+            if DRAGQUEENMOD.is_suit_shade(other_card, "light") then
                 if side == 'A' then
                     return {
                         chips = card.ability.extra.chips
@@ -97,7 +97,7 @@ function DRAGQUEENMOD.Bunco_joker_patch()
                 end
             end
 
-            if DRAGQUEENMOD.is_suit(other_card, "dark") then
+            if DRAGQUEENMOD.is_suit_shade(other_card, "dark") then
                 if side == 'B' then
                     return {
                         mult = card.ability.extra.mult

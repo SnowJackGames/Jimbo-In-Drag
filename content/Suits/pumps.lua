@@ -1,6 +1,7 @@
 SMODS.Suit{
     key = "Pumps",
     card_key = "PUMPS",
+    shade = "light",
 
     lc_atlas = "lc_cards",
     hc_atlas = "hc_cards",
