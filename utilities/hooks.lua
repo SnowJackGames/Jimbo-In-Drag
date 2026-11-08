@@ -117,6 +117,7 @@ end
 -- Hooking Balatro's generate_card_ui
 local dragqueen_hook_generate_card_ui = generate_card_ui
 
+
 -- If `_c` passed to generate_card_ui has a `.set`, `.key`, and `.name`
 -- <br>and the key refers to a particular entry in `G.P_CENTERS`
 -- <br>Let's make sure that .name is the same as `G.P_CENTERS[particular object].name`,
@@ -143,6 +144,23 @@ function generate_card_ui(_c, full_UI_table, specific_vars, card_type, badges, h
         end
       end
     end
+  end
+  if card and card.config and card.config.card then
+
+    local dark_or_light_suittext, dark_or_light_badgecolor, dark_or_light_textcolor, neither_dark_nor_light = DRAGQUEENMOD.get_dark_or_light_suit_badge(card)
+    if (dark_or_light_suittext and dark_or_light_badgecolor and dark_or_light_textcolor) and neither_dark_nor_light == false then
+      local badgey = DRAGQUEENMOD.get_badge_template(dark_or_light_suittext, dark_or_light_badgecolor, dark_or_light_textcolor)
+      print("meow!")
+      print(badgey)
+      print("--")
+      print(badges)
+    end
+
+    -- local suit_type_suittext, suit_type_badgecolor, suit_type_textcolor = DRAGQUEENMOD.get_suit_type_badge(card)
+    -- if suit_type_suittext and suit_type_badgecolor and suit_type_textcolor then
+    --   badges[#badges + 1] = DRAGQUEENMOD.get_badge_template(suit_type_suittext, suit_type_badgecolor, suit_type_textcolor)
+    -- end
+
   end
 
 return dragqueen_hook_generate_card_ui(_c, full_UI_table, specific_vars, card_type, badges, hide_desc, main_start, main_end, card)
