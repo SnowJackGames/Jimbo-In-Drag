@@ -439,10 +439,10 @@ end
 ---@param type "light" | "dark"
 ---@return boolean
 function DRAGQUEENMOD.is_suit_shade(card, type)
-  if type == "dark" and card.is_suit_shade("dark") then
+  if type == "dark" and card:is_suit_shade("dark") then
     return true
   end
-  if type == "light" and card.is_suit_shade("light")then
+  if type == "light" and card:is_suit_shade("light")then
     return true
   end
 
@@ -452,7 +452,7 @@ function DRAGQUEENMOD.is_suit_shade(card, type)
   end
 
   -- For any other shades should they exist
-  if card.is_suit_shade(type) then
+  if card:is_suit_shade(type) then
     return true
   end
 
