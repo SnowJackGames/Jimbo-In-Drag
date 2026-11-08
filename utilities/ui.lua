@@ -1382,72 +1382,74 @@ end
 
 
 
+--- Currently broken due to SMODS changes of obj attributes<br>
+--- @see DRAGQUEENMOD.card_suit_badge
 function DRAGQUEENMOD.get_dark_or_light_suit_badge(obj, givenbadgecolor, giventextcolor)
-  local suitkey = nil
-  local suittext = nil
-  local badgecolor = givenbadgecolor or G.C.GREEN
-  local textcolor = giventextcolor or G.C.WHITE
-  local is_dark = nil
-  local is_light = nil
-  local is_both_dark_and_light = nil
-  local is_neither_dark_nor_light = nil
+  -- local suitkey = nil
+  -- local suittext = nil
+  -- local badgecolor = givenbadgecolor or G.C.GREEN
+  -- local textcolor = giventextcolor or G.C.WHITE
+  -- local is_dark = nil
+  -- local is_light = nil
+  -- local is_both_dark_and_light = nil
+  -- local is_neither_dark_nor_light = nil
 
 
-  for _, v in pairs(DRAGQUEENMOD.dark_suits) do
-    if obj.key == v then
-      is_dark = true
-    end
-  end
-  for _, v in pairs(DRAGQUEENMOD.light_suits) do
-    if obj.key == v then
-      is_light = true
-    end
-  end
+  -- for _, v in pairs(DRAGQUEENMOD.dark_suits) do
+  --   if obj.key == v then
+  --     is_dark = true
+  --   end
+  -- end
+  -- for _, v in pairs(DRAGQUEENMOD.light_suits) do
+  --   if obj.key == v then
+  --     is_light = true
+  --   end
+  -- end
 
-  -- Enhancements can override what the underlying card's suit is considered (ex. Stone Card, Wild Card)
-  -- Enhancement is stored at obj.base_card.config.center.key as a string
-  if SMODS.has_no_suit(obj.base_card) then
-    is_dark = false
-    is_light = false
-  end
+  -- -- Enhancements can override what the underlying card's suit is considered (ex. Stone Card, Wild Card)
+  -- -- Enhancement is stored at obj.base_card.config.center.key as a string
+  -- if SMODS.has_no_suit(obj.base_card) then
+  --   is_dark = false
+  --   is_light = false
+  -- end
 
-  if SMODS.has_any_suit(obj.base_card) then
-    is_dark = true
-    is_light = true
-  end
+  -- if SMODS.has_any_suit(obj.base_card) then
+  --   is_dark = true
+  --   is_light = true
+  -- end
 
-  -- Patch target for DRAGQUEENMOD.get_dark_or_light_suit_badge if you want more conditions to be considered dark, light, or both
+  -- -- Patch target for DRAGQUEENMOD.get_dark_or_light_suit_badge if you want more conditions to be considered dark, light, or both
 
-  if (is_dark == true and is_light == true) or is_both_dark_and_light == true then
-    suitkey = "dragqueen_card_badge_dark_and_light_suit"
-    badgecolor = G.C.DRAGQUEEN_DARK_AND_LIGHT_SUIT
-    is_neither_dark_nor_light = false
-  elseif is_dark == true then
-    suitkey = "dragqueen_card_badge_dark_suit"
-    badgecolor = G.C.DRAGQUEEN_DARK_SUIT
-    is_neither_dark_nor_light = false
-  elseif is_light == true then
-    suitkey = "dragqueen_card_badge_light_suit"
-    badgecolor = G.C.DRAGQUEEN_LIGHT_SUIT
-    is_neither_dark_nor_light = false
-  else
-    is_neither_dark_nor_light = true
-  end
+  -- if (is_dark == true and is_light == true) or is_both_dark_and_light == true then
+  --   suitkey = "dragqueen_card_badge_dark_and_light_suit"
+  --   badgecolor = G.C.DRAGQUEEN_DARK_AND_LIGHT_SUIT
+  --   is_neither_dark_nor_light = false
+  -- elseif is_dark == true then
+  --   suitkey = "dragqueen_card_badge_dark_suit"
+  --   badgecolor = G.C.DRAGQUEEN_DARK_SUIT
+  --   is_neither_dark_nor_light = false
+  -- elseif is_light == true then
+  --   suitkey = "dragqueen_card_badge_light_suit"
+  --   badgecolor = G.C.DRAGQUEEN_LIGHT_SUIT
+  --   is_neither_dark_nor_light = false
+  -- else
+  --   is_neither_dark_nor_light = true
+  -- end
 
-  -- suitkey value check
-  if (suitkey ~= nil) then
-    if is_neither_dark_nor_light == false then
-      suittext = DRAGQUEENMOD.easymisclocalize("dictionary", suitkey)
-      assert(type(suittext) == "string", "issue pulling " .. suitkey .. " string in 'Jimbo in Drag' mod")
-    elseif is_neither_dark_nor_light == true then
-      -- Do nothing
-    else
-      print(suitkey)
-      error("suitkey value in DRAGQUEENMOD.get_dark_or_light_suit_badge is nonsensical")
-    end
-  end
+  -- -- suitkey value check
+  -- if (suitkey ~= nil) then
+  --   if is_neither_dark_nor_light == false then
+  --     suittext = DRAGQUEENMOD.easymisclocalize("dictionary", suitkey)
+  --     assert(type(suittext) == "string", "issue pulling " .. suitkey .. " string in 'Jimbo in Drag' mod")
+  --   elseif is_neither_dark_nor_light == true then
+  --     -- Do nothing
+  --   else
+  --     print(suitkey)
+  --     error("suitkey value in DRAGQUEENMOD.get_dark_or_light_suit_badge is nonsensical")
+  --   end
+  -- end
 
-  return suittext, badgecolor, textcolor, is_neither_dark_nor_light
+  -- return suittext, badgecolor, textcolor, is_neither_dark_nor_light
 end
 
 
